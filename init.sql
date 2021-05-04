@@ -1,0 +1,1 @@
+-- Add extensions here as needed (for UUIDs at least)

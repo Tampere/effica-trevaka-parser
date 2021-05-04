@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /import should return created codes 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "active": true,
+        "code": "1",
+        "codetype": "SPRAK",
+        "extrainfo1": "fi",
+        "extrainfo2": "",
+        "text": "Suomi¤¤Finska",
+      },
+      Object {
+        "active": true,
+        "code": "2",
+        "codetype": "HEMKOMMUN",
+        "extrainfo1": "",
+        "extrainfo2": "",
+        "text": "Ypäjä",
+      },
+      Object {
+        "active": true,
+        "code": "3",
+        "codetype": "LAND",
+        "extrainfo1": "FI",
+        "extrainfo2": "246",
+        "text": "Suomi",
+      },
+      Object {
+        "active": true,
+        "code": "26",
+        "codetype": "INKSLAG",
+        "extrainfo1": "",
+        "extrainfo2": "",
+        "text": "Lisätulo¤¤Inkomstslag1",
+      },
+      Object {
+        "active": true,
+        "code": "25",
+        "codetype": "INKSLAG",
+        "extrainfo1": "",
+        "extrainfo2": "",
+        "text": "Päätulo¤¤Inkomstslag2",
+      },
+      Object {
+        "active": true,
+        "code": "30",
+        "codetype": "INKPERIOD",
+        "extrainfo1": "",
+        "extrainfo2": "",
+        "text": "Kuukausitulo¤¤Inkomstperiod1",
+      },
+    ],
+  ],
+  "tables": Array [
+    "codes",
+  ],
+}
+`;
+
+exports[`GET /import should return created families 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "enddate": "2019-05-30T21:00:00.000Z",
+        "familynbr": 1,
+        "personid": "020967-9992",
+        "roleinfamily": "R",
+        "startdate": "2015-02-01T22:00:00.000Z",
+      },
+      Object {
+        "enddate": "2019-05-30T21:00:00.000Z",
+        "familynbr": 1,
+        "personid": "180476-998M",
+        "roleinfamily": "S",
+        "startdate": "2015-02-01T22:00:00.000Z",
+      },
+      Object {
+        "enddate": null,
+        "familynbr": 2,
+        "personid": "020967-9992",
+        "roleinfamily": "R",
+        "startdate": "2019-05-31T21:00:00.000Z",
+      },
+      Object {
+        "enddate": null,
+        "familynbr": 2,
+        "personid": "180476-998M",
+        "roleinfamily": "S",
+        "startdate": "2019-05-31T21:00:00.000Z",
+      },
+      Object {
+        "enddate": null,
+        "familynbr": 2,
+        "personid": "010619A9501",
+        "roleinfamily": "B",
+        "startdate": "2019-05-31T21:00:00.000Z",
+      },
+    ],
+  ],
+  "tables": Array [
+    "families",
+  ],
+}
+`;
+
+exports[`GET /import should return created income  1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "enddate": "2021-01-02T22:00:00.000Z",
+        "incomemissing": false,
+        "maxincome": false,
+        "personid": "180476-998M",
+        "startdate": "2020-01-02T22:00:00.000Z",
+        "summa": "50000",
+      },
+      Object {
+        "enddate": "2021-01-02T22:00:00.000Z",
+        "incomemissing": false,
+        "maxincome": false,
+        "personid": "020967-9992",
+        "startdate": "2020-01-02T22:00:00.000Z",
+        "summa": "5060.6",
+      },
+    ],
+  ],
+  "tables": Array [
+    "income",
+  ],
+}
+`;
+
+exports[`GET /import should return created incomerows 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "enddate": "2021-01-01T22:00:00.000Z",
+        "incomeperiod": 30,
+        "incometype": 25,
+        "personid": "020967-9992",
+        "startdate": "2020-12-31T22:00:00.000Z",
+        "summa": "4500.6",
+      },
+      Object {
+        "enddate": "2021-01-01T22:00:00.000Z",
+        "incomeperiod": 30,
+        "incometype": 26,
+        "personid": "020967-9992",
+        "startdate": "2020-12-31T22:00:00.000Z",
+        "summa": "560",
+      },
+    ],
+  ],
+  "tables": Array [
+    "incomerows",
+  ],
+}
+`;
+
+exports[`GET /import should return created persons 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "homemunicipality": 2,
+        "mothertongue": 1,
+        "nationality": 3,
+        "personcity": "Ypäjä",
+        "personhomeemail": "fake@notmaildomain.notext",
+        "personid": "020967-9992",
+        "personmobilephone": "000-0000000",
+        "personname": "Authentic, Aimo",
+        "personstreetaddress": "Fakestreet 123",
+        "personzipcode": "1",
+        "secretaddress": false,
+      },
+      Object {
+        "homemunicipality": 2,
+        "mothertongue": 1,
+        "nationality": 3,
+        "personcity": "Ypäjä",
+        "personhomeemail": "fake2@notmaildomain.notext",
+        "personid": "020288-TP01",
+        "personmobilephone": "111-1111111",
+        "personname": "Temporary, Teppo",
+        "personstreetaddress": "StreetStreet 321",
+        "personzipcode": "2",
+        "secretaddress": false,
+      },
+      Object {
+        "homemunicipality": 2,
+        "mothertongue": 1,
+        "nationality": 3,
+        "personcity": "Ypäjä",
+        "personhomeemail": "fake3@notmaildomain.notext",
+        "personid": "180476-998M",
+        "personmobilephone": "222-2222222",
+        "personname": "Hidden, Hilda",
+        "personstreetaddress": "HideStreet 2",
+        "personzipcode": "1",
+        "secretaddress": true,
+      },
+      Object {
+        "homemunicipality": 2,
+        "mothertongue": 1,
+        "nationality": 3,
+        "personcity": "Ypäjä",
+        "personhomeemail": "fake3@notmaildomain.notext",
+        "personid": "010619A9501",
+        "personmobilephone": "222-2222222",
+        "personname": "Child, Christian",
+        "personstreetaddress": "HideStreet 2",
+        "personzipcode": "1",
+        "secretaddress": false,
+      },
+    ],
+  ],
+  "tables": Array [
+    "persons",
+  ],
+}
+`;
