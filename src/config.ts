@@ -1,6 +1,6 @@
 export const config = {
     port: 3000,
-    isTimed: false,
+    isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
     migrationSchema: undefined,
     migrationDb: {
         host: process.env.PGHOST ?? "localhost",
@@ -8,5 +8,9 @@ export const config = {
         user: process.env.PGUSER ?? "postgres",
         password: process.env.PGPASSWORD ?? "postgres",
         database: process.env.PGDATABASE ?? "migration",
+    },
+    xmlParserOptions: {
+        parseNodeValue: true,
+        arrayMode: true
     }
 }
