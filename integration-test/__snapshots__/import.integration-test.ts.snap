@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GET /import should return created codes 1`] = `
+exports[`GET /import positive should return created codes 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -9,15 +9,15 @@ Object {
         "code": "1",
         "codetype": "SPRAK",
         "extrainfo1": "fi",
-        "extrainfo2": "",
+        "extrainfo2": null,
         "text": "Suomi¤¤Finska",
       },
       Object {
         "active": true,
         "code": "2",
         "codetype": "HEMKOMMUN",
-        "extrainfo1": "",
-        "extrainfo2": "",
+        "extrainfo1": null,
+        "extrainfo2": null,
         "text": "Ypäjä",
       },
       Object {
@@ -32,24 +32,24 @@ Object {
         "active": true,
         "code": "26",
         "codetype": "INKSLAG",
-        "extrainfo1": "",
-        "extrainfo2": "",
+        "extrainfo1": null,
+        "extrainfo2": null,
         "text": "Lisätulo¤¤Inkomstslag1",
       },
       Object {
         "active": true,
         "code": "25",
         "codetype": "INKSLAG",
-        "extrainfo1": "",
-        "extrainfo2": "",
+        "extrainfo1": null,
+        "extrainfo2": null,
         "text": "Päätulo¤¤Inkomstslag2",
       },
       Object {
         "active": true,
         "code": "30",
         "codetype": "INKPERIOD",
-        "extrainfo1": "",
-        "extrainfo2": "",
+        "extrainfo1": null,
+        "extrainfo2": null,
         "text": "Kuukausitulo¤¤Inkomstperiod1",
       },
     ],
@@ -60,7 +60,7 @@ Object {
 }
 `;
 
-exports[`GET /import should return created families 1`] = `
+exports[`GET /import positive should return created families 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -107,7 +107,7 @@ Object {
 }
 `;
 
-exports[`GET /import should return created income  1`] = `
+exports[`GET /import positive should return created income  1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -135,7 +135,7 @@ Object {
 }
 `;
 
-exports[`GET /import should return created incomerows 1`] = `
+exports[`GET /import positive should return created incomerows 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -163,7 +163,7 @@ Object {
 }
 `;
 
-exports[`GET /import should return created persons 1`] = `
+exports[`GET /import positive should return created persons 1`] = `
 Object {
   "inserts": Array [
     Array [
