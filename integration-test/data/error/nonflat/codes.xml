@@ -1,52 +1,50 @@
-<MockRoot>
-    <item>
-        <code>1</code>
-        <active>A</active>
-        <codetype>SPRAK</codetype>
-        <text>Suomi¤¤Finska</text>
-        <extrainfo1>fi</extrainfo1>
-        <extrainfo2>
-            <anomaly>Pekka</anomaly>
-        </extrainfo2>
-    </item>
-    <item>
-        <code>2</code>
-        <active>A</active>
-        <codetype>HEMKOMMUN</codetype>
-        <text>Ypäjä</text>
-        <extrainfo1></extrainfo1>
-        <extrainfo2></extrainfo2>
-    </item>
-    <item>
-        <code>3</code>
-        <active>A</active>
-        <codetype>LAND</codetype>
-        <text>Suomi</text>
-        <extrainfo1>FI</extrainfo1>
-        <extrainfo2>246</extrainfo2>
-    </item>
-    <item>
-        <code>26</code>
-        <active>A</active>
-        <codetype>INKSLAG</codetype>
-        <text>Lisätulo¤¤Inkomstslag1</text>
-        <extrainfo1></extrainfo1>
-        <extrainfo2></extrainfo2>
-    </item>
-    <item>
-        <code>25</code>
-        <active>A</active>
-        <codetype>INKSLAG</codetype>
-        <text>Päätulo¤¤Inkomstslag2</text>
-        <extrainfo1></extrainfo1>
-        <extrainfo2></extrainfo2>
-    </item>
-    <item>
-        <code>30</code>
-        <active>A</active>
-        <codetype>INKPERIOD</codetype>
-        <text>Kuukausitulo¤¤Inkomstperiod1</text>
-        <extrainfo1></extrainfo1>
-        <extrainfo2></extrainfo2>
-    </item>
-</MockRoot>
+<item>
+    <code>1</code>
+    <active>A</active>
+    <codetype>SPRAK</codetype>
+    <text>Suomi¤¤Finska</text>
+    <extrainfo1>fi</extrainfo1>
+    <extrainfo2>
+        <anomaly>Pekka</anomaly>
+    </extrainfo2>
+</item>
+<item>
+    <code>2</code>
+    <active>A</active>
+    <codetype>HEMKOMMUN</codetype>
+    <text>Ypäjä</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>3</code>
+    <active>A</active>
+    <codetype>LAND</codetype>
+    <text>Suomi</text>
+    <extrainfo1>FI</extrainfo1>
+    <extrainfo2>246</extrainfo2>
+</item>
+<item>
+    <code>26</code>
+    <active>A</active>
+    <codetype>INKSLAG</codetype>
+    <text>Lisätulo¤¤Inkomstslag1</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>25</code>
+    <active>A</active>
+    <codetype>INKSLAG</codetype>
+    <text>Päätulo¤¤Inkomstslag2</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>30</code>
+    <active>A</active>
+    <codetype>INKPERIOD</codetype>
+    <text>Kuukausitulo¤¤Inkomstperiod1</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>

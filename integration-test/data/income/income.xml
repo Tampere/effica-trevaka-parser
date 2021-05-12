@@ -1,18 +1,16 @@
-<MockRoot>
-    <income>
-        <personid>180476-998M</personid>
-        <startdate>01-03-2020</startdate>
-        <enddate>01-03-2021</enddate>
-        <maxincome>false</maxincome>
-        <incomemissing>false</incomemissing>
-        <summa>50000.00</summa>
-    </income>
-    <income>
-        <personid>020967-9992</personid>
-        <startdate>01-03-2020</startdate>
-        <enddate>01-03-2021</enddate>
-        <maxincome>false</maxincome>
-        <incomemissing>false</incomemissing>
-        <summa>5060.60</summa>
-    </income>
-</MockRoot>
+<income>
+    <personid>180476-998M</personid>
+    <startdate>01-03-2020</startdate>
+    <enddate>01-03-2021</enddate>
+    <maxincome>false</maxincome>
+    <incomemissing>false</incomemissing>
+    <summa>50000.00</summa>
+</income>
+<income>
+    <personid>020967-9992</personid>
+    <startdate>01-03-2020</startdate>
+    <enddate>01-03-2021</enddate>
+    <maxincome>false</maxincome>
+    <incomemissing>false</incomemissing>
+    <summa>5060.60</summa>
+</income>

@@ -36,16 +36,14 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
 }
 
 const stripXmlOverhead = (xmlData: any, fileName: string): any => {
-    // { <root>: [ { <item>: [Array] } ] }
-    // as XML has to be table data, root array should only have one object and that object only one key
-
-    const root = xmlData[Object.keys(xmlData)[0]]
-    const elementWrapper = root[0]
-    if (elementWrapper == null) {
+    // { <item>: [Array] } 
+    // the parsed XML data is just a wrapper object with the item key and an array of "item rows"
+    
+    if (typeof xmlData === "string") {
         throw new Error(`No parseable data element detected in '${fileName}' (${errorCodes.noDataContent})`)
     }
-    const elementKeys = Object.keys(elementWrapper)
-    const itemArray = elementWrapper[elementKeys[0]]
+    const elementKeys = Object.keys(xmlData)
+    const itemArray = xmlData[elementKeys[0]]
     if (elementKeys.length != 1) {
         throw new Error(`Table data ambiguous or insufficient:
             expected 1 element type, got ${elementKeys.length} [${elementKeys}] (${errorCodes.ambiguousTableData})`)
