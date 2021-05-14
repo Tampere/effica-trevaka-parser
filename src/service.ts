@@ -37,22 +37,26 @@ export const createTables = async (tables: TableDescriptor[], t: pgPromise.ITask
 const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
     //TODO: now data is dynamically transformed by parsing it, a more consistent and error safe way would be to pick and parse data based on mapping
     // and consequently catch missing required fields before insert failure
-    data.forEach(row => {
-        Object.keys(row).forEach((key) => {
-            const dataItem = row[key]
-            //Non-flat data shoud appear as arrays (dependent on the XML-parser option arrayMode)
-            if (typeof dataItem === "object") {
-                throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData})`)
-            }
-            const columnParser = sqlTypeMapping[tableName][key]?.parser
-            if (columnParser !== undefined) {
-                row[key] = columnParser(dataItem)
-            } else {
-                throw new Error(`Missing parsing instructions for table: ${tableName}, column: ${key}`)
-            }
+    const parsedDataSet =
+        data.map(row => {
+            const parsedRow: any = {}
+            Object.keys(row).forEach((key) => {
+                const dataItem = row[key]
+                const columnKey = key.toLowerCase()
+                //Non-flat data shoud appear as arrays (dependent on the XML-parser option arrayMode)
+                if (typeof dataItem === "object") {
+                    throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData})`)
+                }
+                const columnParser = sqlTypeMapping[tableName][columnKey]?.parser
+                if (columnParser !== undefined) {
+                    parsedRow[columnKey] = columnParser(dataItem)
+                } else {
+                    throw new Error(`Missing parsing instructions for table: ${tableName}, column: ${key}`)
+                }
+            })
+            return parsedRow
         })
-    })
-    return data
+    return parsedDataSet
 }
 
 export const insertData = async (table: TableDescriptor, data: any[], options: ImportOptions, t: pgPromise.ITask<{}>) => {
@@ -60,8 +64,8 @@ export const insertData = async (table: TableDescriptor, data: any[], options: I
         table.columns.map(c => c.columnName),
         { table: { table: table.tableName, schema: config.migrationSchema } }
     );
-
-    const insert = pgp.helpers.insert(parseTableDataTypes(table.tableName, data), cs);
+    const parsedData = parseTableDataTypes(table.tableName, data)
+    const insert = pgp.helpers.insert(parsedData, cs);
     let resultReturningQuery = options.returnAll ?
         `WITH rows AS ( ${insert} RETURNING *) select * from rows;` :
         `WITH rows AS ( ${insert} RETURNING 1) select count(*) as ${table.tableName}_count from rows;`

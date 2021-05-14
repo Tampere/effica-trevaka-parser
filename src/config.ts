@@ -1,7 +1,7 @@
 export const config = {
     port: 3000,
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
-    migrationSchema: undefined,
+    migrationSchema: process.env.MIGRATION_SCHEMA,
     migrationDb: {
         host: process.env.PGHOST ?? "localhost",
         port: 5432,
@@ -11,6 +11,7 @@ export const config = {
     },
     xmlParserOptions: {
         parseNodeValue: true,
-        arrayMode: true
+        arrayMode: true,
+        trimValues: true
     }
 }

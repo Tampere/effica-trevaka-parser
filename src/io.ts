@@ -13,16 +13,17 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
         const dir = await opendir(path)
         for await (const dirent of dir) {
             if (dirent.isFile()) {
+                const fileName = dirent.name.toLowerCase()
                 time(`'${dirent.name}' reading`)
                 const xmlString = await readFile(`${path}/${dirent.name}`, { encoding: "utf-8" })
                 timeEnd(`'${dirent.name}' reading`)
                 time(`'${dirent.name}' parsing`)
                 const xmlData = parser.parse(xmlString, config.xmlParserOptions)
                 timeEnd(`'${dirent.name}' parsing`)
-                const tableData = stripXmlOverhead(xmlData, dirent.name)
-                const tableName = dirent.name.split('.')[0]
+                const tableData = stripXmlOverhead(xmlData, fileName)
+                const tableName = fileName.split('.')[0]
                 const file: FileDescriptor = {
-                    fileName: dirent.name,
+                    fileName: fileName,
                     data: tableData,
                     table: extractTableDescription(tableName, tableData)
                 }
@@ -63,13 +64,14 @@ const extractTableDescription = (tableName: string, data: any): TableDescriptor 
         )
     }
     const columns: ColumnDescriptor[] = Object.keys(data[0]).map(k => {
-        const columnDef = tableDef[k]
+        const columnKey = k.toLowerCase()
+        const columnDef = tableDef[columnKey]
         if (!columnDef) {
-            throw new Error(`Type definition for column '${k}' in table '${tableName}' not found (${errorCodes.nonMappedColumn})`)
+            throw new Error(`Type definition for column '${columnKey}' in table '${tableName}' not found (${errorCodes.nonMappedColumn})`)
         }
         return {
-            columnName: k,
-            sqlType: tableDef[k].type
+            columnName: columnKey,
+            sqlType: tableDef[columnKey].type
         }
     })
     return { tableName: tableName, columns }
