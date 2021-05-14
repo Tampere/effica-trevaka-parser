@@ -226,3 +226,63 @@ Object {
   ],
 }
 `;
+
+exports[`GET /import positive should work even if XML elements have mixed case 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "active": true,
+        "code": "1",
+        "codetype": "SPRAK",
+        "extrainfo1": "fi",
+        "extrainfo2": null,
+        "text": "Suomi¤¤Finska",
+      },
+      Object {
+        "active": true,
+        "code": "2",
+        "codetype": "HEMKOMMUN",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Ypäjä",
+      },
+      Object {
+        "active": true,
+        "code": "3",
+        "codetype": "LAND",
+        "extrainfo1": "FI",
+        "extrainfo2": "246",
+        "text": "Suomi",
+      },
+      Object {
+        "active": true,
+        "code": "26",
+        "codetype": "INKSLAG",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Lisätulo¤¤Inkomstslag1",
+      },
+      Object {
+        "active": true,
+        "code": "25",
+        "codetype": "INKSLAG",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Päätulo¤¤Inkomstslag2",
+      },
+      Object {
+        "active": true,
+        "code": "30",
+        "codetype": "INKPERIOD",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Kuukausitulo¤¤Inkomstperiod1",
+      },
+    ],
+  ],
+  "tables": Array [
+    "codes",
+  ],
+}
+`;

@@ -91,6 +91,22 @@ describe("GET /import positive", () => {
         tableToReset = "incomerows";
         return response;
     });
+
+    it("should work even if XML elements have mixed case", async () => {
+        const queryObject = {
+            path: "/integration-test/data/mixedcase",
+            returnAll: "true",
+        };
+
+        const response = await request(app).get(baseUrl).query(queryObject);
+        expect(response.status).toBe(200);
+        expect(response.body).toMatchSnapshot(
+            mixedCaseResult
+        );
+
+        tableToReset = "codes";
+        return response;
+    })
 })
 
 
@@ -162,6 +178,61 @@ describe("GET /import negative", () => {
     });
 });
 
+const mixedCaseResult = {
+    tables: ["codes"],
+    inserts: [
+        [
+            {
+                code: "1",
+                active: true,
+                codetype: "SPRAK",
+                text: "Suomi¤¤Finska",
+                extrainfo1: "fi",
+                extrainfo2: null,
+            },
+            {
+                code: "2",
+                active: true,
+                codetype: "HEMKOMMUN",
+                text: "Ypäjä",
+                extrainfo1: null,
+                extrainfo2: null,
+            },
+            {
+                code: "3",
+                active: true,
+                codetype: "LAND",
+                text: "Suomi",
+                extrainfo1: "FI",
+                extrainfo2: "246",
+            },
+            {
+                code: "26",
+                active: true,
+                codetype: "INKSLAG",
+                text: "Lisätulo¤¤Inkomstslag1",
+                extrainfo1: null,
+                extrainfo2: null,
+            },
+            {
+                code: "25",
+                active: true,
+                codetype: "INKSLAG",
+                text: "Päätulo¤¤Inkomstslag2",
+                extrainfo1: null,
+                extrainfo2: null,
+            },
+            {
+                code: "30",
+                active: true,
+                codetype: "INKPERIOD",
+                text: "Kuukausitulo¤¤Inkomstperiod1",
+                extrainfo1: null,
+                extrainfo2: null,
+            },
+        ],
+    ],
+};
 
 const personsResult = {
     tables: ["persons"],
