@@ -15,7 +15,7 @@
 <person>
     <personid>020288-TP01</personid>
     <personname>Temporary, Teppo</personname>
-    <secretaddress>false</secretaddress>
+    <secretaddress>0</secretaddress>
     <personstreetaddress>StreetStreet 321</personstreetaddress>
     <personcity>Ypäjä</personcity>
     <personzipcode>00002</personzipcode>
@@ -28,7 +28,7 @@
 <person>
     <personid>180476-998M</personid>
     <personname>Hidden, Hilda</personname>
-    <secretaddress>true</secretaddress>
+    <secretaddress>1</secretaddress>
     <personstreetaddress>HideStreet 2</personstreetaddress>
     <personcity>Ypäjä</personcity>
     <personzipcode>00001</personzipcode>
@@ -41,7 +41,7 @@
 <person>
     <personid>010619A9501</personid>
     <personname>Child, Christian</personname>
-    <secretaddress>false</secretaddress>
+    <secretaddress>0</secretaddress>
     <personstreetaddress>HideStreet 2</personstreetaddress>
     <personcity>Ypäjä</personcity>
     <personzipcode>00001</personzipcode>

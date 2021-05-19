@@ -1,35 +1,35 @@
 <personinfamily>
     <familynbr>1</familynbr>
     <personid>020967-9992</personid>
-    <startdate>2015-02-02</startdate>
-    <enddate>2019-05-31</enddate>
+    <startdate>20150202</startdate>
+    <enddate>20190531</enddate>
     <roleinfamily>R</roleinfamily>
 </personinfamily>
 <personinfamily>
     <familynbr>1</familynbr>
     <personid>180476-998M</personid>
-    <startdate>2015-02-02</startdate>
-    <enddate>2019-05-31</enddate>
+    <startdate>20150202</startdate>
+    <enddate>20190531</enddate>
     <roleinfamily>S</roleinfamily>
 </personinfamily>
 <personinfamily>
     <familynbr>2</familynbr>
     <personid>020967-9992</personid>
-    <startdate>2019-06-01</startdate>
-    <enddate></enddate>
+    <startdate>20190601</startdate>
+    <enddate>99991231</enddate>
     <roleinfamily>R</roleinfamily>
 </personinfamily>
 <personinfamily>
     <familynbr>2</familynbr>
     <personid>180476-998M</personid>
-    <startdate>2019-06-01</startdate>
-    <enddate></enddate>
+    <startdate>20190601</startdate>
+    <enddate>99999999</enddate>
     <roleinfamily>S</roleinfamily>
 </personinfamily>
 <personinfamily>
     <familynbr>2</familynbr>
     <personid>010619A9501</personid>
-    <startdate>2019-06-01</startdate>
+    <startdate>20190601</startdate>
     <enddate></enddate>
     <roleinfamily>B</roleinfamily>
 </personinfamily>

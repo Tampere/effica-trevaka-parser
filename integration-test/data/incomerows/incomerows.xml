@@ -1,15 +1,15 @@
 <incomerow>
     <personid>020967-9992</personid>
-    <startdate>01-01-2021</startdate>
-    <enddate>01-02-2021</enddate>
+    <startdate>20210101</startdate>
+    <enddate>99991231</enddate>
     <incomeperiod>30</incomeperiod>
     <incometype>25</incometype>
     <summa>4500.60</summa>
 </incomerow>
 <incomerow>
     <personid>020967-9992</personid>
-    <startdate>01-01-2021</startdate>
-    <enddate>01-02-2021</enddate>
+    <startdate>20210101</startdate>
+    <enddate>20210201</enddate>
     <incomeperiod>30</incomeperiod>
     <incometype>26</incometype>
     <summa>560.00</summa>
