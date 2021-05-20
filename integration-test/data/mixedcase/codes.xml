@@ -1,5 +1,5 @@
 <item>
-    <code>1</code>
+    <Code>1</Code>
     <active>A</active>
     <codetype>SPRAK</codetype>
     <text>Suomi¤¤Finska</text>
@@ -16,7 +16,7 @@
 </item>
 <item>
     <code>3</code>
-    <active>A</active>
+    <Active>A</Active>
     <codetype>LAND</codetype>
     <text>Suomi</text>
     <extrainfo1>FI</extrainfo1>

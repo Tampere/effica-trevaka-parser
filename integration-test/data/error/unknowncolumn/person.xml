@@ -10,6 +10,7 @@
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
     <homemunicipality>2</homemunicipality>
+    <notarealcolumn>FAKE_DATA</notarealcolumn>
 </person>
 <person>
     <personid>020288-TP01</personid>

@@ -6,7 +6,7 @@ Object {
     Array [
       Object {
         "active": true,
-        "code": "1",
+        "code": 1,
         "codetype": "SPRAK",
         "extrainfo1": "fi",
         "extrainfo2": null,
@@ -14,7 +14,7 @@ Object {
       },
       Object {
         "active": true,
-        "code": "2",
+        "code": 2,
         "codetype": "HEMKOMMUN",
         "extrainfo1": null,
         "extrainfo2": null,
@@ -22,7 +22,7 @@ Object {
       },
       Object {
         "active": true,
-        "code": "3",
+        "code": 3,
         "codetype": "LAND",
         "extrainfo1": "FI",
         "extrainfo2": "246",
@@ -30,7 +30,7 @@ Object {
       },
       Object {
         "active": true,
-        "code": "26",
+        "code": 26,
         "codetype": "INKSLAG",
         "extrainfo1": null,
         "extrainfo2": null,
@@ -38,7 +38,7 @@ Object {
       },
       Object {
         "active": true,
-        "code": "25",
+        "code": 25,
         "codetype": "INKSLAG",
         "extrainfo1": null,
         "extrainfo2": null,
@@ -46,7 +46,7 @@ Object {
       },
       Object {
         "active": true,
-        "code": "30",
+        "code": 30,
         "codetype": "INKPERIOD",
         "extrainfo1": null,
         "extrainfo2": null,
@@ -65,39 +65,39 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "enddate": "2019-05-30T21:00:00.000Z",
+        "enddate": Any<String>,
         "familynbr": 1,
         "personid": "020967-9992",
         "roleinfamily": "R",
-        "startdate": "2015-02-01T22:00:00.000Z",
+        "startdate": Any<String>,
       },
       Object {
-        "enddate": "2019-05-30T21:00:00.000Z",
+        "enddate": Any<String>,
         "familynbr": 1,
         "personid": "180476-998M",
         "roleinfamily": "S",
-        "startdate": "2015-02-01T22:00:00.000Z",
+        "startdate": Any<String>,
+      },
+      Object {
+        "enddate": Any<String>,
+        "familynbr": 2,
+        "personid": "020967-9992",
+        "roleinfamily": "R",
+        "startdate": Any<String>,
       },
       Object {
         "enddate": null,
         "familynbr": 2,
-        "personid": "020967-9992",
-        "roleinfamily": "R",
-        "startdate": "2019-05-31T21:00:00.000Z",
-      },
-      Object {
-        "enddate": null,
-        "familynbr": 2,
         "personid": "180476-998M",
         "roleinfamily": "S",
-        "startdate": "2019-05-31T21:00:00.000Z",
+        "startdate": Any<String>,
       },
       Object {
         "enddate": null,
         "familynbr": 2,
         "personid": "010619A9501",
         "roleinfamily": "B",
-        "startdate": "2019-05-31T21:00:00.000Z",
+        "startdate": Any<String>,
       },
     ],
   ],
@@ -112,19 +112,19 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "enddate": "2021-01-02T22:00:00.000Z",
+        "enddate": Any<String>,
         "incomemissing": false,
         "maxincome": false,
         "personid": "180476-998M",
-        "startdate": "2020-01-02T22:00:00.000Z",
+        "startdate": Any<String>,
         "summa": "50000",
       },
       Object {
-        "enddate": "2021-01-02T22:00:00.000Z",
+        "enddate": Any<String>,
         "incomemissing": false,
         "maxincome": false,
         "personid": "020967-9992",
-        "startdate": "2020-01-02T22:00:00.000Z",
+        "startdate": Any<String>,
         "summa": "5060.6",
       },
     ],
@@ -140,19 +140,19 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "enddate": "2021-01-01T22:00:00.000Z",
+        "enddate": Any<String>,
         "incomeperiod": 30,
         "incometype": 25,
         "personid": "020967-9992",
-        "startdate": "2020-12-31T22:00:00.000Z",
+        "startdate": Any<String>,
         "summa": "4500.6",
       },
       Object {
-        "enddate": "2021-01-01T22:00:00.000Z",
+        "enddate": Any<String>,
         "incomeperiod": 30,
         "incometype": 26,
         "personid": "020967-9992",
-        "startdate": "2020-12-31T22:00:00.000Z",
+        "startdate": Any<String>,
         "summa": "560",
       },
     ],
@@ -183,7 +183,7 @@ Object {
       Object {
         "homemunicipality": 2,
         "mothertongue": 1,
-        "nationality": 3,
+        "nationality": null,
         "personcity": "Ypäjä",
         "personhomeemail": "fake2@notmaildomain.notext",
         "personid": "020288-TP01",
@@ -222,7 +222,67 @@ Object {
     ],
   ],
   "tables": Array [
-    "persons",
+    "person",
+  ],
+}
+`;
+
+exports[`GET /import positive should work even if XML elements have mixed case 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "active": true,
+        "code": 1,
+        "codetype": "SPRAK",
+        "extrainfo1": "fi",
+        "extrainfo2": null,
+        "text": "Suomi¤¤Finska",
+      },
+      Object {
+        "active": true,
+        "code": 2,
+        "codetype": "HEMKOMMUN",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Ypäjä",
+      },
+      Object {
+        "active": true,
+        "code": 3,
+        "codetype": "LAND",
+        "extrainfo1": "FI",
+        "extrainfo2": "246",
+        "text": "Suomi",
+      },
+      Object {
+        "active": true,
+        "code": 26,
+        "codetype": "INKSLAG",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Lisätulo¤¤Inkomstslag1",
+      },
+      Object {
+        "active": true,
+        "code": 25,
+        "codetype": "INKSLAG",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Päätulo¤¤Inkomstslag2",
+      },
+      Object {
+        "active": true,
+        "code": 30,
+        "codetype": "INKPERIOD",
+        "extrainfo1": null,
+        "extrainfo2": null,
+        "text": "Kuukausitulo¤¤Inkomstperiod1",
+      },
+    ],
+  ],
+  "tables": Array [
+    "codes",
   ],
 }
 `;
