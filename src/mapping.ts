@@ -1,4 +1,4 @@
-import { activityParser, booleanParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "./parsers"
+import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "./parsers"
 import { TypeMapping } from "./types"
 
 
@@ -55,6 +55,94 @@ export const sqlTypeMapping: TypeMapping = {
         mothertongue: { type: "integer", parser: codeNumericParser },
         nationality: { type: "integer", parser: codeNumericParser },
         homemunicipality: { type: "integer", parser: codeNumericParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    areas: {
+        areacode: { type: "integer", parser: nullForcingTextParser },
+        areaname: { type: "text", parser: nullForcingTextParser },
+        level: { type: "integer", parser: nullForcingTextParser },
+        parent: { type: "integer", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    units: {
+        unitcode: { type: "integer", parser: codeNumericParser },
+        unitname: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        unitaddress: { type: "text", parser: nullForcingTextParser },
+        unitzipcode: { type: "text", parser: nullForcingTextParser },
+        unitcity: { type: "text", parser: nullForcingTextParser },
+        unitemail: { type: "text", parser: nullForcingTextParser },
+        phone1: { type: "text", parser: nullForcingTextParser },
+        unit24_7: { type: "boolean", parser: numericBooleanParser },
+        areacode: { type: "integer", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    departments: {
+        unitcode: { type: "integer", parser: codeNumericParser },
+        departmentcode: { type: "integer", parser: codeNumericParser },
+        departmentname: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        departmentaddress: { type: "text", parser: nullForcingTextParser },
+        departmentzipcode: { type: "text", parser: nullForcingTextParser },
+        departmentcity: { type: "text", parser: nullForcingTextParser },
+        departmentemail: { type: "text", parser: nullForcingTextParser },
+        phone: { type: "text", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    placements: {
+        placementnbr: { type: "integer", parser: nullForcingTextParser },
+        personid: { type: "text", parser: nullForcingTextParser },
+        placementunitcode: { type: "integer", parser: codeNumericParser },
+        placementdepartmentcode: { type: "integer", parser: codeNumericParser },
+        placementchildminder: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    placementextents: {
+        placementnbr: { type: "integer", parser: codeNumericParser },
+        extentnbr: { type: "integer", parser: codeNumericParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        hours: { type: "numeric", parser: nullForcingTextParser },
+        days: { type: "integer", parser: nullForcingTextParser },
+        extentcode: { type: "text", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    feedeviations: {
+        placementnbr: { type: "integer", parser: codeNumericParser },
+        rownbr: { type: "integer", parser: codeNumericParser },
+        serviceform: { type: "integer", parser: codeNumericParser },
+        deviationtype: { type: "integer", parser: codeNumericParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        sum: { type: "numeric", parser: nullForcingTextParser },
+        procent: { type: "numeric", parser: nullForcingTextParser },
+        hours: { type: "numeric", parser: nullForcingTextParser },
+        days: { type: "integer", parser: nullForcingTextParser },
+        extentcode: { type: "integer", parser: codeNumericParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    decisions: {
+        personid: { type: "text", parser: nullForcingTextParser },
+        decisiontype: { type: "integer", parser: codeNumericParser },
+        decisionstatus: { type: "integer", parser: codeNumericParser },
+        decisionunitcode: { type: "integer", parser: codeNumericParser },
+        decisionchildminder: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        decisiondate: { type: "date", parser: dateParser },
+        caseworker: { type: "text", parser: nullForcingTextParser },
+        decisionmaker: { type: "text", parser: nullForcingTextParser },
+        decisionnbr: { type: "integer", parser: nullForcingTextParser },
+        extent: { type: "integer", parser: codeNumericParser },
+        days: { type: "integer", parser: nullForcingTextParser },
+        paydecision: { type: "numeric", parser: nullForcingTextParser },
+        sum: { type: "numeric", parser: nullForcingTextParser },
+        totalsum: { type: "numeric", parser: nullForcingTextParser },
+        grandtotal: { type: "numeric", parser: nullForcingTextParser },
         guid: { type: "text", parser: nullForcingTextParser }
     }
 }
