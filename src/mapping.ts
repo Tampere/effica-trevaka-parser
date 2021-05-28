@@ -124,5 +124,25 @@ export const sqlTypeMapping: TypeMapping = {
         days: { type: "integer", parser: nullForcingTextParser },
         extentcode: { type: "integer", parser: codeNumericParser },
         guid: { type: "text", parser: nullForcingTextParser }
+    },
+    decisions: {
+        personid: { type: "text", parser: nullForcingTextParser },
+        decisiontype: { type: "integer", parser: codeNumericParser },
+        decisionstatus: { type: "integer", parser: codeNumericParser },
+        decisionunitcode: { type: "integer", parser: codeNumericParser },
+        decisionchildminder: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        decisiondate: { type: "date", parser: dateParser },
+        caseworker: { type: "text", parser: nullForcingTextParser },
+        decisionmaker: { type: "text", parser: nullForcingTextParser },
+        decisionnbr: { type: "integer", parser: nullForcingTextParser },
+        extent: { type: "integer", parser: codeNumericParser },
+        days: { type: "integer", parser: nullForcingTextParser },
+        paydecision: { type: "numeric", parser: nullForcingTextParser },
+        sum: { type: "numeric", parser: nullForcingTextParser },
+        totalsum: { type: "numeric", parser: nullForcingTextParser },
+        grandtotal: { type: "numeric", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
     }
 }
