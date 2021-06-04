@@ -1,108 +1,127 @@
-import request from "supertest";
-import app from "../src/app";
-import db from "../src/db/db";
-import { errorCodes } from "../src/util";
+import request from "supertest"
+import app from "../src/app"
+import db from "../src/db/db"
+import { errorCodes } from "../src/util"
 
-const baseUrl = "/import";
+const baseUrl = "/import"
 
-let tableToReset: string | undefined = undefined;
-const tables = ["person", "codes", "income", "incomerows", "families"];
+let tableToReset: string | undefined = undefined
+const tables = ["person", "codes", "income", "incomerows", "families"]
 
-beforeAll(() => { });
+type DateRangeExpectation = { [key: string]: any }
+
+const closedDateRange: DateRangeExpectation = {
+    startdate: expect.any(String),
+    enddate: expect.any(String)
+}
+const openDateRange: DateRangeExpectation = {
+    startdate: expect.any(String)
+}
+
+
+
+beforeAll(() => { })
 
 beforeEach(() => tableToReset = undefined)
 afterEach(() => {
     if (tableToReset && tables.includes(tableToReset)) {
-        return db.query(`DROP TABLE IF EXISTS ${tableToReset};`);
+        return db.query(`DROP TABLE IF EXISTS ${tableToReset};`)
     }
-});
+})
 
 afterAll(() => {
-    return db.$pool.end();
-});
+    return db.$pool.end()
+})
 
 // POSITIVE CASES
 describe("GET /import positive", () => {
     it("should return created persons", async () => {
-        const queryObject = {
-            path: "/integration-test/data/person",
-            returnAll: "true",
-        };
+        return await positiveImportSnapshotTest("person")
+    })
 
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot();
-        tableToReset = "person";
-        return response;
-    });
     it("should return created families", async () => {
-        const queryObject = {
-            path: "/integration-test/data/families",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot(familiesResult);
-        tableToReset = "families";
-        return response;
-    });
+        return await positiveImportSnapshotTest(
+            "families",
+            getTimeSeriesResultPattern(
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
+                openDateRange,
+                openDateRange,
+                openDateRange))
+    })
 
     it("should return created codes", async () => {
-        const queryObject = {
-            path: "/integration-test/data/codes",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot();
-
-
-        tableToReset = "codes";
-        return response;
-    });
+        return await positiveImportSnapshotTest("codes")
+    })
 
     it("should return created income ", async () => {
-        const queryObject = {
-            path: "/integration-test/data/income",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot(incomeResult);
-
-        tableToReset = "income";
-        return response;
-    });
+        return await positiveImportSnapshotTest(
+            "income",
+            getTimeSeriesResultPattern(closedDateRange, closedDateRange)
+        )
+    })
 
     it("should return created incomerows", async () => {
-        const queryObject = {
-            path: "/integration-test/data/incomerows",
-            returnAll: "true",
-        };
+        return await positiveImportSnapshotTest(
+            "incomerows",
+            getTimeSeriesResultPattern(closedDateRange, closedDateRange)
+        )
+    })
 
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot(incomeRowsResult);
+    it("should return created units", async () => {
+        return await positiveImportSnapshotTest(
+            "units",
+            getTimeSeriesResultPattern(openDateRange, openDateRange))
+    })
 
-        tableToReset = "incomerows";
-        return response;
-    });
+    it("should return created departments", async () => {
+        return await positiveImportSnapshotTest(
+            "departments",
+            getTimeSeriesResultPattern(openDateRange, openDateRange))
+    })
+
+    it("should return created placements", async () => {
+        return await positiveImportSnapshotTest(
+            "placements",
+            getTimeSeriesResultPattern(openDateRange, openDateRange))
+    })
+
+    it("should return created placementextents", async () => {
+        return await positiveImportSnapshotTest(
+            "placementextents",
+            getTimeSeriesResultPattern(openDateRange, openDateRange))
+    })
+
+    it("should return created decisions", async () => {
+        return await positiveImportSnapshotTest(
+            "decisions",
+            getTimeSeriesResultPattern({ ...openDateRange, decisiondate: expect.any(String) }))
+    })
+
+    it("should return created feedeviations", async () => {
+        return await positiveImportSnapshotTest("feedeviations",
+            getTimeSeriesResultPattern(openDateRange, openDateRange))
+    })
+
+    it("should return created childminders", async () => {
+        return await positiveImportSnapshotTest(
+            "childminders",
+            getTimeSeriesResultPattern(openDateRange))
+    })
 
     it("should work even if XML elements have mixed case", async () => {
         const queryObject = {
             path: "/integration-test/data/mixedcase",
             returnAll: "true",
-        };
+        }
 
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(200);
-        expect(response.body).toMatchSnapshot();
+        const response = await request(app).get(baseUrl).query(queryObject)
+        expect(response.status).toBe(200)
+        expect(response.body).toMatchSnapshot()
 
-        tableToReset = "codes";
-        return response;
+        tableToReset = "codes"
+        return response
     })
 })
 
@@ -110,126 +129,60 @@ describe("GET /import positive", () => {
 // NEGATIVE CASES
 describe("GET /import negative", () => {
     it("should fail on non flat data", async () => {
-        const queryObject = {
-            path: "/integration-test/data/error/nonflat",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(500);
-        expect(response.text).toContain(errorCodes.nonFlatData)
-
-        return response;
-    });
+        return await negativeImportTest("nonflat", 500, errorCodes.nonFlatData)
+    })
 
     it("should fail on non mapped table", async () => {
-        const queryObject = {
-            path: "/integration-test/data/error/unknowntable",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(500);
-        expect(response.text).toContain(errorCodes.nonMappedTable)
-
-        return response;
-    });
+        return await negativeImportTest("unknowntable", 500, errorCodes.nonMappedTable)
+    })
 
     it("should fail on non mapped column", async () => {
-        const queryObject = {
-            path: "/integration-test/data/error/unknowncolumn",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(500);
-        expect(response.text).toContain(errorCodes.nonMappedColumn)
-
-        return response;
-    });
+        return await negativeImportTest("unknowncolumn", 500, errorCodes.nonMappedColumn)
+    })
 
     it("should fail on no data content", async () => {
-        const queryObject = {
-            path: "/integration-test/data/error/empty",
-            returnAll: "true",
-        };
-
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(500);
-        expect(response.text).toContain(errorCodes.noDataContent)
-
-        return response;
-    });
+        return await negativeImportTest("empty", 500, errorCodes.noDataContent)
+    })
 
     it("should fail on ambiguous data content", async () => {
-        const queryObject = {
-            path: "/integration-test/data/error/ambiguous",
-            returnAll: "true",
-        };
+        return await negativeImportTest("ambiguous", 500, errorCodes.ambiguousTableData)
+    })
+})
 
-        const response = await request(app).get(baseUrl).query(queryObject);
-        expect(response.status).toBe(500);
-        expect(response.text).toContain(errorCodes.ambiguousTableData)
-
-        return response;
-    });
-});
-
-const familiesResult = {
-    "inserts":
-        [
-            [
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                },
-
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                },
-
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                },
-
-                {
-                    "startdate": expect.any(String),
-                },
-                {
-                    "startdate": expect.any(String),
-                }
-            ]
-        ]
+//decouple timeseries expectation snapshots from local timezone
+const getTimeSeriesResultPattern = (...expectations: DateRangeExpectation[]) => {
+    return {
+        inserts: [expectations]
+    }
 }
-const incomeResult = {
-    "inserts":
-        [
-            [
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                },
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                }
-            ]
-        ]
+
+const positiveImportSnapshotTest = async (tableName: string, resultPattern?: any) => {
+    const queryObject = {
+        path: `/integration-test/data/${tableName}`,
+        returnAll: "true",
+    }
+
+    const response = await request(app).get(baseUrl).query(queryObject)
+    expect(response.status).toBe(200)
+    if (resultPattern) {
+        expect(response.body).toMatchSnapshot(resultPattern)
+    }
+    else {
+        expect(response.body).toMatchSnapshot()
+    }
+    tableToReset = tableName
+    return response
 }
-const incomeRowsResult = {
-    "inserts":
-        [
-            [
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                },
-                {
-                    "startdate": expect.any(String),
-                    "enddate": expect.any(String)
-                }
-            ]
-        ]
+
+const negativeImportTest = async (path: string, status: number, expectedErrorCode: string) => {
+    const queryObject = {
+        path: `/integration-test/data/error/${path}`,
+        returnAll: "true",
+    }
+
+    const response = await request(app).get(baseUrl).query(queryObject)
+    expect(response.status).toBe(status)
+    expect(response.text).toContain(expectedErrorCode)
+
+    return response
 }

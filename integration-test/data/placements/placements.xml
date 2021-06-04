@@ -1,0 +1,18 @@
+<placement>
+    <placementnbr>11</placementnbr>
+    <personid>010619A9501</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+</placement>
+<placement>
+    <placementnbr>12</placementnbr>
+    <personid>251118A9509</personid>
+    <placementunitcode>125</placementunitcode>
+    <placementdepartmentcode>1251</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+</placement>

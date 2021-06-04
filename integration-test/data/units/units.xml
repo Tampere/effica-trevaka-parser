@@ -1,0 +1,26 @@
+<unit>
+    <unitcode>123</unitcode>
+    <unitname>Tenhon testiyksikkö</unitname>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <unitaddress>Testikuja 123</unitaddress>
+    <unitzipcode>12000</unitzipcode>
+    <unitcity>Tenhola</unitcity>
+    <unitemail>notreal@imaginary.fake</unitemail>
+    <phone1>3123312</phone1>
+    <unit24_7>0</unit24_7>
+    <areacode>1</areacode>
+</unit>
+<unit>
+    <unitcode>125</unitcode>
+    <unitname>Pujakan testiyksikkö</unitname>
+    <startdate>20200301</startdate>
+    <enddate>99999999</enddate>
+    <unitaddress>Testaajankatu 321</unitaddress>
+    <unitzipcode>13000</unitzipcode>
+    <unitcity>Pajuoja</unitcity>
+    <unitemail>notreal@imaginary.fake</unitemail>
+    <phone1>12123123</phone1>
+    <unit24_7>1</unit24_7>
+    <areacode>2</areacode>
+</unit>

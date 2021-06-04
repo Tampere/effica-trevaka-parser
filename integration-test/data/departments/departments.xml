@@ -1,0 +1,24 @@
+<department>
+    <unitcode>123</unitcode>
+    <departmentcode>1231</departmentcode>
+    <departmentname>Tenhon terhot</departmentname>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <departmentaddress>Testikuja 123</departmentaddress>
+    <departmentzipcode>12000</departmentzipcode>
+    <departmentcity>Tenhola</departmentcity>
+    <departmentemail>eij@imaginary.fake</departmentemail>
+    <phone>1234567</phone>
+</department>
+<department>
+    <unitcode>125</unitcode>
+    <departmentcode>1251</departmentcode>
+    <departmentname>Tujun tupajumit</departmentname>
+    <startdate>20200301</startdate>
+    <enddate>99999999</enddate>
+    <departmentaddress>Testaajankatu 321</departmentaddress>
+    <departmentzipcode>13000</departmentzipcode>
+    <departmentcity>Pajuoja</departmentcity>
+    <departmentemail>eij@imaginary.fake</departmentemail>
+    <phone>1234567</phone>
+</department>
