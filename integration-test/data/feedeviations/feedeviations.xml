@@ -1,0 +1,26 @@
+<feedeviation>
+    <placementnbr>11</placementnbr>
+    <rownbr>1</rownbr>
+    <serviceform>3</serviceform>
+    <deviationtype>4</deviationtype>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <sum>0</sum>
+    <procent>0</procent>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>100</extentcode>
+</feedeviation>
+<feedeviation>
+    <placementnbr>12</placementnbr>
+    <rownbr>2</rownbr>
+    <serviceform>3</serviceform>
+    <deviationtype>4</deviationtype>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <sum>10</sum>
+    <procent>0</procent>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>101</extentcode>
+</feedeviation>

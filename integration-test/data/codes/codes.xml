@@ -46,3 +46,27 @@
     <extrainfo1></extrainfo1>
     <extrainfo2></extrainfo2>
 </item>
+<item>
+    <code>100</code>
+    <active>A</active>
+    <codetype>OMFATTNING</codetype>
+    <text>Kokopäivähoito¤¤Heldagsomsorg 5-7t/d</text>
+    <extrainfo1>1,25.01</extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>101</code>
+    <active>A</active>
+    <codetype>OMFATTNING</codetype>
+    <text>Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d</text>
+    <extrainfo1>2,10.01</extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>999420001</code>
+    <active>A</active>
+    <codetype>STATUS</codetype>
+    <text>Hyväksytty¤¤OK</text>
+    <extrainfo1>OK</extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>

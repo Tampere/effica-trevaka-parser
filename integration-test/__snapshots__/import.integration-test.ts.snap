@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /import positive should return created childminders 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "area": 1,
+        "email": "nomail@forme.fake",
+        "enddate": null,
+        "personid": "010101-TP99",
+        "phonenbr": "11223344",
+        "startdate": Any<String>,
+      },
+    ],
+  ],
+  "tables": Array [
+    "childminders",
+  ],
+}
+`;
+
 exports[`GET /import positive should return created codes 1`] = `
 Object {
   "inserts": Array [
@@ -52,10 +72,101 @@ Object {
         "extrainfo2": null,
         "text": "Kuukausitulo¤¤Inkomstperiod1",
       },
+      Object {
+        "active": true,
+        "code": 100,
+        "codetype": "OMFATTNING",
+        "extrainfo1": "1,25.01",
+        "extrainfo2": null,
+        "text": "Kokopäivähoito¤¤Heldagsomsorg 5-7t/d",
+      },
+      Object {
+        "active": true,
+        "code": 101,
+        "codetype": "OMFATTNING",
+        "extrainfo1": "2,10.01",
+        "extrainfo2": null,
+        "text": "Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d",
+      },
+      Object {
+        "active": true,
+        "code": 999420001,
+        "codetype": "STATUS",
+        "extrainfo1": "OK",
+        "extrainfo2": null,
+        "text": "Hyväksytty¤¤OK",
+      },
     ],
   ],
   "tables": Array [
     "codes",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created decisions 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "caseworker": "FAKE",
+        "days": 0,
+        "decisionchildminder": null,
+        "decisiondate": Any<String>,
+        "decisionmaker": null,
+        "decisionnbr": 1,
+        "decisionstatus": 999420001,
+        "decisiontype": 426,
+        "decisionunitcode": 123,
+        "enddate": null,
+        "extent": null,
+        "grandtotal": "10",
+        "paydecision": "1",
+        "personid": "010619A9501",
+        "startdate": Any<String>,
+        "sum": "10",
+        "totalsum": "10",
+      },
+    ],
+  ],
+  "tables": Array [
+    "decisions",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created departments 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "departmentaddress": "Testikuja 123",
+        "departmentcity": "Tenhola",
+        "departmentcode": 1231,
+        "departmentemail": "eij@imaginary.fake",
+        "departmentname": "Tenhon terhot",
+        "departmentzipcode": "12000",
+        "enddate": null,
+        "phone": "1234567",
+        "startdate": Any<String>,
+        "unitcode": 123,
+      },
+      Object {
+        "departmentaddress": "Testaajankatu 321",
+        "departmentcity": "Pajuoja",
+        "departmentcode": 1251,
+        "departmentemail": "eij@imaginary.fake",
+        "departmentname": "Tujun tupajumit",
+        "departmentzipcode": "13000",
+        "enddate": null,
+        "phone": "1234567",
+        "startdate": Any<String>,
+        "unitcode": 125,
+      },
+    ],
+  ],
+  "tables": Array [
+    "departments",
   ],
 }
 `;
@@ -99,10 +210,55 @@ Object {
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
+      Object {
+        "enddate": null,
+        "familynbr": 2,
+        "personid": "251118A9509",
+        "roleinfamily": "B",
+        "startdate": Any<String>,
+      },
     ],
   ],
   "tables": Array [
     "families",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created feedeviations 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "days": 0,
+        "deviationtype": 4,
+        "enddate": null,
+        "extentcode": 100,
+        "hours": "0",
+        "placementnbr": 11,
+        "procent": "0",
+        "rownbr": 1,
+        "serviceform": 3,
+        "startdate": Any<String>,
+        "sum": "0",
+      },
+      Object {
+        "days": 0,
+        "deviationtype": 4,
+        "enddate": null,
+        "extentcode": 101,
+        "hours": "0",
+        "placementnbr": 12,
+        "procent": "0",
+        "rownbr": 2,
+        "serviceform": 3,
+        "startdate": Any<String>,
+        "sum": "10",
+      },
+    ],
+  ],
+  "tables": Array [
+    "feedeviations",
   ],
 }
 `;
@@ -168,6 +324,7 @@ Object {
   "inserts": Array [
     Array [
       Object {
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -181,6 +338,7 @@ Object {
         "secretaddress": false,
       },
       Object {
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": null,
@@ -194,6 +352,7 @@ Object {
         "secretaddress": false,
       },
       Object {
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -207,6 +366,7 @@ Object {
         "secretaddress": true,
       },
       Object {
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -219,10 +379,122 @@ Object {
         "personzipcode": "1",
         "secretaddress": false,
       },
+      Object {
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "homemunicipality": 2,
+        "mothertongue": 1,
+        "nationality": 3,
+        "personcity": "Tenhola",
+        "personhomeemail": "fake3@notmaildomain.notext",
+        "personid": "251118A9509",
+        "personmobilephone": "222-2222222",
+        "personname": "Child, Camilla",
+        "personstreetaddress": "HideStreet 2",
+        "personzipcode": "12000",
+        "secretaddress": false,
+      },
     ],
   ],
   "tables": Array [
     "person",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created placementextents 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "days": 0,
+        "enddate": null,
+        "extentcode": 100,
+        "extentnbr": 1,
+        "hours": "0",
+        "placementnbr": 11,
+        "startdate": Any<String>,
+      },
+      Object {
+        "days": 15,
+        "enddate": null,
+        "extentcode": 101,
+        "extentnbr": 2,
+        "hours": "0",
+        "placementnbr": 12,
+        "startdate": Any<String>,
+      },
+    ],
+  ],
+  "tables": Array [
+    "placementextents",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created placements 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "enddate": null,
+        "personid": "010619A9501",
+        "placementchildminder": null,
+        "placementdepartmentcode": 1231,
+        "placementnbr": 11,
+        "placementunitcode": 123,
+        "startdate": Any<String>,
+      },
+      Object {
+        "enddate": null,
+        "personid": "251118A9509",
+        "placementchildminder": null,
+        "placementdepartmentcode": 1251,
+        "placementnbr": 12,
+        "placementunitcode": 125,
+        "startdate": Any<String>,
+      },
+    ],
+  ],
+  "tables": Array [
+    "placements",
+  ],
+}
+`;
+
+exports[`GET /import positive should return created units 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "areacode": 1,
+        "enddate": null,
+        "phone1": "3123312",
+        "startdate": Any<String>,
+        "unit24_7": false,
+        "unitaddress": "Testikuja 123",
+        "unitcity": "Tenhola",
+        "unitcode": 123,
+        "unitemail": "notreal@imaginary.fake",
+        "unitname": "Tenhon testiyksikkö",
+        "unitzipcode": "12000",
+      },
+      Object {
+        "areacode": 2,
+        "enddate": null,
+        "phone1": "12123123",
+        "startdate": Any<String>,
+        "unit24_7": true,
+        "unitaddress": "Testaajankatu 321",
+        "unitcity": "Pajuoja",
+        "unitcode": 125,
+        "unitemail": "notreal@imaginary.fake",
+        "unitname": "Pujakan testiyksikkö",
+        "unitzipcode": "13000",
+      },
+    ],
+  ],
+  "tables": Array [
+    "units",
   ],
 }
 `;

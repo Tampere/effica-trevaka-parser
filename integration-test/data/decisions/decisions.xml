@@ -1,0 +1,19 @@
+<decision>
+    <personid>010619A9501</personid>
+    <decisiontype>426</decisiontype>
+    <decisionstatus>999420001</decisionstatus>
+    <decisionunitcode>123</decisionunitcode>
+    <decisionchildminder></decisionchildminder>
+    <startdate>20200401</startdate>
+    <enddate></enddate>
+    <decisiondate>20200302</decisiondate>
+    <caseworker>FAKE</caseworker>
+    <decisionmaker></decisionmaker>
+    <decisionnbr>1</decisionnbr>
+    <extent>0</extent>
+    <days>0</days>
+    <paydecision>1</paydecision>
+    <sum>10</sum>
+    <totalsum>10</totalsum>
+    <grandtotal>10</grandtotal>
+</decision>

@@ -1,9 +1,9 @@
-import migrationDb, { pgp } from "./db/db";
-import { FileDescriptor, ImportOptions, TableDescriptor } from "./types";
+import pgPromise from "pg-promise"
 import { config } from "./config"
-import { sqlTypeMapping } from "./mapping";
-import pgPromise from "pg-promise";
+import migrationDb, { pgp } from "./db/db"
+import { sqlTypeMapping } from "./mapping"
 import { time, timeEnd } from "./timing"
+import { FileDescriptor, ImportOptions, TableDescriptor } from "./types"
 import { errorCodes } from "./util"
 
 
@@ -45,7 +45,7 @@ const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
                 const columnKey = key.toLowerCase()
                 //Non-flat data shoud appear as arrays (dependent on the XML-parser option arrayMode)
                 if (typeof dataItem === "object") {
-                    throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData})`)
+                    throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData}): ${JSON.stringify(dataItem)}`)
                 }
                 const columnParser = sqlTypeMapping[tableName][columnKey]?.parser
                 if (columnParser !== undefined) {

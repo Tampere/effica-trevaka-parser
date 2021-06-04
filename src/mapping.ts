@@ -108,7 +108,7 @@ export const sqlTypeMapping: TypeMapping = {
         enddate: { type: "date", parser: dateParser },
         hours: { type: "numeric", parser: nullForcingTextParser },
         days: { type: "integer", parser: nullForcingTextParser },
-        extentcode: { type: "text", parser: nullForcingTextParser },
+        extentcode: { type: "integer", parser: codeNumericParser },
         guid: { type: "text", parser: nullForcingTextParser }
     },
     feedeviations: {
@@ -143,6 +143,15 @@ export const sqlTypeMapping: TypeMapping = {
         sum: { type: "numeric", parser: nullForcingTextParser },
         totalsum: { type: "numeric", parser: nullForcingTextParser },
         grandtotal: { type: "numeric", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser }
+    },
+    childminders: {
+        personid: { type: "text", parser: nullForcingTextParser },
+        area: { type: "integer", parser: codeNumericParser },
+        startdate: { type: "date", parser: dateParser },
+        enddate: { type: "date", parser: dateParser },
+        phonenbr: { type: "text", parser: nullForcingTextParser },
+        email: { type: "text", parser: nullForcingTextParser },
         guid: { type: "text", parser: nullForcingTextParser }
     }
 }

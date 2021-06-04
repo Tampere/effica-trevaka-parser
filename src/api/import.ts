@@ -1,9 +1,9 @@
 import express from "express"
 import { readFilesFromDir } from "../io"
-import { FileDescriptor, ImportOptions } from "../types"
-import { importXmlData } from "../service";
+import { importXmlData } from "../service"
 import { time, timeEnd } from "../timing"
-import { ErrorWithCause } from "../util";
+import { FileDescriptor, ImportOptions } from "../types"
+import { ErrorWithCause } from "../util"
 
 const router = express.Router();
 router.get("/", async (req, res, next) => {
