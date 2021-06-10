@@ -1,5 +1,5 @@
 import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "./parsers"
-import { TypeMapping } from "./types"
+import { TargetTableMapping, TypeMapping } from "./types"
 
 
 // dateformat in effica-data: yyyymmdd
@@ -153,5 +153,21 @@ export const sqlTypeMapping: TypeMapping = {
         phonenbr: { type: "text", parser: nullForcingTextParser },
         email: { type: "text", parser: nullForcingTextParser },
         guid: { type: "text", parser: nullForcingTextParser }
+    }
+}
+
+export const targetTableMapping: TargetTableMapping = {
+    evaka_person: {
+        social_security_number: "text",
+        first_name: "text",
+        last_name: "text",
+        email: "text",
+        language: "text",
+        date_of_birth: "date",
+        street_address: "text",
+        postal_code: "text",
+        post_office: "text",
+        restricted_details_enabled: "boolean",
+        phone: "text"
     }
 }

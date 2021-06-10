@@ -8,7 +8,7 @@ export const numericBooleanParser = (v: undefined | number): boolean => v === 1
 
 //max time = null or max time = 1E8 days after epoch?
 export const dateParser = (v: string): string | null => {
-    return v === "" || v == null || v === "99999999" ? null : DateTime.fromISO(v).toISODate()
+    return v === "" || v == null || v === "99999999" || v === "99991231" ? null : DateTime.fromISO(v).toISODate()
 }
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v

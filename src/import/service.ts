@@ -1,10 +1,10 @@
 import pgPromise from "pg-promise"
-import { config } from "./config"
-import migrationDb, { pgp } from "./db/db"
-import { sqlTypeMapping } from "./mapping"
-import { time, timeEnd } from "./timing"
-import { FileDescriptor, ImportOptions, TableDescriptor } from "./types"
-import { errorCodes } from "./util"
+import { config } from "../config"
+import migrationDb, { pgp } from "../db/db"
+import { sqlTypeMapping } from "../mapping"
+import { time, timeEnd } from "../timing"
+import { FileDescriptor, ImportOptions, TableDescriptor } from "../types"
+import { errorCodes } from "../util"
 
 
 export const importXmlData = async (files: FileDescriptor[], options: ImportOptions) => {
