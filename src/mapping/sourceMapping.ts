@@ -1,5 +1,5 @@
-import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "./parsers"
-import { TypeMapping } from "./types"
+import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "../parsers"
+import { TypeMapping } from "../types"
 
 
 // dateformat in effica-data: yyyymmdd
@@ -7,7 +7,7 @@ import { TypeMapping } from "./types"
 // missing coded value seems to be 0, never null
 
 //TODO: add rest of tables
-export const sqlTypeMapping: TypeMapping = {
+export const efficaTableMapping: TypeMapping = {
     codes: {
         code: { type: "integer", parser: codeNumericParser },
         active: { type: "boolean", parser: activityParser },
@@ -155,3 +155,5 @@ export const sqlTypeMapping: TypeMapping = {
         guid: { type: "text", parser: nullForcingTextParser }
     }
 }
+
+

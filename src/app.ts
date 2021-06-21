@@ -1,7 +1,8 @@
-import express, { NextFunction } from "express"
-import importApi from "./api/import"
+import express from "express"
 import checkApi from "./api/check"
-import { ErrorWithCause } from "./util"
+import importApi from "./api/import"
+import transformApi from "./api/transform"
+import { ErrorWithCause } from "./util/error"
 
 const app: express.Application = express()
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/import", importApi)
 app.use("/check", checkApi)
+app.use("/transform", transformApi)
 app.use(errorHandler)
 
 export default app
