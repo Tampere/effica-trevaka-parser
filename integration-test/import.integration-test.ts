@@ -1,12 +1,15 @@
 import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
-import { errorCodes } from "../src/util"
+import { errorCodes } from "../src/util/error"
+import { getMigrationSchema } from "../src/util/queryTools"
 
 const baseUrl = "/import"
 
 let tableToReset: string | undefined = undefined
-const tables = ["person", "codes", "income", "incomerows", "families"]
+const tables = ["person", "codes", "income", "incomerows", "families",
+    "units", "departments", "placements", "placementextents", "decisions",
+    "feedeviations", "childminders"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -18,14 +21,12 @@ const openDateRange: DateRangeExpectation = {
     startdate: expect.any(String)
 }
 
-
-
 beforeAll(() => { })
 
 beforeEach(() => tableToReset = undefined)
-afterEach(() => {
+afterEach(async () => {
     if (tableToReset && tables.includes(tableToReset)) {
-        return db.query(`DROP TABLE IF EXISTS ${tableToReset};`)
+        return await db.query(`DROP TABLE IF EXISTS ${getMigrationSchema()}${tableToReset};`)
     }
 })
 

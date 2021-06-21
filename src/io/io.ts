@@ -1,11 +1,11 @@
 
+import parser from "fast-xml-parser";
 import { opendir, readFile } from "fs/promises";
-import parser from "fast-xml-parser"
-import { FileDescriptor, TableDescriptor, ColumnDescriptor } from "./types"
-import { sqlTypeMapping } from "./mapping"
-import { time, timeEnd } from "./timing"
-import { config } from "./config";
-import { ErrorWithCause, errorCodes } from "./util";
+import { config } from "../config";
+import { efficaTableMapping } from "../mapping/sourceMapping";
+import { ColumnDescriptor, FileDescriptor, TableDescriptor } from "../types";
+import { errorCodes, ErrorWithCause } from "../util/error";
+import { time, timeEnd } from "../util/timing";
 
 export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> {
     const files: FileDescriptor[] = []
@@ -39,7 +39,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
 const stripXmlOverhead = (xmlData: any, fileName: string): any => {
     // { <item>: [Array] } 
     // the parsed XML data is just a wrapper object with the item key and an array of "item rows"
-    
+
     if (typeof xmlData === "string") {
         throw new Error(`No parseable data element detected in '${fileName}' (${errorCodes.noDataContent})`)
     }
@@ -57,7 +57,7 @@ const extractTableDescription = (tableName: string, data: any): TableDescriptor 
     if (!Array.isArray(data)) {
         throw new Error(`Given table data was not an array, unable to form table description`)
     }
-    const tableDef = sqlTypeMapping[tableName]
+    const tableDef = efficaTableMapping[tableName]
     if (!tableDef) {
         throw new Error(
             `Type definitions for table '${tableName}' not found (${errorCodes.nonMappedTable})`

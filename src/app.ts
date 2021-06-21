@@ -2,7 +2,7 @@ import express from "express"
 import checkApi from "./api/check"
 import importApi from "./api/import"
 import transformApi from "./api/transform"
-import { ErrorWithCause } from "./util"
+import { ErrorWithCause } from "./util/error"
 
 const app: express.Application = express()
 

@@ -8,6 +8,6 @@ export interface TargetTableMapping { [key: string]: TableTyping }
 export type SqlHelper = { type: SqlType, parser: (value: any) => any }
 export interface TableTyping { [key: string]: SqlType }
 export type TypeDescription = {}
-export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date"
+export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date" | "text[]" | "uuid"
 
 export type ImportOptions = { returnAll: boolean, path: string }

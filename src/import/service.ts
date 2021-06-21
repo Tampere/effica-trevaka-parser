@@ -1,10 +1,11 @@
 import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
-import { sqlTypeMapping } from "../mapping"
-import { time, timeEnd } from "../timing"
+import { efficaTableMapping } from "../mapping/sourceMapping"
 import { FileDescriptor, ImportOptions, TableDescriptor } from "../types"
-import { errorCodes } from "../util"
+import { errorCodes } from "../util/error"
+import { getMigrationSchema } from "../util/queryTools"
+import { time, timeEnd } from "../util/timing"
 
 
 export const importXmlData = async (files: FileDescriptor[], options: ImportOptions) => {
@@ -27,7 +28,7 @@ export const importXmlData = async (files: FileDescriptor[], options: ImportOpti
 export const createTables = async (tables: TableDescriptor[], t: pgPromise.ITask<{}>) => {
     const sqls: string[] = tables.map(
         table => `CREATE TABLE IF NOT EXISTS 
-        ${config.migrationSchema ? config.migrationSchema + "." : ""}
+        ${getMigrationSchema()}
         ${table.tableName} 
         (${table.columns.map(c => `${c.columnName} ${c.sqlType}`).join(",")});`)
     await Promise.all(sqls.map(s => t.none(s)))
@@ -47,7 +48,7 @@ const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
                 if (typeof dataItem === "object") {
                     throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData}): ${JSON.stringify(dataItem)}`)
                 }
-                const columnParser = sqlTypeMapping[tableName][columnKey]?.parser
+                const columnParser = efficaTableMapping[tableName][columnKey]?.parser
                 if (columnParser !== undefined) {
                     parsedRow[columnKey] = columnParser(dataItem)
                 } else {
