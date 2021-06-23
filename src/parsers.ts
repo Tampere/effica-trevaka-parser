@@ -12,3 +12,4 @@ export const dateParser = (v: string): string | null => {
 }
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v
+export const stringToNumericParser = (v: null | string) => v == null || v === "" || v === " " ? null : +v 

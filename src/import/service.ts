@@ -1,14 +1,13 @@
 import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
-import { efficaTableMapping } from "../mapping/sourceMapping"
-import { FileDescriptor, ImportOptions, TableDescriptor } from "../types"
+import { FileDescriptor, ImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
 import { getMigrationSchema } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
 
-export const importXmlData = async (files: FileDescriptor[], options: ImportOptions) => {
+export const importFileData = async (files: FileDescriptor[], options: ImportOptions) => {
     return await migrationDb.tx(async (t) => {
         const tables = files.map(f => f.table)
         const tableResult = await createTables(tables, t)
@@ -16,7 +15,7 @@ export const importXmlData = async (files: FileDescriptor[], options: ImportOpti
         time("** Data inserts total")
         for await (const f of files) {
             time(`Table '${f.table.tableName}' inserts`)
-            const insertResult = await insertData(f.table, f.data, options, t)
+            const insertResult = await insertData(f.table, f.data, f.mapping, options, t)
             timeEnd(`Table '${f.table.tableName}' inserts`)
             tableInserts.push(insertResult)
         }
@@ -35,7 +34,7 @@ export const createTables = async (tables: TableDescriptor[], t: pgPromise.ITask
     return tables.map(t => t.tableName)
 }
 
-const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
+const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMapping): any[] => {
     //TODO: now data is dynamically transformed by parsing it, a more consistent and error safe way would be to pick and parse data based on mapping
     // and consequently catch missing required fields before insert failure
     const parsedDataSet =
@@ -48,7 +47,7 @@ const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
                 if (typeof dataItem === "object") {
                     throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData}): ${JSON.stringify(dataItem)}`)
                 }
-                const columnParser = efficaTableMapping[tableName][columnKey]?.parser
+                const columnParser = mapping[tableName][columnKey]?.parser
                 if (columnParser !== undefined) {
                     parsedRow[columnKey] = columnParser(dataItem)
                 } else {
@@ -60,12 +59,12 @@ const parseTableDataTypes = (tableName: string, data: any[]): any[] => {
     return parsedDataSet
 }
 
-export const insertData = async (table: TableDescriptor, data: any[], options: ImportOptions, t: pgPromise.ITask<{}>) => {
+export const insertData = async (table: TableDescriptor, data: any[], mapping: TypeMapping, options: ImportOptions, t: pgPromise.ITask<{}>) => {
     const cs = new pgp.helpers.ColumnSet(
         table.columns.map(c => c.columnName),
         { table: { table: table.tableName, schema: config.migrationSchema } }
     );
-    const parsedData = parseTableDataTypes(table.tableName, data)
+    const parsedData = parseTableDataTypes(table.tableName, data, mapping)
     const insert = pgp.helpers.insert(parsedData, cs);
     let resultReturningQuery = options.returnAll ?
         `WITH rows AS ( ${insert} RETURNING *) select * from rows;` :

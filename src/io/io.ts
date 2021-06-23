@@ -1,11 +1,12 @@
 
-import parser from "fast-xml-parser";
-import { opendir, readFile } from "fs/promises";
-import { config } from "../config";
-import { efficaTableMapping } from "../mapping/sourceMapping";
-import { ColumnDescriptor, FileDescriptor, TableDescriptor } from "../types";
-import { errorCodes, ErrorWithCause } from "../util/error";
-import { time, timeEnd } from "../util/timing";
+import csv from "csvtojson/v2"
+import * as xmlParser from "fast-xml-parser"
+import { opendir, readFile } from "fs/promises"
+import { config } from "../config"
+import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
+import { ColumnDescriptor, FileDescriptor, TableDescriptor, TypeMapping } from "../types"
+import { errorCodes, ErrorWithCause } from "../util/error"
+import { time, timeEnd } from "../util/timing"
 
 export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> {
     const files: FileDescriptor[] = []
@@ -15,23 +16,38 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
             if (dirent.isFile()) {
                 const fileName = dirent.name.toLowerCase()
                 time(`'${dirent.name}' reading`)
-                const xmlString = await readFile(`${path}/${dirent.name}`, { encoding: "utf-8" })
+                const fileAsString = await readFile(`${path}/${dirent.name}`, { encoding: "utf-8" })
                 timeEnd(`'${dirent.name}' reading`)
                 time(`'${dirent.name}' parsing`)
-                const xmlData = parser.parse(xmlString, config.xmlParserOptions)
-                timeEnd(`'${dirent.name}' parsing`)
-                const tableData = stripXmlOverhead(xmlData, fileName)
-                const tableName = fileName.split('.')[0]
-                const file: FileDescriptor = {
-                    fileName: fileName,
-                    data: tableData,
-                    table: extractTableDescription(tableName, tableData)
+                const [tableName, fileType] = fileName.split(".")
+                let file: FileDescriptor;
+                if (fileType === "csv") {
+                    const csvData = await csv(config.csvParserOptions).fromString(fileAsString)
+                    file = {
+                        fileName: fileName,
+                        data: csvData,
+                        table: extractTableDescription(tableName, csvData, extTableMapping),
+                        mapping: extTableMapping
+                    }
+                    // note that effica dumps are delivered as txt files
+                } else {
+                    const xmlData = xmlParser.parse(fileAsString, config.xmlParserOptions)
+                    const tableData = stripXmlOverhead(xmlData, fileName)
+                    file = {
+                        fileName: fileName,
+                        data: tableData,
+                        table: extractTableDescription(tableName, tableData, efficaTableMapping),
+                        mapping: efficaTableMapping
+                    }
                 }
+                timeEnd(`'${dirent.name}' parsing`)
+
+
                 files.push(file)
             }
         }
     } catch (err) {
-        throw new ErrorWithCause(`Parsing XML data failed:`, err)
+        throw new ErrorWithCause(`Parsing file data failed:`, err)
     }
     return files;
 }
@@ -53,11 +69,11 @@ const stripXmlOverhead = (xmlData: any, fileName: string): any => {
 
 }
 
-const extractTableDescription = (tableName: string, data: any): TableDescriptor => {
+const extractTableDescription = (tableName: string, data: any, mapping: TypeMapping): TableDescriptor => {
     if (!Array.isArray(data)) {
         throw new Error(`Given table data was not an array, unable to form table description`)
     }
-    const tableDef = efficaTableMapping[tableName]
+    const tableDef = mapping[tableName]
     if (!tableDef) {
         throw new Error(
             `Type definitions for table '${tableName}' not found (${errorCodes.nonMappedTable})`

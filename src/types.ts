@@ -1,4 +1,4 @@
-export type FileDescriptor = { fileName: string, data: any, table: TableDescriptor }
+export type FileDescriptor = { fileName: string, data: any, table: TableDescriptor, mapping: TypeMapping }
 export type TableDescriptor = { tableName: string, columns: ColumnDescriptor[] }
 export type ColumnDescriptor = { columnName: string, sqlType: SqlType }
 

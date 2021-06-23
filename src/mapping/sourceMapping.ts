@@ -1,4 +1,4 @@
-import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser } from "../parsers"
+import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 
@@ -157,3 +157,13 @@ export const efficaTableMapping: TypeMapping = {
 }
 
 
+export const extTableMapping: TypeMapping = {
+    evaka_areas: {
+        name: { type: "text", parser: nullForcingTextParser },
+        shortname: { type: "text", parser: nullForcingTextParser }
+    },
+    unitmap: {
+        effica_id: { type: "integer", parser: stringToNumericParser },
+        evaka_id: { type: "uuid", parser: nullForcingTextParser }
+    }
+}

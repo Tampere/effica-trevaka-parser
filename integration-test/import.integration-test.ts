@@ -2,14 +2,13 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
-import { getMigrationSchema } from "../src/util/queryTools"
+import { dropTable } from "../src/util/queryTools"
 
 const baseUrl = "/import"
 
-let tableToReset: string | undefined = undefined
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
-    "feedeviations", "childminders"]
+    "feedeviations", "childminders", "evaka_areas", "unitmap"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -21,21 +20,21 @@ const openDateRange: DateRangeExpectation = {
     startdate: expect.any(String)
 }
 
-beforeAll(() => { })
-
-beforeEach(() => tableToReset = undefined)
-afterEach(async () => {
-    if (tableToReset && tables.includes(tableToReset)) {
-        return await db.query(`DROP TABLE IF EXISTS ${getMigrationSchema()}${tableToReset};`)
-    }
+beforeAll(async () => {
+    await Promise.all(tables.map(table => dropTable(table)))
 })
 
-afterAll(() => {
+beforeEach(() => { })
+afterEach(async () => {
+})
+
+afterAll(async () => {
+    await Promise.all(tables.map(table => dropTable(table)))
     return db.$pool.end()
 })
 
 // POSITIVE CASES
-describe("GET /import positive", () => {
+describe("GET /import xml positive", () => {
     it("should return created persons", async () => {
         return await positiveImportSnapshotTest("person")
     })
@@ -121,8 +120,16 @@ describe("GET /import positive", () => {
         expect(response.status).toBe(200)
         expect(response.body).toMatchSnapshot()
 
-        tableToReset = "codes"
         return response
+    })
+})
+
+describe("GET /import csv positive", () => {
+    it("should return created evaka areas", async () => {
+        return await positiveImportSnapshotTest("evaka_areas")
+    })
+    it("should return created unitmaps", async () => {
+        return await positiveImportSnapshotTest("unitmap")
     })
 })
 
@@ -171,7 +178,7 @@ const positiveImportSnapshotTest = async (tableName: string, resultPattern?: any
     else {
         expect(response.body).toMatchSnapshot()
     }
-    tableToReset = tableName
+
     return response
 }
 
