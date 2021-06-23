@@ -1,5 +1,6 @@
 import pgPromise, { QueryFile } from "pg-promise"
 import { config } from "../config"
+import db from "../db/db"
 
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false) => {
     return isDataReturned ?
@@ -14,6 +15,16 @@ export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, isDataR
 
 export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false) => {
     return isDataReturned ? await t.any(query) : await t.none(query)
+}
+
+export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
+    const query = `DROP TABLE IF EXISTS ${getMigrationSchema()}${tableName};`
+    if (!t) {
+        return await db.tx(async t => t.any(query))
+    } else {
+        return await t.any(query)
+    }
+
 }
 
 export const getMigrationSchema = () => config.migrationSchema ? `${config.migrationSchema}.` : ""

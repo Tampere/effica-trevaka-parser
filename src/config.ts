@@ -13,5 +13,9 @@ export const config = {
         parseNodeValue: true,
         arrayMode: true,
         trimValues: true
+    },
+    csvParserOptions: {
+        trim: true,
+        delimiter: "|"
     }
 }

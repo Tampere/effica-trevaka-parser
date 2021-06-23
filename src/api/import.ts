@@ -1,9 +1,9 @@
 import express from "express"
-import { importXmlData } from "../import/service"
+import { importFileData } from "../import/service"
 import { readFilesFromDir } from "../io/io"
 import { FileDescriptor, ImportOptions } from "../types"
-import { time, timeEnd } from "../util/timing"
 import { ErrorWithCause } from "../util/error"
+import { time, timeEnd } from "../util/timing"
 
 const router = express.Router();
 router.get("/", async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
     const importOptions: ImportOptions = { path, returnAll: req.query.returnAll === "true" }
     try {
         const files: FileDescriptor[] = await readFilesFromDir(path)
-        const importResult = await importXmlData(files, importOptions)
+        const importResult = await importFileData(files, importOptions)
         res.status(200).json(importResult)
     } catch (err) {
         next(new ErrorWithCause(`Import operation failed, transaction rolled back:`, err))

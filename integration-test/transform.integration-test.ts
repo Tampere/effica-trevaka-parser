@@ -1,8 +1,7 @@
-import pgPromise from "pg-promise"
 import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
-import { getMigrationSchema } from "../src/util/queryTools"
+import { dropTable } from "../src/util/queryTools"
 
 const baseUrl = "/transform"
 
@@ -12,16 +11,6 @@ const baseDataTables = ["person", "codes"]
 const personExpectation = {
     id: expect.any(String),
     date_of_birth: expect.any(String)
-}
-
-const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
-    const query = `DROP TABLE IF EXISTS ${getMigrationSchema()}${tableName};`
-    if (!t) {
-        return await db.tx(async t => t.any(query))
-    } else {
-        return await t.any(query)
-    }
-
 }
 
 const importTable = async (tableName: string) => {

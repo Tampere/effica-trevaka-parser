@@ -1,6 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GET /import positive should return created childminders 1`] = `
+exports[`GET /import csv positive should return created evaka areas 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "name": "Etelä",
+        "shortname": "etela",
+      },
+      Object {
+        "name": "Itä",
+        "shortname": "ita",
+      },
+      Object {
+        "name": "Länsi",
+        "shortname": "lansi",
+      },
+    ],
+  ],
+  "tables": Array [
+    "evaka_areas",
+  ],
+}
+`;
+
+exports[`GET /import csv positive should return created unitmaps 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "effica_id": 18,
+        "evaka_id": "8eb2ca00-d40f-11eb-b97b-5b7a72ae2099",
+      },
+      Object {
+        "effica_id": 13,
+        "evaka_id": "8eb2caf0-d40f-11eb-b97b-5f3e4474ff3b",
+      },
+      Object {
+        "effica_id": 19,
+        "evaka_id": "8eb2cb86-d40f-11eb-b97b-735b4884eacd",
+      },
+      Object {
+        "effica_id": 272,
+        "evaka_id": "8eb2cc12-d40f-11eb-b97b-9f74a63003ec",
+      },
+      Object {
+        "effica_id": null,
+        "evaka_id": "8eb2cc9e-d40f-11eb-b97b-97c7553247ee",
+      },
+    ],
+  ],
+  "tables": Array [
+    "unitmap",
+  ],
+}
+`;
+
+exports[`GET /import xml positive should return created childminders 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -20,7 +76,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created codes 1`] = `
+exports[`GET /import xml positive should return created codes 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -104,7 +160,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created decisions 1`] = `
+exports[`GET /import xml positive should return created decisions 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -135,7 +191,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created departments 1`] = `
+exports[`GET /import xml positive should return created departments 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -171,7 +227,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created families 1`] = `
+exports[`GET /import xml positive should return created families 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -225,7 +281,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created feedeviations 1`] = `
+exports[`GET /import xml positive should return created feedeviations 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -263,7 +319,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created income  1`] = `
+exports[`GET /import xml positive should return created income  1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -291,7 +347,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created incomerows 1`] = `
+exports[`GET /import xml positive should return created incomerows 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -319,7 +375,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created persons 1`] = `
+exports[`GET /import xml positive should return created persons 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -401,7 +457,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created placementextents 1`] = `
+exports[`GET /import xml positive should return created placementextents 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -431,7 +487,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created placements 1`] = `
+exports[`GET /import xml positive should return created placements 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -461,7 +517,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should return created units 1`] = `
+exports[`GET /import xml positive should return created units 1`] = `
 Object {
   "inserts": Array [
     Array [
@@ -499,7 +555,7 @@ Object {
 }
 `;
 
-exports[`GET /import positive should work even if XML elements have mixed case 1`] = `
+exports[`GET /import xml positive should work even if XML elements have mixed case 1`] = `
 Object {
   "inserts": Array [
     Array [
