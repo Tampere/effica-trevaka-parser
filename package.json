@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node -T src/index.ts",
-    "integration-test": "TZ=UTC jest --config jest.config.integration-test.js --runInBand",
+    "integration-test": "TZ=UTC MIGRATION_SCHEMA=migration jest --config jest.config.integration-test.js --runInBand",
     "test": "echo \"Error: no unit tests specified, try script 'integration-test'\" && exit 1"
   },
   "keywords": [],
