@@ -8,6 +8,29 @@ import { TypeMapping } from "../types"
 
 //TODO: add rest of tables
 export const efficaTableMapping: TypeMapping = {
+    applications: {
+        personid: { type: "text", parser: nullForcingTextParser },
+        applicationdate: { type: "date", parser: dateParser },
+        placeneed: { type: "numeric", parser: nullForcingTextParser },
+        specialhandlingtime: { type: "numeric", parser: nullForcingTextParser },
+        transferapplication: { type: "boolean", parser: numericBooleanParser },
+        guid: { type: "text", parser: nullForcingTextParser },
+    },
+    applicationrows: {
+        personid: { type: "text", parser: nullForcingTextParser },
+        priority: { type: "integer", parser: nullForcingTextParser },
+        unitcode: { type: "integer", parser: nullForcingTextParser },
+        childminder: { type: "text", parser: nullForcingTextParser },
+        areacode: { type: "text", parser: nullForcingTextParser },
+        startdate: { type: "date", parser: dateParser },
+        hours: { type: "numeric", parser: nullForcingTextParser },
+        childmindercare: { type: "text", parser: nullForcingTextParser },
+        unitcare: { type: "integer", parser: nullForcingTextParser },
+        days: { type: "integer", parser: nullForcingTextParser },
+        extent: { type: "integer", parser: nullForcingTextParser },
+        type: { type: "text", parser: nullForcingTextParser },
+        guid: { type: "text", parser: nullForcingTextParser },
+    },
     codes: {
         code: { type: "integer", parser: codeNumericParser },
         active: { type: "boolean", parser: activityParser },
