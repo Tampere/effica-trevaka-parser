@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transform positive should return transformed families 1`] = `
+Object {
+  "child": Array [
+    Object {
+      "child_id": Any<String>,
+      "child_ssn": "251118A9509",
+      "end_date": Any<String>,
+      "family_number": 1,
+      "head_of_family": Any<String>,
+      "hof_ssn": "020967-9992",
+      "start_date": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "child_ssn": "010619A9501",
+      "end_date": null,
+      "family_number": 2,
+      "head_of_family": Any<String>,
+      "hof_ssn": "020967-9992",
+      "start_date": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "child_ssn": "251118A9509",
+      "end_date": null,
+      "family_number": 2,
+      "head_of_family": Any<String>,
+      "hof_ssn": "020967-9992",
+      "start_date": Any<String>,
+    },
+  ],
+  "partner": Array [
+    Object {
+      "effica_ssn": "020967-9992",
+      "end_date": Any<String>,
+      "family_number": 1,
+      "indx": 1,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": Any<String>,
+    },
+    Object {
+      "effica_ssn": "180476-998M",
+      "end_date": Any<String>,
+      "family_number": 1,
+      "indx": 2,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": Any<String>,
+    },
+    Object {
+      "effica_ssn": "020967-9992",
+      "end_date": null,
+      "family_number": 2,
+      "indx": 1,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": Any<String>,
+    },
+    Object {
+      "effica_ssn": "180476-998M",
+      "end_date": null,
+      "family_number": 2,
+      "indx": 2,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": Any<String>,
+    },
+  ],
+}
+`;
+
 exports[`GET /transform positive should return transformed persons 1`] = `
 Array [
   Object {
