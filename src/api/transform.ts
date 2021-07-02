@@ -1,4 +1,5 @@
 import express from "express";
+import { transformApplicationData } from "../transform/application";
 import { transformPersonData } from "../transform/person";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
@@ -14,6 +15,17 @@ router.get("/person", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform person total ", undefined, "*")
+})
+
+router.get("/application", async (req, res, next) => {
+    time("**** Transform application total ", undefined, "*")
+    try {
+        await transformApplicationData()
+        res.status(200)
+    } catch (err) {
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform application total ", undefined, "*")
 })
 
 export default router

@@ -8,7 +8,8 @@ const baseUrl = "/import"
 
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
-    "feedeviations", "childminders", "evaka_areas", "unitmap"]
+    "feedeviations", "childminders", "evaka_areas", "unitmap",
+    "applications", "applicationrows"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -108,6 +109,16 @@ describe("GET /import xml positive", () => {
         return await positiveImportSnapshotTest(
             "childminders",
             getTimeSeriesResultPattern(openDateRange))
+    })
+
+    it("should return created applications", async() => {
+        return await positiveImportSnapshotTest(
+            "applications")
+    })
+
+    it("should return created application rows", async() => {
+        return await positiveImportSnapshotTest(
+            "applicationrows")
     })
 
     it("should work even if XML elements have mixed case", async () => {
