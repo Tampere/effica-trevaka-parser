@@ -1,4 +1,4 @@
-import { activityParser, codeNumericParser, dateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { activityParser, codeNumericParser, nonNullDateParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 
@@ -10,7 +10,7 @@ import { TypeMapping } from "../types"
 export const efficaTableMapping: TypeMapping = {
     applications: {
         personid: { type: "text", parser: nullForcingTextParser },
-        applicationdate: { type: "date", parser: dateParser },
+        applicationdate: { type: "date", parser: nullDateParser },
         placeneed: { type: "numeric", parser: nullForcingTextParser },
         specialhandlingtime: { type: "numeric", parser: nullForcingTextParser },
         transferapplication: { type: "boolean", parser: numericBooleanParser },
@@ -22,7 +22,7 @@ export const efficaTableMapping: TypeMapping = {
         unitcode: { type: "integer", parser: nullForcingTextParser },
         childminder: { type: "text", parser: nullForcingTextParser },
         areacode: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
         hours: { type: "numeric", parser: nullForcingTextParser },
         childmindercare: { type: "text", parser: nullForcingTextParser },
         unitcare: { type: "integer", parser: nullForcingTextParser },
@@ -43,15 +43,15 @@ export const efficaTableMapping: TypeMapping = {
     families: {
         familynbr: { type: "integer", parser: nullForcingTextParser },
         personid: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nonNullDateParser },
+        enddate: { type: "date", parser: nonNullDateParser },
         roleinfamily: { type: "text", parser: nullForcingTextParser },
         guid: { type: "text", parser: nullForcingTextParser }
     },
     income: {
         personid: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         maxincome: { type: "boolean", parser: numericBooleanParser },
         incomemissing: { type: "boolean", parser: numericBooleanParser },
         summa: { type: "numeric", parser: nullForcingTextParser },
@@ -59,8 +59,8 @@ export const efficaTableMapping: TypeMapping = {
     },
     incomerows: {
         personid: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         incomeperiod: { type: "integer", parser: nullForcingTextParser },
         incometype: { type: "integer", parser: nullForcingTextParser },
         summa: { type: "numeric", parser: nullForcingTextParser },
@@ -90,8 +90,8 @@ export const efficaTableMapping: TypeMapping = {
     units: {
         unitcode: { type: "integer", parser: codeNumericParser },
         unitname: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         unitaddress: { type: "text", parser: nullForcingTextParser },
         unitzipcode: { type: "text", parser: nullForcingTextParser },
         unitcity: { type: "text", parser: nullForcingTextParser },
@@ -105,8 +105,8 @@ export const efficaTableMapping: TypeMapping = {
         unitcode: { type: "integer", parser: codeNumericParser },
         departmentcode: { type: "integer", parser: codeNumericParser },
         departmentname: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         departmentaddress: { type: "text", parser: nullForcingTextParser },
         departmentzipcode: { type: "text", parser: nullForcingTextParser },
         departmentcity: { type: "text", parser: nullForcingTextParser },
@@ -120,15 +120,15 @@ export const efficaTableMapping: TypeMapping = {
         placementunitcode: { type: "integer", parser: codeNumericParser },
         placementdepartmentcode: { type: "integer", parser: codeNumericParser },
         placementchildminder: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         guid: { type: "text", parser: nullForcingTextParser }
     },
     placementextents: {
         placementnbr: { type: "integer", parser: codeNumericParser },
         extentnbr: { type: "integer", parser: codeNumericParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         hours: { type: "numeric", parser: nullForcingTextParser },
         days: { type: "integer", parser: nullForcingTextParser },
         extentcode: { type: "integer", parser: codeNumericParser },
@@ -139,8 +139,8 @@ export const efficaTableMapping: TypeMapping = {
         rownbr: { type: "integer", parser: codeNumericParser },
         serviceform: { type: "integer", parser: codeNumericParser },
         deviationtype: { type: "integer", parser: codeNumericParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         sum: { type: "numeric", parser: nullForcingTextParser },
         procent: { type: "numeric", parser: nullForcingTextParser },
         hours: { type: "numeric", parser: nullForcingTextParser },
@@ -154,9 +154,9 @@ export const efficaTableMapping: TypeMapping = {
         decisionstatus: { type: "integer", parser: codeNumericParser },
         decisionunitcode: { type: "integer", parser: codeNumericParser },
         decisionchildminder: { type: "text", parser: nullForcingTextParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
-        decisiondate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
+        decisiondate: { type: "date", parser: nullDateParser },
         caseworker: { type: "text", parser: nullForcingTextParser },
         decisionmaker: { type: "text", parser: nullForcingTextParser },
         decisionnbr: { type: "integer", parser: nullForcingTextParser },
@@ -171,8 +171,8 @@ export const efficaTableMapping: TypeMapping = {
     childminders: {
         personid: { type: "text", parser: nullForcingTextParser },
         area: { type: "integer", parser: codeNumericParser },
-        startdate: { type: "date", parser: dateParser },
-        enddate: { type: "date", parser: dateParser },
+        startdate: { type: "date", parser: nullDateParser },
+        enddate: { type: "date", parser: nullDateParser },
         phonenbr: { type: "text", parser: nullForcingTextParser },
         email: { type: "text", parser: nullForcingTextParser },
         guid: { type: "text", parser: nullForcingTextParser }

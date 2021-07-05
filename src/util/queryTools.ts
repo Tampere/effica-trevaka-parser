@@ -2,9 +2,9 @@ import pgPromise, { QueryFile } from "pg-promise"
 import { config } from "../config"
 import db from "../db/db"
 
-export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false) => {
+export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
-        `WITH rows AS ( ${insertQuery} RETURNING *) select * from rows;` :
+        `WITH rows AS ( ${insertQuery} RETURNING *) select * from rows ${createOrderBy(orderByFields)};` :
         `WITH rows AS ( ${insertQuery} RETURNING 1) select count(*) as ${tableName}_count from rows;`
 }
 
@@ -28,3 +28,5 @@ export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
 }
 
 export const getMigrationSchema = () => config.migrationSchema ? `${config.migrationSchema}.` : ""
+export const getExtensionSchema = () => config.extensionSchema ? `${config.extensionSchema}.` : ""
+export const createOrderBy = (orderByFields: string[]) => orderByFields.length > 0 ? `ORDER BY ${orderByFields.join(" ,")} ` : "" 

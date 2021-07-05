@@ -1,7 +1,8 @@
 export const config = {
     port: 3000,
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
-    migrationSchema: process.env.MIGRATION_SCHEMA,
+    migrationSchema: process.env.MIGRATION_SCHEMA ?? "migration",
+    extensionSchema: process.env.EXTENSION_SCHEMA ?? "ext",
     migrationDb: {
         host: process.env.PGHOST ?? "localhost",
         port: 5432,

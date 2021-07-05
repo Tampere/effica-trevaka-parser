@@ -1,11 +1,11 @@
 import migrationDb from "../db/db"
-import { getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
+import { getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
 
 export const transformPersonData = async (returnAll: boolean = false) => {
     const tableQuery = `
     DROP TABLE IF EXISTS ${getMigrationSchema()}evaka_person CASCADE;
     CREATE TABLE ${getMigrationSchema()}evaka_person(
-        id UUID NOT NULL DEFAULT ext.uuid_generate_v1mc(),
+        id UUID NOT NULL DEFAULT ${getExtensionSchema()}uuid_generate_v1mc(),
         social_security_number TEXT,
         first_name TEXT,
         last_name TEXT,

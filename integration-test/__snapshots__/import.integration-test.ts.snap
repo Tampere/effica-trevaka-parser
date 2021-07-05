@@ -294,6 +294,13 @@ Object {
       },
       Object {
         "enddate": Any<String>,
+        "familynbr": 1,
+        "personid": "251118A9509",
+        "roleinfamily": "B",
+        "startdate": Any<String>,
+      },
+      Object {
+        "enddate": null,
         "familynbr": 2,
         "personid": "020967-9992",
         "roleinfamily": "R",
@@ -309,14 +316,14 @@ Object {
       Object {
         "enddate": null,
         "familynbr": 2,
-        "personid": "010619A9501",
+        "personid": "251118A9509",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
       Object {
         "enddate": null,
         "familynbr": 2,
-        "personid": "251118A9509",
+        "personid": "010619A9501",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
@@ -379,7 +386,7 @@ Object {
         "summa": "50000",
       },
       Object {
-        "enddate": Any<String>,
+        "enddate": null,
         "incomemissing": false,
         "maxincome": false,
         "personid": "020967-9992",
@@ -399,7 +406,7 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "enddate": Any<String>,
+        "enddate": null,
         "incomeperiod": 30,
         "incometype": 25,
         "personid": "020967-9992",

@@ -18,7 +18,8 @@ const closedDateRange: DateRangeExpectation = {
     enddate: expect.any(String)
 }
 const openDateRange: DateRangeExpectation = {
-    startdate: expect.any(String)
+    startdate: expect.any(String),
+    enddate: null
 }
 
 beforeAll(async () => {
@@ -49,6 +50,7 @@ describe("GET /import xml positive", () => {
                 closedDateRange,
                 openDateRange,
                 openDateRange,
+                openDateRange,
                 openDateRange))
     })
 
@@ -59,14 +61,14 @@ describe("GET /import xml positive", () => {
     it("should return created income ", async () => {
         return await positiveImportSnapshotTest(
             "income",
-            getTimeSeriesResultPattern(closedDateRange, closedDateRange)
+            getTimeSeriesResultPattern(closedDateRange, openDateRange)
         )
     })
 
     it("should return created incomerows", async () => {
         return await positiveImportSnapshotTest(
             "incomerows",
-            getTimeSeriesResultPattern(closedDateRange, closedDateRange)
+            getTimeSeriesResultPattern(openDateRange, closedDateRange)
         )
     })
 
