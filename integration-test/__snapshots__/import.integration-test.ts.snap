@@ -29,24 +29,12 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "effica_id": 18,
+        "effica_id": 123,
         "evaka_id": "8eb2ca00-d40f-11eb-b97b-5b7a72ae2099",
       },
       Object {
-        "effica_id": 13,
+        "effica_id": 125,
         "evaka_id": "8eb2caf0-d40f-11eb-b97b-5f3e4474ff3b",
-      },
-      Object {
-        "effica_id": 19,
-        "evaka_id": "8eb2cb86-d40f-11eb-b97b-735b4884eacd",
-      },
-      Object {
-        "effica_id": 272,
-        "evaka_id": "8eb2cc12-d40f-11eb-b97b-9f74a63003ec",
-      },
-      Object {
-        "effica_id": null,
-        "evaka_id": "8eb2cc9e-d40f-11eb-b97b-97c7553247ee",
       },
     ],
   ],
