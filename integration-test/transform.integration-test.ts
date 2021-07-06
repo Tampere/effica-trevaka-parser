@@ -5,7 +5,7 @@ import { dropTable } from "../src/util/queryTools"
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
-const baseDataTables = ["person", "codes", "families"]
+const baseDataTables = ["person", "codes", "families", "units", "departments", "unitmap"]
 
 
 const personExpectation = {
@@ -98,6 +98,28 @@ describe("GET /transform positive", () => {
             { child: fridgeChildExpectation, partner: fridgePartnerExpectation }
         )
 
+    })
+    it("should return transformed departments", async () => {
+        cleanUps = ["evaka_daycare_group"]
+
+        const daycareGroupExpectation =
+            [
+                {
+                    id: expect.any(String),
+                    start_date: expect.any(String),
+                    end_date: null
+                },
+                {
+                    id: expect.any(String),
+                    start_date: expect.any(String),
+                    end_date: null
+                }
+            ]
+
+        await positiveTransformSnapshotTest(
+            "departments",
+            daycareGroupExpectation
+        )
     })
 })
 

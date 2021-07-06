@@ -1,5 +1,6 @@
 import express from "express";
 import { transformApplicationData } from "../transform/application";
+import { transformDepartmentData } from "../transform/departments";
 import { transformFamilyData } from "../transform/families";
 import { transformPersonData } from "../transform/person";
 import { ErrorWithCause } from "../util/error";
@@ -31,14 +32,26 @@ router.get("/application", async (req, res, next) => {
 
 router.get("/families", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
-    time("**** Transform person total ", undefined, "*")
+    time("**** Transform families total ", undefined, "*")
     try {
         const results = await transformFamilyData(returnAll)
         res.status(200).json(results)
     } catch (err) {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
-    timeEnd("**** Transform person total ", undefined, "*")
+    timeEnd("**** Transform families total ", undefined, "*")
+})
+
+router.get("/departments", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform departments total ", undefined, "*")
+    try {
+        const results = await transformDepartmentData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform departments total ", undefined, "*")
 })
 
 

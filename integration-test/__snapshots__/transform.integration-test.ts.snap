@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transform positive should return transformed departments 1`] = `
+Array [
+  Object {
+    "daycare_id": "8eb2ca00-d40f-11eb-b97b-5b7a72ae2099",
+    "effica_id": 1231,
+    "end_date": null,
+    "id": Any<String>,
+    "name": "Tenhon terhot",
+    "start_date": Any<String>,
+  },
+  Object {
+    "daycare_id": "8eb2caf0-d40f-11eb-b97b-5f3e4474ff3b",
+    "effica_id": 1251,
+    "end_date": null,
+    "id": Any<String>,
+    "name": "Tujun tupajumit",
+    "start_date": Any<String>,
+  },
+]
+`;
+
 exports[`GET /transform positive should return transformed families 1`] = `
 Object {
   "child": Array [
