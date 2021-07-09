@@ -5,16 +5,19 @@ Object {
   "inserts": Array [
     Array [
       Object {
+        "id": "6529e31e-9777-11eb-ba88-33a923255570",
         "name": "Etelä",
-        "shortname": "etela",
+        "short_name": "etela",
       },
       Object {
+        "id": "6529f5a2-9777-11eb-ba89-cfcda122ed3b",
         "name": "Itä",
-        "shortname": "ita",
+        "short_name": "ita",
       },
       Object {
+        "id": "6529f6ce-9777-11eb-ba8a-8f6495ec5104",
         "name": "Länsi",
-        "shortname": "lansi",
+        "short_name": "lansi",
       },
     ],
   ],
