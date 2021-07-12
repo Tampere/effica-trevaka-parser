@@ -113,12 +113,12 @@ describe("GET /import xml positive", () => {
             getTimeSeriesResultPattern(openDateRange))
     })
 
-    it("should return created applications", async() => {
+    it("should return created applications", async () => {
         return await positiveImportSnapshotTest(
             "applications")
     })
 
-    it("should return created application rows", async() => {
+    it("should return created application rows", async () => {
         return await positiveImportSnapshotTest(
             "applicationrows")
     })
@@ -143,6 +143,9 @@ describe("GET /import csv positive", () => {
     })
     it("should return created unitmaps", async () => {
         return await positiveImportSnapshotTest("unitmap")
+    })
+    it("should return created evaka daycares", async () => {
+        return await positiveImportSnapshotTest("evaka_daycare")
     })
 })
 

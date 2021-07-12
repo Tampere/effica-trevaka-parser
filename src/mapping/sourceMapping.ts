@@ -1,4 +1,4 @@
-import { activityParser, codeNumericParser, nonNullDateParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { activityParser, codeNumericParser, csvStringBooleanParser, nonNullDateParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 
@@ -179,14 +179,49 @@ export const efficaTableMapping: TypeMapping = {
     }
 }
 
-
 export const extTableMapping: TypeMapping = {
     evaka_areas: {
+        id: { type: "uuid", parser: nullForcingTextParser },
         name: { type: "text", parser: nullForcingTextParser },
-        shortname: { type: "text", parser: nullForcingTextParser }
+        short_name: { type: "text", parser: nullForcingTextParser }
     },
     unitmap: {
         effica_id: { type: "integer", parser: stringToNumericParser },
         evaka_id: { type: "uuid", parser: nullForcingTextParser }
+    },
+    evaka_daycare: {
+        id: { type: "uuid", parser: nullForcingTextParser },
+        name: { type: "text", parser: nullForcingTextParser },
+        type: { type: "text[]", parser: nullForcingTextParser },
+        care_area_id: { type: "uuid", parser: nullForcingTextParser },
+        phone: { type: "text", parser: nullForcingTextParser },
+        url: { type: "text", parser: nullForcingTextParser },
+        backup_location: { type: "text", parser: nullForcingTextParser },
+        opening_date: { type: "date", parser: nullDateParser },
+        closing_date: { type: "date", parser: nullDateParser },
+        email: { type: "text", parser: nullForcingTextParser },
+        schedule: { type: "text", parser: nullForcingTextParser },
+        additional_info: { type: "text", parser: nullForcingTextParser },
+        cost_center: { type: "text", parser: nullForcingTextParser },
+        upload_to_varda: { type: "boolean", parser: csvStringBooleanParser },
+        decision_daycare_name: { type: "text", parser: nullForcingTextParser },
+        decision_preschool_name: { type: "text", parser: nullForcingTextParser },
+        street_address: { type: "text", parser: nullForcingTextParser },
+        postal_code: { type: "text", parser: nullForcingTextParser },
+        post_office: { type: "text", parser: nullForcingTextParser },
+        mailing_po_box: { type: "text", parser: nullForcingTextParser },
+        location: { type: "point", parser: nullForcingTextParser },
+        mailing_street_address: { type: "text", parser: nullForcingTextParser },
+        mailing_postal_code: { type: "text", parser: nullForcingTextParser },
+        mailing_post_office: { type: "text", parser: nullForcingTextParser },
+        invoiced_by_municipality: { type: "boolean", parser: csvStringBooleanParser },
+        provider_type: { type: "text", parser: nullForcingTextParser },
+        language: { type: "text", parser: nullForcingTextParser },
+        upload_to_koski: { type: "boolean", parser: csvStringBooleanParser },
+        operation_days: { type: "integer[]", parser: nullForcingTextParser },
+        ghost_unit: { type: "boolean", parser: csvStringBooleanParser },
+        daycare_apply_period: { type: "daterange", parser: nullForcingTextParser },
+        preschool_apply_period: { type: "daterange", parser: nullForcingTextParser },
+        round_the_clock: { type: "boolean", parser: csvStringBooleanParser },
     }
 }

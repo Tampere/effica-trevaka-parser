@@ -11,10 +11,15 @@ export const nullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`
     return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? null : DateTime.fromISO(stringValue).toISODate()
 }
+//infinity seems to be widely used in evaka
 export const nonNullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`
     return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? "infinity" : DateTime.fromISO(stringValue).toISODate()
 }
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v
-export const stringToNumericParser = (v: null | string) => v == null || v === "" || v === " " ? null : +v 
+export const stringToNumericParser = (v: null | string) => v == null || v === "" || v === " " ? null : +v
+
+//FIXME: currently no way to set defaults for import tables, null needs to be interpreted (should it be evaka default instead)
+export const csvStringArrayParser = (v: undefined | string): string => v ? v : "{}"
+export const csvStringBooleanParser = (v: undefined | string): boolean => v?.toLowerCase() === "t"
