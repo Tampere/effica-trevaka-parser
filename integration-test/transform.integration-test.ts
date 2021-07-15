@@ -2,6 +2,7 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { dropTable } from "../src/util/queryTools"
+import { setupTable, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
@@ -123,24 +124,7 @@ describe("GET /transform positive", () => {
     })
 })
 
-const setupTransformations = async (tfs: string[]) => {
-    const responses: Record<string, any> = {}
-    for (const name of tfs) {
-        responses[name] = await setupTransformation(name)
-    }
-    return responses
-}
 
-const setupTransformation = async (name: string) => {
-    const queryObject = {
-        returnAll: "true"
-    }
-
-    const url = `${baseUrl}/${name}`
-    const response = await request(app).get(url).query(queryObject)
-    expect(response.status).toBe(200)
-    return response.body
-}
 
 const positiveTransformSnapshotTest = async (tableName: string, resultPattern?: any) => {
     const queryObject = {
@@ -159,27 +143,3 @@ const positiveTransformSnapshotTest = async (tableName: string, resultPattern?: 
     return response
 }
 
-const importTable = async (tableName: string) => {
-    const importUrl = "/import"
-    const queryObject = {
-        path: `/integration-test/data/${tableName}`,
-        returnAll: "true",
-    }
-    return await request(app).get(importUrl).query(queryObject)
-}
-
-const setupTable = async (tableName: string) => {
-    await db.tx(async t => {
-        return dropTable(tableName, t)
-    })
-    await importTable(tableName)
-
-}
-
-const cleanTransformations = async (tfs: string[]) => {
-    return await db.tx(async t => {
-        for (const tfName in tfs) {
-            await dropTable(tfName, t)
-        }
-    })
-}

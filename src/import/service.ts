@@ -3,7 +3,7 @@ import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
 import { FileDescriptor, ImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
-import { getMigrationSchema } from "../util/queryTools"
+import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
 
@@ -25,11 +25,10 @@ export const importFileData = async (files: FileDescriptor[], options: ImportOpt
 }
 
 export const createTables = async (tables: TableDescriptor[], t: pgPromise.ITask<{}>) => {
-    const sqls: string[] = tables.map(
-        table => `CREATE TABLE IF NOT EXISTS 
-        ${getMigrationSchema()}
-        ${table.tableName} 
-        (${table.columns.map(c => `${c.columnName} ${c.sqlType}`).join(",")});`)
+    const sqls: string[] = tables.map(t => {
+        const tqf = t.tableQueryFunction ?? createGenericTableQueryFromDescriptor
+        return tqf(t)
+    })
     await Promise.all(sqls.map(s => t.none(s)))
     return tables.map(t => t.tableName)
 }
@@ -47,7 +46,7 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
                 if (typeof dataItem === "object") {
                     throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData}): ${JSON.stringify(dataItem)}`)
                 }
-                const columnParser = mapping[tableName][columnKey]?.parser
+                const columnParser = mapping[tableName].columns[columnKey]?.parser
                 if (columnParser !== undefined) {
                     parsedRow[columnKey] = columnParser(dataItem)
                 } else {
@@ -61,7 +60,7 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
 
 export const insertData = async (table: TableDescriptor, data: any[], mapping: TypeMapping, options: ImportOptions, t: pgPromise.ITask<{}>) => {
     const cs = new pgp.helpers.ColumnSet(
-        table.columns.map(c => c.columnName),
+        Object.keys(table.columns),
         { table: { table: table.tableName, schema: config.migrationSchema } }
     );
     const parsedData = parseTableDataTypes(table.tableName, data, mapping)
