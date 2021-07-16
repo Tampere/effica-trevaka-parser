@@ -3,13 +3,15 @@ import app from "../src/app"
 import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
+import { setupTables } from "../src/util/testTools"
 
 const baseUrl = "/import"
+let cleanUps: string[] = []
 
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap",
-    "applications", "applicationrows"]
+    "applications", "applicationrows", "evaka_daycare"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -28,6 +30,8 @@ beforeAll(async () => {
 
 beforeEach(() => { })
 afterEach(async () => {
+    await Promise.all(cleanUps.map(table => dropTable(table)))
+    cleanUps = []
 })
 
 afterAll(async () => {
@@ -145,6 +149,8 @@ describe("GET /import csv positive", () => {
         return await positiveImportSnapshotTest("unitmap")
     })
     it("should return created evaka daycares", async () => {
+        cleanUps = ["evaka_areas"]
+        await setupTables(["evaka_areas"])
         return await positiveImportSnapshotTest("evaka_daycare")
     })
 })

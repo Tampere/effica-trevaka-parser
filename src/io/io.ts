@@ -26,7 +26,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                     file = {
                         fileName: fileName,
                         data: csvData,
-                        table: extractTableDescription(tableName, csvData, extTableMapping),
+                        table: collectTableDescription(tableName, csvData, extTableMapping),
                         mapping: extTableMapping
                     }
                     // note that effica dumps are delivered as txt files
@@ -36,7 +36,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                     file = {
                         fileName: fileName,
                         data: tableData,
-                        table: extractTableDescription(tableName, tableData, efficaTableMapping),
+                        table: collectTableDescription(tableName, tableData, efficaTableMapping),
                         mapping: efficaTableMapping
                     }
                 }
@@ -69,7 +69,7 @@ const stripXmlOverhead = (xmlData: any, fileName: string): any => {
 
 }
 
-const extractTableDescription = (tableName: string, data: any, mapping: TypeMapping): TableDescriptor => {
+const collectTableDescription = (tableName: string, data: any, mapping: TypeMapping): TableDescriptor => {
     if (!Array.isArray(data)) {
         throw new Error(`Given table data was not an array, unable to form table description`)
     }
@@ -79,16 +79,24 @@ const extractTableDescription = (tableName: string, data: any, mapping: TypeMapp
             `Type definitions for table '${tableName}' not found (${errorCodes.nonMappedTable})`
         )
     }
-    const columns: ColumnDescriptor[] = Object.keys(data[0]).map(k => {
+    //note that column descriptions are collected from data, not mapping
+    //this enables import to take in files that only have a subset of the columns in the mapping
+    return {
+        tableName,
+        columns: collectDataColumnDescriptions(tableName, tableDef, data[0]),
+        tableQueryFunction: tableDef.tableQueryFunction
+    }
+}
+
+const collectDataColumnDescriptions = (tableName: string, td: TableDescriptor, dataItem: any) => {
+    const dataDescription: Record<string, ColumnDescriptor> = {}
+    Object.keys(dataItem).forEach(k => {
         const columnKey = k.toLowerCase()
-        const columnDef = tableDef[columnKey]
+        const columnDef = td.columns[columnKey]
         if (!columnDef) {
             throw new Error(`Type definition for column '${columnKey}' in table '${tableName}' not found (${errorCodes.nonMappedColumn})`)
         }
-        return {
-            columnName: columnKey,
-            sqlType: tableDef[columnKey].type
-        }
+        dataDescription[columnKey] = columnDef
     })
-    return { tableName: tableName, columns }
+    return dataDescription
 }
