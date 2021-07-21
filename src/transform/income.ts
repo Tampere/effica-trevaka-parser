@@ -3,6 +3,7 @@ import { incomeCoefficientMultipliers as coeff } from "../mapping/coefficients"
 import { getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
 
 export const transformIncomeData = async (returnAll: boolean = false) => {
+    //TODO: add application id FK constraint?
     const incomeTableQuery =
         `
         DROP TABLE IF EXISTS ${getMigrationSchema()}evaka_income CASCADE;
@@ -23,7 +24,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
             is_entrepreneur boolean default false not null,
             application_id uuid,
             constraint no_overlapping_income
-                exclude using gist (person_id with pg_catalog.=)
+                exclude using gist (person_id WITH pg_catalog.=, daterange(valid_from, COALESCE(valid_to, '2099-12-31'::date), '[]') WITH &&)
         );
         `
 
@@ -60,6 +61,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
         $$ LANGUAGE SQL;
         `
 
+    //TODO: add application id?
     const incomeQueryPart =
         `
         INSERT INTO ${getMigrationSchema()}evaka_income (person_id, person_ssn, data, effect, valid_from, valid_to, income_total)

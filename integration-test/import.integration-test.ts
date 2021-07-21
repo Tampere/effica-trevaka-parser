@@ -30,7 +30,9 @@ beforeAll(async () => {
 
 beforeEach(() => { })
 afterEach(async () => {
-    await Promise.all(cleanUps.map(table => dropTable(table)))
+    for (const table of cleanUps) {
+        await dropTable(table)
+    }
     cleanUps = []
 })
 

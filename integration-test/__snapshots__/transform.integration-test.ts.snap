@@ -93,6 +93,51 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed income 1`] = `
+Array [
+  Object {
+    "application_id": null,
+    "data": Object {
+      "MAIN_INCOME": Object {
+        "amount": 450060,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+      "SECONDARY_INCOME": Object {
+        "amount": 56000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+    },
+    "effect": "INCOME",
+    "id": Any<String>,
+    "income_total": 506060,
+    "is_entrepreneur": false,
+    "notes": "",
+    "person_id": Any<String>,
+    "person_ssn": "020967-9992",
+    "valid_from": Any<String>,
+    "valid_to": null,
+  },
+  Object {
+    "application_id": null,
+    "data": Object {
+      "MAIN_INCOME": Object {
+        "amount": 5000000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+    },
+    "effect": "INCOME",
+    "id": Any<String>,
+    "income_total": 5000000,
+    "is_entrepreneur": false,
+    "notes": "",
+    "person_id": Any<String>,
+    "person_ssn": "180476-998M",
+    "valid_from": Any<String>,
+    "valid_to": Any<String>,
+  },
+]
+`;
+
 exports[`GET /transform positive should return transformed persons 1`] = `
 Array [
   Object {

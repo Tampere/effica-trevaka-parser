@@ -6,7 +6,7 @@ import { setupTable, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
-const baseDataTables = ["person", "codes", "families", "units", "departments", "unitmap"]
+const baseDataTables = ["person", "codes", "families", "units", "departments", "unitmap", "income", "incomerows"]
 
 
 const personExpectation = {
@@ -21,7 +21,9 @@ beforeAll(async () => {
 beforeEach(() => {
 })
 afterEach(async () => {
-    await Promise.all(cleanUps.map(table => dropTable(table)))
+    for (const table of cleanUps) {
+        await dropTable(table)
+    }
     cleanUps = []
 })
 
@@ -122,9 +124,36 @@ describe("GET /transform positive", () => {
             daycareGroupExpectation
         )
     })
+
+    it("should return transformed income", async () => {
+        cleanUps = ["evaka_income", "evaka_person"]
+        //TODO: application transformation?
+        await setupTransformations(["person"])
+
+        //TODO: add application id?
+        const incomeExpectation =
+            [
+                {
+                    id: expect.any(String),
+                    person_id: expect.any(String),
+                    valid_from: expect.any(String),
+                    valid_to: null
+                },
+                {
+                    id: expect.any(String),
+                    person_id: expect.any(String),
+                    valid_from: expect.any(String),
+                    valid_to: expect.any(String)
+                }
+            ]
+
+        await positiveTransformSnapshotTest(
+            "income",
+            incomeExpectation
+        )
+    })
+
 })
-
-
 
 const positiveTransformSnapshotTest = async (tableName: string, resultPattern?: any) => {
     const queryObject = {
