@@ -1,9 +1,17 @@
+import { config } from "../config"
 import migrationDb from "../db/db"
-import { incomeCoefficientMultipliers as coeff } from "../mapping/coefficients"
-import { getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
+import { citySpecificIncomeMappings } from "../mapping/citySpecific"
+import { CitySpecificIncomeMapping } from "../types/mappings"
+import { createSqlConditionalForCoefficients, createSqlConditionalForIncomeCodes, createTotalSumClauseForIncomeTypes, getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
 
 export const transformIncomeData = async (returnAll: boolean = false) => {
     //TODO: add application id FK constraint?
+
+    const incomeMapping: CitySpecificIncomeMapping = citySpecificIncomeMappings[config.cityVariant]
+    if (!incomeMapping) {
+        throw new Error(`No income mapping found for city variant ${config.cityVariant}`)
+    }
+
     const incomeTableQuery =
         `
         DROP TABLE IF EXISTS ${getMigrationSchema()}evaka_income CASCADE;
@@ -30,33 +38,20 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
 
     const incomeFunctionQuery =
         `
-        DROP FUNCTION IF EXISTS ${getMigrationSchema()}coefficient_multiplier(text);
-        CREATE FUNCTION ${getMigrationSchema()}coefficient_multiplier(text) RETURNS numeric AS $$
+        DROP FUNCTION IF EXISTS pg_temp.coefficient_multiplier(text);
+        CREATE FUNCTION pg_temp.coefficient_multiplier(text) RETURNS numeric AS $$
         SELECT
             CASE $1
-            WHEN 'MONTHLY_WITH_HOLIDAY_BONUS' THEN ${coeff["MONTHLY_WITH_HOLIDAY_BONUS"]}
-            WHEN 'MONTHLY_NO_HOLIDAY_BONUS' THEN ${coeff["MONTHLY_NO_HOLIDAY_BONUS"]}
-            WHEN 'BI_WEEKLY_WITH_HOLIDAY_BONUS' THEN ${coeff["BI_WEEKLY_WITH_HOLIDAY_BONUS"]}
-            WHEN 'BI_WEEKLY_NO_HOLIDAY_BONUS' THEN ${coeff["BI_WEEKLY_NO_HOLIDAY_BONUS"]}
-            WHEN 'YEARLY' THEN ${coeff["YEARLY"]}
+            ${createSqlConditionalForCoefficients(incomeMapping.coefficientMap)}
             ELSE 0
             END
         $$ LANGUAGE SQL;
 
-        DROP FUNCTION IF EXISTS ${getMigrationSchema()}summed_income_data(jsonb);
-        CREATE FUNCTION ${getMigrationSchema()}summed_income_data(jsonb) RETURNS int AS $$
+        DROP FUNCTION IF EXISTS pg_temp.summed_income_data(jsonb);
+        CREATE FUNCTION pg_temp.summed_income_data(jsonb) RETURNS int AS $$
         SELECT (
             0
-            + COALESCE(($1->'PARENTAL_ALLOWANCE'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'PARENTAL_ALLOWANCE'->>'coefficient')
-            + COALESCE(($1->'SICKNESS_ALLOWANCE'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'SICKNESS_ALLOWANCE'->>'coefficient')
-            + COALESCE(($1->'ALIMONY'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'ALIMONY'->>'coefficient')
-            + COALESCE(($1->'PENSION'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'PENSION'->>'coefficient')
-            + COALESCE(($1->'HOME_CARE_ALLOWANCE'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'HOME_CARE_ALLOWANCE'->>'coefficient')
-            + COALESCE(($1->'OTHER_INCOME'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'OTHER_INCOME'->>'coefficient')
-            + COALESCE(($1->'MAIN_INCOME'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'MAIN_INCOME'->>'coefficient')
-            + COALESCE(($1->'SECONDARY_INCOME'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'SECONDARY_INCOME'->>'coefficient')
-            + COALESCE(($1->'UNEMPLOYMENT_BENEFITS'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'UNEMPLOYMENT_BENEFITS'->>'coefficient')
-            - COALESCE(($1->'ALL_EXPENSES'->>'amount') :: int, 0) * ${getMigrationSchema()}coefficient_multiplier($1->'ALL_EXPENSES'->>'coefficient')
+            ${createTotalSumClauseForIncomeTypes(incomeMapping.incomeTypeMap)}
             )::int
         $$ LANGUAGE SQL;
         `
@@ -73,27 +68,13 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
                     WHEN i.incomemissing THEN '{}'::jsonb
                     WHEN count(ir.*) > 0 THEN json_object_agg(
                     (CASE ir.incometype
-                        WHEN 19 THEN 'PARENTAL_ALLOWANCE'
-                        WHEN 20 THEN 'SICKNESS_ALLOWANCE'
-                        WHEN 21 THEN 'ALIMONY'
-                        WHEN 22 THEN 'PENSION'
-                        WHEN 23 THEN 'HOME_CARE_ALLOWANCE'
-                        WHEN 24 THEN 'OTHER_INCOME'
-                        WHEN 25 THEN 'MAIN_INCOME'
-                        WHEN 26 THEN 'SECONDARY_INCOME'
-                        WHEN 27 THEN 'UNEMPLOYMENT_BENEFITS'
-                        WHEN 28 THEN 'ALL_EXPENSES'
+                        ${createSqlConditionalForIncomeCodes(incomeMapping.incomeTypeMap)}
                         ELSE 'LOL'
                     END),
                     json_build_object(
                         'amount', (ir.summa * 100)::int,
                         'coefficient', (CASE ir.incomeperiod
-                        WHEN 30 THEN 'MONTHLY_NO_HOLIDAY_BONUS'
-                        WHEN 31 THEN 'YEARLY'
-                        WHEN 32 THEN 'BI_WEEKLY_NO_HOLIDAY_BONUS'
-                        WHEN 108 THEN 'MONTHLY_WITH_HOLIDAY_BONUS'
-                        WHEN 110 THEN 'BI_WEEKLY_WITH_HOLIDAY_BONUS'
-                        WHEN 416 THEN 'MONTHLY_WITH_HOLIDAY_BONUS'
+                        ${createSqlConditionalForIncomeCodes(incomeMapping.incomePeriodMap)}
                         ELSE 'BAL'
                         END)
                     )
@@ -124,7 +105,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
             ep.id as person_id,
             da.person_ssn,
             (CASE
-                WHEN da.income_total - ${getMigrationSchema()}summed_income_data(da.data) = 0 THEN data
+                WHEN da.income_total - pg_temp.summed_income_data(da.data) = 0 THEN data
                 ELSE json_build_object(
                   'MAIN_INCOME',
                   json_build_object('amount', da.income_total, 'coefficient', 'MONTHLY_NO_HOLIDAY_BONUS')

@@ -2,6 +2,7 @@ import pgPromise, { QueryFile } from "pg-promise"
 import { config } from "../config"
 import db from "../db/db"
 import { TableDescriptor } from "../types"
+import { EfficaIncomeCodeMapping } from "../types/mappings"
 
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
@@ -37,4 +38,20 @@ export const createGenericTableQueryFromDescriptor = (td: TableDescriptor): stri
         ${getMigrationSchema()}
         ${td.tableName} 
         (${Object.keys(td.columns).map(c => `${c} ${td.columns[c].sqlType}`).join(",")});`
+}
+
+export const createSqlConditionalForIncomeCodes = (mappings: EfficaIncomeCodeMapping[]) => {
+    return mappings.map(
+        p => p.codes.map(
+            code => `WHEN ${code} THEN '${p.evakaType}'`
+        ).join("\n")
+    ).join("\n")
+}
+
+export const createTotalSumClauseForIncomeTypes = (mappings: EfficaIncomeCodeMapping[]) => {
+    return mappings.map(m => `${m.sign ?? "+"} COALESCE(($1->'${m.evakaType}'->>'amount') :: int, 0) * pg_temp.coefficient_multiplier($1->'${m.evakaType}'->>'coefficient')`).join("\n")
+}
+
+export const createSqlConditionalForCoefficients = (coeffMap: Record<string, string>) => {
+    return Object.keys(coeffMap).map(c => `WHEN '${c}' THEN ${coeffMap[c]}`).join("\n")
 }

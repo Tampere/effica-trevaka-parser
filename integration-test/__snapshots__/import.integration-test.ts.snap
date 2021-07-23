@@ -504,16 +504,16 @@ Object {
     Array [
       Object {
         "enddate": null,
-        "incomeperiod": 30,
-        "incometype": 25,
+        "incomeperiod": 83,
+        "incometype": 85,
         "personid": "020967-9992",
         "startdate": Any<String>,
         "summa": "4500.6",
       },
       Object {
         "enddate": Any<String>,
-        "incomeperiod": 30,
-        "incometype": 26,
+        "incomeperiod": 83,
+        "incometype": 108,
         "personid": "020967-9992",
         "startdate": Any<String>,
         "summa": "560",

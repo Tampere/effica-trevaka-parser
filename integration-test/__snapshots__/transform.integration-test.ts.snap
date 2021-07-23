@@ -102,7 +102,7 @@ Array [
         "amount": 450060,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
-      "SECONDARY_INCOME": Object {
+      "OTHER_INCOME": Object {
         "amount": 56000,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
