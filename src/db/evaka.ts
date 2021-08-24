@@ -1,7 +1,7 @@
 import { ITask } from "pg-promise";
 import { TableDescriptor } from "../types";
 import { EvakaPerson } from "../types/evaka";
-import { getExtensionSchema, getMigrationSchema } from "../util/queryTools";
+import { getExtensionSchemaPrefix, getMigrationSchemaPrefix } from "../util/queryTools";
 
 export const findPersonBySSN = async <T>(t: ITask<T>, ssn: string) => {
     return await t.oneOrNone<EvakaPerson>(
@@ -38,16 +38,17 @@ export const getFirstGuardianByChild = async <T>(
 
 export const createDaycareTableQuery = (td: TableDescriptor): string => {
     return `
-    create table ${getMigrationSchema()}${td.tableName}
+    create table ${getMigrationSchemaPrefix()}${td.tableName}
     (
-        id uuid default ${getExtensionSchema()}uuid_generate_v1mc() not null
+        id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
             constraint daycare_pkey
                 primary key,
         name text not null,
         type text[] default '{CENTRE}' not null,
         care_area_id uuid not null
             constraint fk$care_area
-                references ${getMigrationSchema()}evaka_areas,
+                references ${getMigrationSchemaPrefix()}evaka_areas
+                    on delete cascade,
         phone text,
         url text,
         backup_location text,
@@ -84,9 +85,9 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
 
 export const createAreaTableQuery = (td: TableDescriptor): string => {
     return `
-    create table if not exists ${getMigrationSchema()}${td.tableName}
+    create table if not exists ${getMigrationSchemaPrefix()}${td.tableName}
     (
-        id uuid default ${getExtensionSchema()}uuid_generate_v1mc() not null
+        id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
             constraint care_area_pkey
                 primary key,
         name text not null

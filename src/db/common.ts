@@ -1,12 +1,12 @@
 import { ITask } from "pg-promise";
-import { getMigrationSchema } from "../util/queryTools";
+import { getMigrationSchemaPrefix } from "../util/queryTools";
 
 export type UnitMap = Record<number, string>;
 export const getUnitMap = async <T>(t: ITask<T>): Promise<UnitMap> => {
     const units = await t.manyOrNone<{ effica_id: number; evaka_id: string }>(
         `
         SELECT effica_id, evaka_id
-        FROM ${getMigrationSchema()}unitmap
+        FROM ${getMigrationSchemaPrefix()}unitmap
         `
     );
     return units.reduce((previousValue, currentValue) => {
@@ -26,7 +26,7 @@ export const getExtentMap = async <T>(t: ITask<T>): Promise<ExtentMap> => {
     }>(
         `
         SELECT effica_id, evaka_id, sno.name AS evaka_name
-        FROM ${getMigrationSchema()}extentmap em
+        FROM ${getMigrationSchemaPrefix()}extentmap em
         JOIN service_need_option sno ON sno.id = em.evaka_id
         `
     );

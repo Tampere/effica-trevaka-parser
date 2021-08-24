@@ -2,7 +2,7 @@ import { config } from "../config"
 import migrationDb from "../db/db"
 import { citySpecificIncomeMappings } from "../mapping/citySpecific"
 import { CitySpecificIncomeMapping } from "../types/mappings"
-import { createSqlConditionalForCoefficients, createSqlConditionalForIncomeCodes, createTotalSumClauseForIncomeTypes, getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
+import { createSqlConditionalForCoefficients, createSqlConditionalForIncomeCodes, createTotalSumClauseForIncomeTypes, getExtensionSchemaPrefix, getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/queryTools"
 
 export const transformIncomeData = async (returnAll: boolean = false) => {
     //TODO: add application id FK constraint?
@@ -14,14 +14,15 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
 
     const incomeTableQuery =
         `
-        DROP TABLE IF EXISTS ${getMigrationSchema()}evaka_income CASCADE;
-        CREATE TABLE ${getMigrationSchema()}evaka_income (
-            id UUID NOT NULL DEFAULT ${getExtensionSchema()}uuid_generate_v1mc()
+        DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_income CASCADE;
+        CREATE TABLE ${getMigrationSchemaPrefix()}evaka_income (
+            id UUID NOT NULL DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc()
                 constraint pk$income
                     primary key,
             person_id uuid not null
                 constraint fk$person_id
-                    references ${getMigrationSchema()}evaka_person,
+                    references ${getMigrationSchemaPrefix()}evaka_person
+                        on delete cascade,
             person_ssn text not null,
             data jsonb not null,
             valid_from date not null,
@@ -59,7 +60,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
     //TODO: add application id?
     const incomeQueryPart =
         `
-        INSERT INTO ${getMigrationSchema()}evaka_income (person_id, person_ssn, data, effect, valid_from, valid_to, income_total)
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_income (person_id, person_ssn, data, effect, valid_from, valid_to, income_total)
         WITH data_agg AS
             (SELECT
                 i.personid as person_ssn,    
@@ -95,8 +96,8 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
                     ELSE 'INCOME'::text
                 END) AS effect,
                 (i.summa * 100)::int AS income_total
-            FROM ${getMigrationSchema()}income i
-            LEFT JOIN ${getMigrationSchema()}incomerows ir 
+            FROM ${getMigrationSchemaPrefix()}income i
+            LEFT JOIN ${getMigrationSchemaPrefix()}incomerows ir 
                     ON i.personid = ir.personid 
                         AND daterange(i.startdate, i.enddate, '[]') && daterange(ir.startdate, ir.enddate, '[]')
             GROUP BY i.personid, i.maxincome, i.incomemissing, i.startdate, i.enddate, i.summa
@@ -116,7 +117,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
             da.valid_to,
             da.income_total
         FROM data_agg da
-            JOIN ${getMigrationSchema()}evaka_person ep
+            JOIN ${getMigrationSchemaPrefix()}evaka_person ep
                 ON da.person_ssn = ep.effica_ssn
         `
 

@@ -9,8 +9,12 @@ export const importTable = async (tableName: string) => {
         path: `/integration-test/data/${tableName}`,
         returnAll: "true",
     }
+
     const response = await request(app).get(importUrl).query(queryObject)
-    expect(response.status).toBe(200)
+    if (response.error) {
+        console.log(`Import error for ${tableName}`)
+        console.error(response.error.text)
+    }
     return response.body
 }
 
