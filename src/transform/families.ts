@@ -19,7 +19,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         );
         `
 
-    //TODO: "monogamy" constraint allows only one entry per person id???
+    //no evaka-style conflict state for partnerships -> no overlap
     const partnerTableQuery =
         `
         DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_partner CASCADE;
@@ -34,9 +34,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             CHECK (start_date <= end_date),
             CONSTRAINT fridge_partner_pkey
 		        PRIMARY KEY (partnership_id, indx),
-	        --CONSTRAINT exclude$fridge_partner_enforce_monogamy
-		    --    EXCLUDE using gist (person_id with pg_catalog.=),
-            CONSTRAINT partnership_end_date_matches
+	        CONSTRAINT partnership_end_date_matches
 		        EXCLUDE using gist (partnership_id with pg_catalog.=, end_date with pg_catalog.<>)
 			        deferrable initially deferred,
             CONSTRAINT partnership_start_date_matches
