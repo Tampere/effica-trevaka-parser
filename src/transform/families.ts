@@ -20,6 +20,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         `
 
     //no evaka-style conflict state for partnerships -> no overlap
+    //end_date_matches constraint removed due to an unresolved issue with migration environment database
     const partnerTableQuery =
         `
         DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_partner CASCADE;
@@ -34,9 +35,6 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             CHECK (start_date <= end_date),
             CONSTRAINT fridge_partner_pkey
 		        PRIMARY KEY (partnership_id, indx),
-	        CONSTRAINT partnership_end_date_matches
-		        EXCLUDE using gist (partnership_id with pg_catalog.=, end_date with pg_catalog.<>)
-			        deferrable initially deferred,
             CONSTRAINT partnership_start_date_matches
 		        EXCLUDE using gist (partnership_id with pg_catalog.=, start_date with pg_catalog.<>)
 			        deferrable initially deferred,
@@ -75,7 +73,10 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         `
         INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner (person_id, effica_ssn, partnership_id, family_number, start_date, end_date, indx)
         WITH partnerships AS (
-            SELECT f.familynbr as family_number, ${getExtensionSchemaPrefix()}uuid_generate_v1mc() as partnership_id
+            SELECT f.familynbr as family_number,
+                ${getExtensionSchemaPrefix()}uuid_generate_v1mc() as partnership_id,
+                max(startdate) filter ( where roleinfamily in ('S', 'R')) as start_date,
+                min(enddate) filter ( where roleinfamily in ('S', 'R')) as end_date
             FROM ${getMigrationSchemaPrefix()}families f
             GROUP BY f.familynbr
             HAVING array_agg(roleinfamily) @> '{"S", "R"}'
@@ -84,8 +85,8 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             p.effica_ssn, 
             pr.partnership_id,
             f.familynbr,
-            f.startdate as start_date,
-            f.enddate   as end_date,
+            pr.start_date,
+            pr.end_date,
             CASE f.roleinfamily
                 WHEN 'R' THEN 1
                 WHEN 'S' THEN 2
