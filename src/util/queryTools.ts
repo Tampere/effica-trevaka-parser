@@ -20,7 +20,7 @@ export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataRetu
 }
 
 export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
-    const query = `DROP TABLE IF EXISTS ${getMigrationSchema()}${tableName} CASCADE;`
+    const query = `DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}${tableName} CASCADE;`
     if (!t) {
         return await db.tx(async t => t.any(query))
     } else {
@@ -29,13 +29,13 @@ export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
 
 }
 
-export const getMigrationSchema = () => config.migrationSchema ? `${config.migrationSchema}.` : ""
-export const getExtensionSchema = () => config.extensionSchema ? `${config.extensionSchema}.` : ""
+export const getMigrationSchemaPrefix = () => config.migrationSchema ? `${config.migrationSchema}.` : ""
+export const getExtensionSchemaPrefix = () => config.extensionSchema ? `${config.extensionSchema}.` : ""
 export const createOrderBy = (orderByFields: string[]) => orderByFields.length > 0 ? `ORDER BY ${orderByFields.join(" ,")} ` : ""
 
 export const createGenericTableQueryFromDescriptor = (td: TableDescriptor): string => {
     return `CREATE TABLE IF NOT EXISTS 
-        ${getMigrationSchema()}
+        ${getMigrationSchemaPrefix()}
         ${td.tableName} 
         (${Object.keys(td.columns).map(c => `${c} ${td.columns[c].sqlType}`).join(",")});`
 }

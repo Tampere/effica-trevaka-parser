@@ -1,28 +1,29 @@
 import migrationDb from "../db/db"
-import { getExtensionSchema, getMigrationSchema, runQuery, wrapWithReturning } from "../util/queryTools"
+import { getExtensionSchemaPrefix, getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/queryTools"
 
+//FIXME: updated_from_vtj is required for all rows with a non-null ssn in eVaka
 export const transformPersonData = async (returnAll: boolean = false) => {
     const tableQuery = `
-    DROP TABLE IF EXISTS ${getMigrationSchema()}evaka_person CASCADE;
-    CREATE TABLE ${getMigrationSchema()}evaka_person(
-        id UUID NOT NULL DEFAULT ${getExtensionSchema()}uuid_generate_v1mc(),
-        social_security_number TEXT,
+    DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_person CASCADE;
+    CREATE TABLE ${getMigrationSchemaPrefix()}evaka_person(
+        id UUID NOT NULL DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
+        social_security_number TEXT UNIQUE,
         first_name TEXT,
         last_name TEXT,
         email TEXT,
         language TEXT[],
-        date_of_birth DATE,
+        date_of_birth DATE NOT NULL,
         street_address TEXT,
         postal_code TEXT,
         post_office TEXT,
         restricted_details_enabled BOOLEAN,
-        phone TEXT,
+        phone TEXT DEFAULT NULL::character varying,
         effica_ssn TEXT,
         PRIMARY KEY(id)
     );`
 
     const insertQueryPart = `
-    INSERT INTO ${getMigrationSchema()}evaka_person 
+    INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
     (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, restricted_details_enabled, phone, effica_ssn, date_of_birth)
         SELECT
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
@@ -42,8 +43,8 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                         WHEN 'A' THEN 2000 END
                         + substr(personid, 5, 2)::smallint, '-', substr(personid, 3, 2), '-',
                     substr(personid, 1, 2))::date AS date_of_birth
-        FROM ${getMigrationSchema()}person p
-        LEFT JOIN ${getMigrationSchema()}codes c
+        FROM ${getMigrationSchemaPrefix()}person p
+        LEFT JOIN ${getMigrationSchemaPrefix()}codes c
         ON p.mothertongue = c.code AND c.codetype = 'SPRAK'`
 
     const insertQuery = wrapWithReturning("evaka_person", insertQueryPart, returnAll)

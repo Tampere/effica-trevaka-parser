@@ -6,7 +6,21 @@ import { setupTable, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
-const baseDataTables = ["person", "codes", "families", "units", "departments", "unitmap", "income", "incomerows"]
+
+//order based on dependency
+const baseDataTables =
+    [
+        "person",
+        "codes",
+        "families",
+        "units",
+        "departments",
+        "unitmap",
+        "income",
+        "incomerows",
+        "evaka_areas",
+        "evaka_daycare"
+    ]
 
 
 const personExpectation = {
@@ -15,7 +29,9 @@ const personExpectation = {
 }
 
 beforeAll(async () => {
-    await Promise.all(baseDataTables.map(table => setupTable(table)))
+    for (const table of baseDataTables) {
+        await setupTable(table)
+    }
 })
 
 beforeEach(() => {
@@ -28,7 +44,9 @@ afterEach(async () => {
 })
 
 afterAll(async () => {
-    await Promise.all(baseDataTables.map(table => dropTable(table)))
+    for (const table of baseDataTables) {
+        await dropTable(table)
+    }
     return await db.$pool.end()
 })
 

@@ -1,10 +1,10 @@
-import migrationDb from "../db/db";
-import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { ITask } from "pg-promise";
-import { findPersonBySSN, getFirstGuardianByChild } from "../db/evaka";
-import { findApplications, findRowsByApplication } from "../db/effica";
-import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
+import migrationDb from "../db/db";
+import { findApplications, findRowsByApplication } from "../db/effica";
+import { findPersonBySSN, getFirstGuardianByChild } from "../db/evaka";
+import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
+import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 
 export const transformApplicationData = async () => {
     await migrationDb.tx(async (t) => {

@@ -1,12 +1,12 @@
 import { ITask } from "pg-promise";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
-import { getMigrationSchema } from "../util/queryTools";
+import { getMigrationSchemaPrefix } from "../util/queryTools";
 
 export const findApplications = async <T>(t: ITask<T>) => {
     return await t.manyOrNone<EfficaApplication>(
         `
         SELECT *
-        FROM ${getMigrationSchema()}applications
+        FROM ${getMigrationSchemaPrefix()}applications
         `
     );
 };
