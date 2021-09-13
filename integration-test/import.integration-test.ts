@@ -1,5 +1,7 @@
 import request from "supertest"
 import app from "../src/app"
+import { getChildminderMap } from "../src/db/common"
+import migrationDb from "../src/db/db"
 import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
@@ -10,7 +12,7 @@ let cleanUps: string[] = []
 
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
-    "feedeviations", "childminders", "evaka_areas", "unitmap",
+    "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
     "applications", "applicationrows", "evaka_daycare"]
 
 type DateRangeExpectation = { [key: string]: any }
@@ -149,6 +151,15 @@ describe("GET /import csv positive", () => {
     })
     it("should return created unitmaps", async () => {
         return await positiveImportSnapshotTest("unitmap")
+    })
+    it("should return created childmindermaps", async () => {
+        const result = await positiveImportSnapshotTest("childmindermap")
+        const map = await migrationDb.tx(async (t) => await getChildminderMap(t))
+        expect(map).toStrictEqual({
+            "130963-949H": "19fec146-e2f1-11eb-8473-db55258254c5",
+            "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
+        })
+        return result
     })
     it("should return created evaka daycares", async () => {
         cleanUps = ["evaka_areas"]

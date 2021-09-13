@@ -241,6 +241,13 @@ export const extTableMapping: TypeMapping = {
             evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
         }
     },
+    childmindermap: {
+        tableName: "childmindermap",
+        columns: {
+            effica_id: { sqlType: "text", parser: nullForcingTextParser },
+            evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
+        }
+    },
     evaka_daycare: {
         tableQueryFunction: createDaycareTableQuery,
         tableName: "evaka_daycare",

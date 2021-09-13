@@ -40,3 +40,22 @@ export const getExtentMap = async <T>(t: ITask<T>): Promise<ExtentMap> => {
         };
     }, {});
 };
+
+export type ChildminderMap = Record<string, string>;
+export const getChildminderMap = async <T>(
+    t: ITask<T>
+): Promise<ChildminderMap> => {
+    const data = await t.manyOrNone<{ effica_id: string; evaka_id: string }>(
+        `
+        SELECT effica_id, evaka_id
+        FROM ${getMigrationSchemaPrefix()}childmindermap
+        `
+    );
+    return data.reduce(
+        (previousValue, currentValue) => ({
+            ...previousValue,
+            [currentValue.effica_id]: currentValue.evaka_id,
+        }),
+        {}
+    );
+};
