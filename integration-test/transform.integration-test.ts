@@ -16,6 +16,7 @@ const baseDataTables =
         "units",
         "departments",
         "unitmap",
+        "childmindermap",
         "income",
         "incomerows",
         "evaka_areas",
