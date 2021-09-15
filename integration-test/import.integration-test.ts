@@ -1,8 +1,7 @@
 import request from "supertest"
 import app from "../src/app"
 import { getChildminderMap } from "../src/db/common"
-import migrationDb from "../src/db/db"
-import db from "../src/db/db"
+import { default as db, default as migrationDb } from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
 import { setupTables } from "../src/util/testTools"
@@ -39,8 +38,13 @@ afterEach(async () => {
 })
 
 afterAll(async () => {
-    await Promise.all(tables.map(table => dropTable(table)))
-    return db.$pool.end()
+    try {
+        for (const table of tables) {
+            await dropTable(table)
+        }
+    } finally {
+        return db.$pool.end()
+    }
 })
 
 // POSITIVE CASES

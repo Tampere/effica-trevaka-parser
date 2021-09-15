@@ -45,10 +45,13 @@ afterEach(async () => {
 })
 
 afterAll(async () => {
-    for (const table of baseDataTables) {
-        await dropTable(table)
+    try {
+        for (const table of baseDataTables) {
+            await dropTable(table)
+        }
+    } finally {
+        return await db.$pool.end()
     }
-    return await db.$pool.end()
 })
 
 describe("GET /transform positive", () => {

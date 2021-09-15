@@ -29,6 +29,16 @@ export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
 
 }
 
+export const truncateEvakaTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
+    const query = `TRUNCATE TABLE ${tableName} CASCADE;`
+    if (!t) {
+        return await db.tx(async t => t.any(query))
+    } else {
+        return await t.any(query)
+    }
+
+}
+
 export const getMigrationSchemaPrefix = () => config.migrationSchema ? `${config.migrationSchema}.` : ""
 export const getExtensionSchemaPrefix = () => config.extensionSchema ? `${config.extensionSchema}.` : ""
 export const createOrderBy = (orderByFields: string[]) => orderByFields.length > 0 ? `ORDER BY ${orderByFields.join(" ,")} ` : ""
