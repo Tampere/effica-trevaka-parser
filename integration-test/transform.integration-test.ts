@@ -1,11 +1,15 @@
 import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
-import { dropTable } from "../src/util/queryTools"
-import { setupTable, setupTransformations } from "../src/util/testTools"
+import { dropTable, truncateEvakaTable } from "../src/util/queryTools"
+import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
+
+let evakaDataCleanups: string[] = [
+    "person",
+]
 
 //order based on dependency
 const baseDataTables =
@@ -45,6 +49,9 @@ afterEach(async () => {
         await dropTable(table)
     }
     cleanUps = []
+    for (const table of evakaDataCleanups) {
+        await truncateEvakaTable(table)
+    }
 })
 
 afterAll(async () => {
@@ -178,12 +185,25 @@ describe("GET /transform positive", () => {
         )
     })
 
-    xit("should return transformed application", async () => {
-        await setupTransformations(["person"])
+    it("should return transformed application", async () => {
+        cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
+
+        await setupTransformations(["person", "families"])
+        await setupTransfers(["person", "families"])
 
         const applicationExpectation = [
             {
-                id: expect.any(String)
+                id: expect.any(String),
+                created: expect.any(String),
+                updated: expect.any(String),
+                child_id: expect.any(String),
+                guardian_id: expect.any(String),
+                form: expect.objectContaining({
+                    id: expect.any(String),
+                    created: expect.any(String),
+                    updated: expect.any(String),
+                    application_id: expect.any(String)
+                })
             }
         ]
 

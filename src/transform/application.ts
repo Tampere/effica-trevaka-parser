@@ -1,3 +1,4 @@
+import { application } from "express";
 import { ITask } from "pg-promise";
 import { APPLICATION_TYPE_MAP } from "../constants";
 import {
@@ -18,22 +19,26 @@ import { findHeadOfChild } from "../db/evaka";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 
-export const transformApplicationData = async () => {
+export const transformApplicationData = async (returnAll: boolean = false) => {
+    const results: any[] = [];
     await migrationDb.tx(async (t) => {
         const efficaApplications = await findApplications(t);
         const unitMap = await getUnitMap(t);
         const childminderMap = await getChildminderMap(t);
         const extentMap = await getExtentMap(t);
         for (const efficaApplication of efficaApplications) {
-            await migrateApplication(
-                t,
-                efficaApplication,
-                unitMap,
-                childminderMap,
-                extentMap
+            results.push(
+                await migrateApplication(
+                    t,
+                    efficaApplication,
+                    unitMap,
+                    childminderMap,
+                    extentMap
+                )
             );
         }
     });
+    return results;
 };
 
 const migrateApplication = async <T>(
@@ -70,7 +75,7 @@ const migrateApplication = async <T>(
             'SENT'::application_status_type,
             'ELECTRONIC'::application_origin_type
         )
-        RETURNING id
+        RETURNING *
         `,
         {
             sentdate: efficaApplication.applicationdate,
@@ -88,10 +93,11 @@ const migrateApplication = async <T>(
         unitMap,
         extentMap
     );
-    await t.none(
+    const evakaApplicationForm = await t.one(
         `
         INSERT INTO application_form (application_id, revision, document, latest)
         VALUES ($(applicationId), $(revision), $(document), $(latest))
+        RETURNING *
         `,
         {
             applicationId: evakaApplication.id,
@@ -100,6 +106,11 @@ const migrateApplication = async <T>(
             latest: true,
         }
     );
+
+    return {
+        ...evakaApplication,
+        form: evakaApplicationForm,
+    };
 };
 
 const getChildByApplication = async <T>(
