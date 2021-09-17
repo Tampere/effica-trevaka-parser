@@ -36,7 +36,8 @@ const personExpectation = {
     date_of_birth: expect.any(String),
     created: expect.any(String),
     updated: expect.any(String),
-    updated_from_vtj: expect.any(String)
+    updated_from_vtj: expect.any(String),
+    customer_id: expect.any(String)
 }
 
 beforeAll(async () => {
