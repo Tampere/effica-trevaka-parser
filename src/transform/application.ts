@@ -1,8 +1,12 @@
 import { ITask } from "pg-promise";
 import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
 import migrationDb from "../db/db";
-import { findApplications, findRowsByApplication } from "../db/effica";
-import { findHeadOfChild, findPersonBySSN } from "../db/evaka";
+import {
+    findApplications,
+    findPersonBySSN,
+    findRowsByApplication,
+} from "../db/effica";
+import { findHeadOfChild } from "../db/evaka";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 

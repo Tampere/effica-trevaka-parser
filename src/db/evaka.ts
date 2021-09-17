@@ -3,17 +3,6 @@ import { TableDescriptor } from "../types";
 import { EvakaPerson } from "../types/evaka";
 import { getExtensionSchemaPrefix, getMigrationSchemaPrefix } from "../util/queryTools";
 
-export const findPersonBySSN = async <T>(t: ITask<T>, ssn: string) => {
-    return await t.oneOrNone<EvakaPerson>(
-        `
-        SELECT *
-        FROM person
-        WHERE social_security_number = $(ssn)
-        `,
-        { ssn }
-    );
-};
-
 export const findHeadOfChild = async <T>(
     t: ITask<T>,
     child: EvakaPerson,
