@@ -1,6 +1,13 @@
 import { ITask } from "pg-promise";
 import { APPLICATION_TYPE_MAP } from "../constants";
-import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
+import {
+    ChildminderMap,
+    ExtentMap,
+    getChildminderMap,
+    getExtentMap,
+    getUnitMap,
+    UnitMap,
+} from "../db/common";
 import migrationDb from "../db/db";
 import {
     findApplications,
@@ -15,9 +22,16 @@ export const transformApplicationData = async () => {
     await migrationDb.tx(async (t) => {
         const efficaApplications = await findApplications(t);
         const unitMap = await getUnitMap(t);
+        const childminderMap = await getChildminderMap(t);
         const extentMap = await getExtentMap(t);
         for (const efficaApplication of efficaApplications) {
-            await migrateApplication(t, efficaApplication, unitMap, extentMap);
+            await migrateApplication(
+                t,
+                efficaApplication,
+                unitMap,
+                childminderMap,
+                extentMap
+            );
         }
     });
 };
@@ -26,6 +40,7 @@ const migrateApplication = async <T>(
     t: ITask<T>,
     efficaApplication: EfficaApplication,
     unitMap: UnitMap,
+    childminderMap: ChildminderMap,
     extentMap: ExtentMap
 ) => {
     const child = await getChildByApplication(t, efficaApplication);
@@ -65,7 +80,14 @@ const migrateApplication = async <T>(
         }
     );
 
-    const document = newDocument(child, guardian, rows, unitMap, extentMap);
+    const document = newDocument(
+        child,
+        guardian,
+        rows,
+        childminderMap,
+        unitMap,
+        extentMap
+    );
     await t.none(
         `
         INSERT INTO application_form (application_id, revision, document, latest)
@@ -108,9 +130,10 @@ const newDocument = (
     guardian: EvakaPerson,
     rows: EfficaApplicationRow[],
     unitMap: UnitMap,
+    childminderMap: ChildminderMap,
     extentMap: ExtentMap
 ): EvakaApplicationFormDocumentV0 => {
-    const preferredUnits = rows.map(({ unitcode }) => unitMap[unitcode]);
+    const preferredUnits = resolveUnits(rows, unitMap, childminderMap);
     const serviceNeedOption = extentMap[rows[0]?.extent] ?? null;
     const preferredStartDate = rows[0]?.startdate ?? null;
     const type = resolveType(rows);
@@ -210,3 +233,18 @@ const baseDocumentV0 = asPartial({
     },
     maxFeeAccepted: false,
 });
+
+const resolveUnits = (
+    rows: EfficaApplicationRow[],
+    unitMap: UnitMap,
+    childminderMap: ChildminderMap
+) => {
+    return rows
+        .map(({ unitcode, childminder }) => {
+            if (childminder !== null) {
+                return childminderMap[childminder];
+            }
+            return unitMap[unitcode];
+        })
+        .filter((unitId) => unitId !== undefined);
+};
