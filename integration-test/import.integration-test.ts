@@ -1,7 +1,7 @@
 import request from "supertest"
 import app from "../src/app"
-import { getChildminderMap } from "../src/db/common"
-import { default as db, default as migrationDb } from "../src/db/db"
+import { getChildminderMap, getExtentMap } from "../src/db/common"
+import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
 import { setupTables } from "../src/util/testTools"
@@ -153,12 +153,27 @@ describe("GET /import csv positive", () => {
     it("should return created evaka areas", async () => {
         return await positiveImportSnapshotTest("evaka_areas")
     })
+    it("should return created extentmaps", async () => {
+        const result = await positiveImportSnapshotTest("extentmap")
+        const map = await db.tx(async (t) => await getExtentMap(t))
+        expect(map).toStrictEqual({
+            "461": {
+                "id": "19fec146-e2f1-11eb-8473-db55258254c5",
+                "name": null
+            },
+            "999340002": {
+                "id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+                "name": null
+            }
+        })
+        return result
+    })
     it("should return created unitmaps", async () => {
         return await positiveImportSnapshotTest("unitmap")
     })
     it("should return created childmindermaps", async () => {
         const result = await positiveImportSnapshotTest("childmindermap")
-        const map = await migrationDb.tx(async (t) => await getChildminderMap(t))
+        const map = await db.tx(async (t) => await getChildminderMap(t))
         expect(map).toStrictEqual({
             "130963-949H": "19fec146-e2f1-11eb-8473-db55258254c5",
             "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"

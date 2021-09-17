@@ -1,8 +1,20 @@
 import { ITask } from "pg-promise";
-import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
+import { APPLICATION_TYPE_MAP } from "../constants";
+import {
+    ChildminderMap,
+    ExtentMap,
+    getChildminderMap,
+    getExtentMap,
+    getUnitMap,
+    UnitMap,
+} from "../db/common";
 import migrationDb from "../db/db";
-import { findApplications, findRowsByApplication } from "../db/effica";
-import { findPersonBySSN, getFirstGuardianByChild } from "../db/evaka";
+import {
+    findApplications,
+    findPersonBySSN,
+    findRowsByApplication,
+} from "../db/effica";
+import { findHeadOfChild } from "../db/evaka";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 
@@ -10,9 +22,16 @@ export const transformApplicationData = async () => {
     await migrationDb.tx(async (t) => {
         const efficaApplications = await findApplications(t);
         const unitMap = await getUnitMap(t);
+        const childminderMap = await getChildminderMap(t);
         const extentMap = await getExtentMap(t);
         for (const efficaApplication of efficaApplications) {
-            await migrateApplication(t, efficaApplication, unitMap, extentMap);
+            await migrateApplication(
+                t,
+                efficaApplication,
+                unitMap,
+                childminderMap,
+                extentMap
+            );
         }
     });
 };
@@ -21,10 +40,15 @@ const migrateApplication = async <T>(
     t: ITask<T>,
     efficaApplication: EfficaApplication,
     unitMap: UnitMap,
+    childminderMap: ChildminderMap,
     extentMap: ExtentMap
 ) => {
     const child = await getChildByApplication(t, efficaApplication);
-    const guardian = await getFirstGuardianByChild(t, child);
+    const guardian = await getHeadOfChild(
+        t,
+        child,
+        efficaApplication.applicationdate
+    );
     const rows = await findRowsByApplication(t, efficaApplication);
 
     const evakaApplication = await t.one<{ id: string }>(
@@ -56,7 +80,14 @@ const migrateApplication = async <T>(
         }
     );
 
-    const document = newDocument(child, guardian, rows, unitMap, extentMap);
+    const document = newDocument(
+        child,
+        guardian,
+        rows,
+        childminderMap,
+        unitMap,
+        extentMap
+    );
     await t.none(
         `
         INSERT INTO application_form (application_id, revision, document, latest)
@@ -82,16 +113,30 @@ const getChildByApplication = async <T>(
     return child;
 };
 
+const getHeadOfChild = async <T>(
+    t: ITask<T>,
+    child: EvakaPerson,
+    date: Date
+) => {
+    const headOfChild = await findHeadOfChild(t, child, date);
+    if (headOfChild === null) {
+        throw new Error(`Cannot find head of child for ${child.id} at ${date}`);
+    }
+    return headOfChild;
+};
+
 const newDocument = (
     child: EvakaPerson,
     guardian: EvakaPerson,
     rows: EfficaApplicationRow[],
     unitMap: UnitMap,
+    childminderMap: ChildminderMap,
     extentMap: ExtentMap
 ): EvakaApplicationFormDocumentV0 => {
-    const preferredUnits = rows.map(({ unitcode }) => unitMap[unitcode]);
+    const preferredUnits = resolveUnits(rows, unitMap, childminderMap);
     const serviceNeedOption = extentMap[rows[0]?.extent] ?? null;
     const preferredStartDate = rows[0]?.startdate ?? null;
+    const type = resolveType(rows);
     return {
         ...baseDocumentV0,
         child: {
@@ -147,7 +192,16 @@ const newDocument = (
         },
         serviceNeedOption,
         preferredStartDate,
+        type,
     };
+};
+
+const resolveType = (rows: EfficaApplicationRow[]) => {
+    const type = rows.map(({ type }) => type).find((type) => type !== null);
+    if (type === undefined || type === null) {
+        return "DAYCARE";
+    }
+    return APPLICATION_TYPE_MAP[type];
 };
 
 const asPartial = <T extends Partial<EvakaApplicationFormDocumentV0>>(t: T) =>
@@ -178,5 +232,19 @@ const baseDocumentV0 = asPartial({
         otherInfo: "",
     },
     maxFeeAccepted: false,
-    type: "DAYCARE",
 });
+
+const resolveUnits = (
+    rows: EfficaApplicationRow[],
+    unitMap: UnitMap,
+    childminderMap: ChildminderMap
+) => {
+    return rows
+        .map(({ unitcode, childminder }) => {
+            if (childminder !== null) {
+                return childminderMap[childminder];
+            }
+            return unitMap[unitcode];
+        })
+        .filter((unitId) => unitId !== undefined);
+};

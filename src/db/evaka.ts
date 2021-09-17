@@ -3,36 +3,21 @@ import { TableDescriptor } from "../types";
 import { EvakaPerson } from "../types/evaka";
 import { getExtensionSchemaPrefix, getMigrationSchemaPrefix } from "../util/queryTools";
 
-export const findPersonBySSN = async <T>(t: ITask<T>, ssn: string) => {
-    return await t.oneOrNone<EvakaPerson>(
-        `
-        SELECT *
-        FROM person
-        WHERE social_security_number = $(ssn)
-        `,
-        { ssn }
-    );
-};
-
-export const getFirstGuardianByChild = async <T>(
+export const findHeadOfChild = async <T>(
     t: ITask<T>,
-    child: EvakaPerson
+    child: EvakaPerson,
+    date: Date
 ) => {
-    const guardian = await t.oneOrNone<EvakaPerson>(
+    return await t.oneOrNone<EvakaPerson>(
         `
         SELECT p.*
         FROM person p
-        JOIN guardian g ON g.guardian_id = p.id
-        WHERE g.child_id = $(childId)
-        ORDER BY p.id
-        LIMIT 1
+        JOIN fridge_child fc ON fc.head_of_child = p.id
+        WHERE fc.child_id = $(childId)
+        AND $(date) BETWEEN fc.start_date AND fc.end_date
         `,
-        { childId: child.id }
+        { childId: child.id, date }
     );
-    if (guardian === null) {
-        throw new Error(`Cannot find guardian for child ${child.id}`);
-    }
-    return guardian;
 };
 
 

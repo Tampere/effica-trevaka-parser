@@ -153,6 +153,26 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created extentmaps 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "effica_id": "461",
+        "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+      },
+      Object {
+        "effica_id": "999340002",
+        "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+      },
+    ],
+  ],
+  "tables": Array [
+    "extentmap",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created unitmaps 1`] = `
 Object {
   "inserts": Array [
@@ -185,7 +205,7 @@ Object {
         "extent": 999340002,
         "guid": "52F59481-5533-49E4-8D9F-85E6E180B768",
         "hours": "0",
-        "personid": "010114A975H",
+        "personid": "010619A9501",
         "priority": 1,
         "startdate": "2021-09-01T00:00:00.000Z",
         "type": "BOA",
@@ -207,7 +227,7 @@ Object {
       Object {
         "applicationdate": "2021-08-01T00:00:00.000Z",
         "guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
-        "personid": "010114A975H",
+        "personid": "010619A9501",
         "placeneed": "1",
         "specialhandlingtime": "0",
         "transferapplication": false,

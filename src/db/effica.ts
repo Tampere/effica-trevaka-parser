@@ -2,6 +2,17 @@ import { ITask } from "pg-promise";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { getMigrationSchemaPrefix } from "../util/queryTools";
 
+export const findPersonBySSN = async <T>(t: ITask<T>, ssn: string) => {
+    return await t.oneOrNone<any>(
+        `
+        SELECT *
+        FROM ${getMigrationSchemaPrefix()}evaka_person
+        WHERE effica_ssn = $(ssn)
+        `,
+        { ssn }
+    );
+};
+
 export const findApplications = async <T>(t: ITask<T>) => {
     return await t.manyOrNone<EfficaApplication>(
         `
