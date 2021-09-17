@@ -7,6 +7,8 @@ export type EfficaApplication = {
     guid: string;
 };
 
+export type EfficaApplicationType = "BOA" | "BOK" | "PRO";
+
 export type EfficaApplicationRow = {
     personid: string;
     priority: number;
@@ -19,6 +21,6 @@ export type EfficaApplicationRow = {
     unitcare: number;
     days: number;
     extent: number;
-    type: string | null;
+    type: EfficaApplicationType | null;
     guid: string;
 };

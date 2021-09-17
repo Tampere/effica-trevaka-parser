@@ -19,6 +19,8 @@ const baseDataTables =
         "childmindermap",
         "income",
         "incomerows",
+        "applications",
+        "applicationrows",
         "evaka_areas",
         "evaka_daycare"
     ]
@@ -170,6 +172,18 @@ describe("GET /transform positive", () => {
             "income",
             incomeExpectation
         )
+    })
+
+    xit("should return transformed application", async () => {
+        await setupTransformations(["person"])
+
+        const applicationExpectation = [
+            {
+                id: expect.any(String)
+            }
+        ]
+
+        await positiveTransformSnapshotTest("application", applicationExpectation)
     })
 
 })
