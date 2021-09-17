@@ -1,7 +1,6 @@
 import request from "supertest"
 import app from "../src/app"
 import { getChildminderMap, getExtentMap } from "../src/db/common"
-import migrationDb from "../src/db/db"
 import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
@@ -39,8 +38,13 @@ afterEach(async () => {
 })
 
 afterAll(async () => {
-    await Promise.all(tables.map(table => dropTable(table)))
-    return db.$pool.end()
+    try {
+        for (const table of tables) {
+            await dropTable(table)
+        }
+    } finally {
+        return db.$pool.end()
+    }
 })
 
 // POSITIVE CASES
@@ -151,7 +155,7 @@ describe("GET /import csv positive", () => {
     })
     it("should return created extentmaps", async () => {
         const result = await positiveImportSnapshotTest("extentmap")
-        const map = await migrationDb.tx(async (t) => await getExtentMap(t))
+        const map = await db.tx(async (t) => await getExtentMap(t))
         expect(map).toStrictEqual({
             "461": {
                 "id": "19fec146-e2f1-11eb-8473-db55258254c5",
@@ -169,7 +173,7 @@ describe("GET /import csv positive", () => {
     })
     it("should return created childmindermaps", async () => {
         const result = await positiveImportSnapshotTest("childmindermap")
-        const map = await migrationDb.tx(async (t) => await getChildminderMap(t))
+        const map = await db.tx(async (t) => await getChildminderMap(t))
         expect(map).toStrictEqual({
             "130963-949H": "19fec146-e2f1-11eb-8473-db55258254c5",
             "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
