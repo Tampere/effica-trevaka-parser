@@ -15,6 +15,7 @@ const baseDataTables =
         "families",
         "units",
         "departments",
+        "extentmap",
         "unitmap",
         "childmindermap",
         "income",

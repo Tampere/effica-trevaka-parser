@@ -27,7 +27,7 @@ export const getExtentMap = async <T>(t: ITask<T>): Promise<ExtentMap> => {
         `
         SELECT effica_id, evaka_id, sno.name AS evaka_name
         FROM ${getMigrationSchemaPrefix()}extentmap em
-        JOIN service_need_option sno ON sno.id = em.evaka_id
+        LEFT JOIN service_need_option sno ON sno.id = em.evaka_id
         `
     );
     return extents.reduce((previousValue, currentValue) => {
