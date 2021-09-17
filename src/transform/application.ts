@@ -2,7 +2,7 @@ import { ITask } from "pg-promise";
 import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
 import migrationDb from "../db/db";
 import { findApplications, findRowsByApplication } from "../db/effica";
-import { findPersonBySSN, getFirstGuardianByChild } from "../db/evaka";
+import { findHeadOfChild, findPersonBySSN } from "../db/evaka";
 import { EfficaApplication, EfficaApplicationRow } from "../types/effica";
 import { EvakaApplicationFormDocumentV0, EvakaPerson } from "../types/evaka";
 
@@ -24,7 +24,11 @@ const migrateApplication = async <T>(
     extentMap: ExtentMap
 ) => {
     const child = await getChildByApplication(t, efficaApplication);
-    const guardian = await getFirstGuardianByChild(t, child);
+    const guardian = await getHeadOfChild(
+        t,
+        child,
+        efficaApplication.applicationdate
+    );
     const rows = await findRowsByApplication(t, efficaApplication);
 
     const evakaApplication = await t.one<{ id: string }>(
@@ -80,6 +84,18 @@ const getChildByApplication = async <T>(
         throw new Error(`Cannot find child in application ${application.guid}`);
     }
     return child;
+};
+
+const getHeadOfChild = async <T>(
+    t: ITask<T>,
+    child: EvakaPerson,
+    date: Date
+) => {
+    const headOfChild = await findHeadOfChild(t, child, date);
+    if (headOfChild === null) {
+        throw new Error(`Cannot find head of child for ${child.id} at ${date}`);
+    }
+    return headOfChild;
 };
 
 const newDocument = (
