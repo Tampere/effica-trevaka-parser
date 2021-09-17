@@ -153,6 +153,26 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created extentmaps 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "effica_id": "461",
+        "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+      },
+      Object {
+        "effica_id": "999340002",
+        "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+      },
+    ],
+  ],
+  "tables": Array [
+    "extentmap",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created unitmaps 1`] = `
 Object {
   "inserts": Array [
