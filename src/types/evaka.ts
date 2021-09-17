@@ -14,6 +14,8 @@ export type EvakaPerson = {
     // not complete, add more fields if needed...
 };
 
+export type EvakaApplicationType = "CLUB" | "DAYCARE" | "PRESCHOOL";
+
 export type EvakaApplicationFormDocumentV0 = {
     child: EvakaApplicationFormDocumentChildV0;
     guardian: EvakaApplicationFormDocumentGuardianV0;
@@ -49,7 +51,7 @@ export type EvakaApplicationFormDocumentV0 = {
         otherInfo: string;
     };
     maxFeeAccepted: boolean;
-    type: string;
+    type: EvakaApplicationType;
 };
 
 type EvakaApplicationFormDocumentPersonV0 = {

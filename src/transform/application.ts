@@ -1,4 +1,5 @@
 import { ITask } from "pg-promise";
+import { APPLICATION_TYPE_MAP } from "../constants";
 import { ExtentMap, getExtentMap, getUnitMap, UnitMap } from "../db/common";
 import migrationDb from "../db/db";
 import {
@@ -112,6 +113,7 @@ const newDocument = (
     const preferredUnits = rows.map(({ unitcode }) => unitMap[unitcode]);
     const serviceNeedOption = extentMap[rows[0]?.extent] ?? null;
     const preferredStartDate = rows[0]?.startdate ?? null;
+    const type = resolveType(rows);
     return {
         ...baseDocumentV0,
         child: {
@@ -167,7 +169,16 @@ const newDocument = (
         },
         serviceNeedOption,
         preferredStartDate,
+        type,
     };
+};
+
+const resolveType = (rows: EfficaApplicationRow[]) => {
+    const type = rows.map(({ type }) => type).find((type) => type !== null);
+    if (type === undefined || type === null) {
+        return "DAYCARE";
+    }
+    return APPLICATION_TYPE_MAP[type];
 };
 
 const asPartial = <T extends Partial<EvakaApplicationFormDocumentV0>>(t: T) =>
@@ -198,5 +209,4 @@ const baseDocumentV0 = asPartial({
         otherInfo: "",
     },
     maxFeeAccepted: false,
-    type: "DAYCARE",
 });
