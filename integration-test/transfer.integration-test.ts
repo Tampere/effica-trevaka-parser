@@ -2,7 +2,7 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { dropTable, truncateEvakaTable } from "../src/util/queryTools"
-import { setupTable, setupTransformations } from "../src/util/testTools"
+import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transfer"
 
@@ -28,7 +28,7 @@ const transformationMap: Record<string, string> = {
 }
 
 let evakaDataCleanups: string[] = [
-
+    "person",
 ]
 
 const personExpectation = {
@@ -38,6 +38,20 @@ const personExpectation = {
     updated: expect.any(String),
     updated_from_vtj: expect.any(String),
     customer_id: expect.any(String)
+}
+
+const fridgeChildExpectation = {
+    id: expect.any(String),
+    child_id: expect.any(String),
+    head_of_child: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String)
+}
+const fridgePartnerExpectation = {
+    partnership_id: expect.any(String),
+    person_id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String)
 }
 
 beforeAll(async () => {
@@ -54,7 +68,6 @@ afterEach(async () => {
     for (const table of evakaDataCleanups) {
         await truncateEvakaTable(table)
     }
-    evakaDataCleanups = []
 })
 
 afterAll(async () => {
@@ -80,6 +93,17 @@ describe("GET /transfer positive", () => {
             Array(5).fill(personExpectation)
         )
     })
+    it("should return transferred families", async () => {
+        await setupTransformations(["person", "families"])
+        await setupTransfers(["person"])
+        await positiveTransferSnapshotTest(
+            "families",
+            {
+                children: Array(3).fill(fridgeChildExpectation),
+                partners: Array(4).fill(fridgePartnerExpectation)
+            }
+        )
+    })
 })
 
 const positiveTransferSnapshotTest = async (tableName: string, resultPattern?: any) => {
@@ -87,7 +111,6 @@ const positiveTransferSnapshotTest = async (tableName: string, resultPattern?: a
         returnAll: "true"
     }
 
-    evakaDataCleanups = ["person"]
     const url = `${baseUrl}/${tableName}`
     const response = await request(app).get(url).query(queryObject)
     expect(response.status).toBe(200)

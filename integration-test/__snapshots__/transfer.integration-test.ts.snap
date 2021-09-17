@@ -1,5 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transfer positive should return transferred families 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "child_id": Any<String>,
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": null,
+      "head_of_child": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-12-01T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": null,
+      "head_of_child": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-12-01T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": "2020-11-30T00:00:00.000Z",
+      "head_of_child": Any<String>,
+      "id": Any<String>,
+      "start_date": "2019-11-25T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+  ],
+  "partners": Array [
+    Object {
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": "2020-11-30T00:00:00.000Z",
+      "indx": 1,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": "2019-11-25T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+    Object {
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": null,
+      "indx": 1,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": "2020-12-01T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+    Object {
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": "2020-11-30T00:00:00.000Z",
+      "indx": 2,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": "2019-11-25T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+    Object {
+      "conflict": false,
+      "created": Any<String>,
+      "end_date": null,
+      "indx": 2,
+      "partnership_id": Any<String>,
+      "person_id": Any<String>,
+      "start_date": "2020-12-01T00:00:00.000Z",
+      "updated": Any<String>,
+    },
+  ],
+}
+`;
+
 exports[`GET /transfer positive should return transferred persons 1`] = `
 Array [
   Object {
