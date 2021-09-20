@@ -28,8 +28,14 @@ const transformationMap: Record<string, string> = {
 }
 
 let evakaDataCleanups: string[] = [
-    "person",
+    "daycare",
+    "person"
 ]
+
+const daycareExpectation = {
+    created: expect.any(String),
+    updated: expect.any(String)
+}
 
 const personExpectation = {
     id: expect.any(String),
@@ -85,6 +91,12 @@ afterAll(async () => {
 })
 
 describe("GET /transfer positive", () => {
+    it("should return transferred daycares", async () => {
+        await positiveTransferSnapshotTest(
+            "daycare",
+            Array(2).fill(daycareExpectation)
+        )
+    })
     it("should return transferred persons", async () => {
         await setupTransformations(["person"])
         await positiveTransferSnapshotTest(
