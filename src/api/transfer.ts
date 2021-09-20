@@ -1,10 +1,22 @@
 import express from "express";
 import { transferFamiliesData } from "../transfer/families";
+import { transferDaycareData } from "../transfer/daycare";
 import { transferPersonData } from "../transfer/person";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
 
 const router = express.Router();
+router.get("/daycare", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer daycare total ", undefined, "*")
+    try {
+        const results = await transferDaycareData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer daycare total ", undefined, "*")
+})
 router.get("/person", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
     time("**** Transfer person total ", undefined, "*")
