@@ -198,12 +198,12 @@ describe("GET /transform positive", () => {
                 updated: expect.any(String),
                 child_id: expect.any(String),
                 guardian_id: expect.any(String),
-                form: expect.objectContaining({
+                form: {
                     id: expect.any(String),
                     created: expect.any(String),
                     updated: expect.any(String),
                     application_id: expect.any(String)
-                })
+                }
             }
         ]
 
