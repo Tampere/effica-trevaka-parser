@@ -52,6 +52,25 @@ export const setupTransformations = async (tfs: string[]) => {
     return responses
 }
 
+export const setupTransfer = async (name: string) => {
+    const queryObject = {
+        returnAll: "true"
+    }
+
+    const url = `/transfer/${name}`
+    const response = await request(app).get(url).query(queryObject)
+    expect(response.status).toBe(200)
+    return response.body
+}
+
+export const setupTransfers = async (tfs: string[]) => {
+    const responses: Record<string, any> = {}
+    for (const name of tfs) {
+        responses[name] = await setupTransfer(name)
+    }
+    return responses
+}
+
 export const cleanTables = async (tfs: string[]) => {
     return await db.tx(async t => {
         for (const tfName in tfs) {

@@ -16,6 +16,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         street_address TEXT,
         postal_code TEXT,
         post_office TEXT,
+        nationalities varchar(3)[] NOT NULL,
         restricted_details_enabled BOOLEAN,
         phone TEXT DEFAULT NULL::character varying,
         effica_ssn TEXT,
@@ -24,7 +25,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
 
     const insertQueryPart = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
-    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, restricted_details_enabled, phone, effica_ssn, date_of_birth)
+    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, effica_ssn, date_of_birth)
         SELECT
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
         trim(split_part(p.personname, ',', 1)) AS last_name,
@@ -34,6 +35,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personstreetaddress, '') END AS street_address,
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personzipcode, '') END AS postal_code,
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personcity, '') END AS post_office,
+        '{}', -- TODO: nationality
         p.secretaddress AS restricted_details_enabled,
         (CASE WHEN length(p.personmobilephone) > 20 THEN NULL ELSE p.personmobilephone END) AS phone,
         p.personid AS effica_ssn,

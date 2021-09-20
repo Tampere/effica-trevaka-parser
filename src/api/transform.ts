@@ -21,10 +21,11 @@ router.get("/person", async (req, res, next) => {
 })
 
 router.get("/application", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
     time("**** Transform application total ", undefined, "*")
     try {
-        await transformApplicationData()
-        res.status(200)
+        const results = await transformApplicationData(returnAll)
+        res.status(200).json(results)
     } catch (err) {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }

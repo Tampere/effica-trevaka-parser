@@ -6,8 +6,9 @@ import { getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/q
 export const transferPersonData = async (returnAll: boolean = false) => {
     const insertQueryPart = `
     INSERT INTO person 
-    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, restricted_details_enabled, phone, date_of_birth, updated_from_vtj)
+    (id, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, restricted_details_enabled, phone, date_of_birth, updated_from_vtj)
         SELECT
+            id,
             p.social_security_number,
             last_name,
             first_name,
