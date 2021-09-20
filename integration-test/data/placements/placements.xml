@@ -10,9 +10,9 @@
 <placement>
     <placementnbr>12</placementnbr>
     <personid>251118A9509</personid>
-    <placementunitcode>125</placementunitcode>
-    <placementdepartmentcode>1251</placementdepartmentcode>
-    <placementchildminder></placementchildminder>
+    <placementunitcode>0</placementunitcode>
+    <placementdepartmentcode>0</placementdepartmentcode>
+    <placementchildminder>010101-TP99</placementchildminder>
     <startdate>20200301</startdate>
     <enddate></enddate>
 </placement>

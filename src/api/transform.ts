@@ -4,6 +4,7 @@ import { transformDepartmentData } from "../transform/departments";
 import { transformFamilyData } from "../transform/families";
 import { transformIncomeData } from "../transform/income";
 import { transformPersonData } from "../transform/person";
+import { transformPlacementsData } from "../transform/placements";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
 
@@ -54,6 +55,19 @@ router.get("/departments", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform departments total ", undefined, "*")
+})
+
+router.get("/placements", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform placements total ", undefined, "*")
+    try {
+        const results = await transformPlacementsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform placements total ", undefined, "*")
 })
 
 router.get("/income", async (req, res, next) => {

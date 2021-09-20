@@ -3,6 +3,7 @@ import { config } from "../config"
 import db from "../db/db"
 import { TableDescriptor } from "../types"
 import { EfficaIncomeCodeMapping } from "../types/mappings"
+import { join as joinPath } from "path"
 
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
@@ -10,9 +11,16 @@ export const wrapWithReturning = (tableName: string, insertQuery: string, isData
         `WITH rows AS ( ${insertQuery} RETURNING 1) select count(*) as ${tableName}_count from rows;`
 }
 
-export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false) => {
-    const queryFile = new QueryFile(path)
-    return isDataReturned ? await t.any(queryFile) : await t.none(queryFile)
+export const selectFromTable = (tableName: string, schema: string = "", isDataReturned: boolean = false, orderByFields: string[] = []) => {
+    return isDataReturned ?
+        `SELECT * FROM ${schema}.${tableName} ${createOrderBy(orderByFields)}` :
+        `SELECT COUNT(*) AS ${tableName}_count FROM ${tableName}`
+}
+
+export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, values: any = {}, isDataReturned: boolean = false) => {
+    const fullPath = joinPath(__dirname, "sql", path);
+    const queryFile = new QueryFile(fullPath)
+    return isDataReturned ? await t.any(queryFile, values) : await t.none(queryFile, values)
 }
 
 export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false) => {

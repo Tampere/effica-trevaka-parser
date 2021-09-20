@@ -5,11 +5,7 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "effica_id": "130963-949H",
-        "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
-      },
-      Object {
-        "effica_id": "130953-9908",
+        "effica_id": "010101-TP99",
         "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       },
     ],
@@ -718,10 +714,10 @@ Object {
       Object {
         "enddate": null,
         "personid": "251118A9509",
-        "placementchildminder": null,
-        "placementdepartmentcode": 1251,
+        "placementchildminder": "010101-TP99",
+        "placementdepartmentcode": null,
         "placementnbr": 12,
-        "placementunitcode": 125,
+        "placementunitcode": null,
         "startdate": Any<String>,
       },
     ],

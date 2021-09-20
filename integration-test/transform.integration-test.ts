@@ -22,6 +22,8 @@ const baseDataTables =
         "extentmap",
         "unitmap",
         "childmindermap",
+        "placements",
+        "placementextents",
         "income",
         "incomerows",
         "applications",
@@ -154,6 +156,31 @@ describe("GET /transform positive", () => {
         await positiveTransformSnapshotTest(
             "departments",
             daycareGroupExpectation
+        )
+    })
+
+    it("should return transformed placements", async () => {
+        await setupTransformations(["person", "departments"])
+
+        const placementExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            daycare_group_id: expect.any(String)
+        }
+        const serviceNeedExpectation = {
+            id: expect.any(String),
+            placement_id: expect.any(String)
+        }
+
+        await positiveTransformSnapshotTest(
+            "placements",
+            {
+                placements: [
+                    placementExpectation,
+                    {...placementExpectation, daycare_group_id: null}
+                ],
+                serviceNeeds: Array(2).fill(serviceNeedExpectation)
+            }
         )
     })
 

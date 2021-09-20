@@ -175,8 +175,7 @@ describe("GET /import csv positive", () => {
         const result = await positiveImportSnapshotTest("childmindermap")
         const map = await db.tx(async (t) => await getChildminderMap(t))
         expect(map).toStrictEqual({
-            "130963-949H": "19fec146-e2f1-11eb-8473-db55258254c5",
-            "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
+            "010101-TP99": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
         })
         return result
     })
