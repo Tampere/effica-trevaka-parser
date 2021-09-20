@@ -15,7 +15,8 @@ services:
     image: flyway/flyway
     command: -url=jdbc:postgresql://db:5432/migration -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres migrate
     volumes:
-      - ./evaka/service/src/main/resources/db/migration:/flyway/sql
+      - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
+      - ./trevaka/service/src/main/resources/db/migration:/flyway/sql/trevaka
     depends_on:
       - db
     restart: on-failure
