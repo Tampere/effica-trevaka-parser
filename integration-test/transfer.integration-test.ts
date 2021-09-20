@@ -37,6 +37,10 @@ const daycareExpectation = {
     updated: expect.any(String)
 }
 
+const daycareGroupExpectation = {
+    id: expect.any(String)
+}
+
 const personExpectation = {
     id: expect.any(String),
     date_of_birth: expect.any(String),
@@ -95,6 +99,14 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "daycare",
             Array(2).fill(daycareExpectation)
+        )
+    })
+    it("should return transferred departments", async () => {
+        await setupTransformations(["departments"])
+        await setupTransfers(["daycare"])
+        await positiveTransferSnapshotTest(
+            "departments",
+            Array(2).fill(daycareGroupExpectation)
         )
     })
     it("should return transferred persons", async () => {
