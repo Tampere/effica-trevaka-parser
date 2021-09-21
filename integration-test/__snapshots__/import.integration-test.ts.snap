@@ -153,6 +153,30 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created evaka unit managers 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "email": null,
+        "id": "340ead9c-a1bc-11eb-b5d4-1bc4a624aabe",
+        "name": "Yrjö Yksikönjohtaja",
+        "phone": "1",
+      },
+      Object {
+        "email": null,
+        "id": "340eae78-a1bc-11eb-b5d6-b30369678b4c",
+        "name": "Ylermi Yksikönjohtaja",
+        "phone": "2",
+      },
+    ],
+  ],
+  "tables": Array [
+    "evaka_unit_manager",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created extentmaps 1`] = `
 Object {
   "inserts": Array [

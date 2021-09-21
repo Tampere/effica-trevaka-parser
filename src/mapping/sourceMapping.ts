@@ -1,4 +1,4 @@
-import { createAreaTableQuery, createDaycareTableQuery } from "../db/evaka"
+import { createAreaTableQuery, createDaycareTableQuery, createUnitManagerTableQuery } from "../db/evaka"
 import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullDateParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
@@ -253,6 +253,20 @@ export const extTableMapping: TypeMapping = {
         columns: {
             effica_id: { sqlType: "text", parser: nullForcingTextParser },
             evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
+        }
+    },
+    evaka_unit_manager: {
+        tableQueryFunction: createUnitManagerTableQuery,
+        tableName: "evaka_unit_manager",
+        columns: {
+            id:
+                { sqlType: "uuid", parser: nullForcingTextParser },
+            name:
+                { sqlType: "text", parser: nullForcingTextParser },
+            phone:
+                { sqlType: "text", parser: nullForcingTextParser },
+            email:
+                { sqlType: "text", parser: nullForcingTextParser }
         }
     },
     evaka_daycare: {

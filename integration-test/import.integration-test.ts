@@ -12,7 +12,7 @@ let cleanUps: string[] = []
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
-    "applications", "applicationrows", "evaka_daycare"]
+    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -179,6 +179,9 @@ describe("GET /import csv positive", () => {
             "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
         })
         return result
+    })
+    it("should return created evaka unit managers", async () => {
+        return await positiveImportSnapshotTest("evaka_unit_manager")
     })
     it("should return created evaka daycares", async () => {
         cleanUps = ["evaka_areas"]
