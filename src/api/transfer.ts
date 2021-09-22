@@ -3,6 +3,7 @@ import { transferFamiliesData } from "../transfer/families";
 import { transferDaycareData } from "../transfer/daycare";
 import { transferDepartmentData } from "../transfer/departments";
 import { transferPersonData } from "../transfer/person";
+import { transferUnitManagerData } from "../transfer/evaka-unit-manager";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
 
@@ -51,7 +52,17 @@ router.get("/families", async (req, res, next) => {
     }
     timeEnd("**** Transfer families total ", undefined, "*")
 })
-
+router.get("/evaka_unit_manager", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer unit managers total ", undefined, "*")
+    try {
+        const results = await transferUnitManagerData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer unit managers total ", undefined, "*")
+})
 
 
 

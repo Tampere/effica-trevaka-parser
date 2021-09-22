@@ -20,6 +20,19 @@ export const findHeadOfChild = async <T>(
     );
 };
 
+export const createUnitManagerTableQuery = (td: TableDescriptor): string => {
+    return `
+    create table ${getMigrationSchemaPrefix()}${td.tableName}
+    (
+        id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
+            constraint unit_manager_pkey
+                primary key,
+        name text,
+        phone text,
+        email text
+    )
+    `
+}
 
 export const createDaycareTableQuery = (td: TableDescriptor): string => {
     return `

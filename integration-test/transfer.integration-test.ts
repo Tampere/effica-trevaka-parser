@@ -19,6 +19,7 @@ const baseDataTables =
         "income",
         "incomerows",
         "evaka_areas",
+        "evaka_unit_manager",
         "evaka_daycare"
     ]
 
