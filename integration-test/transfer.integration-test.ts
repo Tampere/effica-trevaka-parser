@@ -34,7 +34,8 @@ let evakaDataCleanups: string[] = [
 
 const daycareExpectation = {
     created: expect.any(String),
-    updated: expect.any(String)
+    updated: expect.any(String),
+    care_area_id: expect.any(String)
 }
 
 const daycareGroupExpectation = {
