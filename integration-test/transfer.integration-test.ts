@@ -165,10 +165,10 @@ describe("GET /transfer positive", () => {
             "placements",
             {
                 children: Array(2).fill(childExpectation),
-                placements: Array(2).fill(placementExpectation),
+                placements: Array(3).fill(placementExpectation),
                 serviceNeeds: Array(2).fill(serviceNeedExpectation),
                 daycareGroups: Array(1).fill(daycareGroupExpectation),
-                groupPlacements: Array(2).fill(groupPlacementExpectation)
+                groupPlacements: Array(3).fill(groupPlacementExpectation)
             }
         )
     })

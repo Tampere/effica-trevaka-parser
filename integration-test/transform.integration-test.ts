@@ -177,6 +177,11 @@ describe("GET /transform positive", () => {
             {
                 placements: [
                     placementExpectation,
+                    placementExpectation,
+                    {...placementExpectation, daycare_group_id: null}
+                ],
+                overlapping: [
+                    {...placementExpectation, daycare_group_id: null},
                     {...placementExpectation, daycare_group_id: null}
                 ],
                 serviceNeeds: Array(2).fill(serviceNeedExpectation)

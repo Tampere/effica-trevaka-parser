@@ -33,3 +33,12 @@ AND p1.effica_extent_nbr > p2.effica_extent_nbr
 AND p1.start_date = p2.start_date
 AND (p1.end_date = p2.end_date OR p1.end_date IS NULL AND p2.end_date IS NULL)
 AND p1.effica_extent_code = p2.effica_extent_code;
+
+-- move service needs with overlapping placements to another table
+DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_service_need_overlapping CASCADE;
+CREATE TABLE ${migrationSchema:name}.evaka_service_need_overlapping AS
+SELECT *
+FROM ${migrationSchema:name}.evaka_service_need
+WHERE placement_id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_overlapping);
+DELETE FROM ${migrationSchema:name}.evaka_service_need
+WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_service_need_overlapping);

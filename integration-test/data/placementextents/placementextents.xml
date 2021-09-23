@@ -8,8 +8,17 @@
     <extentcode>100</extentcode>
 </placementextent>
 <placementextent>
-    <placementnbr>12</placementnbr>
+    <placementnbr>13</placementnbr>
     <extentnbr>2</extentnbr>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <hours>0</hours>
+    <days>15</days>
+    <extentcode>101</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>13</placementnbr>
+    <extentnbr>3</extentnbr>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <hours>0</hours>

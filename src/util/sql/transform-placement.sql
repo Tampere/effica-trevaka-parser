@@ -16,13 +16,13 @@ INSERT INTO ${migrationSchema:name}.evaka_placement
 SELECT
     p.placementnbr,
     p.personid,
-    (
+    COALESCE((
         SELECT DISTINCT valid_placement_type
         FROM ${migrationSchema:name}.placementextents pe
         JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode
         JOIN service_need_option sno ON sno.id = em.evaka_id
         WHERE pe.placementnbr = p.placementnbr
-    ),
+    ), 'DAYCARE'),
     ep.id,
     COALESCE(um.evaka_id, cm.evaka_id),
     p.startdate,
@@ -61,3 +61,14 @@ SET end_date = (CASE type
     ELSE ${migrationSchema:name}.daycare_end_date(effica_ssn, start_date)
 END)
 WHERE end_date IS NULL;
+
+-- move overlapping placements to another table
+DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_placement_overlapping CASCADE;
+CREATE TABLE ${migrationSchema:name}.evaka_placement_overlapping AS
+SELECT DISTINCT p1.*
+FROM ${migrationSchema:name}.evaka_placement p1
+JOIN ${migrationSchema:name}.evaka_placement p2 ON p1.effica_ssn = p2.effica_ssn
+    AND p1.effica_placement_nbr <> p2.effica_placement_nbr
+    AND daterange(p1.start_date, p1.end_date, '[]') && daterange(p2.start_date, p2.end_date, '[]');
+DELETE FROM ${migrationSchema:name}.evaka_placement
+WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_overlapping);

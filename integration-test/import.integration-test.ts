@@ -99,13 +99,13 @@ describe("GET /import xml positive", () => {
     it("should return created placements", async () => {
         return await positiveImportSnapshotTest(
             "placements",
-            getTimeSeriesResultPattern(openDateRange, openDateRange))
+            getTimeSeriesResultPattern(openDateRange, openDateRange, openDateRange, closedDateRange, openDateRange))
     })
 
     it("should return created placementextents", async () => {
         return await positiveImportSnapshotTest(
             "placementextents",
-            getTimeSeriesResultPattern(openDateRange, openDateRange))
+            getTimeSeriesResultPattern(openDateRange, openDateRange, openDateRange))
     })
 
     it("should return created decisions", async () => {

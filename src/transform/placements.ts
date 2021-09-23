@@ -6,7 +6,7 @@ import { runQuery, runQueryFile, selectFromTable } from "../util/queryTools";
 export const transformPlacementsData = async (returnAll: boolean = false) => {
     return migrationDb.tx(async (t) => {
         return {
-            placements: await transformPlacements(t, returnAll),
+            ...(await transformPlacements(t, returnAll)),
             serviceNeeds: await transformExtents(t, returnAll),
         };
     });
@@ -21,13 +21,24 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
     await runQueryFile("functions.sql", t, queryParameters);
     await runQueryFile("transform-placement.sql", t, queryParameters);
 
-    return await runQuery(
+    const placements = await runQuery(
         selectFromTable("evaka_placement", config.migrationSchema, returnAll, [
             "effica_placement_nbr",
         ]),
         t,
         true
     );
+    const overlapping = await runQuery(
+        selectFromTable(
+            "evaka_placement_overlapping",
+            config.migrationSchema,
+            returnAll,
+            ["effica_placement_nbr"]
+        ),
+        t,
+        true
+    );
+    return { placements, overlapping };
 };
 
 const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {
