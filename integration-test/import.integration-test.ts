@@ -185,7 +185,7 @@ describe("GET /import csv positive", () => {
     })
     it("should return created evaka daycares", async () => {
         cleanUps = ["evaka_areas"]
-        await setupTables(["evaka_areas"])
+        await setupTables(["evaka_areas", "evaka_unit_manager"])
         return await positiveImportSnapshotTest("evaka_daycare")
     })
 })

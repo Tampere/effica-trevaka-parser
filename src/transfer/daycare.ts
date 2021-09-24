@@ -21,7 +21,7 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
         null, -- TODO: language_emphasis_id
         opening_date, closing_date,
         email, schedule, additional_info,
-        null, -- TODO: unit_manager_id
+        unit_manager_id,
         cost_center, upload_to_varda,
         0, -- TODO: capacity
         decision_daycare_name, decision_preschool_name,
