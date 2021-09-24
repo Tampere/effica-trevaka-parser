@@ -17,9 +17,15 @@ export const selectFromTable = (tableName: string, schema: string = "", isDataRe
         `SELECT COUNT(*) AS ${tableName}_count FROM ${tableName}`
 }
 
+const queryFileCache: Record<string, QueryFile> = {}
+
 export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, values: any = {}, isDataReturned: boolean = false) => {
-    const fullPath = joinPath(__dirname, "sql", path);
-    const queryFile = new QueryFile(fullPath)
+    let queryFile = queryFileCache[path];
+    if (!queryFile) {
+        const fullPath = joinPath(__dirname, "sql", path);
+        queryFile = new QueryFile(fullPath);
+        queryFileCache[path] = queryFile;
+    }
     return isDataReturned ? await t.any(queryFile, values) : await t.none(queryFile, values)
 }
 
