@@ -4,8 +4,8 @@ CREATE TABLE ${migrationSchema:name}.evaka_placement (
     effica_placement_nbr INTEGER UNIQUE NOT NULL,
     effica_ssn TEXT NOT NULL,
     type TEXT NOT NULL,
-    child_id UUID NOT NULL,
-    unit_id UUID NOT NULL,
+    child_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_person,
+    unit_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_daycare,
     start_date DATE NOT NULL,
     end_date DATE,
     daycare_group_id UUID

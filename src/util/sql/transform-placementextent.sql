@@ -5,7 +5,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_service_need (
     effica_extent_nbr INTEGER NOT NULL,
     effica_extent_code TEXT NOT NULL,
     option_id UUID NOT NULL,
-    placement_id UUID NOT NULL,
+    placement_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_placement,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     UNIQUE (effica_placement_nbr, effica_extent_nbr)
