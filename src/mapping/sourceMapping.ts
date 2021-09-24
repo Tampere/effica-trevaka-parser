@@ -338,7 +338,9 @@ export const extTableMapping: TypeMapping = {
             preschool_apply_period:
                 { sqlType: "daterange", parser: nullForcingTextParser },
             round_the_clock:
-                { sqlType: "boolean", parser: csvStringBooleanParser }
+                { sqlType: "boolean", parser: csvStringBooleanParser },
+            unit_manager_id:
+                { sqlType: "uuid", parser: nullForcingTextParser }
         }
     }
 }

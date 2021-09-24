@@ -30,7 +30,8 @@ const transformationMap: Record<string, string> = {
 
 let evakaDataCleanups: string[] = [
     "daycare",
-    "person"
+    "person",
+    "unit_manager"
 ]
 
 const daycareExpectation = {
@@ -98,6 +99,7 @@ afterAll(async () => {
 
 describe("GET /transfer positive", () => {
     it("should return transferred daycares", async () => {
+        await setupTransfers(["unit_manager"])
         await positiveTransferSnapshotTest(
             "daycare",
             Array(2).fill(daycareExpectation)
@@ -105,7 +107,7 @@ describe("GET /transfer positive", () => {
     })
     it("should return transferred departments", async () => {
         await setupTransformations(["departments"])
-        await setupTransfers(["daycare"])
+        await setupTransfers(["unit_manager", "daycare"])
         await positiveTransferSnapshotTest(
             "departments",
             Array(2).fill(daycareGroupExpectation)

@@ -76,7 +76,10 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
         daycare_apply_period daterange,
         preschool_apply_period daterange,
         club_apply_period daterange,
-        round_the_clock boolean default false
+        round_the_clock boolean default false,
+        unit_manager_id uuid
+            constraint fk$unit_manager
+                references ${getMigrationSchemaPrefix()}evaka_unit_manager(id)
     );
     `
 }
