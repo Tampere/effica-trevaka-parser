@@ -31,7 +31,11 @@ CREATE FUNCTION ${migrationSchema:name}.daycare_end_date(text, date) RETURNS dat
             31
         ) AS candidate
     )
-    SELECT CASE WHEN candidate < $2 THEN (candidate + interval '1 years')::date ELSE candidate END
+    SELECT
+        CASE
+            WHEN candidate < $2 THEN make_date(date_part('year', $2 + interval '1 years')::integer, 7, 31)
+            ELSE candidate
+        END
     FROM dates
 $$ LANGUAGE SQL IMMUTABLE;
 
