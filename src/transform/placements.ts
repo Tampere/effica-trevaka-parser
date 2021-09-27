@@ -7,7 +7,7 @@ export const transformPlacementsData = async (returnAll: boolean = false) => {
     return migrationDb.tx(async (t) => {
         return {
             ...(await transformPlacements(t, returnAll)),
-            serviceNeeds: await transformExtents(t, returnAll),
+            ...(await transformExtents(t, returnAll)),
         };
     });
 };
@@ -28,9 +28,9 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
-    const overlapping = await runQuery(
+    const placementsTodo = await runQuery(
         selectFromTable(
-            "evaka_placement_overlapping",
+            "evaka_placement_todo",
             config.migrationSchema,
             returnAll,
             ["effica_placement_nbr"]
@@ -38,13 +38,13 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
-    return { placements, overlapping };
+    return { placements, placementsTodo };
 };
 
 const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {
     await runQueryFile("transform-placementextent.sql", t, queryParameters);
 
-    return await runQuery(
+    const serviceNeeds = await runQuery(
         selectFromTable(
             "evaka_service_need",
             config.migrationSchema,
@@ -54,4 +54,15 @@ const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
+    const serviceNeedsTodo = await runQuery(
+        selectFromTable(
+            "evaka_service_need_todo",
+            config.migrationSchema,
+            returnAll,
+            ["effica_placement_nbr", "effica_extent_nbr"]
+        ),
+        t,
+        true
+    );
+    return { serviceNeeds, serviceNeedsTodo }
 };

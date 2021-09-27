@@ -4,8 +4,8 @@ CREATE TABLE ${migrationSchema:name}.evaka_placement (
     effica_placement_nbr INTEGER UNIQUE NOT NULL,
     effica_ssn TEXT NOT NULL,
     type TEXT NOT NULL,
-    child_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_person,
-    unit_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_daycare,
+    child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
+    unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     start_date DATE NOT NULL,
     end_date DATE,
     daycare_group_id UUID
@@ -62,13 +62,28 @@ SET end_date = (CASE type
 END)
 WHERE end_date IS NULL;
 
--- move overlapping placements to another table
-DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_placement_overlapping CASCADE;
-CREATE TABLE ${migrationSchema:name}.evaka_placement_overlapping AS
-SELECT DISTINCT p1.*
+DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_placement_todo CASCADE;
+
+-- insert missing people to todo table
+CREATE TABLE ${migrationSchema:name}.evaka_placement_todo AS
+SELECT *, 'PERSON MISSING' AS reason
+FROM ${migrationSchema:name}.evaka_placement
+WHERE child_id IS NULL;
+
+-- insert missing units to todo table
+INSERT INTO ${migrationSchema:name}.evaka_placement_todo
+SELECT *, 'UNIT MISSING'
+FROM ${migrationSchema:name}.evaka_placement
+WHERE unit_id IS NULL;
+
+-- insert overlapping placements to todo table
+INSERT INTO ${migrationSchema:name}.evaka_placement_todo
+SELECT DISTINCT p1.*, 'OVERLAPPING PLACEMENT'
 FROM ${migrationSchema:name}.evaka_placement p1
 JOIN ${migrationSchema:name}.evaka_placement p2 ON p1.effica_ssn = p2.effica_ssn
     AND p1.effica_placement_nbr <> p2.effica_placement_nbr
     AND daterange(p1.start_date, p1.end_date, '[]') && daterange(p2.start_date, p2.end_date, '[]');
+
+-- remove problematic placements from migration
 DELETE FROM ${migrationSchema:name}.evaka_placement
-WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_overlapping);
+WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_todo);

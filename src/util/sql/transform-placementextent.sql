@@ -4,7 +4,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_service_need (
     effica_placement_nbr INTEGER NOT NULL,
     effica_extent_nbr INTEGER NOT NULL,
     effica_extent_code TEXT NOT NULL,
-    option_id UUID NOT NULL,
+    option_id UUID,
     placement_id UUID NOT NULL REFERENCES ${migrationSchema:name}.evaka_placement,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
@@ -22,7 +22,7 @@ SELECT
     pe.startdate,
     COALESCE(pe.enddate, ep.end_date)
 FROM ${migrationSchema:name}.placementextents pe
-LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.effica_placement_nbr = pe.placementnbr
+JOIN ${migrationSchema:name}.evaka_placement ep ON ep.effica_placement_nbr = pe.placementnbr
 LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode;
 
 -- delete duplicate rows
@@ -34,11 +34,14 @@ AND p1.start_date = p2.start_date
 AND (p1.end_date = p2.end_date OR p1.end_date IS NULL AND p2.end_date IS NULL)
 AND p1.effica_extent_code = p2.effica_extent_code;
 
--- move service needs with overlapping placements to another table
-DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_service_need_overlapping CASCADE;
-CREATE TABLE ${migrationSchema:name}.evaka_service_need_overlapping AS
-SELECT *
+DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_service_need_todo CASCADE;
+
+-- insert missing service need options to todo table
+CREATE TABLE ${migrationSchema:name}.evaka_service_need_todo AS
+SELECT *, 'OPTION MISSING'
 FROM ${migrationSchema:name}.evaka_service_need
-WHERE placement_id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_overlapping);
+WHERE option_id IS NULL;
+
+-- remove problematic service needs from migration
 DELETE FROM ${migrationSchema:name}.evaka_service_need
-WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_service_need_overlapping);
+WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_service_need_todo);
