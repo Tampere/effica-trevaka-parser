@@ -22,6 +22,7 @@ SELECT
         JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode
         JOIN service_need_option sno ON sno.id = em.evaka_id
         WHERE pe.placementnbr = p.placementnbr
+        LIMIT 1 -- TODO: split placement with multiple types to multiple placements
     ), 'DAYCARE'),
     ep.id,
     COALESCE(um.evaka_id, cm.evaka_id),
