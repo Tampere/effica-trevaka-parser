@@ -16,16 +16,12 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
             finance_decision_handler, round_the_clock, enabled_pilot_features, upload_children_to_varda)
     SELECT
         id, name, type::care_types[],
-        CASE care_area_id::text
-            WHEN '6529e31e-9777-11eb-ba88-33a923255570' THEN (SELECT id FROM care_area WHERE short_name = 'etela')
-            WHEN '6529f5a2-9777-11eb-ba89-cfcda122ed3b' THEN (SELECT id FROM care_area WHERE short_name = 'ita')
-            WHEN '6529f6ce-9777-11eb-ba8a-8f6495ec5104' THEN (SELECT id FROM care_area WHERE short_name = 'lansi')
-        END, -- TODO: CareAreaMap
+        care_area_id,
         phone, url, backup_location,
         null, -- TODO: language_emphasis_id
         opening_date, closing_date,
         email, schedule, additional_info,
-        null, -- TODO: unit_manager_id
+        unit_manager_id,
         cost_center, upload_to_varda,
         0, -- TODO: capacity
         decision_daycare_name, decision_preschool_name,

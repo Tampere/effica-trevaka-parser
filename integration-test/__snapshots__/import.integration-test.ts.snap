@@ -90,6 +90,7 @@ Object {
         "type": Array [
           "CENTRE",
         ],
+        "unit_manager_id": "340ead9c-a1bc-11eb-b5d4-1bc4a624aabe",
         "upload_to_koski": false,
         "upload_to_varda": false,
         "url": null,
@@ -137,6 +138,7 @@ Object {
         "type": Array [
           "CENTRE",
         ],
+        "unit_manager_id": "340eae78-a1bc-11eb-b5d6-b30369678b4c",
         "upload_to_koski": false,
         "upload_to_varda": false,
         "url": null,

@@ -65,7 +65,7 @@ router.get("/placements", async (req, res, next) => {
     }
     timeEnd("**** Transfer families total ", undefined, "*")
 })
-router.get("/evaka_unit_manager", async (req, res, next) => {
+router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
     time("**** Transfer unit managers total ", undefined, "*")
     try {

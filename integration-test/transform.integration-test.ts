@@ -29,6 +29,7 @@ const baseDataTables =
         "applications",
         "applicationrows",
         "evaka_areas",
+        "evaka_unit_manager",
         "evaka_daycare"
     ]
 

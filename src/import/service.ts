@@ -6,7 +6,6 @@ import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
-
 export const importFileData = async (files: FileDescriptor[], options: ImportOptions) => {
     return await migrationDb.tx(async (t) => {
         const tables = files.map(f => f.table)
