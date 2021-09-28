@@ -1,5 +1,5 @@
 import migrationDb from "../db/db";
-import { ensureEfficaUser, selectEfficaUserSql } from "../db/evaka";
+import { ensureEfficaUser } from "../db/evaka";
 import {
     getMigrationSchemaPrefix,
     runQuery,
@@ -22,7 +22,7 @@ export const transferFeeAlterationsData = async (
         valid_to,
         notes,
         now(),
-        (${selectEfficaUserSql})
+        $(updatedBy)
     FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration
     `;
     const insertQuery = wrapWithReturning(
@@ -32,7 +32,7 @@ export const transferFeeAlterationsData = async (
     );
 
     return await migrationDb.tx(async (t) => {
-        await ensureEfficaUser(t);
-        return await runQuery(insertQuery, t, true);
+        const updatedBy = await ensureEfficaUser(t);
+        return await runQuery(insertQuery, t, true, { updatedBy });
     });
 };

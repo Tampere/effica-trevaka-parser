@@ -6,11 +6,11 @@ import {
     getMigrationSchemaPrefix,
 } from "../util/queryTools";
 
-export const selectEfficaUserSql =
-    "SELECT id FROM employee WHERE first_name = 'Effica' AND last_name = 'Effica'";
-
 export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
-    let user = await t.oneOrNone<{ id: string }>(selectEfficaUserSql, t);
+    let user = await t.oneOrNone<{ id: string }>(
+        "SELECT id FROM employee WHERE first_name = 'Effica' AND last_name = 'Effica'",
+        t
+    );
     if (user === null) {
         user = await t.one<{ id: string }>(
             "INSERT INTO employee (first_name, last_name) VALUES ('Effica', 'Effica') RETURNING id",
