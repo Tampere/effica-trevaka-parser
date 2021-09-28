@@ -1,6 +1,6 @@
 export const config = {
     cityVariant: process.env.CITY_VARIANT ?? "tampere",
-    port: 3000,
+    port: process.env.PORT ?? 3000,
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
     migrationSchema: process.env.MIGRATION_SCHEMA ?? "migration",
     extensionSchema: process.env.EXTENSION_SCHEMA ?? "ext",

@@ -99,13 +99,13 @@ describe("GET /import xml positive", () => {
     it("should return created placements", async () => {
         return await positiveImportSnapshotTest(
             "placements",
-            getTimeSeriesResultPattern(openDateRange, openDateRange))
+            getTimeSeriesResultPattern(openDateRange, openDateRange, openDateRange, closedDateRange, openDateRange))
     })
 
     it("should return created placementextents", async () => {
         return await positiveImportSnapshotTest(
             "placementextents",
-            getTimeSeriesResultPattern(openDateRange, openDateRange))
+            getTimeSeriesResultPattern(openDateRange, openDateRange, openDateRange))
     })
 
     it("should return created decisions", async () => {
@@ -157,13 +157,13 @@ describe("GET /import csv positive", () => {
         const result = await positiveImportSnapshotTest("extentmap")
         const map = await db.tx(async (t) => await getExtentMap(t))
         expect(map).toStrictEqual({
-            "461": {
-                "id": "19fec146-e2f1-11eb-8473-db55258254c5",
-                "name": null
+            "100": {
+                "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+                "name": "Kokopäiväinen"
             },
-            "999340002": {
-                "id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
-                "name": null
+            "101": {
+                "id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
+                "name": "Osapäiväinen, max 5h päivässä"
             }
         })
         return result
@@ -175,8 +175,7 @@ describe("GET /import csv positive", () => {
         const result = await positiveImportSnapshotTest("childmindermap")
         const map = await db.tx(async (t) => await getChildminderMap(t))
         expect(map).toStrictEqual({
-            "130963-949H": "19fec146-e2f1-11eb-8473-db55258254c5",
-            "130953-9908": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
+            "010101-TP99": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
         })
         return result
     })

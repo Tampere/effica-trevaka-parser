@@ -16,6 +16,9 @@ const baseDataTables =
         "departments",
         "unitmap",
         "childmindermap",
+        "placements",
+        "extentmap",
+        "placementextents",
         "income",
         "incomerows",
         "evaka_areas",
@@ -51,6 +54,10 @@ const personExpectation = {
     updated_from_vtj: expect.any(String),
 }
 
+const childExpectation = {
+    id: expect.any(String)
+}
+
 const fridgeChildExpectation = {
     id: expect.any(String),
     child_id: expect.any(String),
@@ -63,6 +70,28 @@ const fridgePartnerExpectation = {
     person_id: expect.any(String),
     created: expect.any(String),
     updated: expect.any(String)
+}
+
+const placementExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    child_id: expect.any(String)
+}
+
+const serviceNeedExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    placement_id: expect.any(String)
+}
+
+const groupPlacementExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    daycare_placement_id: expect.any(String),
+    daycare_group_id: expect.any(String)
 }
 
 beforeAll(async () => {
@@ -127,6 +156,20 @@ describe("GET /transfer positive", () => {
             {
                 children: Array(3).fill(fridgeChildExpectation),
                 partners: Array(4).fill(fridgePartnerExpectation)
+            }
+        )
+    })
+    it("should return transferred placements", async () => {
+        await setupTransformations(["person", "departments", "placements"])
+        await setupTransfers(["person", "unit_manager", "daycare", "departments"])
+        await positiveTransferSnapshotTest(
+            "placements",
+            {
+                children: Array(2).fill(childExpectation),
+                placements: Array(3).fill(placementExpectation),
+                serviceNeeds: Array(2).fill(serviceNeedExpectation),
+                daycareGroups: Array(1).fill(daycareGroupExpectation),
+                groupPlacements: Array(3).fill(groupPlacementExpectation)
             }
         )
     })
