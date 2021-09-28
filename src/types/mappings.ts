@@ -1,6 +1,7 @@
+export type FeeAlterationType = "DISCOUNT" | "INCREASE" | "RELIEF";
 export type CitySpecificDeviationTypeMapping = Record<
     number,
-    { type: string; notes: string }
+    { type: FeeAlterationType; notes: string }
 >;
 export type CitySpecificDeviationTypeMappings = Record<
     string,
