@@ -1,7 +1,24 @@
 import { ITask } from "pg-promise";
 import { TableDescriptor } from "../types";
 import { EvakaPerson } from "../types/evaka";
-import { getExtensionSchemaPrefix, getMigrationSchemaPrefix } from "../util/queryTools";
+import {
+    getExtensionSchemaPrefix,
+    getMigrationSchemaPrefix,
+} from "../util/queryTools";
+
+export const selectEfficaUserSql =
+    "SELECT id FROM employee WHERE first_name = 'Effica' AND last_name = 'Effica'";
+
+export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
+    let user = await t.oneOrNone<{ id: string }>(selectEfficaUserSql, t);
+    if (user === null) {
+        user = await t.one<{ id: string }>(
+            "INSERT INTO employee (first_name, last_name) VALUES ('Effica', 'Effica') RETURNING id",
+            t
+        );
+    }
+    return user.id;
+};
 
 export const findHeadOfChild = async <T>(
     t: ITask<T>,

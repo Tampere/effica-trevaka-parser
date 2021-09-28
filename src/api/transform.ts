@@ -2,6 +2,7 @@ import express from "express";
 import { transformApplicationData } from "../transform/application";
 import { transformDepartmentData } from "../transform/departments";
 import { transformFamilyData } from "../transform/families";
+import { transformFeeDeviationsData } from "../transform/fee-deviations";
 import { transformIncomeData } from "../transform/income";
 import { transformPersonData } from "../transform/person";
 import { transformPlacementsData } from "../transform/placements";
@@ -68,6 +69,19 @@ router.get("/placements", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform placements total ", undefined, "*")
+})
+
+router.get("/feedeviations", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform fee deviations total ", undefined, "*")
+    try {
+        const results = await transformFeeDeviationsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform fee deviations total ", undefined, "*")
 })
 
 router.get("/income", async (req, res, next) => {

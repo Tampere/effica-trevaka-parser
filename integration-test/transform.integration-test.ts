@@ -24,6 +24,7 @@ const baseDataTables =
         "childmindermap",
         "placements",
         "placementextents",
+        "feedeviations",
         "income",
         "incomerows",
         "applications",
@@ -188,6 +189,20 @@ describe("GET /transform positive", () => {
                 serviceNeeds: Array(2).fill(serviceNeedExpectation),
                 serviceNeedsTodo: []
             }
+        )
+    })
+
+    it("should return transformed feedeviations", async () => {
+        await setupTransformations(["person", "departments", "placements"])
+
+        const feeAlterationExpectation = {
+            id: expect.any(String),
+            person_id: expect.any(String)
+        }
+
+        await positiveTransformSnapshotTest(
+            "feedeviations",
+            Array(1).fill(feeAlterationExpectation)
         )
     })
 

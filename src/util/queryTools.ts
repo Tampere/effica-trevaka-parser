@@ -29,8 +29,8 @@ export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, values:
     return isDataReturned ? await t.any(queryFile, values) : await t.none(queryFile, values)
 }
 
-export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false) => {
-    return isDataReturned ? await t.any(query) : await t.none(query)
+export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false, values: any = {}) => {
+    return isDataReturned ? await t.any(query, values) : await t.none(query, values)
 }
 
 export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {

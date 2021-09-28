@@ -1,3 +1,12 @@
+export type CitySpecificDeviationTypeMapping = Record<
+    number,
+    { type: string; notes: string }
+>;
+export type CitySpecificDeviationTypeMappings = Record<
+    string,
+    CitySpecificDeviationTypeMapping
+>;
+
 export type EfficaIncomeCodeMapping = {
     codes: number[],
     evakaType: string,
