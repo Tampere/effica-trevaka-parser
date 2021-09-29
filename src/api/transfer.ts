@@ -68,7 +68,7 @@ router.get("/placements", async (req, res, next) => {
 })
 router.get("/fee_alterations", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
-    time("**** Transfer families total ", undefined, "*")
+    time("**** Transfer fee alterations total ", undefined, "*")
     try {
         const results = await transferFeeAlterationsData(returnAll)
         res.status(200).json(results)
@@ -76,7 +76,7 @@ router.get("/fee_alterations", async (req, res, next) => {
         console.log(err)
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
-    timeEnd("**** Transfer families total ", undefined, "*")
+    timeEnd("**** Transfer fee alterations total ", undefined, "*")
 })
 router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
