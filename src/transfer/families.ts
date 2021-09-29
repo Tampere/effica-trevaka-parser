@@ -1,3 +1,4 @@
+import { ITask } from "pg-promise";
 import migrationDb from "../db/db";
 import {
     getMigrationSchemaPrefix,
@@ -6,13 +7,15 @@ import {
 } from "../util/queryTools";
 
 export const transferFamiliesData = async (returnAll: boolean = false) => {
-    return {
-        children: await transferFridgeChildData(returnAll),
-        partners: await transferFridgePartnerData(returnAll),
-    };
+    return await migrationDb.tx(async (t) => {
+        return {
+            children: await transferChildData(t, returnAll),
+            partners: await transferPartnerData(t, returnAll),
+        };
+    });
 };
 
-const transferFridgeChildData = async (returnAll: boolean) => {
+const transferChildData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
     INSERT INTO fridge_child
         (child_id, head_of_child, start_date, end_date, conflict)
@@ -26,12 +29,10 @@ const transferFridgeChildData = async (returnAll: boolean) => {
         returnAll
     );
 
-    return await migrationDb.tx(async (t) => {
-        return await runQuery(insertQuery, t, true);
-    });
+    return await runQuery(insertQuery, t, true);
 };
 
-const transferFridgePartnerData = async (returnAll: boolean) => {
+const transferPartnerData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
     INSERT INTO fridge_partner
         (partnership_id, indx, person_id, start_date, end_date, conflict)
@@ -45,7 +46,5 @@ const transferFridgePartnerData = async (returnAll: boolean) => {
         returnAll
     );
 
-    return await migrationDb.tx(async (t) => {
-        return await runQuery(insertQuery, t, true);
-    });
+    return await runQuery(insertQuery, t, true);
 };
