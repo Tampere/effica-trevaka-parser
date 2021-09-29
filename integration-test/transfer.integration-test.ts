@@ -19,6 +19,7 @@ const baseDataTables =
         "placements",
         "extentmap",
         "placementextents",
+        "feedeviations",
         "income",
         "incomerows",
         "evaka_areas",
@@ -92,6 +93,13 @@ const groupPlacementExpectation = {
     updated: expect.any(String),
     daycare_placement_id: expect.any(String),
     daycare_group_id: expect.any(String)
+}
+
+const feeAlterationExpectation = {
+    id: expect.any(String),
+    person_id: expect.any(String),
+    updated_at: expect.any(String),
+    updated_by: expect.any(String)
 }
 
 beforeAll(async () => {
@@ -171,6 +179,14 @@ describe("GET /transfer positive", () => {
                 daycareGroups: Array(1).fill(daycareGroupExpectation),
                 groupPlacements: Array(3).fill(groupPlacementExpectation)
             }
+        )
+    })
+    it("should return transferred fee alterations", async () => {
+        await setupTransformations(["person", "departments", "placements", "feedeviations"])
+        await setupTransfers(["person", "unit_manager", "daycare", "departments", "placements"])
+        await positiveTransferSnapshotTest(
+            "fee_alterations",
+            Array(1).fill(feeAlterationExpectation)
         )
     })
 })

@@ -203,6 +203,21 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed feedeviations 1`] = `
+Array [
+  Object {
+    "amount": 10,
+    "id": Any<String>,
+    "is_absolute": true,
+    "notes": "ALENNUS AP/IP",
+    "person_id": Any<String>,
+    "type": "DISCOUNT",
+    "valid_from": "2020-03-01T00:00:00.000Z",
+    "valid_to": null,
+  },
+]
+`;
+
 exports[`GET /transform positive should return transformed income 1`] = `
 Array [
   Object {

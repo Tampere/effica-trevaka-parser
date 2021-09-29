@@ -2,7 +2,7 @@
     <placementnbr>11</placementnbr>
     <rownbr>1</rownbr>
     <serviceform>3</serviceform>
-    <deviationtype>4</deviationtype>
+    <deviationtype>5</deviationtype>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <sum>0</sum>
@@ -15,7 +15,7 @@
     <placementnbr>12</placementnbr>
     <rownbr>2</rownbr>
     <serviceform>3</serviceform>
-    <deviationtype>4</deviationtype>
+    <deviationtype>39</deviationtype>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <sum>10</sum>

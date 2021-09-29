@@ -500,7 +500,7 @@ Object {
     Array [
       Object {
         "days": 0,
-        "deviationtype": 4,
+        "deviationtype": 5,
         "enddate": null,
         "extentcode": 100,
         "hours": "0",
@@ -513,7 +513,7 @@ Object {
       },
       Object {
         "days": 0,
-        "deviationtype": 4,
+        "deviationtype": 39,
         "enddate": null,
         "extentcode": 101,
         "hours": "0",

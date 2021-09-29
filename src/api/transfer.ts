@@ -7,6 +7,7 @@ import { transferUnitManagerData } from "../transfer/evaka-unit-manager";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
 import { transferPlacementsData } from "../transfer/placements";
+import { transferFeeAlterationsData } from "../transfer/fee-alterations";
 
 const router = express.Router();
 router.get("/daycare", async (req, res, next) => {
@@ -64,6 +65,18 @@ router.get("/placements", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer families total ", undefined, "*")
+})
+router.get("/fee_alterations", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer fee alterations total ", undefined, "*")
+    try {
+        const results = await transferFeeAlterationsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer fee alterations total ", undefined, "*")
 })
 router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

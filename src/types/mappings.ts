@@ -1,3 +1,13 @@
+export type FeeAlterationType = "DISCOUNT" | "INCREASE" | "RELIEF";
+export type CitySpecificDeviationTypeMapping = Record<
+    number,
+    { type: FeeAlterationType; notes: string }
+>;
+export type CitySpecificDeviationTypeMappings = Record<
+    string,
+    CitySpecificDeviationTypeMapping
+>;
+
 export type EfficaIncomeCodeMapping = {
     codes: number[],
     evakaType: string,
