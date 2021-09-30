@@ -35,7 +35,8 @@ const transformationMap: Record<string, string> = {
 let evakaDataCleanups: string[] = [
     "daycare",
     "person",
-    "unit_manager"
+    "unit_manager",
+    "daycare_group"
 ]
 
 const daycareExpectation = {
@@ -101,6 +102,24 @@ const feeAlterationExpectation = {
     updated_at: expect.any(String),
     updated_by: expect.any(String)
 }
+
+const incomeExpectations = [
+    {
+        id: expect.any(String),
+        person_id: expect.any(String),
+        updated_at: expect.any(String),
+        updated_by: expect.any(String),
+        valid_from: expect.any(String)
+    },
+    {
+        id: expect.any(String),
+        person_id: expect.any(String),
+        updated_at: expect.any(String),
+        updated_by: expect.any(String),
+        valid_from: expect.any(String),
+        valid_to: expect.any(String)
+    }
+]
 
 beforeAll(async () => {
     for await (const table of baseDataTables) {
@@ -187,6 +206,15 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "fee_alterations",
             Array(1).fill(feeAlterationExpectation)
+        )
+    })
+
+    it("should return transferred income", async () => {
+        await setupTransformations(["person", "income"])
+        await setupTransfers(["person"])
+        await positiveTransferSnapshotTest(
+            "income",
+            incomeExpectations
         )
     })
 })

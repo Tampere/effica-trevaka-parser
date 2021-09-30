@@ -15,7 +15,7 @@ export const transferIncomeData = async (returnAll: boolean = false) => {
             valid_from,
             valid_to,
             current_timestamp(2) as updated_at,
-            '${migrationUser.id}' as updated_by,
+            '${migrationUser.id}'::uuid as updated_by,
             notes,
             is_entrepreneur,
             application_id
