@@ -85,16 +85,19 @@ describe("GET /transform positive", () => {
         const fridgeChildExpectation =
             [
                 {
+                    id: expect.any(String),
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
                     start_date: expect.any(String)
                 },
                 {
+                    id: expect.any(String),
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
                     start_date: expect.any(String)
                 },
                 {
+                    id: expect.any(String),
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
                     start_date: expect.any(String)

@@ -141,6 +141,7 @@ Object {
       "family_number": 1,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
+      "id": Any<String>,
       "start_date": Any<String>,
     },
     Object {
@@ -150,6 +151,7 @@ Object {
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
+      "id": Any<String>,
       "start_date": Any<String>,
     },
     Object {
@@ -159,6 +161,7 @@ Object {
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
+      "id": Any<String>,
       "start_date": Any<String>,
     },
   ],

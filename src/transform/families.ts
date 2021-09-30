@@ -6,21 +6,18 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         `
         DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_child CASCADE;
         CREATE TABLE ${getMigrationSchemaPrefix()}evaka_fridge_child (
+            id UUID PRIMARY KEY DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
             child_id UUID NOT NULL,
             child_ssn TEXT NOT NULL,
             head_of_family UUID NOT NULL,
             hof_ssn TEXT NOT NULL,
             family_number INTEGER NOT NULL,
             start_date date NOT NULL,
-            end_date date NOT NULL,
-            CHECK (start_date <= end_date),
-            CONSTRAINT fridge_child_no_overlap EXCLUDE USING gist (child_id WITH =, daterange(start_date, end_date, '[]') WITH &&),
-            CONSTRAINT fridge_child_no_full_duplicates UNIQUE (child_id, head_of_family, start_date, end_date)
+            end_date date NOT NULL
         );
         `
 
     //no evaka-style conflict state for partnerships -> no overlap
-    //end_date_matches constraint removed due to an unresolved issue with migration environment database
     const partnerTableQuery =
         `
         DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_partner CASCADE;
@@ -32,13 +29,14 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             family_number INTEGER NOT NULL,
             start_date date NOT NULL,
             end_date date NOT NULL,
-            CHECK (start_date <= end_date),
             CONSTRAINT fridge_partner_pkey
 		        PRIMARY KEY (partnership_id, indx),
             CONSTRAINT partnership_start_date_matches
 		        EXCLUDE using gist (partnership_id with pg_catalog.=, start_date with pg_catalog.<>)
 			        deferrable initially deferred,
-            CONSTRAINT fridge_partner_no_overlap EXCLUDE USING gist (person_id WITH =, daterange(start_date, end_date, '[]') WITH &&),
+            CONSTRAINT partnership_end_date_matches
+                EXCLUDE using gist (partnership_id with =, end_date with <>)
+                    deferrable initially deferred,
             CONSTRAINT unique_partnership_person UNIQUE (partnership_id, person_id)
         );
         `
@@ -99,6 +97,38 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         WHERE f.roleinfamily in ('S', 'R')
         `
 
+    const updateQueries =
+        `
+        DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_child_todo;
+        CREATE TABLE ${getMigrationSchemaPrefix()}evaka_fridge_child_todo AS
+        SELECT DISTINCT f1.*, 'OVERLAPPING' AS reason
+        FROM ${getMigrationSchemaPrefix()}evaka_fridge_child f1
+        JOIN ${getMigrationSchemaPrefix()}evaka_fridge_child f2 ON f1.child_id = f2.child_id
+            AND f1.id != f2.id
+            AND daterange(f1.start_date, f1.end_date, '[]') && daterange(f2.start_date, f2.end_date, '[]');
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_child_todo
+        SELECT *, 'START AFTER END'
+        FROM ${getMigrationSchemaPrefix()}evaka_fridge_child
+        WHERE start_date > end_date;
+        DELETE FROM ${getMigrationSchemaPrefix()}evaka_fridge_child
+        WHERE id IN (SELECT id FROM ${getMigrationSchemaPrefix()}evaka_fridge_child_todo);
+
+        DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fridge_partner_todo;
+        CREATE TABLE ${getMigrationSchemaPrefix()}evaka_fridge_partner_todo AS
+        SELECT DISTINCT f1.*, 'OVERLAPPING' AS reason
+        FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner f1
+        JOIN ${getMigrationSchemaPrefix()}evaka_fridge_partner f2 ON f1.person_id = f2.person_id
+            AND f1.partnership_id != f2.partnership_id
+            AND f1.indx != f2.indx
+            AND daterange(f1.start_date, f1.end_date, '[]') && daterange(f2.start_date, f2.end_date, '[]');
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner_todo
+        SELECT *, 'START AFTER END'
+        FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner
+        WHERE start_date > end_date;
+        DELETE FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner
+        WHERE (partnership_id, indx) IN (SELECT partnership_id, indx FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner_todo);
+        `;
+
     const childQuery = wrapWithReturning("evaka_fridge_child", childQueryPart, returnAll, ["family_number", "hof_ssn", "child_ssn"])
     const partnerQuery = wrapWithReturning("evaka_fridge_partner", partnerQueryPart, returnAll, ["family_number", "effica_ssn"])
 
@@ -107,6 +137,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         await runQuery(partnerTableQuery, t)
         const childResult = await runQuery(childQuery, t, true)
         const partnerResult = await runQuery(partnerQuery, t, true)
+        await runQuery(updateQueries, t)
         return { child: childResult, partner: partnerResult }
     })
 
