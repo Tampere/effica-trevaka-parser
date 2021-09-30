@@ -16,6 +16,10 @@ export const nonNullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`
     return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? "infinity" : DateTime.fromISO(stringValue).toISODate()
 }
+export const familyEndDateParser = (v: number | string): string | null => {
+    const stringValue = `${v}`
+    return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? DateTime.fromISO("9999-01-01").toISODate() : DateTime.fromISO(stringValue).toISODate()
+}
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v
 export const stringToNumericParser = (v: null | string) => v == null || v === "" || v === " " ? null : +v

@@ -87,20 +87,17 @@ describe("GET /transform positive", () => {
                 {
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
-                    start_date: expect.any(String),
-                    end_date: expect.any(String)
+                    start_date: expect.any(String)
                 },
                 {
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
-                    start_date: expect.any(String),
-                    end_date: null
+                    start_date: expect.any(String)
                 },
                 {
                     head_of_family: expect.any(String),
                     child_id: expect.any(String),
-                    start_date: expect.any(String),
-                    end_date: null
+                    start_date: expect.any(String)
                 }
             ]
 
@@ -109,26 +106,22 @@ describe("GET /transform positive", () => {
                 {
                     partnership_id: expect.any(String),
                     person_id: expect.any(String),
-                    start_date: expect.any(String),
-                    end_date: expect.any(String)
+                    start_date: expect.any(String)
                 },
                 {
                     partnership_id: expect.any(String),
                     person_id: expect.any(String),
                     start_date: expect.any(String),
-                    end_date: expect.any(String)
                 },
                 {
                     partnership_id: expect.any(String),
                     person_id: expect.any(String),
                     start_date: expect.any(String),
-                    end_date: null
                 },
                 {
                     partnership_id: expect.any(String),
                     person_id: expect.any(String),
                     start_date: expect.any(String),
-                    end_date: null
                 }
             ]
 

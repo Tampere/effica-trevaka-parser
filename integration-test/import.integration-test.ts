@@ -60,10 +60,10 @@ describe("GET /import xml positive", () => {
                 closedDateRange,
                 closedDateRange,
                 closedDateRange,
-                openDateRange,
-                openDateRange,
-                openDateRange,
-                openDateRange))
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
+                closedDateRange))
     })
 
     it("should return created codes", async () => {
