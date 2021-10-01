@@ -28,7 +28,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             indx smallint NOT NULL,
             family_number INTEGER NOT NULL,
             start_date date NOT NULL,
-            end_date date NOT NULL,
+            end_date date,
             CONSTRAINT fridge_partner_pkey
 		        PRIMARY KEY (partnership_id, indx),
             CONSTRAINT partnership_start_date_matches
@@ -58,7 +58,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             p.effica_ssn as child_ssn,
             f.familynbr,
             f.startdate as start_date,
-            f.enddate as end_date
+            COALESCE(f.enddate, 'infinity') as end_date
         FROM hofs_in_families hofs
             JOIN ${getMigrationSchemaPrefix()}families f
                 ON f.familynbr = hofs.familynbr

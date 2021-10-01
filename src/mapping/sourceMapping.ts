@@ -1,5 +1,5 @@
 import { createAreaTableQuery, createDaycareTableQuery, createUnitManagerTableQuery } from "../db/evaka"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, familyEndDateParser, nonNullDateParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullDateParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 // dateformat in effica-data: yyyymmdd
@@ -55,7 +55,7 @@ export const efficaTableMapping: TypeMapping = {
             familynbr: { sqlType: "integer", parser: nullForcingTextParser },
             personid: { sqlType: "text", parser: nullForcingTextParser },
             startdate: { sqlType: "date", parser: nonNullDateParser },
-            enddate: { sqlType: "date", parser: familyEndDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
             roleinfamily: { sqlType: "text", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }

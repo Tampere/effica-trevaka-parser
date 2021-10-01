@@ -147,7 +147,7 @@ Object {
     Object {
       "child_id": Any<String>,
       "child_ssn": "010619A9501",
-      "end_date": "9999-01-01T00:00:00.000Z",
+      "end_date": null,
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
@@ -157,7 +157,7 @@ Object {
     Object {
       "child_id": Any<String>,
       "child_ssn": "251118A9509",
-      "end_date": "9999-01-01T00:00:00.000Z",
+      "end_date": null,
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
@@ -186,7 +186,7 @@ Object {
     },
     Object {
       "effica_ssn": "020967-9992",
-      "end_date": "9999-01-01T00:00:00.000Z",
+      "end_date": null,
       "family_number": 2,
       "indx": 1,
       "partnership_id": Any<String>,
@@ -195,7 +195,7 @@ Object {
     },
     Object {
       "effica_ssn": "180476-998M",
-      "end_date": "9999-01-01T00:00:00.000Z",
+      "end_date": null,
       "family_number": 2,
       "indx": 2,
       "partnership_id": Any<String>,
