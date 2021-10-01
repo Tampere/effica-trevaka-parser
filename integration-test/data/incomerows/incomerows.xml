@@ -14,3 +14,19 @@
     <incometype>108</incometype>
     <summa>560.00</summa>
 </incomerow>
+<incomerow>
+    <personid>020967-9992</personid>
+    <startdate>20210101</startdate>
+    <enddate>99991231</enddate>
+    <incomeperiod>83</incomeperiod>
+    <incometype>88</incometype>
+    <summa>215.00</summa>
+</incomerow>
+<incomerow>
+    <personid>020967-9992</personid>
+    <startdate>20210101</startdate>
+    <enddate>99991231</enddate>
+    <incomeperiod>111</incomeperiod>
+    <incometype>109</incometype>
+    <summa>10.00</summa>
+</incomerow>

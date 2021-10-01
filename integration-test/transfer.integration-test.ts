@@ -103,23 +103,7 @@ const feeAlterationExpectation = {
     updated_by: expect.any(String)
 }
 
-const incomeExpectations = [
-    {
-        id: expect.any(String),
-        person_id: expect.any(String),
-        updated_at: expect.any(String),
-        updated_by: expect.any(String),
-        valid_from: expect.any(String)
-    },
-    {
-        id: expect.any(String),
-        person_id: expect.any(String),
-        updated_at: expect.any(String),
-        updated_by: expect.any(String),
-        valid_from: expect.any(String),
-        valid_to: expect.any(String)
-    }
-]
+
 
 beforeAll(async () => {
     for await (const table of baseDataTables) {
@@ -210,11 +194,24 @@ describe("GET /transfer positive", () => {
     })
 
     it("should return transferred income", async () => {
+        const incomeOpenExpectation = {
+
+            id: expect.any(String),
+            person_id: expect.any(String),
+            updated_at: expect.any(String),
+            updated_by: expect.any(String),
+            valid_from: expect.any(String),
+        }
+        const incomeClosedExpectation = {
+            ...incomeOpenExpectation,
+            valid_to: expect.any(String)
+        }
+
         await setupTransformations(["person", "income"])
         await setupTransfers(["person"])
         await positiveTransferSnapshotTest(
             "income",
-            incomeExpectations
+            [incomeOpenExpectation, incomeClosedExpectation]
         )
     })
 })

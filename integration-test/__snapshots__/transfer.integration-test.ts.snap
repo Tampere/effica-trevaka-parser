@@ -241,12 +241,20 @@ Array [
   Object {
     "application_id": null,
     "data": Object {
+      "DAILY_ALLOWANCE": Object {
+        "amount": 1000,
+        "coefficient": "DAILY_ALLOWANCE_21_5",
+      },
       "MAIN_INCOME": Object {
         "amount": 450060,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
       "OTHER_INCOME": Object {
         "amount": 56000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+      "PAID_ALIMONY": Object {
+        "amount": 21500,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
     },
