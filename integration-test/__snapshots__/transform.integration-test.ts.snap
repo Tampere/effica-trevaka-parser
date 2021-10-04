@@ -147,7 +147,7 @@ Object {
     Object {
       "child_id": Any<String>,
       "child_ssn": "010619A9501",
-      "end_date": null,
+      "end_date": "2037-05-31T00:00:00.000Z",
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",
@@ -157,7 +157,7 @@ Object {
     Object {
       "child_id": Any<String>,
       "child_ssn": "251118A9509",
-      "end_date": null,
+      "end_date": "2036-11-24T00:00:00.000Z",
       "family_number": 2,
       "head_of_family": Any<String>,
       "hof_ssn": "020967-9992",

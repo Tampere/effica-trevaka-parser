@@ -58,7 +58,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             p.effica_ssn as child_ssn,
             f.familynbr,
             f.startdate as start_date,
-            COALESCE(f.enddate, 'infinity') as end_date
+            COALESCE(f.enddate, (p.date_of_birth) + INTERVAL '18 years' - INTERVAL '1 day') as end_date
         FROM hofs_in_families hofs
             JOIN ${getMigrationSchemaPrefix()}families f
                 ON f.familynbr = hofs.familynbr
