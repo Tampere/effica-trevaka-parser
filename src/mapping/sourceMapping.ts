@@ -55,7 +55,7 @@ export const efficaTableMapping: TypeMapping = {
             familynbr: { sqlType: "integer", parser: nullForcingTextParser },
             personid: { sqlType: "text", parser: nullForcingTextParser },
             startdate: { sqlType: "date", parser: nonNullDateParser },
-            enddate: { sqlType: "date", parser: nonNullDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
             roleinfamily: { sqlType: "text", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }
