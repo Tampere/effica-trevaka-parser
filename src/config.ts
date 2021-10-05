@@ -14,7 +14,8 @@ export const config = {
     xmlParserOptions: {
         parseNodeValue: true,
         arrayMode: true,
-        trimValues: true
+        trimValues: true,
+        parseTrueNumberOnly: true
     },
     csvParserOptions: {
         trim: true,
