@@ -14,6 +14,7 @@ export const transferPlacementsData = async (returnAll: boolean = false) => {
             serviceNeeds: await transferServiceNeedData(t, returnAll),
             daycareGroups: await transferDaycareGroupData(t, returnAll),
             groupPlacements: await transferGroupPlacementData(t, returnAll),
+            cleanedDaycareGroups: await cleanupEmptyDaycareGroups(t, returnAll),
         };
     });
 };
@@ -106,4 +107,20 @@ const transferGroupPlacementData = async <T>(
     );
 
     return await runQuery(insertQuery, t, true);
+};
+
+const cleanupEmptyDaycareGroups = async <T>(
+    t: ITask<T>,
+    returnAll: boolean
+) => {
+    const deleteQueryPart = `
+    DELETE FROM daycare_group WHERE id NOT IN (SELECT daycare_group_id FROM daycare_group_placement)
+    `;
+    const deleteQuery = wrapWithReturning(
+        "daycare_group",
+        deleteQueryPart,
+        returnAll
+    );
+
+    return await runQuery(deleteQuery, t, true);
 };
