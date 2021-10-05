@@ -1,9 +1,9 @@
+import { join as joinPath } from "path"
 import pgPromise, { QueryFile } from "pg-promise"
 import { config } from "../config"
 import db from "../db/db"
 import { TableDescriptor } from "../types"
 import { EfficaIncomeCodeMapping } from "../types/mappings"
-import { join as joinPath } from "path"
 
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
@@ -78,23 +78,4 @@ export const createTotalSumClauseForIncomeTypes = (mappings: EfficaIncomeCodeMap
 
 export const createSqlConditionalForCoefficients = (coeffMap: Record<string, string>) => {
     return Object.keys(coeffMap).map(c => `WHEN '${c}' THEN ${coeffMap[c]}`).join("\n")
-}
-
-export const getMigrationUser = async (): Promise<{ id: string }> => {
-    try {
-        let migrationUser;
-        const fetchResult: { id: string } | null =
-            await db.tx(async t => t.oneOrNone(`SELECT id FROM employee WHERE first_name = 'Effica' AND last_name = '-migraatio';`))
-        if (!fetchResult) {
-            const insertResult: { id: string } =
-                await db.tx(async t => t.one(`INSERT INTO employee (first_name, last_name) VALUES ('Effica', '-migraatio') RETURNING id;`))
-            migrationUser = insertResult
-        } else {
-            migrationUser = fetchResult
-        }
-        return migrationUser
-    } catch (error) {
-        console.error(`Fetching or creating migration user failed`)
-        throw error
-    }
 }
