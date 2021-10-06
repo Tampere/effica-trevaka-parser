@@ -603,7 +603,7 @@ Object {
         "personmobilephone": "000-0000000",
         "personname": "Authentic, Aimo",
         "personstreetaddress": "Fakestreet 123",
-        "personzipcode": "1",
+        "personzipcode": "00001",
         "secretaddress": false,
       },
       Object {
@@ -617,7 +617,7 @@ Object {
         "personmobilephone": "111-1111111",
         "personname": "Temporary, Teppo",
         "personstreetaddress": "StreetStreet 321",
-        "personzipcode": "2",
+        "personzipcode": "00002",
         "secretaddress": false,
       },
       Object {
@@ -628,10 +628,10 @@ Object {
         "personcity": "Ypäjä",
         "personhomeemail": "fake3@notmaildomain.notext",
         "personid": "180476-998M",
-        "personmobilephone": "222-2222222",
+        "personmobilephone": "0222222222",
         "personname": "Hidden, Hilda",
         "personstreetaddress": "HideStreet 2",
-        "personzipcode": "1",
+        "personzipcode": "00001",
         "secretaddress": true,
       },
       Object {
@@ -645,7 +645,7 @@ Object {
         "personmobilephone": "222-2222222",
         "personname": "Child, Christian",
         "personstreetaddress": "HideStreet 2",
-        "personzipcode": "1",
+        "personzipcode": "00001",
         "secretaddress": false,
       },
       Object {
