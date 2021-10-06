@@ -80,7 +80,7 @@ describe("GET /import xml positive", () => {
     it("should return created incomerows", async () => {
         return await positiveImportSnapshotTest(
             "incomerows",
-            getTimeSeriesResultPattern(openDateRange, closedDateRange)
+            getTimeSeriesResultPattern(openDateRange, closedDateRange, openDateRange, openDateRange)
         )
     })
 

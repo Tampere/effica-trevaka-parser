@@ -23,26 +23,50 @@
     <extrainfo2>246</extrainfo2>
 </item>
 <item>
-    <code>26</code>
+    <code>108</code>
     <active>A</active>
     <codetype>INKSLAG</codetype>
-    <text>Lisätulo¤¤Inkomstslag1</text>
+    <text>Muu tulo¤¤Muu tulo</text>
     <extrainfo1></extrainfo1>
     <extrainfo2></extrainfo2>
 </item>
 <item>
-    <code>25</code>
+    <code>85</code>
     <active>A</active>
     <codetype>INKSLAG</codetype>
-    <text>Päätulo¤¤Inkomstslag2</text>
+    <text>Palkkatulo</text>
     <extrainfo1></extrainfo1>
     <extrainfo2></extrainfo2>
 </item>
 <item>
-    <code>30</code>
+    <code>88</code>
+    <active>A</active>
+    <codetype>INKSLAG</codetype>
+    <text>Maksetut elatusavut¤¤Maksetut elatusavut</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>109</code>
+    <active>A</active>
+    <codetype>INKSLAG</codetype>
+    <text>Päiväraha¤¤Päiväraha</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>83</code>
     <active>A</active>
     <codetype>INKPERIOD</codetype>
     <text>Kuukausitulo¤¤Inkomstperiod1</text>
+    <extrainfo1></extrainfo1>
+    <extrainfo2></extrainfo2>
+</item>
+<item>
+    <code>111</code>
+    <active>A</active>
+    <codetype>INKPERIOD</codetype>
+    <text>päiväraha x 21,5</text>
     <extrainfo1></extrainfo1>
     <extrainfo2></extrainfo2>
 </item>

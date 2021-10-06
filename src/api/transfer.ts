@@ -1,13 +1,14 @@
 import express from "express";
-import { transferFamiliesData } from "../transfer/families";
 import { transferDaycareData } from "../transfer/daycare";
 import { transferDepartmentData } from "../transfer/departments";
-import { transferPersonData } from "../transfer/person";
 import { transferUnitManagerData } from "../transfer/evaka-unit-manager";
+import { transferFamiliesData } from "../transfer/families";
+import { transferFeeAlterationsData } from "../transfer/fee-alterations";
+import { transferIncomeData } from "../transfer/income";
+import { transferPersonData } from "../transfer/person";
+import { transferPlacementsData } from "../transfer/placements";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
-import { transferPlacementsData } from "../transfer/placements";
-import { transferFeeAlterationsData } from "../transfer/fee-alterations";
 
 const router = express.Router();
 router.get("/daycare", async (req, res, next) => {
@@ -89,6 +90,19 @@ router.get("/unit_manager", async (req, res, next) => {
     }
     timeEnd("**** Transfer unit managers total ", undefined, "*")
 })
+
+router.get("/income", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer income total ", undefined, "*")
+    try {
+        const results = await transferIncomeData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer income total ", undefined, "*")
+})
+
 
 
 

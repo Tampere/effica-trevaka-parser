@@ -236,6 +236,61 @@ Array [
 ]
 `;
 
+exports[`GET /transfer positive should return transferred income 1`] = `
+Array [
+  Object {
+    "application_id": null,
+    "data": Object {
+      "DAILY_ALLOWANCE": Object {
+        "amount": 1000,
+        "coefficient": "DAILY_ALLOWANCE_21_5",
+      },
+      "MAIN_INCOME": Object {
+        "amount": 450060,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+      "OTHER_INCOME": Object {
+        "amount": 56000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+      "PAID_ALIMONY": Object {
+        "amount": 21500,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+    },
+    "effect": "INCOME",
+    "id": Any<String>,
+    "is_entrepreneur": false,
+    "notes": "",
+    "person_id": Any<String>,
+    "updated_at": Any<String>,
+    "updated_by": Any<String>,
+    "valid_from": Any<String>,
+    "valid_to": null,
+    "works_at_echa": false,
+  },
+  Object {
+    "application_id": null,
+    "data": Object {
+      "MAIN_INCOME": Object {
+        "amount": 5000000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+      },
+    },
+    "effect": "INCOME",
+    "id": Any<String>,
+    "is_entrepreneur": false,
+    "notes": "",
+    "person_id": Any<String>,
+    "updated_at": Any<String>,
+    "updated_by": Any<String>,
+    "valid_from": Any<String>,
+    "valid_to": Any<String>,
+    "works_at_echa": false,
+  },
+]
+`;
+
 exports[`GET /transfer positive should return transferred persons 1`] = `
 Array [
   Object {

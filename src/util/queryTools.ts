@@ -1,9 +1,9 @@
+import { join as joinPath } from "path"
 import pgPromise, { QueryFile } from "pg-promise"
 import { config } from "../config"
 import db from "../db/db"
 import { TableDescriptor } from "../types"
 import { EfficaIncomeCodeMapping } from "../types/mappings"
-import { join as joinPath } from "path"
 
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
