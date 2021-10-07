@@ -2,17 +2,28 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import express from "express";
-import { transformApplicationData } from "../transform/application";
-import { transformDepartmentData } from "../transform/departments";
-import { transformFamilyData } from "../transform/families";
-import { transformFeeDeviationsData } from "../transform/fee-deviations";
-import { transformIncomeData } from "../transform/income";
-import { transformPersonData } from "../transform/person";
-import { transformPlacementsData } from "../transform/placements";
-import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions";
-import { ErrorWithCause } from "../util/error";
-import { time, timeEnd } from "../util/timing";
+import express from "express"
+import { transformApplicationData } from "../transform/application"
+import { transformDepartmentData } from "../transform/departments"
+import { transformFamilyData } from "../transform/families"
+import { transformFeeDeviationsData } from "../transform/fee-deviations"
+import { transformIncomeData } from "../transform/income"
+import { transformPersonData } from "../transform/person"
+import { transformPlacementsData } from "../transform/placements"
+import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
+import { TransformOperation } from "../types/internal"
+import { ErrorWithCause } from "../util/error"
+import { time, timeEnd } from "../util/timing"
+
+const dependencyOrder: TransformOperation[] =
+    [
+        { name: "person", function: transformPersonData },
+        { name: "families", function: transformFamilyData },
+        { name: "income", function: transformIncomeData },
+        { name: "departments", function: transformDepartmentData },
+        { name: "placements", function: transformPlacementsData },
+        { name: "feedeviations", function: transformFeeDeviationsData }
+    ]
 
 const router = express.Router();
 router.get("/person", async (req, res, next) => {
@@ -112,6 +123,25 @@ router.get("/voucher_value_decisions", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform voucher value decisions total ", undefined, "*")
+})
+
+router.get("/", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform all total ", undefined, "*")
+    const results: Record<string, any> = {}
+
+    for (let operation of dependencyOrder) {
+        try {
+            results[operation.name] = await operation.function(returnAll)
+        } catch (error) {
+            results[operation.name] = error
+            break
+        }
+    }
+
+    res.status(200).json(results)
+
+    timeEnd("**** Transform all total ", undefined, "*")
 })
 
 
