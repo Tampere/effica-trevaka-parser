@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2021 City of Tampere
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
+
 import express from "express";
 import { resetEvakaMigratedData } from "../db/evaka";
 import { ErrorWithCause } from "../util/error";
