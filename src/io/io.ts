@@ -18,6 +18,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
         for await (const dirent of dir) {
             if (dirent.isFile()) {
                 const fileName = dirent.name.toLowerCase()
+                if (fileName.endsWith(".license")) continue
                 time(`'${dirent.name}' reading`)
                 const fileAsString = await readFile(`${path}/${dirent.name}`, { encoding: "utf-8" })
                 timeEnd(`'${dirent.name}' reading`)
