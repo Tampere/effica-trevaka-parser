@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 City of Tampere
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 import { ITask } from "pg-promise";
 import { TableDescriptor } from "../types";
 import { EvakaPerson } from "../types/evaka";

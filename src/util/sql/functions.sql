@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2021 City of Tampere
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 DROP FUNCTION IF EXISTS ${migrationSchema:name}.parse_ssn_birth_date(text) CASCADE;
 CREATE FUNCTION ${migrationSchema:name}.parse_ssn_birth_date(input text) RETURNS date AS $$
 DECLARE

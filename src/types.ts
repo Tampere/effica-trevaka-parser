@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 City of Tampere
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 export type FileDescriptor = { fileName: string, data: any, table: TableDescriptor, mapping: TypeMapping }
 export type TableDescriptor = { tableName: string, columns: Record<string, ColumnDescriptor>, tableQueryFunction?: TableQueryFunction }
 export type ColumnDescriptor = { sqlType: SqlType, parser: Function }

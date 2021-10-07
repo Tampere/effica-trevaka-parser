@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2021 City of Tampere
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_service_need CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_service_need (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),

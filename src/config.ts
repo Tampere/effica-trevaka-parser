@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 City of Tampere
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 export const config = {
     cityVariant: process.env.CITY_VARIANT ?? "tampere",
     port: process.env.PORT ?? 3000,

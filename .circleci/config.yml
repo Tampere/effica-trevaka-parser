@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2021 City of Tampere
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+version: 2.1
+
+executors:
+  reuse_tool:
+    docker:
+      - image: fsfe/reuse:0.13.0 # NOTE: Update bin/add-license-headers.sh to match
+    resource_class: small
+
+jobs:
+  check_licenses:
+    executor: reuse_tool
+    steps:
+      - checkout
+      - run:
+          name: reuse lint
+          command: |
+            reuse lint || {
+              echo '';
+              echo '=========================================';
+              echo 'Please run: ./bin/add-license-headers.sh';
+              echo '=========================================';
+              exit 1
+            }
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - check_licenses

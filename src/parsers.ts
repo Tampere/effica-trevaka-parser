@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 City of Tampere
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 import { DateTime } from "luxon"
 
 export const nullForcingTextParser = (v: undefined | string | null | number): string | null => v != null && v !== "" && v !== "&#x20;" ? `${v}` : null
