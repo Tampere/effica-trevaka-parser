@@ -17,5 +17,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <Days>0</Days>
   <Extent>999340002</Extent>
   <Type>BOA</Type>
+  <CareId>12345</CareId>
   <GUID>52F59481-5533-49E4-8D9F-85E6E180B768</GUID>
 </ApplicationRows>

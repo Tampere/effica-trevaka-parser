@@ -30,16 +30,13 @@ export const findRowsByApplication = async <T>(
     t: ITask<T>,
     application: EfficaApplication
 ): Promise<EfficaApplicationRow[]> => {
-    // TODO: implement
-    return Promise.resolve([]);
-    /*
     return await t.manyOrNone<EfficaApplicationRow>(
         `
         SELECT *
-        FROM ${getMigrationSchema}applicationrows
-        WHERE ???
+        FROM ${getMigrationSchemaPrefix()}applicationrows
+        WHERE careid = $(careId)
         ORDER BY priority
-        `
+        `,
+        { careId: application.careid }
     );
-    */
 };

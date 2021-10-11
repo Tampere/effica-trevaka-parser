@@ -8,6 +8,8 @@ export type EfficaApplication = {
     placeneed: number;
     specialhandlingtime: number;
     transferapplication: boolean;
+    status: number;
+    careid: number;
     guid: string;
 };
 
@@ -26,5 +28,6 @@ export type EfficaApplicationRow = {
     days: number;
     extent: number;
     type: EfficaApplicationType | null;
+    careid: number;
     guid: string;
 };
