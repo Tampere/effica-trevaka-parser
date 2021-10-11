@@ -92,8 +92,8 @@ export const efficaTableMapping: TypeMapping = {
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }
     },
-    person: {
-        tableName: "person",
+    persons: {
+        tableName: "persons",
         columns: {
             personid: { sqlType: "text", parser: nullForcingTextParser },
             personname: { sqlType: "text", parser: nullForcingTextParser },
@@ -223,7 +223,7 @@ export const efficaTableMapping: TypeMapping = {
             grandtotal: { sqlType: "numeric", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys:["guid"],
+        primaryKeys: ["guid"],
     },
     childminders: {
         tableName: "childminders",

@@ -2,9 +2,13 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import { DateTime } from "luxon"
+import { DateTime } from "luxon";
 
 export const nullForcingTextParser = (v: undefined | string | null | number): string | null => v != null && v !== "" && v !== "&#x20;" ? `${v}` : null
+export const trimmingNullForcingTextParser = (v: undefined | string | null | number): string | null => {
+    v = v == null ? null : `${v}`?.trim()
+    return v != null && v !== "" && v !== "&#x20;" ? `${v}` : null
+}
 export const nullableTextParser = (v: undefined | string | null | number): string | null => v != null ? `${v}` : null
 export const nonNullTextParser = (v: undefined | string | null | number): string => v != null ? `${v}` : ""
 export const activityParser = (v: string): boolean => v?.toUpperCase() === "A"

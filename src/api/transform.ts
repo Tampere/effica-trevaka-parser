@@ -17,7 +17,7 @@ import { time, timeEnd } from "../util/timing"
 
 const dependencyOrder: TransformOperation[] =
     [
-        { name: "person", function: transformPersonData },
+        { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
@@ -26,16 +26,16 @@ const dependencyOrder: TransformOperation[] =
     ]
 
 const router = express.Router();
-router.get("/person", async (req, res, next) => {
+router.get("/persons", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
-    time("**** Transform person total ", undefined, "*")
+    time("**** Transform persons total ", undefined, "*")
     try {
         const results = await transformPersonData(returnAll)
         res.status(200).json(results)
     } catch (err) {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
-    timeEnd("**** Transform person total ", undefined, "*")
+    timeEnd("**** Transform persons total ", undefined, "*")
 })
 
 router.get("/application", async (req, res, next) => {

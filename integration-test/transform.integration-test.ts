@@ -19,7 +19,7 @@ let evakaDataCleanups: string[] = [
 //order based on dependency
 const baseDataTables =
     [
-        "person",
+        "persons",
         "codes",
         "families",
         "units",
@@ -80,19 +80,19 @@ describe("GET /transform positive", () => {
     it("should return transformed persons", async () => {
         cleanUps = ["evaka_person"]
         const response1 = await positiveTransformSnapshotTest(
-            "person",
+            "persons",
             Array(5).fill(personExpectation)
         )
         // verify maintain ids between migrations
         const response2 = await transform("person")
         expect(response2.body).toEqual(
-            expect.arrayContaining(response1.body.map((person: any) => expect.objectContaining({id: person.id})))
+            expect.arrayContaining(response1.body.map((person: any) => expect.objectContaining({ id: person.id })))
         )
     })
     it("should return transformed families", async () => {
 
         cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
-        await setupTransformations(["person"])
+        await setupTransformations(["persons"])
 
         const fridgeChildExpectation =
             [
@@ -170,7 +170,7 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed placements", async () => {
-        await setupTransformations(["person", "departments"])
+        await setupTransformations(["persons", "departments"])
 
         const placementExpectation = {
             id: expect.any(String),
@@ -188,11 +188,11 @@ describe("GET /transform positive", () => {
                 placements: [
                     placementExpectation,
                     placementExpectation,
-                    {...placementExpectation, daycare_group_id: null}
+                    { ...placementExpectation, daycare_group_id: null }
                 ],
                 placementsTodo: [
-                    {...placementExpectation, daycare_group_id: null},
-                    {...placementExpectation, daycare_group_id: null}
+                    { ...placementExpectation, daycare_group_id: null },
+                    { ...placementExpectation, daycare_group_id: null }
                 ],
                 serviceNeeds: Array(2).fill(serviceNeedExpectation),
                 serviceNeedsTodo: []
@@ -201,7 +201,7 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed feedeviations", async () => {
-        await setupTransformations(["person", "departments", "placements"])
+        await setupTransformations(["persons", "departments", "placements"])
 
         const feeAlterationExpectation = {
             id: expect.any(String),
@@ -217,7 +217,7 @@ describe("GET /transform positive", () => {
     it("should return transformed income", async () => {
         cleanUps = ["evaka_income", "evaka_person"]
         //TODO: application transformation?
-        await setupTransformations(["person"])
+        await setupTransformations(["persons"])
 
         //TODO: add application id?
         const incomeExpectation =
@@ -262,15 +262,15 @@ describe("GET /transform positive", () => {
         // verify maintain ids between migrations
         const response2 = await transform("voucher_value_decisions")
         expect(response2.body.decisions).toEqual(
-            expect.arrayContaining(response1.body.decisions.map((decision: any) => expect.objectContaining({id: decision.id})))
+            expect.arrayContaining(response1.body.decisions.map((decision: any) => expect.objectContaining({ id: decision.id })))
         )
     })
 
     it("should return transformed application", async () => {
         cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
 
-        await setupTransformations(["person", "families"])
-        await setupTransfers(["person", "families"])
+        await setupTransformations(["persons", "families"])
+        await setupTransfers(["persons", "families"])
 
         const applicationExpectation = {
             id: expect.any(String),
@@ -290,7 +290,7 @@ describe("GET /transform positive", () => {
         // verify maintain ids between migrations
         const response2 = await transform("application")
         expect(response2.body.applications).toEqual(
-            expect.arrayContaining(response1.body.applications.map((application: any) => expect.objectContaining({id: application.id})))
+            expect.arrayContaining(response1.body.applications.map((application: any) => expect.objectContaining({ id: application.id })))
         )
     })
 

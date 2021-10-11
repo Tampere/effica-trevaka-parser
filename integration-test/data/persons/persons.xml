@@ -45,7 +45,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personzipcode>00001</personzipcode>
     <personhomeemail>fake3@notmaildomain.notext</personhomeemail>
     <personmobilephone></personmobilephone>
-    <phonework> </phonework>
+    <phonework></phonework>
     <phonehome>0222222222</phonehome>
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
@@ -76,7 +76,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personcity>Tenhola</personcity>
     <personzipcode>12000</personzipcode>
     <personhomeemail>fake3@notmaildomain.notext</personhomeemail>
-    <personmobilephone> </personmobilephone>
+    <personmobilephone></personmobilephone>
     <phonework> 222-2222222</phonework>
     <phonehome>222-2222223 </phonehome>
     <mothertongue>1</mothertongue>

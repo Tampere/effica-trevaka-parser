@@ -12,7 +12,7 @@ import { setupTables } from "../src/util/testTools"
 
 const baseUrl = "/import"
 
-const tables = ["person", "codes", "income", "incomerows", "families",
+const tables = ["persons", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
     "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare"]
@@ -45,7 +45,7 @@ afterAll(async () => {
 // POSITIVE CASES
 describe("GET /import xml positive", () => {
     it("should return created persons", async () => {
-        return await positiveImportSnapshotTest("person")
+        return await positiveImportSnapshotTest("persons")
     })
 
     it("should return created families", async () => {

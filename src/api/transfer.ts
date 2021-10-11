@@ -39,16 +39,16 @@ router.get("/departments", async (req, res, next) => {
     }
     timeEnd("**** Transfer departments total ", undefined, "*")
 })
-router.get("/person", async (req, res, next) => {
+router.get("/persons", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
-    time("**** Transfer person total ", undefined, "*")
+    time("**** Transfer persons total ", undefined, "*")
     try {
         const results = await transferPersonData(returnAll)
         res.status(200).json(results)
     } catch (err) {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
-    timeEnd("**** Transfer person total ", undefined, "*")
+    timeEnd("**** Transfer persons total ", undefined, "*")
 })
 router.get("/families", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
