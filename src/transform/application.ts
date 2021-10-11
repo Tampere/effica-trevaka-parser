@@ -149,7 +149,7 @@ const newDocument = (
     extentMap: ExtentMap
 ): EvakaApplicationFormDocumentV0 => {
     const preferredUnits = resolveUnits(rows, unitMap, childminderMap);
-    const serviceNeedOption = extentMap[rows[0]?.extent] ?? null;
+    const serviceNeedOption = extentMap[rows[0]?.extent]?.[rows[0]?.days] ?? null;
     const preferredStartDate = rows[0]?.startdate ?? null;
     const type = resolveType(rows);
     return {
