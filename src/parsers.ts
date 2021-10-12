@@ -5,10 +5,6 @@
 import { DateTime } from "luxon";
 
 export const nullForcingTextParser = (v: undefined | string | null | number): string | null => v != null && v !== "" && v !== "&#x20;" ? `${v}` : null
-export const trimmingNullForcingTextParser = (v: undefined | string | null | number): string | null => {
-    v = v == null ? null : `${v}`?.trim()
-    return v != null && v !== "" && v !== "&#x20;" ? `${v}` : null
-}
 export const nullableTextParser = (v: undefined | string | null | number): string | null => v != null ? `${v}` : null
 export const nonNullTextParser = (v: undefined | string | null | number): string => v != null ? `${v}` : ""
 export const activityParser = (v: string): boolean => v?.toUpperCase() === "A"
@@ -18,11 +14,6 @@ export const numericBooleanParser = (v: undefined | number): boolean => v === 1
 export const nullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`
     return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? null : DateTime.fromISO(stringValue).toISODate()
-}
-//infinity seems to be widely used in evaka
-export const nonNullDateParser = (v: number | string): string | null => {
-    const stringValue = `${v}`
-    return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? "infinity" : DateTime.fromISO(stringValue).toISODate()
 }
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v

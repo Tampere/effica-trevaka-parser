@@ -18,7 +18,7 @@ export const transformDepartmentData = async (returnAll: boolean = false) => {
             effica_id INTEGER NOT NULL,
             name TEXT NOT NULL,
             start_date date NOT NULL,
-            end_date date DEFAULT 'infinity'::date NOT NULL,
+            end_date date,
             CONSTRAINT start_before_end
 		        CHECK (start_date <= end_date)
         );
