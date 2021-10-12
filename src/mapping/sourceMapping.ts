@@ -102,6 +102,8 @@ export const efficaTableMapping: TypeMapping = {
             personzipcode: { sqlType: "text", parser: nullForcingTextParser },
             personhomeemail: { sqlType: "text", parser: nullForcingTextParser },
             personmobilephone: { sqlType: "text", parser: nullForcingTextParser },
+            phonehome: { sqlType: "text", parser: nullForcingTextParser },
+            phonework: { sqlType: "text", parser: nullForcingTextParser },
             mothertongue: { sqlType: "integer", parser: codeNumericParser },
             nationality: { sqlType: "integer", parser: codeNumericParser },
             homemunicipality: { sqlType: "integer", parser: codeNumericParser },

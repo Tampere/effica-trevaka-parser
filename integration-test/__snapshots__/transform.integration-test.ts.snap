@@ -196,6 +196,7 @@ Array [
 exports[`GET /transform positive should return transformed persons 1`] = `
 Array [
   Object {
+    "backup_phone": "",
     "date_of_birth": Any<String>,
     "effica_ssn": "020967-9992",
     "email": "fake@notmaildomain.notext",
@@ -212,6 +213,7 @@ Array [
     "street_address": "Fakestreet 123",
   },
   Object {
+    "backup_phone": "",
     "date_of_birth": Any<String>,
     "effica_ssn": "020288-TP01",
     "email": "fake2@notmaildomain.notext",
@@ -228,6 +230,7 @@ Array [
     "street_address": "StreetStreet 321",
   },
   Object {
+    "backup_phone": "",
     "date_of_birth": Any<String>,
     "effica_ssn": "180476-998M",
     "email": "fake3@notmaildomain.notext",
@@ -244,6 +247,7 @@ Array [
     "street_address": "",
   },
   Object {
+    "backup_phone": "222-2222223",
     "date_of_birth": Any<String>,
     "effica_ssn": "010619A9501",
     "email": "fake3@notmaildomain.notext",
@@ -260,6 +264,7 @@ Array [
     "street_address": "HideStreet 2",
   },
   Object {
+    "backup_phone": "222-2222223",
     "date_of_birth": Any<String>,
     "effica_ssn": "251118A9509",
     "email": "fake3@notmaildomain.notext",

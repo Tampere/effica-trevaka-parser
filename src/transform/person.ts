@@ -23,13 +23,14 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         nationalities varchar(3)[] NOT NULL,
         restricted_details_enabled BOOLEAN,
         phone TEXT DEFAULT NULL::character varying,
+        backup_phone text DEFAULT ''::text NOT NULL,
         effica_ssn TEXT,
         PRIMARY KEY(id)
     );`
 
     const insertQueryPart = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
-    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, effica_ssn, date_of_birth)
+    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth)
         SELECT
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
         trim(split_part(p.personname, ',', 1)) AS last_name,
@@ -41,7 +42,29 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personcity, '') END AS post_office,
         '{}', -- TODO: nationality
         p.secretaddress AS restricted_details_enabled,
-        (CASE WHEN length(p.personmobilephone) > 20 THEN NULL ELSE p.personmobilephone END) AS phone,
+        (CASE
+            WHEN (length(p.personmobilephone) <= 20 AND length(p.personmobilephone) > 0) THEN p.personmobilephone
+            ELSE
+                CASE
+                    WHEN (length(p.phonework) <= 20 AND length(p.phonework) > 0) THEN p.phonework
+                    WHEN (length(p.phonehome) <= 20 AND length(p.phonehome) > 0) THEN p.phonehome
+                    ELSE NULL
+                END
+        END) AS phone,
+        (CASE
+            WHEN (length(p.personmobilephone) <= 20 AND length(p.personmobilephone) > 0) THEN
+                CASE
+                    WHEN (length(p.phonework) <= 20 AND length(p.phonework) > 0) THEN p.phonework
+                    WHEN (length(p.phonehome) <= 20 AND length(p.phonehome) > 0) THEN p.phonehome
+                    ELSE ''
+                END
+            WHEN (length(p.phonework) <= 20 AND length(p.phonework) > 0) THEN
+                CASE
+                    WHEN (length(p.phonehome) <= 20 AND length(p.phonehome) > 0) THEN p.phonehome
+                    ELSE ''
+                END
+            ELSE ''
+        END) AS backup_phone,
         p.personid AS effica_ssn,
         concat(CASE substr(personid, 7, 1)
                         WHEN '-' THEN 1900
