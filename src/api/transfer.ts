@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import express from "express";
+import { transferApplicationData } from "../transfer/application";
 import { transferDaycareData } from "../transfer/daycare";
 import { transferDepartmentData } from "../transfer/departments";
 import { transferUnitManagerData } from "../transfer/evaka-unit-manager";
@@ -58,6 +59,18 @@ router.get("/families", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer families total ", undefined, "*")
+})
+router.get("/application", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer application total ", undefined, "*")
+    try {
+        const results = await transferApplicationData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer application total ", undefined, "*")
 })
 router.get("/placements", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

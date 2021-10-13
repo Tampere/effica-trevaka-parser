@@ -20,6 +20,8 @@ export const efficaTableMapping: TypeMapping = {
             placeneed: { sqlType: "numeric", parser: nullForcingTextParser },
             specialhandlingtime: { sqlType: "numeric", parser: nullForcingTextParser },
             transferapplication: { sqlType: "boolean", parser: numericBooleanParser },
+            status: { sqlType: "integer", parser: nullForcingTextParser },
+            careid: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }
     },
@@ -38,6 +40,7 @@ export const efficaTableMapping: TypeMapping = {
             days: { sqlType: "integer", parser: nullForcingTextParser },
             extent: { sqlType: "integer", parser: nullForcingTextParser },
             type: { sqlType: "text", parser: nullForcingTextParser },
+            careid: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }
     },

@@ -240,23 +240,21 @@ describe("GET /transform positive", () => {
         await setupTransformations(["person", "families"])
         await setupTransfers(["person", "families"])
 
-        const applicationExpectation = [
-            {
-                id: expect.any(String),
-                created: expect.any(String),
-                updated: expect.any(String),
-                child_id: expect.any(String),
-                guardian_id: expect.any(String),
-                form: {
-                    id: expect.any(String),
-                    created: expect.any(String),
-                    updated: expect.any(String),
-                    application_id: expect.any(String)
-                }
-            }
-        ]
+        const applicationExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            guardian_id: expect.any(String),
+        }
+        const applicationFormExpectation = {
+            application_id: expect.any(String),
+        }
 
-        await positiveTransformSnapshotTest("application", applicationExpectation)
+        await positiveTransformSnapshotTest("application", {
+            applications: Array(1).fill(applicationExpectation),
+            applicationsTodo: Array(0).fill(applicationExpectation),
+            applicationForms: Array(1).fill(applicationFormExpectation),
+            applicationFormsTodo: Array(0).fill(applicationFormExpectation),
+        })
     })
 
 })

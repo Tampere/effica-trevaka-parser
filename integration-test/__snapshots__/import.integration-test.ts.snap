@@ -223,10 +223,11 @@ Object {
     Array [
       Object {
         "areacode": "4010401",
+        "careid": 12345,
         "childminder": null,
         "childmindercare": "0",
         "days": 0,
-        "extent": 999340002,
+        "extent": 100,
         "guid": "52F59481-5533-49E4-8D9F-85E6E180B768",
         "hours": "0",
         "personid": "010619A9501",
@@ -234,7 +235,7 @@ Object {
         "startdate": "2021-09-01T00:00:00.000Z",
         "type": "BOA",
         "unitcare": 0,
-        "unitcode": 7,
+        "unitcode": 123,
       },
     ],
   ],
@@ -250,10 +251,12 @@ Object {
     Array [
       Object {
         "applicationdate": "2021-08-01T00:00:00.000Z",
+        "careid": 12345,
         "guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
         "personid": "010619A9501",
         "placeneed": "1",
         "specialhandlingtime": "0",
+        "status": 999962042,
         "transferapplication": false,
       },
     ],

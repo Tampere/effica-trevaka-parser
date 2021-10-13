@@ -4,7 +4,6 @@
 
 import { ITask } from "pg-promise";
 import { TableDescriptor } from "../types";
-import { EvakaPerson } from "../types/evaka";
 import {
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
@@ -22,23 +21,6 @@ export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
         );
     }
     return user.id;
-};
-
-export const findHeadOfChild = async <T>(
-    t: ITask<T>,
-    child: EvakaPerson,
-    date: Date
-) => {
-    return await t.oneOrNone<EvakaPerson>(
-        `
-        SELECT p.*
-        FROM person p
-        JOIN fridge_child fc ON fc.head_of_child = p.id
-        WHERE fc.child_id = $(childId)
-        AND $(date) BETWEEN fc.start_date AND fc.end_date
-        `,
-        { childId: child.id, date }
-    );
 };
 
 export const createUnitManagerTableQuery = (td: TableDescriptor): string => {
