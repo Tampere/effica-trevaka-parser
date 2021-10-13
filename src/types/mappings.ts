@@ -2,6 +2,26 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+export type ApplicationStatusType =
+    | "CREATED"
+    | "SENT"
+    | "WAITING_PLACEMENT"
+    | "WAITING_UNIT_CONFIRMATION"
+    | "WAITING_DECISION"
+    | "WAITING_MAILING"
+    | "WAITING_CONFIRMATION"
+    | "REJECTED"
+    | "ACTIVE"
+    | "CANCELLED";
+export type CitySpecificApplicationStatusMapping = Record<
+    number,
+    ApplicationStatusType
+>;
+export type CitySpecificApplicationStatusMappings = Record<
+    string,
+    CitySpecificApplicationStatusMapping
+>;
+
 export type FeeAlterationType = "DISCOUNT" | "INCREASE" | "RELIEF";
 export type CitySpecificDeviationTypeMapping = Record<
     number,

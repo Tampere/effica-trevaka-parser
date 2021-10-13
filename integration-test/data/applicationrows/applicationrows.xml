@@ -7,7 +7,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <ApplicationRows>
   <PersonId>010619A9501</PersonId>
   <Priority>1</Priority>
-  <UnitCode>7</UnitCode>
+  <UnitCode>123</UnitCode>
   <ChildMinder>&#x20;</ChildMinder>
   <AreaCode>4010401</AreaCode>
   <StartDate>20210901</StartDate>
@@ -15,7 +15,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <ChildMinderCare>0</ChildMinderCare>
   <UnitCare>0</UnitCare>
   <Days>0</Days>
-  <Extent>999340002</Extent>
+  <Extent>100</Extent>
   <Type>BOA</Type>
   <CareId>12345</CareId>
   <GUID>52F59481-5533-49E4-8D9F-85E6E180B768</GUID>

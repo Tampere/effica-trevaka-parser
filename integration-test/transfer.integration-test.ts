@@ -26,6 +26,8 @@ const baseDataTables =
         "feedeviations",
         "income",
         "incomerows",
+        "applications",
+        "applicationrows",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare"
@@ -76,6 +78,20 @@ const fridgePartnerExpectation = {
     person_id: expect.any(String),
     created: expect.any(String),
     updated: expect.any(String)
+}
+
+const applicationExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    child_id: expect.any(String),
+    guardian_id: expect.any(String),
+}
+const applicationFormExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    application_id: expect.any(String),
 }
 
 const placementExpectation = {
@@ -171,6 +187,17 @@ describe("GET /transfer positive", () => {
             {
                 children: Array(3).fill(fridgeChildExpectation),
                 partners: Array(4).fill(fridgePartnerExpectation)
+            }
+        )
+    })
+    it("should return transferred applications", async () => {
+        await setupTransformations(["person", "families", "application"])
+        await setupTransfers(["person", "families"])
+        await positiveTransferSnapshotTest(
+            "application",
+            {
+                applications: Array(1).fill(applicationExpectation),
+                applicationForms: Array(1).fill(applicationFormExpectation)
             }
         )
     })

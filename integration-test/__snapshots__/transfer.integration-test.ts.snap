@@ -1,5 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transfer positive should return transferred applications 1`] = `
+Object {
+  "applicationForms": Array [
+    Object {
+      "application_id": Any<String>,
+      "created": Any<String>,
+      "document": Object {
+        "additionalDetails": Object {
+          "allergyType": "",
+          "dietType": "",
+          "otherInfo": "",
+        },
+        "apply": Object {
+          "preferredUnits": Array [
+            "19fec146-e2f1-11eb-8473-db55258254c5",
+          ],
+          "siblingBasis": false,
+          "siblingName": "",
+          "siblingSsn": "",
+        },
+        "careDetails": Object {
+          "assistanceDescription": "",
+          "assistanceNeeded": false,
+          "preparatory": null,
+        },
+        "child": Object {
+          "address": Object {
+            "city": "Ypäjä",
+            "editable": false,
+            "postalCode": "00001",
+            "street": "HideStreet 2",
+          },
+          "childMovingDate": null,
+          "correctingAddress": Object {
+            "city": "",
+            "editable": true,
+            "postalCode": "",
+            "street": "",
+          },
+          "dateOfBirth": "2019-06-01",
+          "firstName": "Christian",
+          "hasCorrectingAddress": null,
+          "language": "fi",
+          "lastName": "Child",
+          "nationality": "FI",
+          "restricted": false,
+          "socialSecurityNumber": "010619A9501",
+        },
+        "connectedDaycare": null,
+        "docVersion": 0,
+        "extendedCare": false,
+        "guardian": Object {
+          "address": Object {
+            "city": "Ypäjä",
+            "editable": false,
+            "postalCode": "00001",
+            "street": "Fakestreet 123",
+          },
+          "correctingAddress": Object {
+            "city": "",
+            "editable": true,
+            "postalCode": "",
+            "street": "",
+          },
+          "email": "fake@notmaildomain.notext",
+          "firstName": "Aimo",
+          "guardianMovingDate": null,
+          "hasCorrectingAddress": null,
+          "lastName": "Authentic",
+          "phoneNumber": "000-0000000",
+          "restricted": false,
+          "socialSecurityNumber": "020967-9992",
+        },
+        "guardian2": null,
+        "hasOtherAdults": false,
+        "hasOtherChildren": false,
+        "maxFeeAccepted": false,
+        "otherAdults": Array [],
+        "otherChildren": Array [],
+        "otherGuardianAgreementStatus": null,
+        "partTime": false,
+        "preferredStartDate": "2021-09-01",
+        "serviceEnd": null,
+        "serviceNeedOption": Object {
+          "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+          "name": "Kokopäiväinen",
+        },
+        "serviceStart": null,
+        "type": "DAYCARE",
+        "urgent": false,
+      },
+      "id": Any<String>,
+      "latest": true,
+      "revision": "1",
+      "updated": Any<String>,
+    },
+  ],
+  "applications": Array [
+    Object {
+      "additionaldaycareapplication": false,
+      "checkedbyadmin": false,
+      "child_id": Any<String>,
+      "created": Any<String>,
+      "duedate": null,
+      "duedate_set_manually_at": null,
+      "guardian_id": Any<String>,
+      "hidefromguardian": false,
+      "id": Any<String>,
+      "origin": "ELECTRONIC",
+      "other_guardian_id": null,
+      "sentdate": "2021-08-01T00:00:00.000Z",
+      "status": "SENT",
+      "transferapplication": false,
+      "updated": Any<String>,
+    },
+  ],
+}
+`;
+
 exports[`GET /transfer positive should return transferred daycares 1`] = `
 Array [
   Object {

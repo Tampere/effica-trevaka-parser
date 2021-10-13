@@ -4,7 +4,6 @@
 
 import request from "supertest"
 import app from "../src/app"
-import { getChildminderMap, getExtentMap } from "../src/db/common"
 import db from "../src/db/db"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
@@ -158,30 +157,13 @@ describe("GET /import csv positive", () => {
         return await positiveImportSnapshotTest("evaka_areas")
     })
     it("should return created extentmaps", async () => {
-        const result = await positiveImportSnapshotTest("extentmap")
-        const map = await db.tx(async (t) => await getExtentMap(t))
-        expect(map).toStrictEqual({
-            "100": {
-                "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
-                "name": "Kokopäiväinen"
-            },
-            "101": {
-                "id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
-                "name": "Osapäiväinen, max 5h päivässä"
-            }
-        })
-        return result
+        return await positiveImportSnapshotTest("extentmap")
     })
     it("should return created unitmaps", async () => {
         return await positiveImportSnapshotTest("unitmap")
     })
     it("should return created childmindermaps", async () => {
-        const result = await positiveImportSnapshotTest("childmindermap")
-        const map = await db.tx(async (t) => await getChildminderMap(t))
-        expect(map).toStrictEqual({
-            "010101-TP99": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07"
-        })
-        return result
+        return await positiveImportSnapshotTest("childmindermap")
     })
     it("should return created evaka unit managers", async () => {
         return await positiveImportSnapshotTest("evaka_unit_manager")

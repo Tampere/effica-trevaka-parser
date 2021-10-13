@@ -16,9 +16,10 @@ export const wrapWithReturning = (tableName: string, insertQuery: string, isData
 }
 
 export const selectFromTable = (tableName: string, schema: string = "", isDataReturned: boolean = false, orderByFields: string[] = []) => {
+    const tablePrefix = schema.length > 0 ? `${schema}.` : ""
     return isDataReturned ?
-        `SELECT * FROM ${schema}.${tableName} ${createOrderBy(orderByFields)}` :
-        `SELECT COUNT(*) AS ${tableName}_count FROM ${schema}.${tableName}`
+        `SELECT * FROM ${tablePrefix}${tableName} ${createOrderBy(orderByFields)}` :
+        `SELECT COUNT(*) AS ${tableName}_count FROM ${tablePrefix}${tableName}`
 }
 
 const queryFileCache: Record<string, QueryFile> = {}

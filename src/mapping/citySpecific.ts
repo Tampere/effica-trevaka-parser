@@ -3,9 +3,22 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import {
+    CitySpecificApplicationStatusMappings,
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
 } from "../types/mappings";
+
+export const APPLICATION_STATUS_MAPPINGS: CitySpecificApplicationStatusMappings = {
+    tampere: {
+        999962042: "SENT", // Saapunut
+        // 999962043: "", // Poistettu
+        // 999962044: "", // Ehdotus lähetetty
+        // 999962045: "", // Ehdotus hyväksytty
+        // 999962046: "", // Ehdotus hylätty
+        // 999962047: "", // Käsitelty
+        // 999962050: "", // Tiedot vanhentuneet
+    },
+};
 
 export const DEVIATION_TYPE_MAPPINGS: CitySpecificDeviationTypeMappings = {
     tampere: {
