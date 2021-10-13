@@ -21,25 +21,32 @@ export const getUnitMap = async <T>(t: ITask<T>): Promise<UnitMap> => {
     }, {});
 };
 
-export type ExtentMap = Record<number, { id: string; name: string }>;
+export type ExtentMap = Record<
+    number,
+    Record<number, { id: string; name: string }>
+>;
 export const getExtentMap = async <T>(t: ITask<T>): Promise<ExtentMap> => {
     const extents = await t.manyOrNone<{
         effica_id: number;
+        days: number;
         evaka_id: string;
         evaka_name: string;
     }>(
         `
-        SELECT effica_id, evaka_id, sno.name AS evaka_name
+        SELECT effica_id, days, evaka_id, sno.name AS evaka_name
         FROM ${getMigrationSchemaPrefix()}extentmap em
         LEFT JOIN service_need_option sno ON sno.id = em.evaka_id
         `
     );
-    return extents.reduce((previousValue, currentValue) => {
+    return extents.reduce<ExtentMap>((previousValue, currentValue) => {
         return {
             ...previousValue,
             [currentValue.effica_id]: {
-                id: currentValue.evaka_id,
-                name: currentValue.evaka_name,
+                ...previousValue[currentValue.effica_id],
+                [currentValue.days]: {
+                    id: currentValue.evaka_id,
+                    name: currentValue.evaka_name,
+                },
             },
         };
     }, {});

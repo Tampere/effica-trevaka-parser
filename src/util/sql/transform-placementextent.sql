@@ -27,7 +27,7 @@ SELECT
     COALESCE(pe.enddate, ep.end_date)
 FROM ${migrationSchema:name}.placementextents pe
 JOIN ${migrationSchema:name}.evaka_placement ep ON ep.effica_placement_nbr = pe.placementnbr
-LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode;
+LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode AND em.days = pe.days;
 
 -- delete duplicate rows
 DELETE FROM ${migrationSchema:name}.evaka_service_need p1

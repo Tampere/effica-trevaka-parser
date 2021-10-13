@@ -162,12 +162,16 @@ describe("GET /import csv positive", () => {
         const map = await db.tx(async (t) => await getExtentMap(t))
         expect(map).toStrictEqual({
             "100": {
-                "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
-                "name": "Kokopäiväinen"
+                "0": {
+                    "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+                    "name": "Kokopäiväinen"
+                }
             },
             "101": {
-                "id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
-                "name": "Osapäiväinen, max 5h päivässä"
+                "15": {
+                    "id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
+                    "name": "Osapäiväinen, max 5h päivässä"
+                }
             }
         })
         return result
