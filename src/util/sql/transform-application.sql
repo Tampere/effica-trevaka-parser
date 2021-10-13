@@ -88,11 +88,6 @@ SELECT *, 'UNIT MISSING' AS reason
 FROM ${migrationSchema:name}.evaka_application_form
 WHERE unit_id IS NULL;
 
-INSERT INTO ${migrationSchema:name}.evaka_application_form_todo
-SELECT *, 'SERVICE NEED OPTION MISSING'
-FROM ${migrationSchema:name}.evaka_application_form
-WHERE service_need_option_id IS NULL;
-
 DELETE FROM ${migrationSchema:name}.evaka_application_form
 WHERE (effica_application_id, effica_priority) IN (
     SELECT effica_application_id, effica_priority

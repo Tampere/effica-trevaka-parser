@@ -174,13 +174,13 @@ JOIN (
         application_id,
         array_agg(unit_id ORDER BY effica_priority) AS unit_ids,
         array_agg(jsonb_build_object(
-            'id', service_need_option_id,
+            'id', sno.id,
             'name', sno.name
-        ) ORDER BY effica_priority) AS service_need_options,
+        ) ORDER BY effica_priority) FILTER (WHERE sno.id IS NOT NULL) AS service_need_options,
         array_agg(preferred_start_date ORDER BY effica_priority) AS preferred_start_dates,
         array_agg(type ORDER BY effica_priority) AS types
     FROM ${migrationSchema:name}.evaka_application_form
-    JOIN service_need_option sno ON sno.id = service_need_option_id
+    LEFT JOIN service_need_option sno ON sno.id = service_need_option_id
     GROUP BY application_id
 ) eaf ON eaf.application_id = ea.id
 JOIN ${migrationSchema:name}.evaka_person c ON c.id = ea.child_id
