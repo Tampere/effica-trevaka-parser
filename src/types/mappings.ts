@@ -32,6 +32,13 @@ export type CitySpecificDeviationTypeMappings = Record<
     CitySpecificDeviationTypeMapping
 >;
 
+export type DecisionStatusType =
+    | "DRAFT"
+    | "WAITING_FOR_SENDING"
+    | "WAITING_FOR_MANUAL_SENDING"
+    | "SENT"
+    | "ANNULLED";
+
 export type EfficaIncomeCodeMapping = {
     codes: number[],
     evakaType: string,

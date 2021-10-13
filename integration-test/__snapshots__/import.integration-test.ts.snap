@@ -401,6 +401,7 @@ Object {
     Array [
       Object {
         "caseworker": "FAKE",
+        "ceiling": "0",
         "days": 0,
         "decisionchildminder": null,
         "decisiondate": Any<String>,
@@ -410,7 +411,9 @@ Object {
         "decisiontype": 426,
         "decisionunitcode": 123,
         "enddate": null,
-        "extent": null,
+        "extent": 100,
+        "factor": "0",
+        "familysize": 5,
         "grandtotal": "10",
         "paydecision": "1",
         "personid": "010619A9501",
