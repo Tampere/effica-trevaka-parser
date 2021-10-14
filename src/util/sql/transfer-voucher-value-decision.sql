@@ -63,13 +63,6 @@ INSERT INTO voucher_value_decision (
             'maxFee', ft.max_fee,
             'minFee', ft.min_fee
         )
-        WHEN 4 THEN jsonb_build_object(
-            'minIncomeThreshold', ft.min_income_threshold_4,
-            'maxIncomeThreshold', ft.max_income_threshold_4,
-            'incomeMultiplier', ft.income_multiplier_4,
-            'maxFee', ft.max_fee,
-            'minFee', ft.min_fee
-        )
         WHEN 5 THEN jsonb_build_object(
             'minIncomeThreshold', ft.min_income_threshold_5,
             'maxIncomeThreshold', ft.max_income_threshold_5,
