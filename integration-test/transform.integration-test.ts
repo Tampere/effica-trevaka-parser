@@ -31,6 +31,7 @@ const baseDataTables =
         "feedeviations",
         "income",
         "incomerows",
+        "decisions",
         "applications",
         "applicationrows",
         "evaka_areas",
@@ -231,6 +232,25 @@ describe("GET /transform positive", () => {
         await positiveTransformSnapshotTest(
             "income",
             incomeExpectation
+        )
+    })
+
+    it("should return transformed voucher value decisions", async () => {
+        await setupTransformations(["person", "families", "departments", "placements", "income"])
+
+        const voucherValueDecisionExpectation = {
+            id: expect.any(String),
+            head_of_family_id: expect.any(String),
+            partner_id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "voucher_value_decisions",
+            {
+                decisions: Array(1).fill(voucherValueDecisionExpectation),
+                decisionsTodo: Array(0).fill(voucherValueDecisionExpectation)
+            }
         )
     })
 

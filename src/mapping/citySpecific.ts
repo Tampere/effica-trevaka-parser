@@ -6,6 +6,7 @@ import {
     CitySpecificApplicationStatusMappings,
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
+    DecisionStatusType,
 } from "../types/mappings";
 
 export const APPLICATION_STATUS_MAPPINGS: CitySpecificApplicationStatusMappings = {
@@ -26,6 +27,22 @@ export const DEVIATION_TYPE_MAPPINGS: CitySpecificDeviationTypeMappings = {
         39: { type: "DISCOUNT", notes: "ALENNUS AP/IP" },
         41: { type: "DISCOUNT", notes: "MAKSUTON OSUUS" },
         48: { type: "RELIEF", notes: "ULKOKUNTALAINEN" },
+    },
+};
+
+export const VOUCHER_VALUE_DECISION_TYPES: Record<string, number[]> = {
+    tampere: [426],
+};
+
+export const DECISION_STATUS_TYPE_MAPPINGS: Record<
+    string,
+    Record<number, DecisionStatusType | null>
+> = {
+    tampere: {
+        82: "DRAFT", // Valmisteilla
+        // 493: Vanhentunut
+        999420001: "SENT", // Hyväksytty
+        // 999420002: "ANNULLED", // Mitätöity
     },
 };
 

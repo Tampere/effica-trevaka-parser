@@ -366,3 +366,34 @@ Object {
   "serviceNeedsTodo": Array [],
 }
 `;
+
+exports[`GET /transform positive should return transformed voucher value decisions 1`] = `
+Object {
+  "decisions": Array [
+    Object {
+      "base_co_payment": 0,
+      "capacity_factor": "0.00",
+      "child_date_of_birth": "2019-06-01T00:00:00.000Z",
+      "child_id": Any<String>,
+      "co_payment": 0,
+      "decision_number": "1",
+      "effica_decision_date": "2020-12-01T00:00:00.000Z",
+      "effica_ssn": "010619A9501",
+      "family_size": 5,
+      "final_co_payment": 0,
+      "head_of_family_id": Any<String>,
+      "id": Any<String>,
+      "partner_id": Any<String>,
+      "placement_unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+      "service_need_option_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+      "sibling_discount": 0,
+      "status": "SENT",
+      "status_group": "APPROVED",
+      "valid_from": "2020-04-01T00:00:00.000Z",
+      "valid_to": null,
+      "voucher_value": 1000,
+    },
+  ],
+  "decisionsTodo": Array [],
+}
+`;

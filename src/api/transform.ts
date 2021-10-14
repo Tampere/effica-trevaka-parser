@@ -10,6 +10,7 @@ import { transformFeeDeviationsData } from "../transform/fee-deviations";
 import { transformIncomeData } from "../transform/income";
 import { transformPersonData } from "../transform/person";
 import { transformPlacementsData } from "../transform/placements";
+import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions";
 import { ErrorWithCause } from "../util/error";
 import { time, timeEnd } from "../util/timing";
 
@@ -98,6 +99,19 @@ router.get("/income", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform income total ", undefined, "*")
+})
+
+router.get("/voucher_value_decisions", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform voucher value decisions total ", undefined, "*")
+    try {
+        const results = await transformVoucherValueDecisionData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform voucher value decisions total ", undefined, "*")
 })
 
 
