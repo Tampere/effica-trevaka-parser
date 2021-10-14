@@ -4,6 +4,7 @@
 
 export const config = {
     cityVariant: process.env.CITY_VARIANT ?? "tampere",
+    mockVtj: process.env.MOCK_VTJ?.toUpperCase() === "TRUE",
     port: process.env.PORT ?? 3000,
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
     migrationSchema: process.env.MIGRATION_SCHEMA ?? "migration",
