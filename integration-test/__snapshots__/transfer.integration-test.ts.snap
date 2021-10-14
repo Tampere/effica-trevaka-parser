@@ -734,7 +734,7 @@ Array [
       "minFee": null,
       "minIncomeThreshold": null,
     },
-    "final_co_payment": 0,
+    "final_co_payment": 100,
     "head_of_family_id": Any<String>,
     "head_of_family_income": null,
     "id": Any<String>,

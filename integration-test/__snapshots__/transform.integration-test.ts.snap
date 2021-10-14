@@ -380,7 +380,7 @@ Object {
       "effica_decision_date": "2020-12-01T00:00:00.000Z",
       "effica_ssn": "010619A9501",
       "family_size": 5,
-      "final_co_payment": 0,
+      "final_co_payment": 100,
       "head_of_family_id": Any<String>,
       "id": Any<String>,
       "partner_id": Any<String>,

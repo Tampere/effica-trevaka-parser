@@ -73,7 +73,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     em.evaka_id,
     0, -- TODO: co payment
     d.totalsum * 100,
-    0, -- TODO: final co payment
+    d.paydecision * 100,
     d.factor
 FROM ${migrationSchema:name}.decisions d
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child f_child ON f_child.child_ssn = d.personid
