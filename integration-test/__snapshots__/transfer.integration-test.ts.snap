@@ -513,7 +513,7 @@ Array [
   },
   Object {
     "aad_object_id": null,
-    "backup_phone": "",
+    "backup_phone": "222-2222223",
     "created": Any<String>,
     "date_of_birth": Any<String>,
     "date_of_death": null,
@@ -546,7 +546,7 @@ Array [
   },
   Object {
     "aad_object_id": null,
-    "backup_phone": "",
+    "backup_phone": "222-2222223",
     "created": Any<String>,
     "date_of_birth": Any<String>,
     "date_of_death": null,

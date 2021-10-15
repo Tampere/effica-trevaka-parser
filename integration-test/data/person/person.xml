@@ -13,6 +13,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personzipcode>00001</personzipcode>
     <personhomeemail>fake@notmaildomain.notext</personhomeemail>
     <personmobilephone>000-0000000</personmobilephone>
+    <phonework></phonework>
+    <phonehome></phonehome>
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
     <homemunicipality>2</homemunicipality>
@@ -26,7 +28,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personcity>Ypäjä</personcity>
     <personzipcode>00002</personzipcode>
     <personhomeemail>fake2@notmaildomain.notext</personhomeemail>
-    <personmobilephone>111-1111111</personmobilephone>
+    <personmobilephone></personmobilephone>
+    <phonework>111-1111111</phonework>
+    <phonehome></phonehome>
     <mothertongue>1</mothertongue>
     <nationality>0</nationality>
     <homemunicipality>2</homemunicipality>
@@ -40,7 +44,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personcity>Ypäjä</personcity>
     <personzipcode>00001</personzipcode>
     <personhomeemail>fake3@notmaildomain.notext</personhomeemail>
-    <personmobilephone>0222222222</personmobilephone>
+    <personmobilephone></personmobilephone>
+    <phonework> </phonework>
+    <phonehome>0222222222</phonehome>
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
     <homemunicipality>2</homemunicipality>
@@ -55,6 +61,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personzipcode>00001</personzipcode>
     <personhomeemail>fake3@notmaildomain.notext</personhomeemail>
     <personmobilephone>222-2222222</personmobilephone>
+    <phonework>222-2222223</phonework>
+    <phonehome>222-2222224</phonehome>
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
     <homemunicipality>2</homemunicipality>
@@ -68,7 +76,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <personcity>Tenhola</personcity>
     <personzipcode>12000</personzipcode>
     <personhomeemail>fake3@notmaildomain.notext</personhomeemail>
-    <personmobilephone>222-2222222</personmobilephone>
+    <personmobilephone> </personmobilephone>
+    <phonework> 222-2222222</phonework>
+    <phonehome>222-2222223 </phonehome>
     <mothertongue>1</mothertongue>
     <nationality>3</nationality>
     <homemunicipality>2</homemunicipality>
