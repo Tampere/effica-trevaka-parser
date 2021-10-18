@@ -7,7 +7,7 @@ INSERT INTO application
 SELECT
     id,
     sentdate,
-    null,
+    duedate,
     guardian_id,
     child_id,
     transferapplication,
