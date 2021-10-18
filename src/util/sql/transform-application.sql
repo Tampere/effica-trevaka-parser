@@ -9,6 +9,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
     effica_id INTEGER NOT NULL,
     sentdate DATE NOT NULL,
+    duedate DATE NOT NULL,
     guardian_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     transferapplication BOOLEAN NOT NULL,
@@ -16,15 +17,20 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_application
-    (effica_id, sentdate, guardian_id, child_id, transferapplication, status)
+    (effica_id, sentdate, duedate, guardian_id, child_id, transferapplication, status)
 SELECT
     a.careid,
     a.applicationdate,
+    a.applicationdate + CASE
+        WHEN specialhandlingtime.extrainfo1 IS NOT NULL THEN (specialhandlingtime.extrainfo1 || ' days')::interval
+        ELSE ('120 days')::interval
+    END,
     g.id,
     c.id,
     a.transferapplication,
     $(statusMappings:json)::jsonb ->> a.status::text
 FROM ${migrationSchema:name}.applications a
+LEFT JOIN ${migrationSchema:name}.codes specialhandlingtime ON specialhandlingtime.code = a.specialhandlingtime
 LEFT JOIN ${migrationSchema:name}.evaka_person c ON c.effica_ssn = a.personid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child fc ON fc.child_id = c.id
     AND a.applicationdate BETWEEN fc.start_date AND fc.end_date
