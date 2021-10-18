@@ -6,7 +6,12 @@ import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
 import { APPLICATION_STATUS_MAPPINGS } from "../mapping/citySpecific";
-import { runQuery, runQueryFile, selectFromTable } from "../util/queryTools";
+import {
+    baseQueryParameters,
+    runQuery,
+    runQueryFile,
+    selectFromTable,
+} from "../util/queryTools";
 
 export const transformApplicationData = async (returnAll: boolean = false) => {
     return migrationDb.tx(async (t) => {
@@ -16,14 +21,9 @@ export const transformApplicationData = async (returnAll: boolean = false) => {
     });
 };
 
-const queryParameters = {
-    migrationSchema: config.migrationSchema,
-    extensionSchema: config.extensionSchema,
-};
-
 const transformApplications = async <T>(t: ITask<T>, returnAll: boolean) => {
     await runQueryFile("transform-application.sql", t, {
-        ...queryParameters,
+        ...baseQueryParameters,
         statusMappings: APPLICATION_STATUS_MAPPINGS[config.cityVariant],
     });
 

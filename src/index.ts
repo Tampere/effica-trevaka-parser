@@ -2,10 +2,19 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import app from "./app"
-import { config } from "./config"
+import app from "./app";
+import { config } from "./config";
+import { initDb } from "./init";
 
-app.listen(config.port, () => {
-    console.log(`Parser app listening at http://localhost:${config.port}`)
-})
-
+Promise.all([initDb()])
+    .then(() => {
+        app.listen(config.port, () => {
+            console.log(
+                `Parser app listening at http://localhost:${config.port}`
+            );
+        });
+    })
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });

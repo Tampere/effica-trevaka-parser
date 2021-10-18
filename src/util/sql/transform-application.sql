@@ -6,7 +6,8 @@
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_application CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_application (
-    id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
+    id UUID PRIMARY KEY,
+    effica_guid TEXT NOT NULL,
     effica_id INTEGER NOT NULL,
     sentdate DATE NOT NULL,
     duedate DATE NOT NULL,
@@ -17,8 +18,10 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_application
-    (effica_id, sentdate, duedate, guardian_id, child_id, transferapplication, status)
+    (id, effica_guid, effica_id, sentdate, duedate, guardian_id, child_id, transferapplication, status)
 SELECT
+    COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
+    a.guid,
     a.careid,
     a.applicationdate,
     a.applicationdate + CASE
@@ -30,12 +33,21 @@ SELECT
     a.transferapplication,
     $(statusMappings:json)::jsonb ->> a.status::text
 FROM ${migrationSchema:name}.applications a
+LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'APPLICATION' AND im.effica_guid = a.guid
 LEFT JOIN ${migrationSchema:name}.codes specialhandlingtime ON specialhandlingtime.code = a.specialhandlingtime
 LEFT JOIN ${migrationSchema:name}.evaka_person c ON c.effica_ssn = a.personid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child fc ON fc.child_id = c.id
     AND a.applicationdate BETWEEN fc.start_date AND fc.end_date
 LEFT JOIN ${migrationSchema:name}.evaka_person g ON g.id = fc.head_of_family
 WHERE a.status::text IN (SELECT code FROM jsonb_object_keys($(statusMappings:json)) AS code);
+
+-- maintain ids between migrations
+INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)
+SELECT 'APPLICATION', a.guid, ea.id
+FROM ${migrationSchema:name}.applications a
+JOIN ${migrationSchema:name}.evaka_application ea ON ea.effica_guid = a.guid
+ON CONFLICT (type, effica_guid) DO
+UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_application_todo CASCADE;
 

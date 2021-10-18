@@ -9,6 +9,11 @@ import db from "../db/db"
 import { TableDescriptor } from "../types"
 import { EfficaIncomeCodeMapping } from "../types/mappings"
 
+export const baseQueryParameters = {
+    migrationSchema: config.migrationSchema,
+    extensionSchema: config.extensionSchema,
+};
+
 export const wrapWithReturning = (tableName: string, insertQuery: string, isDataReturned: boolean = false, orderByFields: string[] = []) => {
     return isDataReturned ?
         `WITH rows AS ( ${insertQuery} RETURNING *) select * from rows ${createOrderBy(orderByFields)};` :
@@ -63,10 +68,11 @@ export const getExtensionSchemaPrefix = () => config.extensionSchema ? `${config
 export const createOrderBy = (orderByFields: string[]) => orderByFields.length > 0 ? `ORDER BY ${orderByFields.join(" ,")} ` : ""
 
 export const createGenericTableQueryFromDescriptor = (td: TableDescriptor): string => {
+    const primaryKeyStr = td.primaryKeys !== undefined ? `, PRIMARY KEY (${td.primaryKeys?.join(",")})` : ""
     return `CREATE TABLE IF NOT EXISTS 
         ${getMigrationSchemaPrefix()}
         ${td.tableName} 
-        (${Object.keys(td.columns).map(c => `${c} ${td.columns[c].sqlType}`).join(",")});`
+        (${Object.keys(td.columns).map(c => `${c} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});`
 }
 
 export const createSqlConditionalForIncomeCodes = (mappings: EfficaIncomeCodeMapping[]) => {

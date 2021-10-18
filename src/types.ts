@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 export type FileDescriptor = { fileName: string, data: any, table: TableDescriptor, mapping: TypeMapping }
-export type TableDescriptor = { tableName: string, columns: Record<string, ColumnDescriptor>, tableQueryFunction?: TableQueryFunction }
+export type TableDescriptor = { tableName: string, columns: Record<string, ColumnDescriptor>, primaryKeys?: string[], tableQueryFunction?: TableQueryFunction }
 export type ColumnDescriptor = { sqlType: SqlType, parser: Function }
 
 export type QueryOptions = {

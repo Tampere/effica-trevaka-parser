@@ -88,6 +88,7 @@ const collectTableDescription = (tableName: string, data: any, mapping: TypeMapp
     return {
         tableName,
         columns: collectDataColumnDescriptions(tableName, tableDef, data[0]),
+        primaryKeys: tableDef.primaryKeys,
         tableQueryFunction: tableDef.tableQueryFunction
     }
 }

@@ -5,6 +5,7 @@
 import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
+import { initDb } from "../src/init"
 import { dropTable, truncateEvakaTable } from "../src/util/queryTools"
 import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 
@@ -135,6 +136,8 @@ const voucherValueDecisionExpectation = {
 }
 
 beforeAll(async () => {
+    await initDb()
+
     for await (const table of baseDataTables) {
         await setupTable(table)
     }

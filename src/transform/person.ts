@@ -10,7 +10,8 @@ export const transformPersonData = async (returnAll: boolean = false) => {
     const tableQuery = `
     DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_person CASCADE;
     CREATE TABLE ${getMigrationSchemaPrefix()}evaka_person(
-        id UUID NOT NULL DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
+        id UUID NOT NULL,
+        effica_guid TEXT NOT NULL,
         social_security_number TEXT UNIQUE,
         first_name TEXT,
         last_name TEXT,
@@ -30,8 +31,10 @@ export const transformPersonData = async (returnAll: boolean = false) => {
 
     const insertQueryPart = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
-    (social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth)
+    (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth)
         SELECT
+        COALESCE(im.evaka_id, ${getExtensionSchemaPrefix()}uuid_generate_v1mc()),
+        p.guid,
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
         trim(split_part(p.personname, ',', 1)) AS last_name,
         trim(split_part(p.personname, ',', 2)) AS first_name,
@@ -73,6 +76,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                         + substr(personid, 5, 2)::smallint, '-', substr(personid, 3, 2), '-',
                     substr(personid, 1, 2))::date AS date_of_birth
         FROM ${getMigrationSchemaPrefix()}person p
+        LEFT JOIN ${getMigrationSchemaPrefix()}idmap im ON im.type = 'PERSON' AND im.effica_guid = p.guid
         LEFT JOIN ${getMigrationSchemaPrefix()}codes c
         ON p.mothertongue = c.code AND c.codetype = 'SPRAK'`
 
@@ -80,7 +84,17 @@ export const transformPersonData = async (returnAll: boolean = false) => {
 
     return await migrationDb.tx(async (t) => {
         await runQuery(tableQuery, t)
-        return await runQuery(insertQuery, t, true)
+        const ret = await runQuery(insertQuery, t, true)
+        // maintain ids between migrations
+        await runQuery(`
+            INSERT INTO ${getMigrationSchemaPrefix()}idmap (type, effica_guid, evaka_id)
+            SELECT 'PERSON', p.guid, ep.id
+            FROM ${getMigrationSchemaPrefix()}person p
+            JOIN ${getMigrationSchemaPrefix()}evaka_person ep ON ep.effica_guid = p.guid
+            ON CONFLICT (type, effica_guid) DO
+            UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
+        `, t)
+        return ret;
     })
 
 }

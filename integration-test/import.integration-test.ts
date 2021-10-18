@@ -5,12 +5,12 @@
 import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
+import { initDb } from "../src/init"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
 import { setupTables } from "../src/util/testTools"
 
 const baseUrl = "/import"
-let cleanUps: string[] = []
 
 const tables = ["person", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
@@ -29,25 +29,17 @@ const openDateRange: DateRangeExpectation = {
 }
 
 beforeAll(async () => {
-    await Promise.all(tables.map(table => dropTable(table)))
+    await initDb()
 })
 
-beforeEach(() => { })
-afterEach(async () => {
-    for (const table of cleanUps) {
+beforeEach(async () => {
+    for (const table of tables) {
         await dropTable(table)
     }
-    cleanUps = []
 })
 
 afterAll(async () => {
-    try {
-        for (const table of tables) {
-            await dropTable(table)
-        }
-    } finally {
-        return db.$pool.end()
-    }
+    await db.$pool.end()
 })
 
 // POSITIVE CASES
@@ -169,7 +161,6 @@ describe("GET /import csv positive", () => {
         return await positiveImportSnapshotTest("evaka_unit_manager")
     })
     it("should return created evaka daycares", async () => {
-        cleanUps = ["evaka_areas"]
         await setupTables(["evaka_areas", "evaka_unit_manager"])
         return await positiveImportSnapshotTest("evaka_daycare")
     })
