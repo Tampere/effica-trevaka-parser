@@ -73,32 +73,39 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
 
     const partnerQueryPart =
         `
-        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner (person_id, effica_ssn, partnership_id, family_number, start_date, end_date, indx)
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner (person_id, partnership_id, start_date, end_date, indx, family_number, effica_ssn)
         WITH partnerships AS (
-            SELECT f.familynbr as family_number,
-                ${getExtensionSchemaPrefix()}uuid_generate_v1mc() as partnership_id,
-                max(startdate) filter ( where roleinfamily in ('S', 'R')) as start_date,
-                min(enddate) filter ( where roleinfamily in ('S', 'R')) as end_date
-            FROM ${getMigrationSchemaPrefix()}families f
-            GROUP BY f.familynbr
-            HAVING array_agg(roleinfamily) @> '{"S", "R"}'
-        )
-        SELECT p.id        as person_id,
-            p.effica_ssn, 
-            pr.partnership_id,
-            f.familynbr,
-            pr.start_date,
-            pr.end_date,
-            CASE f.roleinfamily
-                WHEN 'R' THEN 1
-                WHEN 'S' THEN 2
-                END     as indx
-        FROM ${getMigrationSchemaPrefix()}families f
-            JOIN partnerships pr
-                ON pr.family_number = f.familynbr
-            JOIN ${getMigrationSchemaPrefix()}evaka_person p
-                ON p.effica_ssn = f.personid
-        WHERE f.roleinfamily in ('S', 'R')
+            SELECT hof.personid                                   AS hof_ssn,
+                partner.personid                                  AS partner_ssn,
+                ${getExtensionSchemaPrefix()}uuid_generate_v1mc() AS partnership_id,
+                GREATEST(hof.startdate, partner.startdate)        AS start_date,
+                LEAST(hof.enddate, partner.enddate)               AS end_date,
+                hof.familynbr                                     AS family_number
+            FROM ${getMigrationSchemaPrefix()}families hof
+                JOIN ${getMigrationSchemaPrefix()}families partner
+                    ON partner.familynbr = hof.familynbr
+                        AND daterange(hof.startdate, hof.enddate, '[]') && daterange(partner.startdate, partner.enddate, '[]')
+                        AND hof.roleinfamily = 'R'
+                        AND partner.roleinfamily = 'S')
+        SELECT ep.id   AS person_id,
+            ps.partnership_id,
+            ps.start_date,
+            ps.end_date,
+            1          AS indx,
+            ps.family_number,
+            ps.hof_ssn AS effica_ssn
+        FROM partnerships ps
+            JOIN ${getMigrationSchemaPrefix()}evaka_person ep ON ps.hof_ssn = ep.effica_ssn
+        UNION
+        SELECT ep.id       AS person_id,
+            ps.partnership_id,
+            ps.start_date,
+            ps.end_date,
+            2              AS indx,
+            ps.family_number,
+            ps.partner_ssn AS effica_ssn
+        FROM partnerships ps
+            JOIN ${getMigrationSchemaPrefix()}evaka_person ep ON ps.partner_ssn = ep.effica_ssn
         `
 
     const updateQueries =
