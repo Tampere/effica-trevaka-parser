@@ -8,19 +8,19 @@ import {
     DECISION_STATUS_TYPE_MAPPINGS,
     VOUCHER_VALUE_DECISION_TYPES,
 } from "../mapping/citySpecific";
-import { runQuery, runQueryFile, selectFromTable } from "../util/queryTools";
-
-const queryParameters = {
-    migrationSchema: config.migrationSchema,
-    extensionSchema: config.extensionSchema,
-};
+import {
+    baseQueryParameters,
+    runQuery,
+    runQueryFile,
+    selectFromTable,
+} from "../util/queryTools";
 
 export const transformVoucherValueDecisionData = async (
     returnAll: boolean = false
 ) => {
     return await migrationDb.tx(async (t) => {
         await runQueryFile("transform-voucher-value-decision.sql", t, {
-            ...queryParameters,
+            ...baseQueryParameters,
             statusMappings: DECISION_STATUS_TYPE_MAPPINGS[config.cityVariant],
             types: VOUCHER_VALUE_DECISION_TYPES[config.cityVariant],
         });

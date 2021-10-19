@@ -415,6 +415,7 @@ Object {
         "factor": "0",
         "familysize": 5,
         "grandtotal": "10",
+        "guid": "10",
         "paydecision": "1",
         "personid": "010619A9501",
         "startdate": Any<String>,
@@ -641,7 +642,7 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa1}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -657,7 +658,7 @@ Object {
         "secretaddress": false,
       },
       Object {
-        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa2}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": null,
@@ -673,7 +674,7 @@ Object {
         "secretaddress": false,
       },
       Object {
-        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa3}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -689,7 +690,7 @@ Object {
         "secretaddress": true,
       },
       Object {
-        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa4}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,
@@ -705,7 +706,7 @@ Object {
         "secretaddress": false,
       },
       Object {
-        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa}",
+        "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa5}",
         "homemunicipality": 2,
         "mothertongue": 1,
         "nationality": 3,

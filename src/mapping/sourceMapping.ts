@@ -23,7 +23,8 @@ export const efficaTableMapping: TypeMapping = {
             status: { sqlType: "integer", parser: nullForcingTextParser },
             careid: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
-        }
+        },
+        primaryKeys: ["guid"],
     },
     applicationrows: {
         tableName: "applicationrows",
@@ -108,7 +109,8 @@ export const efficaTableMapping: TypeMapping = {
             nationality: { sqlType: "integer", parser: codeNumericParser },
             homemunicipality: { sqlType: "integer", parser: codeNumericParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
-        }
+        },
+        primaryKeys: ["guid"],
     },
     areas: {
         tableName: "areas",
@@ -220,7 +222,8 @@ export const efficaTableMapping: TypeMapping = {
             totalsum: { sqlType: "numeric", parser: nullForcingTextParser },
             grandtotal: { sqlType: "numeric", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
-        }
+        },
+        primaryKeys:["guid"],
     },
     childminders: {
         tableName: "childminders",

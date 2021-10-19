@@ -5,7 +5,12 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
-import { runQuery, runQueryFile, selectFromTable } from "../util/queryTools";
+import {
+    baseQueryParameters,
+    runQuery,
+    runQueryFile,
+    selectFromTable,
+} from "../util/queryTools";
 
 export const transformPlacementsData = async (returnAll: boolean = false) => {
     return migrationDb.tx(async (t) => {
@@ -16,14 +21,8 @@ export const transformPlacementsData = async (returnAll: boolean = false) => {
     });
 };
 
-const queryParameters = {
-    migrationSchema: config.migrationSchema,
-    extensionSchema: config.extensionSchema,
-};
-
 const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
-    await runQueryFile("functions.sql", t, queryParameters);
-    await runQueryFile("transform-placement.sql", t, queryParameters);
+    await runQueryFile("transform-placement.sql", t, baseQueryParameters);
 
     const placements = await runQuery(
         selectFromTable("evaka_placement", config.migrationSchema, returnAll, [
@@ -46,7 +45,7 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
 };
 
 const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {
-    await runQueryFile("transform-placementextent.sql", t, queryParameters);
+    await runQueryFile("transform-placementextent.sql", t, baseQueryParameters);
 
     const serviceNeeds = await runQuery(
         selectFromTable(
@@ -68,5 +67,5 @@ const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
-    return { serviceNeeds, serviceNeedsTodo }
+    return { serviceNeeds, serviceNeedsTodo };
 };

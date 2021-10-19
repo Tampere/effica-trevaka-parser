@@ -4,7 +4,8 @@
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_voucher_value_decision CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
-    id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
+    id UUID PRIMARY KEY,
+    effica_guid TEXT NOT NULL,
     effica_ssn TEXT,
     effica_decision_date DATE,
     status TEXT,
@@ -29,6 +30,8 @@ CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
+    id,
+    effica_guid,
     effica_ssn,
     effica_decision_date,
     status,
@@ -50,6 +53,8 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     final_co_payment,
     capacity_factor
 ) SELECT
+    COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
+    d.guid,
     d.personid,
     d.decisiondate,
     $(statusMappings:json)::jsonb ->> d.decisionstatus::text,
@@ -76,6 +81,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     d.paydecision * 100,
     d.factor
 FROM ${migrationSchema:name}.decisions d
+LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'DECISION' AND im.effica_guid = d.guid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child f_child ON f_child.child_ssn = d.personid
     AND daterange(f_child.start_date, f_child.end_date, '[]') @> d.decisiondate
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_partner f_partner1 ON f_partner1.person_id = f_child.head_of_family
@@ -87,6 +93,14 @@ LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = d.decisionunitcod
 LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = d.decisionchildminder
 LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = d.extent AND em.days = d.days
 WHERE decisiontype IN ($(types:csv));
+
+-- maintain ids between migrations
+INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)
+SELECT 'DECISION', d.guid, ed.id
+FROM ${migrationSchema:name}.decisions d
+JOIN ${migrationSchema:name}.evaka_voucher_value_decision ed ON ed.effica_guid = d.guid
+ON CONFLICT (type, effica_guid) DO
+UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
 
 -- fix null end dates from next start dates
 WITH

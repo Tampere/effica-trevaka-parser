@@ -18,6 +18,7 @@ Object {
     Object {
       "child_id": Any<String>,
       "duedate": "2021-11-29T00:00:00.000Z",
+      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
       "effica_id": 12345,
       "guardian_id": Any<String>,
       "id": Any<String>,
@@ -199,6 +200,7 @@ Array [
   Object {
     "backup_phone": "",
     "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa1}",
     "effica_ssn": "020967-9992",
     "email": "fake@notmaildomain.notext",
     "first_name": "Aimo",
@@ -216,6 +218,7 @@ Array [
   Object {
     "backup_phone": "",
     "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa2}",
     "effica_ssn": "020288-TP01",
     "email": "fake2@notmaildomain.notext",
     "first_name": "Teppo",
@@ -233,6 +236,7 @@ Array [
   Object {
     "backup_phone": "",
     "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa3}",
     "effica_ssn": "180476-998M",
     "email": "fake3@notmaildomain.notext",
     "first_name": "Hilda",
@@ -250,6 +254,7 @@ Array [
   Object {
     "backup_phone": "222-2222223",
     "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa4}",
     "effica_ssn": "010619A9501",
     "email": "fake3@notmaildomain.notext",
     "first_name": "Christian",
@@ -267,6 +272,7 @@ Array [
   Object {
     "backup_phone": "222-2222223",
     "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa5}",
     "effica_ssn": "251118A9509",
     "email": "fake3@notmaildomain.notext",
     "first_name": "Camilla",
@@ -384,6 +390,7 @@ Object {
       "co_payment": 0,
       "decision_number": "1",
       "effica_decision_date": "2020-12-01T00:00:00.000Z",
+      "effica_guid": "10",
       "effica_ssn": "010619A9501",
       "family_size": 5,
       "final_co_payment": 100,
