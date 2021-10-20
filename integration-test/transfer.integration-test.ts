@@ -203,8 +203,8 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred applications", async () => {
-        await setupTransformations(["person", "families", "application"])
-        await setupTransfers(["person", "families"])
+        await setupTransformations(["persons", "families", "application"])
+        await setupTransfers(["persons", "families"])
         await positiveTransferSnapshotTest(
             "application",
             {
@@ -260,8 +260,8 @@ describe("GET /transfer positive", () => {
     })
 
     it("should return transferred voucher value decisions", async () => {
-        await setupTransformations(["person", "families", "departments", "placements", "feedeviations", "voucher_value_decisions"])
-        await setupTransfers(["person", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
+        await setupTransformations(["persons", "families", "departments", "placements", "feedeviations", "voucher_value_decisions"])
+        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
         await positiveTransferSnapshotTest(
             "voucher_value_decisions",
             Array(1).fill(voucherValueDecisionExpectation)

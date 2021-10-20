@@ -84,7 +84,7 @@ describe("GET /transform positive", () => {
             Array(5).fill(personExpectation)
         )
         // verify maintain ids between migrations
-        const response2 = await transform("person")
+        const response2 = await transform("persons")
         expect(response2.body).toEqual(
             expect.arrayContaining(response1.body.map((person: any) => expect.objectContaining({ id: person.id })))
         )
@@ -243,7 +243,7 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed voucher value decisions", async () => {
-        await setupTransformations(["person", "families", "departments", "placements", "income"])
+        await setupTransformations(["persons", "families", "departments", "placements", "income"])
 
         const voucherValueDecisionExpectation = {
             id: expect.any(String),
