@@ -22,7 +22,9 @@ const dependencyOrder: TransformOperation[] =
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
         { name: "placements", function: transformPlacementsData },
-        { name: "feedeviations", function: transformFeeDeviationsData }
+        { name: "feedeviations", function: transformFeeDeviationsData },
+        { name: "application", function: transformApplicationData },
+        { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
     ]
 
 const router = express.Router();
@@ -125,21 +127,23 @@ router.get("/voucher_value_decisions", async (req, res, next) => {
     timeEnd("**** Transform voucher value decisions total ", undefined, "*")
 })
 
+//run all transforms in dependency order in SEPARATE TRANSACTIONS, stops at first error
 router.get("/", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"
     time("**** Transform all total ", undefined, "*")
     const results: Record<string, any> = {}
-
+    let status = 200
     for (let operation of dependencyOrder) {
         try {
             results[operation.name] = await operation.function(returnAll)
         } catch (error) {
             results[operation.name] = error
+            status = 500
             break
         }
     }
 
-    res.status(200).json(results)
+    res.status(status).json(results)
 
     timeEnd("**** Transform all total ", undefined, "*")
 })
