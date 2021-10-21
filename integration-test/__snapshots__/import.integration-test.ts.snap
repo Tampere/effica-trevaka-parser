@@ -724,7 +724,7 @@ Object {
     ],
   ],
   "tables": Array [
-    "person",
+    "persons",
   ],
 }
 `;

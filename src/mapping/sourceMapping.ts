@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { createAreaTableQuery, createDaycareTableQuery, createUnitManagerTableQuery } from "../db/evaka"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullDateParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 // dateformat in effica-data: yyyymmdd
@@ -62,7 +62,7 @@ export const efficaTableMapping: TypeMapping = {
         columns: {
             familynbr: { sqlType: "integer", parser: nullForcingTextParser },
             personid: { sqlType: "text", parser: nullForcingTextParser },
-            startdate: { sqlType: "date", parser: nonNullDateParser },
+            startdate: { sqlType: "date", parser: nullDateParser },
             enddate: { sqlType: "date", parser: nullDateParser },
             roleinfamily: { sqlType: "text", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
@@ -92,8 +92,8 @@ export const efficaTableMapping: TypeMapping = {
             guid: { sqlType: "text", parser: nullForcingTextParser }
         }
     },
-    person: {
-        tableName: "person",
+    persons: {
+        tableName: "persons",
         columns: {
             personid: { sqlType: "text", parser: nullForcingTextParser },
             personname: { sqlType: "text", parser: nullForcingTextParser },
@@ -127,8 +127,8 @@ export const efficaTableMapping: TypeMapping = {
         columns: {
             unitcode: { sqlType: "integer", parser: codeNumericParser },
             unitname: { sqlType: "text", parser: nullForcingTextParser },
-            startdate: { sqlType: "date", parser: nonNullDateParser },
-            enddate: { sqlType: "date", parser: nonNullDateParser },
+            startdate: { sqlType: "date", parser: nullDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
             unitaddress: { sqlType: "text", parser: nullForcingTextParser },
             unitzipcode: { sqlType: "text", parser: nullForcingTextParser },
             unitcity: { sqlType: "text", parser: nullForcingTextParser },
@@ -145,8 +145,8 @@ export const efficaTableMapping: TypeMapping = {
             unitcode: { sqlType: "integer", parser: codeNumericParser },
             departmentcode: { sqlType: "integer", parser: codeNumericParser },
             departmentname: { sqlType: "text", parser: nullForcingTextParser },
-            startdate: { sqlType: "date", parser: nonNullDateParser },
-            enddate: { sqlType: "date", parser: nonNullDateParser },
+            startdate: { sqlType: "date", parser: nullDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
             departmentaddress: { sqlType: "text", parser: nullForcingTextParser },
             departmentzipcode: { sqlType: "text", parser: nullForcingTextParser },
             departmentcity: { sqlType: "text", parser: nullForcingTextParser },
@@ -223,7 +223,7 @@ export const efficaTableMapping: TypeMapping = {
             grandtotal: { sqlType: "numeric", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys:["guid"],
+        primaryKeys: ["guid"],
     },
     childminders: {
         tableName: "childminders",

@@ -75,7 +75,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                         WHEN 'A' THEN 2000 END
                         + substr(personid, 5, 2)::smallint, '-', substr(personid, 3, 2), '-',
                     substr(personid, 1, 2))::date AS date_of_birth
-        FROM ${getMigrationSchemaPrefix()}person p
+        FROM ${getMigrationSchemaPrefix()}persons p
         LEFT JOIN ${getMigrationSchemaPrefix()}idmap im ON im.type = 'PERSON' AND im.effica_guid = p.guid
         LEFT JOIN ${getMigrationSchemaPrefix()}codes c
         ON p.mothertongue = c.code AND c.codetype = 'SPRAK'`
@@ -89,7 +89,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         await runQuery(`
             INSERT INTO ${getMigrationSchemaPrefix()}idmap (type, effica_guid, evaka_id)
             SELECT 'PERSON', p.guid, ep.id
-            FROM ${getMigrationSchemaPrefix()}person p
+            FROM ${getMigrationSchemaPrefix()}persons p
             JOIN ${getMigrationSchemaPrefix()}evaka_person ep ON ep.effica_guid = p.guid
             ON CONFLICT (type, effica_guid) DO
             UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;

@@ -14,7 +14,7 @@ const baseUrl = "/transfer"
 //order based on dependency
 const baseDataTables =
     [
-        "person",
+        "persons",
         "codes",
         "families",
         "units",
@@ -37,7 +37,7 @@ const baseDataTables =
 
 //endpoint: table
 const transformationMap: Record<string, string> = {
-    person: "evaka_person"
+    persons: "evaka_person"
 }
 
 let evakaDataCleanups: string[] = [
@@ -185,15 +185,15 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred persons", async () => {
-        await setupTransformations(["person"])
+        await setupTransformations(["persons"])
         await positiveTransferSnapshotTest(
-            "person",
+            "persons",
             Array(5).fill(personExpectation)
         )
     })
     it("should return transferred families", async () => {
-        await setupTransformations(["person", "families"])
-        await setupTransfers(["person"])
+        await setupTransformations(["persons", "families"])
+        await setupTransfers(["persons"])
         await positiveTransferSnapshotTest(
             "families",
             {
@@ -203,8 +203,8 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred applications", async () => {
-        await setupTransformations(["person", "families", "application"])
-        await setupTransfers(["person", "families"])
+        await setupTransformations(["persons", "families", "application"])
+        await setupTransfers(["persons", "families"])
         await positiveTransferSnapshotTest(
             "application",
             {
@@ -214,8 +214,8 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred placements", async () => {
-        await setupTransformations(["person", "departments", "placements"])
-        await setupTransfers(["person", "unit_manager", "daycare", "departments"])
+        await setupTransformations(["persons", "departments", "placements"])
+        await setupTransfers(["persons", "unit_manager", "daycare", "departments"])
         await positiveTransferSnapshotTest(
             "placements",
             {
@@ -229,8 +229,8 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred fee alterations", async () => {
-        await setupTransformations(["person", "departments", "placements", "feedeviations"])
-        await setupTransfers(["person", "unit_manager", "daycare", "departments", "placements"])
+        await setupTransformations(["persons", "departments", "placements", "feedeviations"])
+        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "fee_alterations",
             Array(1).fill(feeAlterationExpectation)
@@ -251,8 +251,8 @@ describe("GET /transfer positive", () => {
             valid_to: expect.any(String)
         }
 
-        await setupTransformations(["person", "income"])
-        await setupTransfers(["person"])
+        await setupTransformations(["persons", "income"])
+        await setupTransfers(["persons"])
         await positiveTransferSnapshotTest(
             "income",
             [incomeOpenExpectation, incomeClosedExpectation]
@@ -260,8 +260,8 @@ describe("GET /transfer positive", () => {
     })
 
     it("should return transferred voucher value decisions", async () => {
-        await setupTransformations(["person", "families", "departments", "placements", "feedeviations", "voucher_value_decisions"])
-        await setupTransfers(["person", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
+        await setupTransformations(["persons", "families", "departments", "placements", "feedeviations", "voucher_value_decisions"])
+        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
         await positiveTransferSnapshotTest(
             "voucher_value_decisions",
             Array(1).fill(voucherValueDecisionExpectation)

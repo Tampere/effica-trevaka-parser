@@ -7,7 +7,9 @@ import { TableDescriptor } from "../types";
 import {
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
+    truncateEvakaTable
 } from "../util/queryTools";
+import migrationDb from "./db";
 
 export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
     let user = await t.oneOrNone<{ id: string }>(
@@ -48,7 +50,7 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
         type text[] default '{CENTRE}' not null,
         care_area_id uuid not null
             constraint fk$care_area
-                references ${getMigrationSchemaPrefix()}evaka_areas
+                references care_area
                     on delete cascade,
         phone text,
         url text,
@@ -104,4 +106,13 @@ export const createAreaTableQuery = (td: TableDescriptor): string => {
     `
 }
 
-
+export const resetEvakaMigratedData = async () => {
+    const evakaMigrationTables: string[] = [
+        "person", "daycare", "unit_manager"
+    ]
+    return await migrationDb.tx(async (t) => {
+        for (let table of evakaMigrationTables) {
+            await truncateEvakaTable(table, t)
+        }
+    })
+}
