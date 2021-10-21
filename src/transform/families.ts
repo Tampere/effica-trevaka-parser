@@ -17,7 +17,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             hof_ssn TEXT NOT NULL,
             family_number INTEGER NOT NULL,
             start_date date NOT NULL,
-            end_date DATE NOT NULL DEFAULT 'infinity'::date
+            end_date DATE NOT NULL
         );
         `
 
