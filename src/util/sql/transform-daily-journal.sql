@@ -108,7 +108,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_backup_care (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
-    group_id UUID REFERENCES daycare_group, -- TODO: REFERENCES ${migrationSchema:name}.evaka_daycare_group,
+    group_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare_group,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL
 );
@@ -117,14 +117,13 @@ WITH backup_cares AS (
     SELECT
         child.id AS child_id,
         COALESCE(um.evaka_id, cm.evaka_id) AS unit_id,
-        dg.id AS group_id,
+        edg.id AS group_id,
         d.date,
-        ROW_NUMBER() OVER(PARTITION BY child.id, COALESCE(um.evaka_id, cm.evaka_id), dg.id ORDER BY d.date) AS days
+        ROW_NUMBER() OVER(PARTITION BY child.id, COALESCE(um.evaka_id, cm.evaka_id), edg.id ORDER BY d.date) AS days
     FROM ${migrationSchema:name}.dailyjournals_view d
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
     LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = d.unit
     LEFT JOIN ${migrationSchema:name}.evaka_daycare_group edg ON edg.effica_id = d.department
-    LEFT JOIn daycare_group dg ON dg.id = edg.id -- TODO: remove when REFERENCES is fixed
     LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = d.childminder
     WHERE d.reportcode IN ($(backupCareTypes:csv))
     GROUP BY child_id, unit_id, group_id, d.date

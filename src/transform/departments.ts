@@ -10,7 +10,7 @@ export const transformDepartmentData = async (returnAll: boolean = false) => {
         `
         DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_daycare_group CASCADE;
         CREATE TABLE ${getMigrationSchemaPrefix()}evaka_daycare_group (
-            id UUID NOT NULL DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
+            id UUID PRIMARY KEY DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
             daycare_id UUID NOT NULL
                 CONSTRAINT daycare_group_daycare_id_fkey
 			        REFERENCES ${getMigrationSchemaPrefix()}evaka_daycare

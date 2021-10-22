@@ -322,6 +322,21 @@ describe("GET /transform positive", () => {
         )
     })
 
+    it("should return cleanups", async () => {
+        await setupTransformations(["persons", "departments", "placements"])
+
+        const daycareGroupExpectation = {
+            id: expect.any(String)
+        }
+
+        await positiveTransformSnapshotTest(
+            "cleanup",
+            {
+                cleanedDaycareGroups: Array(1).fill(daycareGroupExpectation),
+            }
+        )
+    })
+
 })
 
 const positiveTransformSnapshotTest = async (tableName: string, resultPattern?: any) => {

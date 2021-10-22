@@ -4,6 +4,7 @@
 
 import express from "express"
 import { transformApplicationData } from "../transform/application"
+import { cleanupData } from "../transform/cleanup"
 import { transformDailyJournalsData } from "../transform/daily-journals"
 import { transformDepartmentData } from "../transform/departments"
 import { transformFamilyData } from "../transform/families"
@@ -27,6 +28,7 @@ const dependencyOrder: TransformOperation[] =
         { name: "application", function: transformApplicationData },
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
         { name: "daily_journals", function: transformDailyJournalsData },
+        { name: "cleanup", function: cleanupData },
     ]
 
 const router = express.Router();
@@ -140,6 +142,19 @@ router.get("/daily_journals", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform daily journals total ", undefined, "*")
+})
+
+router.get("/cleanup", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Cleanup total ", undefined, "*")
+    try {
+        const results = await cleanupData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Cleanup total ", undefined, "*")
 })
 
 //run all transforms in dependency order in SEPARATE TRANSACTIONS, stops at first error
