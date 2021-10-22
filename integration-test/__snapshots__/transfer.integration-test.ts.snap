@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transfer positive should return transferred absences 1`] = `
+Array [
+  Object {
+    "absence_type": "SICKLEAVE",
+    "care_type": "DAYCARE",
+    "child_id": Any<String>,
+    "date": "2020-03-09T00:00:00.000Z",
+    "id": Any<String>,
+    "modified_at": Any<String>,
+    "modified_by_deprecated": null,
+    "modified_by_employee_id": Any<String>,
+    "modified_by_guardian_id": null,
+  },
+]
+`;
+
 exports[`GET /transfer positive should return transferred applications 1`] = `
 Object {
   "applicationForms": Array [
@@ -118,6 +134,8 @@ Object {
   ],
 }
 `;
+
+exports[`GET /transfer positive should return transferred backup cares 1`] = `Array []`;
 
 exports[`GET /transfer positive should return transferred daycares 1`] = `
 Array [

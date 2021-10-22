@@ -15,6 +15,7 @@ const baseUrl = "/import"
 const tables = ["persons", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
+    "dailyjournals", "dailyjournalrows",
     "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare"]
 
 type DateRangeExpectation = { [key: string]: any }
@@ -118,6 +119,14 @@ describe("GET /import xml positive", () => {
         return await positiveImportSnapshotTest(
             "childminders",
             getTimeSeriesResultPattern(openDateRange))
+    })
+
+    it("should return created daily journals", async () => {
+        return await positiveImportSnapshotTest("dailyjournals")
+    })
+
+    it("should return created daily journal rows", async () => {
+        return await positiveImportSnapshotTest("dailyjournalrows")
     })
 
     it("should return created applications", async () => {

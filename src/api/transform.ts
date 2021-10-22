@@ -4,6 +4,7 @@
 
 import express from "express"
 import { transformApplicationData } from "../transform/application"
+import { transformDailyJournalsData } from "../transform/daily-journals"
 import { transformDepartmentData } from "../transform/departments"
 import { transformFamilyData } from "../transform/families"
 import { transformFeeDeviationsData } from "../transform/fee-deviations"
@@ -25,6 +26,7 @@ const dependencyOrder: TransformOperation[] =
         { name: "feedeviations", function: transformFeeDeviationsData },
         { name: "application", function: transformApplicationData },
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
+        { name: "daily_journals", function: transformDailyJournalsData },
     ]
 
 const router = express.Router();
@@ -125,6 +127,19 @@ router.get("/voucher_value_decisions", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform voucher value decisions total ", undefined, "*")
+})
+
+router.get("/daily_journals", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform daily journals total ", undefined, "*")
+    try {
+        const results = await transformDailyJournalsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform daily journals total ", undefined, "*")
 })
 
 //run all transforms in dependency order in SEPARATE TRANSACTIONS, stops at first error

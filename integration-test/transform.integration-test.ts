@@ -35,6 +35,8 @@ const baseDataTables =
         "decisions",
         "applications",
         "applicationrows",
+        "dailyjournals",
+        "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare"
@@ -263,6 +265,32 @@ describe("GET /transform positive", () => {
         const response2 = await transform("voucher_value_decisions")
         expect(response2.body.decisions).toEqual(
             expect.arrayContaining(response1.body.decisions.map((decision: any) => expect.objectContaining({ id: decision.id })))
+        )
+    })
+
+    it("should return transformed daily journals", async () => {
+        await setupTransformations(["persons", "departments", "placements"])
+
+        const absenceExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        const backupCareExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            unit_id: expect.any(String),
+            group_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "daily_journals",
+            {
+                absences: Array(1).fill(absenceExpectation),
+                absencesTodo: Array(0).fill(absenceExpectation),
+                backupCares: Array(0).fill(backupCareExpectation),
+                backupCaresTodo: Array(0).fill(backupCareExpectation),
+            }
         )
     })
 

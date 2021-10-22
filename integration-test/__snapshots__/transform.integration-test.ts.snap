@@ -31,6 +31,26 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed daily journals 1`] = `
+Object {
+  "absences": Array [
+    Object {
+      "absence_type": "SICKLEAVE",
+      "care_type": "DAYCARE",
+      "child_id": Any<String>,
+      "date": "2020-03-09T00:00:00.000Z",
+      "effica_dailyjournalids": Array [
+        123456,
+      ],
+      "id": Any<String>,
+    },
+  ],
+  "absencesTodo": Array [],
+  "backupCares": Array [],
+  "backupCaresTodo": Array [],
+}
+`;
+
 exports[`GET /transform positive should return transformed departments 1`] = `
 Array [
   Object {
