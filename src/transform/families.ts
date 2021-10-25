@@ -47,28 +47,42 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
 
     const childQueryPart =
         `
-        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_child (head_of_family, hof_ssn, child_id, child_ssn, family_number, start_date, end_date)
-        WITH hofs_in_families AS (
-            SELECT DISTINCT f.familynbr, f.personid AS hof_ssn, p.id as person_id
-            FROM ${getMigrationSchemaPrefix()}families f
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_child (hof_ssn, head_of_family, child_ssn, child_id, start_date, end_date, family_number)
+         WITH hofs AS (
+             SELECT hof.personid  AS effica_ssn,
+                    hof.startdate AS start_date,
+                    hof.enddate   AS end_date,
+                    hof.familynbr AS family_number,
+                    p.id          AS person_id
+             FROM ${getMigrationSchemaPrefix()}families hof
                 JOIN ${getMigrationSchemaPrefix()}evaka_person p
-                    ON f.personid = p.effica_ssn
-            WHERE f.roleinfamily = 'R'
-        )
-        SELECT
-            hofs.person_id as head_of_family,
-            hofs.hof_ssn, 
-            p.id as child_id,
-            p.effica_ssn as child_ssn,
-            f.familynbr,
-            f.startdate as start_date,
-            COALESCE(f.enddate, (p.date_of_birth) + INTERVAL '18 years' - INTERVAL '1 day') as end_date
-        FROM hofs_in_families hofs
-            JOIN ${getMigrationSchemaPrefix()}families f
-                ON f.familynbr = hofs.familynbr
-            JOIN ${getMigrationSchemaPrefix()}evaka_person p
-                ON f.personid = p.effica_ssn
-        WHERE roleinfamily = 'B'
+                    ON hof.personid = p.effica_ssn
+             WHERE hof.roleinfamily = 'R'
+         ),
+              children AS (
+                  SELECT child.personid                                                             AS effica_ssn,
+                         child.startdate                                                            AS start_date,
+                         COALESCE(child.enddate,
+                                  (p.date_of_birth) + INTERVAL '18 years' - INTERVAL '1 day')::date AS end_date,
+                         child.familynbr                                                            AS family_number,
+                         p.id                                                                       AS person_id
+                  FROM ${getMigrationSchemaPrefix()}families child
+                     JOIN ${getMigrationSchemaPrefix()}evaka_person p
+                         ON child.personid = p.effica_ssn
+                  WHERE child.roleinfamily = 'B'
+              )
+         SELECT h.effica_ssn                         AS hof_ssn,
+                h.person_id                          AS head_of_family,
+                c.effica_ssn                         AS child_ssn,
+                c.person_id                          AS child_id,
+                GREATEST(h.start_date, c.start_date) AS start_date,
+                LEAST(h.end_date, c.end_date)        AS end_date,
+                h.family_number
+         FROM hofs h
+            JOIN children c
+                ON h.family_number = c.family_number
+                    AND daterange(h.start_date, h.end_date, '[]') &&
+                        daterange(c.start_date, c.end_date, '[]')
         `
 
     const partnerQueryPart =
