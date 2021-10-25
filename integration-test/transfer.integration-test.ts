@@ -30,6 +30,8 @@ const baseDataTables =
         "applications",
         "applicationrows",
         "decisions",
+        "dailyjournals",
+        "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare"
@@ -135,6 +137,20 @@ const voucherValueDecisionExpectation = {
     updated: expect.any(String)
 }
 
+const absenceExpectation = {
+    id: expect.any(String),
+    child_id: expect.any(String),
+    modified_at: expect.any(String),
+    modified_by_employee_id: expect.any(String),
+}
+
+const backupCareExpectation = {
+    id: expect.any(String),
+    child_id: expect.any(String),
+    unit_id: expect.any(String),
+    group_id: expect.any(String),
+}
+
 beforeAll(async () => {
     await initDb()
 
@@ -224,7 +240,6 @@ describe("GET /transfer positive", () => {
                 serviceNeeds: Array(2).fill(serviceNeedExpectation),
                 daycareGroups: Array(1).fill(daycareGroupExpectation),
                 groupPlacements: Array(3).fill(groupPlacementExpectation),
-                cleanedDaycareGroups: Array(1).fill(daycareGroupExpectation)
             }
         )
     })
@@ -265,6 +280,24 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "voucher_value_decisions",
             Array(1).fill(voucherValueDecisionExpectation)
+        )
+    })
+
+    it("should return transferred absences", async () => {
+        await setupTransformations(["persons", "departments", "placements", "daily_journals"])
+        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
+        await positiveTransferSnapshotTest(
+            "absences",
+            Array(1).fill(absenceExpectation)
+        )
+    })
+
+    it("should return transferred backup cares", async () => {
+        await setupTransformations(["persons", "departments", "placements", "daily_journals"])
+        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
+        await positiveTransferSnapshotTest(
+            "backup_cares",
+            Array(0).fill(backupCareExpectation)
         )
     })
 })

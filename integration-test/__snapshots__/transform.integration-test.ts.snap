@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GET /transform positive should return cleanups 1`] = `
+Object {
+  "cleanedDaycareGroups": Array [
+    Object {
+      "daycare_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+      "effica_id": 1251,
+      "end_date": null,
+      "id": Any<String>,
+      "name": "Tujun tupajumit",
+      "start_date": "2020-03-01T00:00:00.000Z",
+    },
+  ],
+}
+`;
+
 exports[`GET /transform positive should return transformed application 1`] = `
 Object {
   "applicationForms": Array [
@@ -28,6 +43,26 @@ Object {
     },
   ],
   "applicationsTodo": Array [],
+}
+`;
+
+exports[`GET /transform positive should return transformed daily journals 1`] = `
+Object {
+  "absences": Array [
+    Object {
+      "absence_type": "SICKLEAVE",
+      "care_type": "DAYCARE",
+      "child_id": Any<String>,
+      "date": "2020-03-09T00:00:00.000Z",
+      "effica_dailyjournalids": Array [
+        123456,
+      ],
+      "id": Any<String>,
+    },
+  ],
+  "absencesTodo": Array [],
+  "backupCares": Array [],
+  "backupCaresTodo": Array [],
 }
 `;
 

@@ -35,6 +35,8 @@ const baseDataTables =
         "decisions",
         "applications",
         "applicationrows",
+        "dailyjournals",
+        "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare"
@@ -266,6 +268,32 @@ describe("GET /transform positive", () => {
         )
     })
 
+    it("should return transformed daily journals", async () => {
+        await setupTransformations(["persons", "departments", "placements"])
+
+        const absenceExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        const backupCareExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            unit_id: expect.any(String),
+            group_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "daily_journals",
+            {
+                absences: Array(1).fill(absenceExpectation),
+                absencesTodo: Array(0).fill(absenceExpectation),
+                backupCares: Array(0).fill(backupCareExpectation),
+                backupCaresTodo: Array(0).fill(backupCareExpectation),
+            }
+        )
+    })
+
     it("should return transformed application", async () => {
         cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
 
@@ -291,6 +319,21 @@ describe("GET /transform positive", () => {
         const response2 = await transform("application")
         expect(response2.body.applications).toEqual(
             expect.arrayContaining(response1.body.applications.map((application: any) => expect.objectContaining({ id: application.id })))
+        )
+    })
+
+    it("should return cleanups", async () => {
+        await setupTransformations(["persons", "departments", "placements"])
+
+        const daycareGroupExpectation = {
+            id: expect.any(String)
+        }
+
+        await positiveTransformSnapshotTest(
+            "cleanup",
+            {
+                cleanedDaycareGroups: Array(1).fill(daycareGroupExpectation),
+            }
         )
     })
 

@@ -395,6 +395,76 @@ Object {
 }
 `;
 
+exports[`GET /import xml positive should return created daily journal rows 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "dailyjournalid": 123456,
+        "extrachild": null,
+        "guid": "dailyjournalrow123456",
+        "personid": "251118A9509",
+        "reportcode01": 0,
+        "reportcode02": 0,
+        "reportcode03": 0,
+        "reportcode04": 0,
+        "reportcode05": 0,
+        "reportcode06": 0,
+        "reportcode07": 0,
+        "reportcode08": 0,
+        "reportcode09": 169,
+        "reportcode10": 0,
+        "reportcode11": 0,
+        "reportcode12": 0,
+        "reportcode13": 0,
+        "reportcode14": 0,
+        "reportcode15": 0,
+        "reportcode16": 0,
+        "reportcode17": 0,
+        "reportcode18": 0,
+        "reportcode19": 0,
+        "reportcode20": 0,
+        "reportcode21": 0,
+        "reportcode22": 0,
+        "reportcode23": 0,
+        "reportcode24": 0,
+        "reportcode25": 0,
+        "reportcode26": 0,
+        "reportcode27": 0,
+        "reportcode28": 0,
+        "reportcode29": 0,
+        "reportcode30": 0,
+        "reportcode31": 0,
+      },
+    ],
+  ],
+  "tables": Array [
+    "dailyjournalrows",
+  ],
+}
+`;
+
+exports[`GET /import xml positive should return created daily journals 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "childminder": null,
+        "dailyjournalid": 123456,
+        "department": 1231,
+        "guid": "dailyjournal123456",
+        "openingdays": "0000011000001100000110000011000",
+        "period": "202003",
+        "unit": 123,
+      },
+    ],
+  ],
+  "tables": Array [
+    "dailyjournals",
+  ],
+}
+`;
+
 exports[`GET /import xml positive should return created decisions 1`] = `
 Object {
   "inserts": Array [

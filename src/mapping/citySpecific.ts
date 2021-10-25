@@ -46,6 +46,29 @@ export const DECISION_STATUS_TYPE_MAPPINGS: Record<
     },
 };
 
+export const ABSENCE_TYPE_MAPPINGS: Record<string, Record<number, string>> = {
+    tampere: {
+        169: "SICKLEAVE", // Sairaana (S)
+        // 170: '', // Kesäajan maksuton poissaolo
+        171: "OTHER_ABSENCE", // Muu poissaolo (P)
+        172: "PLANNED_ABSENCE", // Sopimuksen muk. poissaolo (E)
+        // 173: '', // Sopimuksen ylitys (Y)
+        // 174: 'TEMPORARY_RELOCATION', // Hoidossa muualla (X)
+        175: "OTHER_ABSENCE", // Kerhon poissaolo
+        // 176: '', // Lapsi sijaishoitopaikassa (V)
+        // 177: '', // Hoitopäivä yli 13 tuntia (L)
+        178: "FORCE_MAJEURE", // Hyvityspäivä (-)
+        // 409: '', // Työntasausvp - Lapsi hoidossa
+        // 410: '', // Työntasausvp - Lapsi poissa
+        447: "UNKNOWN_ABSENCE", // Ilmoittamaton päivystyksen poissaolo
+        474: "OTHER_ABSENCE", // Vuorohoidon poissaolo
+    },
+};
+
+export const BACKUP_CARE_TYPES: Record<string, number[]> = {
+    tampere: [176],
+};
+
 export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
     tampere: {
         //maps evaka income periods to coefficients used to normalize income to monthly levels

@@ -3,7 +3,9 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import express from "express"
+import { transferAbsences } from "../transfer/absence"
 import { transferApplicationData } from "../transfer/application"
+import { transferBackupCares } from "../transfer/backup-cares"
 import { transferDaycareData } from "../transfer/daycare"
 import { transferDepartmentData } from "../transfer/departments"
 import { transferUnitManagerData } from "../transfer/evaka-unit-manager"
@@ -108,6 +110,30 @@ router.get("/voucher_value_decisions", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer voucher value decisions total ", undefined, "*")
+})
+router.get("/absences", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer absences total ", undefined, "*")
+    try {
+        const results = await transferAbsences(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer absences total ", undefined, "*")
+})
+router.get("/backup_cares", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer backup cares total ", undefined, "*")
+    try {
+        const results = await transferBackupCares(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer backup cares total ", undefined, "*")
 })
 router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

@@ -1,0 +1,15 @@
+<!--
+SPDX-FileCopyrightText: 2021 City of Tampere
+
+SPDX-License-Identifier: LGPL-2.1-or-later
+-->
+
+<DailyJournals>
+  <DailyJournalId>123456</DailyJournalId>
+  <Unit>123</Unit>
+  <Department>1231</Department>
+  <ChildMinder></ChildMinder>
+  <OpeningDays>0000011000001100000110000011000</OpeningDays>
+  <Period>202003</Period>
+  <GUID>dailyjournal123456</GUID>
+</DailyJournals>
