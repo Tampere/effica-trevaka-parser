@@ -287,7 +287,7 @@ describe("GET /transform positive", () => {
             "daily_journals",
             {
                 absences: Array(1).fill(absenceExpectation),
-                absencesTodo: Array(0).fill(absenceExpectation),
+                absencesTodo: Array(1).fill(absenceExpectation),
                 backupCares: Array(0).fill(backupCareExpectation),
                 backupCaresTodo: Array(0).fill(backupCareExpectation),
             }

@@ -39,6 +39,21 @@ export type DecisionStatusType =
     | "SENT"
     | "ANNULLED";
 
+export type CitySpecificDailyJournalReportCodeMappings = Record<
+    string,
+    Record<number, { absenceType?: string; backupCare?: boolean }>
+>;
+
+export type AbsenceType =
+    | "OTHER_ABSENCE"
+    | "SICKLEAVE"
+    | "UNKNOWN_ABSENCE"
+    | "PLANNED_ABSENCE"
+    | "TEMPORARY_RELOCATION"
+    | "TEMPORARY_VISITOR"
+    | "PARENTLEAVE"
+    | "FORCE_MAJEURE";
+
 export type EfficaIncomeCodeMapping = {
     codes: number[],
     evakaType: string,

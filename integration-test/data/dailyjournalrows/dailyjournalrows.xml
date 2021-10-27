@@ -10,7 +10,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <ExtraChild>&#x20;</ExtraChild>
     <ReportCode01>0</ReportCode01>
     <ReportCode02>0</ReportCode02>
-    <ReportCode03>0</ReportCode03>
+    <ReportCode03>173</ReportCode03>
     <ReportCode04>0</ReportCode04>
     <ReportCode05>0</ReportCode05>
     <ReportCode06>0</ReportCode06>
@@ -31,7 +31,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <ReportCode21>0</ReportCode21>
     <ReportCode22>0</ReportCode22>
     <ReportCode23>0</ReportCode23>
-    <ReportCode24>0</ReportCode24>
+    <ReportCode24>999</ReportCode24>
     <ReportCode25>0</ReportCode25>
     <ReportCode26>0</ReportCode26>
     <ReportCode27>0</ReportCode27>

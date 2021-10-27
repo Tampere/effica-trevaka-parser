@@ -4,6 +4,7 @@
 
 import {
     CitySpecificApplicationStatusMappings,
+    CitySpecificDailyJournalReportCodeMappings,
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
     DecisionStatusType,
@@ -46,27 +47,65 @@ export const DECISION_STATUS_TYPE_MAPPINGS: Record<
     },
 };
 
-export const ABSENCE_TYPE_MAPPINGS: Record<string, Record<number, string>> = {
+export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCodeMappings = {
     tampere: {
-        169: "SICKLEAVE", // Sairaana (S)
-        // 170: '', // Kesäajan maksuton poissaolo
-        171: "OTHER_ABSENCE", // Muu poissaolo (P)
-        172: "PLANNED_ABSENCE", // Sopimuksen muk. poissaolo (E)
-        // 173: '', // Sopimuksen ylitys (Y)
-        // 174: 'TEMPORARY_RELOCATION', // Hoidossa muualla (X)
-        175: "OTHER_ABSENCE", // Kerhon poissaolo
-        // 176: '', // Lapsi sijaishoitopaikassa (V)
-        // 177: '', // Hoitopäivä yli 13 tuntia (L)
-        178: "FORCE_MAJEURE", // Hyvityspäivä (-)
-        // 409: '', // Työntasausvp - Lapsi hoidossa
-        // 410: '', // Työntasausvp - Lapsi poissa
-        447: "UNKNOWN_ABSENCE", // Ilmoittamaton päivystyksen poissaolo
-        474: "OTHER_ABSENCE", // Vuorohoidon poissaolo
+        169: {
+            // Sairaana (S)
+            absenceType: "SICKLEAVE",
+        },
+        170: {
+            // Kesäajan maksuton poissaolo
+            // TODO: uusi poissaolotyyppi
+        },
+        171: {
+            // Muu poissaolo (P)
+            absenceType: "OTHER_ABSENCE",
+        },
+        172: {
+            // Sopimuksen muk. poissaolo (E)
+            absenceType: "PLANNED_ABSENCE",
+        },
+        173: {
+            // Sopimuksen ylitys (Y)
+            // TODO: läsnäolo
+        },
+        174: {
+            // Hoidossa muualla (X)
+            absenceType: "TEMPORARY_RELOCATION",
+        },
+        175: {
+            // Kerhon poissaolo
+            absenceType: "OTHER_ABSENCE",
+        },
+        176: {
+            // Lapsi sijaishoitopaikassa (V)
+            backupCare: true,
+        },
+        177: {
+            // Hoitopäivä yli 13 tuntia (L)
+            // TODO: läsnäolo
+        },
+        178: {
+            // Hyvityspäivä (-)
+            absenceType: "FORCE_MAJEURE",
+        },
+        409: {
+            // Työntasausvp - Lapsi hoidossa
+            absenceType: "TEMPORARY_RELOCATION",
+        },
+        410: {
+            // Työntasausvp - Lapsi poissa
+            absenceType: "FORCE_MAJEURE",
+        },
+        447: {
+            // Ilmoittamaton päivystyksen poissaolo
+            absenceType: "UNKNOWN_ABSENCE",
+        },
+        474: {
+            // Vuorohoidon poissaolo
+            absenceType: "OTHER_ABSENCE",
+        },
     },
-};
-
-export const BACKUP_CARE_TYPES: Record<string, number[]> = {
-    tampere: [176],
 };
 
 export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {

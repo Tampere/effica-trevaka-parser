@@ -66,12 +66,13 @@ WITH absences AS (
             WHEN 'TEMPORARY_DAYCARE_PART_DAY' THEN ARRAY['DAYCARE']
             ELSE ARRAY['UNKNOWN']
         END) AS care_type,
-        $(types:json)::jsonb ->> d.reportcode::text AS absence_type
+        $(absenceTypeMappings:json)::jsonb ->> d.reportcode::text AS absence_type
     FROM ${migrationSchema:name}.dailyjournals_view d
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
     LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
         AND daterange(ep.start_date, ep.end_date, '[]') @> d.date
-    WHERE d.reportcode NOT IN ($(backupCareTypes:csv))
+    WHERE $(absenceTypeMappings:json)::jsonb ->> d.reportcode::text IS NOT NULL -- include all known absence types
+        OR d.reportcode::text NOT IN ($(allReportCodes:csv)) -- include all unknown reportcodes
 )
 INSERT INTO ${migrationSchema:name}.evaka_absence
     (effica_dailyjournalids, child_id, date, care_type, absence_type)
