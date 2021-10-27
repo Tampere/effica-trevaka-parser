@@ -60,8 +60,37 @@ Object {
       "id": Any<String>,
     },
   ],
-  "absencesTodo": Array [],
-  "backupCares": Array [],
+  "absencesTodo": Array [
+    Object {
+      "absence_type": null,
+      "care_type": "DAYCARE",
+      "child_id": Any<String>,
+      "date": "2020-03-24T00:00:00.000Z",
+      "effica_dailyjournalids": Array [
+        123456,
+      ],
+      "id": Any<String>,
+      "reason": "TYPE MISSING",
+    },
+  ],
+  "backupCares": Array [
+    Object {
+      "child_id": Any<String>,
+      "end_date": "2020-03-17T00:00:00.000Z",
+      "group_id": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-03-15T00:00:00.000Z",
+      "unit_id": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "end_date": "2020-03-19T00:00:00.000Z",
+      "group_id": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-03-19T00:00:00.000Z",
+      "unit_id": Any<String>,
+    },
+  ],
   "backupCaresTodo": Array [],
 }
 `;
