@@ -135,7 +135,30 @@ Object {
 }
 `;
 
-exports[`GET /transfer positive should return transferred backup cares 1`] = `Array []`;
+exports[`GET /transfer positive should return transferred backup cares 1`] = `
+Array [
+  Object {
+    "child_id": Any<String>,
+    "created": Any<String>,
+    "end_date": "2020-03-17T00:00:00.000Z",
+    "group_id": Any<String>,
+    "id": Any<String>,
+    "start_date": "2020-03-15T00:00:00.000Z",
+    "unit_id": Any<String>,
+    "updated": Any<String>,
+  },
+  Object {
+    "child_id": Any<String>,
+    "created": Any<String>,
+    "end_date": "2020-03-19T00:00:00.000Z",
+    "group_id": Any<String>,
+    "id": Any<String>,
+    "start_date": "2020-03-19T00:00:00.000Z",
+    "unit_id": Any<String>,
+    "updated": Any<String>,
+  },
+]
+`;
 
 exports[`GET /transfer positive should return transferred daycares 1`] = `
 Array [

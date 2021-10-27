@@ -73,7 +73,24 @@ Object {
       "reason": "TYPE MISSING",
     },
   ],
-  "backupCares": Array [],
+  "backupCares": Array [
+    Object {
+      "child_id": Any<String>,
+      "end_date": "2020-03-17T00:00:00.000Z",
+      "group_id": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-03-15T00:00:00.000Z",
+      "unit_id": Any<String>,
+    },
+    Object {
+      "child_id": Any<String>,
+      "end_date": "2020-03-19T00:00:00.000Z",
+      "group_id": Any<String>,
+      "id": Any<String>,
+      "start_date": "2020-03-19T00:00:00.000Z",
+      "unit_id": Any<String>,
+    },
+  ],
   "backupCaresTodo": Array [],
 }
 `;

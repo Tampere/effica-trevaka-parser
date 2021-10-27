@@ -46,7 +46,12 @@ const transformDailyJournals = async <T>(t: ITask<T>, returnAll: boolean) => {
         true
     );
     const backupCares = await runQuery(
-        selectFromTable("evaka_backup_care", config.migrationSchema, returnAll),
+        selectFromTable(
+            "evaka_backup_care",
+            config.migrationSchema,
+            returnAll,
+            ["start_date", "end_date"]
+        ),
         t,
         true
     );
@@ -54,7 +59,8 @@ const transformDailyJournals = async <T>(t: ITask<T>, returnAll: boolean) => {
         selectFromTable(
             "evaka_backup_care_todo",
             config.migrationSchema,
-            returnAll
+            returnAll,
+            ["start_date", "end_date"]
         ),
         t,
         true

@@ -146,6 +146,8 @@ const absenceExpectation = {
 
 const backupCareExpectation = {
     id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
     child_id: expect.any(String),
     unit_id: expect.any(String),
     group_id: expect.any(String),
@@ -297,7 +299,7 @@ describe("GET /transfer positive", () => {
         await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "backup_cares",
-            Array(0).fill(backupCareExpectation)
+            Array(2).fill(backupCareExpectation)
         )
     })
 })

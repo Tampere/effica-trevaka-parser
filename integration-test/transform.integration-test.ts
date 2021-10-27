@@ -288,7 +288,7 @@ describe("GET /transform positive", () => {
             {
                 absences: Array(1).fill(absenceExpectation),
                 absencesTodo: Array(1).fill(absenceExpectation),
-                backupCares: Array(0).fill(backupCareExpectation),
+                backupCares: Array(2).fill(backupCareExpectation),
                 backupCaresTodo: Array(0).fill(backupCareExpectation),
             }
         )
