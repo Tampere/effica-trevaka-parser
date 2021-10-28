@@ -35,7 +35,7 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
         mailing_street_address, mailing_postal_code, mailing_post_office,
         invoiced_by_municipality, provider_type::unit_provider_type, language::unit_language, upload_to_koski,
         null, -- TODO: oph_organization_oid
-        null, -- TODO: oph_unit_oid
+        oph_unit_oid,
         null, -- TODO: oph_organizer_oid
         operation_days, ghost_unit,
         daycare_apply_period, preschool_apply_period, club_apply_period,

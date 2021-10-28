@@ -39,7 +39,8 @@ const baseDataTables =
         "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
-        "evaka_daycare"
+        "evaka_daycare",
+        "daycare_oid_map"
     ]
 
 
@@ -334,6 +335,12 @@ describe("GET /transform positive", () => {
             {
                 cleanedDaycareGroups: Array(1).fill(daycareGroupExpectation),
             }
+        )
+    })
+
+    it("should return oid updated daycares", async () => {
+        await positiveTransformSnapshotTest(
+            "daycare_oid"
         )
     })
 

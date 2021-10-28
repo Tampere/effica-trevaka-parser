@@ -411,5 +411,18 @@ export const extTableMapping: TypeMapping = {
             unit_manager_id:
                 { sqlType: "uuid", parser: nullForcingTextParser }
         }
+
+    },
+    daycare_oid_map: {
+        tableName: "daycare_oid_map",
+        columns: {
+            oid: {
+                sqlType: "text", parser: nullForcingTextParser
+            },
+            effica_id: {
+                sqlType: "integer", parser: stringToNumericParser
+            }
+        }
     }
+
 }

@@ -16,6 +16,26 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created daycare oid mappings 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "effica_id": 123,
+        "oid": "1.2.3.4.5.6",
+      },
+      Object {
+        "effica_id": 125,
+        "oid": "1.2.3.4.5.7",
+      },
+    ],
+  ],
+  "tables": Array [
+    "daycare_oid_map",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created evaka areas 1`] = `
 Object {
   "inserts": Array [
@@ -79,6 +99,7 @@ Object {
           4,
           5,
         ],
+        "oph_unit_oid": null,
         "phone": null,
         "post_office": "Tenhola",
         "postal_code": "12000",
@@ -127,6 +148,7 @@ Object {
           4,
           5,
         ],
+        "oph_unit_oid": null,
         "phone": null,
         "post_office": "Pajuoja",
         "postal_code": "13000",

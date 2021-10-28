@@ -34,7 +34,8 @@ const baseDataTables =
         "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
-        "evaka_daycare"
+        "evaka_daycare",
+        "daycare_oid_map"
     ]
 
 //endpoint: table
@@ -195,6 +196,7 @@ afterAll(async () => {
 
 describe("GET /transfer positive", () => {
     it("should return transferred daycares", async () => {
+        await setupTransformations(["daycare_oid"])
         await setupTransfers(["unit_manager"])
         await positiveTransferSnapshotTest(
             "daycare",
