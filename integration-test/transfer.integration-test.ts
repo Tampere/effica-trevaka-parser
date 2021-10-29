@@ -59,6 +59,13 @@ const daycareGroupExpectation = {
     id: expect.any(String)
 }
 
+const caretakersExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    group_id: expect.any(String),
+}
+
 const personExpectation = {
     id: expect.any(String),
     date_of_birth: expect.any(String),
@@ -199,7 +206,10 @@ describe("GET /transfer positive", () => {
         await setupTransfers(["unit_manager", "daycare"])
         await positiveTransferSnapshotTest(
             "departments",
-            Array(2).fill(daycareGroupExpectation)
+            {
+                groups: Array(2).fill(daycareGroupExpectation),
+                caretakers: Array(2).fill(caretakersExpectation),
+            }
         )
     })
     it("should return transferred persons", async () => {
