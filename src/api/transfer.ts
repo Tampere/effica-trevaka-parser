@@ -7,6 +7,7 @@ import { transferAbsences } from "../transfer/absence"
 import { transferApplicationData } from "../transfer/application"
 import { transferBackupCares } from "../transfer/backup-cares"
 import { transferDaycareData } from "../transfer/daycare"
+import { transferDaycareOidData } from "../transfer/daycare-oid"
 import { transferDepartmentData } from "../transfer/departments"
 import { transferUnitManagerData } from "../transfer/evaka-unit-manager"
 import { transferFamiliesData } from "../transfer/families"
@@ -159,7 +160,17 @@ router.get("/income", async (req, res, next) => {
     timeEnd("**** Transfer income total ", undefined, "*")
 })
 
-
+router.get("/daycare_oid", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer daycare varda ids total ", undefined, "*")
+    try {
+        const results = await transferDaycareOidData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer daycare varda ids total ", undefined, "*")
+})
 
 
 export default router

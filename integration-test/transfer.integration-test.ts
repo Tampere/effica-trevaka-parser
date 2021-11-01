@@ -196,7 +196,6 @@ afterAll(async () => {
 
 describe("GET /transfer positive", () => {
     it("should return transferred daycares", async () => {
-        await setupTransformations(["daycare_oid"])
         await setupTransfers(["unit_manager"])
         await positiveTransferSnapshotTest(
             "daycare",
@@ -312,6 +311,25 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "backup_cares",
             Array(2).fill(backupCareExpectation)
+        )
+    })
+    it("should return oid updated daycares", async () => {
+        const vardaUnitExpectation = { created_at: expect.any(String), uploaded_at: expect.any(String) }
+        const updateExpectation = {
+            daycare: [
+                daycareExpectation,
+                daycareExpectation
+            ],
+            varda_unit: [
+                vardaUnitExpectation,
+                vardaUnitExpectation
+            ]
+        }
+
+        await setupTransfers(["unit_manager", "daycare"])
+        await positiveTransferSnapshotTest(
+            "daycare_oid",
+            updateExpectation
         )
     })
 })

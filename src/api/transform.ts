@@ -6,7 +6,6 @@ import express from "express"
 import { transformApplicationData } from "../transform/application"
 import { cleanupData } from "../transform/cleanup"
 import { transformDailyJournalsData } from "../transform/daily-journals"
-import { transformDaycareOidData } from "../transform/daycare-oid"
 import { transformDepartmentData } from "../transform/departments"
 import { transformFamilyData } from "../transform/families"
 import { transformFeeDeviationsData } from "../transform/fee-deviations"
@@ -143,19 +142,6 @@ router.get("/daily_journals", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform daily journals total ", undefined, "*")
-})
-
-router.get("/daycare_oid", async (req, res, next) => {
-    const returnAll = req.query.returnAll === "true"
-    time("**** Transform daycare oids total ", undefined, "*")
-    try {
-        const results = await transformDaycareOidData(returnAll)
-        res.status(200).json(results)
-    } catch (err) {
-        console.log(err)
-        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
-    }
-    timeEnd("**** Transform daycare oids total ", undefined, "*")
 })
 
 router.get("/cleanup", async (req, res, next) => {

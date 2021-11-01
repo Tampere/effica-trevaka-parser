@@ -337,13 +337,6 @@ describe("GET /transform positive", () => {
             }
         )
     })
-
-    it("should return oid updated daycares", async () => {
-        await positiveTransformSnapshotTest(
-            "daycare_oid"
-        )
-    })
-
 })
 
 const positiveTransformSnapshotTest = async (tableName: string, resultPattern?: any) => {
