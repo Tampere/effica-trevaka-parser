@@ -15,8 +15,22 @@ export const transferDepartmentData = async (returnAll: boolean = false) => {
     `
     const insertQuery = wrapWithReturning("daycare_group", insertQueryPart, returnAll)
 
-    return await migrationDb.tx(async (t) => {
-        return await runQuery(insertQuery, t, true)
-    })
+    const caretakersQueryPart = `
+        INSERT INTO daycare_caretaker (group_id, amount, start_date, end_date)
+        SELECT id, $(amount), start_date, end_date FROM daycare_group
+    `;
 
+    const caretakersQuery = wrapWithReturning(
+        "daycare_caretaker",
+        caretakersQueryPart,
+        returnAll
+    );
+
+    return await migrationDb.tx(async (t) => {
+        const groups = await runQuery(insertQuery, t, true);
+        const caretakers = await runQuery(caretakersQuery, t, true, {
+            amount: 3,
+        });
+        return { groups, caretakers };
+    });
 }
