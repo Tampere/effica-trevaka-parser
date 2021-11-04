@@ -26,6 +26,7 @@ export const transferDaycareOidData = async (returnAll: boolean = false) => {
         dom.varda_unit_id,
         now() - interval '20 years' --forces the update
     FROM ${getMigrationSchemaPrefix()}daycare_oid_map dom
+    WHERE dom.varda_unit_id IS NOT NULL
     `
     const updateDaycareQuery = wrapWithReturning("daycare_oid_update", updateDaycareQueryPart, returnAll)
     const insertVardaUnitQuery = wrapWithReturning("daycare_varda_id_insert", insertVardaUnitQueryPart, returnAll)

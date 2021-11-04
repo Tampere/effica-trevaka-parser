@@ -133,12 +133,6 @@ Object {
       "uploaded_at": Any<String>,
       "varda_unit_id": "100",
     },
-    Object {
-      "created_at": Any<String>,
-      "evaka_daycare_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
-      "uploaded_at": Any<String>,
-      "varda_unit_id": "101",
-    },
   ],
 }
 `;

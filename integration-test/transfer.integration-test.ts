@@ -321,7 +321,6 @@ describe("GET /transfer positive", () => {
                 daycareExpectation
             ],
             varda_unit: [
-                vardaUnitExpectation,
                 vardaUnitExpectation
             ]
         }

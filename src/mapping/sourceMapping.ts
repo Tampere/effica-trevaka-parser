@@ -427,6 +427,9 @@ export const extTableMapping: TypeMapping = {
             },
             evaka_id: {
                 sqlType: "uuid", parser: nullForcingTextParser
+            },
+            name: {
+                sqlType: "text", parser: nullForcingTextParser
             }
         }
     }
