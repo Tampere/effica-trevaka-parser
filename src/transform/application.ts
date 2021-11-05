@@ -5,7 +5,10 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
-import { APPLICATION_STATUS_MAPPINGS } from "../mapping/citySpecific";
+import {
+    APPLICATION_STATUS_MAPPINGS,
+    APPLICATION_TYPE_MAPPINGS,
+} from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
@@ -24,6 +27,8 @@ export const transformApplicationData = async (returnAll: boolean = false) => {
 const transformApplications = async <T>(t: ITask<T>, returnAll: boolean) => {
     await runQueryFile("transform-application.sql", t, {
         ...baseQueryParameters,
+        typeMappings: APPLICATION_TYPE_MAPPINGS[config.cityVariant],
+        allTypes: Object.keys(APPLICATION_TYPE_MAPPINGS[config.cityVariant]),
         statusMappings: APPLICATION_STATUS_MAPPINGS[config.cityVariant],
     });
 

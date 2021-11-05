@@ -251,6 +251,7 @@ Object {
     Array [
       Object {
         "applicationdate": "2021-08-01T00:00:00.000Z",
+        "applicationtype": 999940001,
         "careid": 12345,
         "guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
         "personid": "010619A9501",
@@ -386,6 +387,14 @@ Object {
         "extrainfo1": "OK",
         "extrainfo2": null,
         "text": "Hyväksytty¤¤OK",
+      },
+      Object {
+        "active": true,
+        "code": 999940001,
+        "codetype": "ARENDETYP",
+        "extrainfo1": "BOA",
+        "extrainfo2": null,
+        "text": "Päivähoitohakemus",
       },
     ],
   ],

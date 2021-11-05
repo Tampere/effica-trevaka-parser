@@ -2,6 +2,12 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+export type ApplicationType = "CLUB" | "DAYCARE" | "PRESCHOOL";
+export type CitySpecificApplicationTypeMappings = Record<
+    string,
+    Record<number, ApplicationType | null>
+>;
+
 export type ApplicationStatusType =
     | "CREATED"
     | "SENT"

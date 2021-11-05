@@ -4,11 +4,32 @@
 
 import {
     CitySpecificApplicationStatusMappings,
+    CitySpecificApplicationTypeMappings,
     CitySpecificDailyJournalReportCodeMappings,
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
     DecisionStatusType,
 } from "../types/mappings";
+
+export const APPLICATION_TYPE_MAPPINGS: CitySpecificApplicationTypeMappings = {
+    tampere: {
+        999940001: "DAYCARE", // Päivähoitohakemus (BOA)
+        999940002: "DAYCARE", // Päivähoitohakemus (BOB)
+        999940003: null, // Hoitoajat (BOS)
+        999940004: null, // Tuloselvitys (BON)
+        999940005: null, // Hoitosuhteen irtisanominen (BOR)
+        999940006: null, // Vastaus paikkatarjoukseen (BOX)
+        999940010: null, // Paikkatarjous (PER)
+        999940013: null, // Logg spara direkt (LOG)
+        999940016: null, // Ryhmän vaihto (PAD)
+        999940023: null, // Kerhohakemus (BOK)
+        999940027: null, // Esiopetushakemus (PRO)
+        999940028: null, // Kerhohakemu (BOD)
+        999940029: null, // Esiopetushakemus (PRA)
+        999940030: null, // Palveluseteli (PCS)
+        999940031: null, // Kerhohakemus 2 (BOO)
+    },
+};
 
 export const APPLICATION_STATUS_MAPPINGS: CitySpecificApplicationStatusMappings = {
     tampere: {
