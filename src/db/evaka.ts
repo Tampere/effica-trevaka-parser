@@ -13,12 +13,15 @@ import migrationDb from "./db";
 
 export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
     let user = await t.oneOrNone<{ id: string }>(
-        "SELECT id FROM employee WHERE first_name = 'Effica' AND last_name = 'Effica'",
+        "SELECT id FROM evaka_user WHERE type = 'UNKNOWN'::evaka_user_type AND name = 'Effica'",
         t
     );
     if (user === null) {
         user = await t.one<{ id: string }>(
-            "INSERT INTO employee (first_name, last_name) VALUES ('Effica', 'Effica') RETURNING id",
+            `
+            INSERT INTO evaka_user (id, type, name)
+            VALUES (${getExtensionSchemaPrefix()}uuid_generate_v1mc(), 'UNKNOWN'::evaka_user_type, 'Effica')
+            RETURNING id`,
             t
         );
     }

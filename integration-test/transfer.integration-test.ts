@@ -148,7 +148,7 @@ const absenceExpectation = {
     id: expect.any(String),
     child_id: expect.any(String),
     modified_at: expect.any(String),
-    modified_by_employee_id: expect.any(String),
+    modified_by: expect.any(String),
 }
 
 const backupCareExpectation = {
