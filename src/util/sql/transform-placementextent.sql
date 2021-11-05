@@ -58,6 +58,7 @@ SELECT DISTINCT s1.*, 'OVERLAPPING SERVICE NEED'
 FROM ${migrationSchema:name}.evaka_service_need s1
 JOIN ${migrationSchema:name}.evaka_service_need s2 ON s1.effica_placement_nbr = s2.effica_placement_nbr
     AND s1.effica_extent_nbr != s2.effica_extent_nbr
+    AND s1.end_date >= s1.start_date AND s2.end_date >= s2.start_date
     AND daterange(s1.start_date, s1.end_date, '[]') && daterange(s2.start_date, s2.end_date, '[]');
 
 -- remove problematic service needs from migration
