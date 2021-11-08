@@ -16,8 +16,27 @@ import { transferIncomeData } from "../transfer/income"
 import { transferPersonData } from "../transfer/person"
 import { transferPlacementsData } from "../transfer/placements"
 import { transferVoucherValueDecisions } from "../transfer/voucher-value-decisions"
+import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
+
+const dependencyOrder: MigrationOperation[] =
+    [
+        { name: "persons", function: transferPersonData },
+        { name: "families", function: transferFamiliesData },
+        { name: "income", function: transferIncomeData },
+        { name: "unit_manager", function: transferUnitManagerData },
+        { name: "daycare", function: transferDaycareData },
+        { name: "departments", function: transferDepartmentData },
+        { name: "placements", function: transferPlacementsData },
+        { name: "fee_alterations", function: transferFeeAlterationsData },
+        { name: "voucher_value_decisions", function: transferVoucherValueDecisions },
+        { name: "application", function: transferApplicationData },
+        { name: "absences", function: transferAbsences },
+        { name: "backup_care", function: transferBackupCares },
+        { name: "daycare_oid", function: transferDaycareOidData }
+    ]
+
 
 const router = express.Router()
 router.get("/daycare", async (req, res, next) => {
@@ -172,5 +191,25 @@ router.get("/daycare_oid", async (req, res, next) => {
     timeEnd("**** Transfer daycare varda ids total ", undefined, "*")
 })
 
+
+router.get("/", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer all total ", undefined, "*")
+    const results: Record<string, any> = {}
+    let status = 200
+    for (let operation of dependencyOrder) {
+        try {
+            results[operation.name] = await operation.function(returnAll)
+        } catch (error) {
+            results[operation.name] = error
+            status = 500
+            break
+        }
+    }
+
+    res.status(status).json(results)
+
+    timeEnd("**** Transfer all total ", undefined, "*")
+})
 
 export default router

@@ -2,5 +2,5 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-export type TransformFunction = (returnAll: boolean) => Promise<any>;
-export type TransformOperation = { name: string, function: TransformFunction }
+export type MigrationFunction = (returnAll: boolean) => Promise<any>;
+export type MigrationOperation = { name: string, function: MigrationFunction }
