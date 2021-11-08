@@ -130,6 +130,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         FROM ${getMigrationSchemaPrefix()}evaka_fridge_child f1
         JOIN ${getMigrationSchemaPrefix()}evaka_fridge_child f2 ON f1.child_id = f2.child_id
             AND f1.id != f2.id
+            AND f1.end_date >= f1.start_date AND f2.end_date >= f2.start_date
             AND daterange(f1.start_date, f1.end_date, '[]') && daterange(f2.start_date, f2.end_date, '[]');
         INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_child_todo
         SELECT *, 'START AFTER END'
@@ -145,6 +146,8 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
         JOIN ${getMigrationSchemaPrefix()}evaka_fridge_partner f2 ON f1.person_id = f2.person_id
             AND f1.partnership_id != f2.partnership_id
             AND f1.indx != f2.indx
+            AND (f1.end_date >= f1.start_date OR f1.end_date IS NULL)
+            AND (f2.end_date >= f2.start_date OR f2.end_date IS NULL)
             AND daterange(f1.start_date, f1.end_date, '[]') && daterange(f2.start_date, f2.end_date, '[]');
         INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner_todo
         SELECT *, 'START AFTER END'

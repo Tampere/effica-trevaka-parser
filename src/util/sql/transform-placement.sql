@@ -87,6 +87,7 @@ SELECT DISTINCT p1.*, 'OVERLAPPING PLACEMENT'
 FROM ${migrationSchema:name}.evaka_placement p1
 JOIN ${migrationSchema:name}.evaka_placement p2 ON p1.effica_ssn = p2.effica_ssn
     AND p1.effica_placement_nbr <> p2.effica_placement_nbr
+    AND p1.end_date >= p1.start_date AND p2.end_date >= p2.start_date
     AND daterange(p1.start_date, p1.end_date, '[]') && daterange(p2.start_date, p2.end_date, '[]');
 
 -- remove problematic placements from migration
