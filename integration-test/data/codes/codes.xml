@@ -100,3 +100,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <extrainfo1>OK</extrainfo1>
     <extrainfo2></extrainfo2>
 </item>
+<item>
+    <code>999940001</code>
+    <active>A</active>
+    <codetype>ARENDETYP</codetype>
+    <text>Päivähoitohakemus</text>
+    <extrainfo1>BOA</extrainfo1>
+    <extrainfo2> </extrainfo2>
+</item>

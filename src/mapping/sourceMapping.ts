@@ -22,6 +22,7 @@ export const efficaTableMapping: TypeMapping = {
             transferapplication: { sqlType: "boolean", parser: numericBooleanParser },
             status: { sqlType: "integer", parser: nullForcingTextParser },
             careid: { sqlType: "integer", parser: nullForcingTextParser },
+            applicationtype: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
         primaryKeys: ["guid"],

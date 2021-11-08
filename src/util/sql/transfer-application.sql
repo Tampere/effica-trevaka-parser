@@ -20,8 +20,8 @@ INSERT INTO application_form
 SELECT
     ea.id,
     1,
-    CASE eaf.types[1]
-        WHEN 'DAYCARE' THEN jsonb_build_object(
+    CASE
+        WHEN ea.type IN ('DAYCARE', 'PRESCHOOL') THEN jsonb_build_object(
             'child', jsonb_build_object(
                 'firstName', c.first_name,
                 'lastName', c.last_name,
@@ -99,9 +99,9 @@ SELECT
                 'otherInfo', ''
             ),
             'maxFeeAccepted', false,
-            'type', eaf.types[1]
+            'type', ea.type
         )
-        WHEN 'CLUB' THEN jsonb_build_object(
+        WHEN ea.type = 'CLUB' THEN jsonb_build_object(
             'child', jsonb_build_object(
                 'firstName', c.first_name,
                 'lastName', c.last_name,
@@ -177,8 +177,7 @@ JOIN (
             'id', sno.id,
             'name', sno.name
         ) ORDER BY effica_priority) FILTER (WHERE sno.id IS NOT NULL) AS service_need_options,
-        array_agg(preferred_start_date ORDER BY effica_priority) AS preferred_start_dates,
-        array_agg(type ORDER BY effica_priority) AS types
+        array_agg(preferred_start_date ORDER BY effica_priority) AS preferred_start_dates
     FROM ${migrationSchema:name}.evaka_application_form
     LEFT JOIN service_need_option sno ON sno.id = service_need_option_id
     GROUP BY application_id

@@ -9,6 +9,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
     id UUID PRIMARY KEY,
     effica_guid TEXT NOT NULL,
     effica_id INTEGER NOT NULL,
+    type TEXT CHECK (type IN ('CLUB', 'DAYCARE', 'PRESCHOOL')),
     sentdate DATE NOT NULL,
     duedate DATE NOT NULL,
     guardian_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
@@ -18,11 +19,12 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_application
-    (id, effica_guid, effica_id, sentdate, duedate, guardian_id, child_id, transferapplication, status)
+    (id, effica_guid, effica_id, type, sentdate, duedate, guardian_id, child_id, transferapplication, status)
 SELECT
     COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
     a.guid,
     a.careid,
+    $(typeMappings:json)::jsonb ->> a.applicationtype::text,
     a.applicationdate,
     a.applicationdate + CASE
         WHEN specialhandlingtime.extrainfo1 IS NOT NULL THEN (specialhandlingtime.extrainfo1 || ' days')::interval
@@ -39,7 +41,12 @@ LEFT JOIN ${migrationSchema:name}.evaka_person c ON c.effica_ssn = a.personid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child fc ON fc.child_id = c.id
     AND a.applicationdate BETWEEN fc.start_date AND fc.end_date
 LEFT JOIN ${migrationSchema:name}.evaka_person g ON g.id = fc.head_of_family
-WHERE a.status::text IN (SELECT code FROM jsonb_object_keys($(statusMappings:json)) AS code);
+WHERE
+    (
+        $(typeMappings:json)::jsonb ->> a.applicationtype::text IS NOT NULL OR -- include all mapped types
+        a.applicationtype::text NOT IN ($(allTypes:csv)) -- include all unknown types
+    )
+    AND a.status::text IN (SELECT code FROM jsonb_object_keys($(statusMappings:json)) AS code);
 
 -- maintain ids between migrations
 INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)
@@ -61,6 +68,11 @@ SELECT *, 'CHILD MISSING'
 FROM ${migrationSchema:name}.evaka_application
 WHERE child_id IS NULL;
 
+INSERT INTO ${migrationSchema:name}.evaka_application_todo
+SELECT *, 'TYPE MISSING'
+FROM ${migrationSchema:name}.evaka_application
+WHERE type IS NULL;
+
 DELETE FROM ${migrationSchema:name}.evaka_application
 WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_application_todo);
 
@@ -74,25 +86,18 @@ CREATE TABLE ${migrationSchema:name}.evaka_application_form (
     unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     service_need_option_id UUID,
     preferred_start_date DATE NOT NULL,
-    type TEXT NOT NULL,
     PRIMARY KEY (effica_application_id, effica_priority)
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_application_form
-    (effica_application_id, effica_priority, application_id, unit_id, service_need_option_id, preferred_start_date, type)
+    (effica_application_id, effica_priority, application_id, unit_id, service_need_option_id, preferred_start_date)
 SELECT
     r.careid,
     r.priority,
     ea.id,
     COALESCE(um.evaka_id, cm.evaka_id),
     em.evaka_id,
-    r.startdate,
-    CASE r.type
-        WHEN 'BOA' THEN 'DAYCARE'
-        WHEN 'PRO' THEN 'DAYCARE'
-        WHEN 'BOK' THEN 'CLUB'
-        ELSE 'DAYCARE'
-    END
+    r.startdate
 FROM ${migrationSchema:name}.applicationrows r
 JOIN ${migrationSchema:name}.evaka_application ea ON ea.effica_id = r.careid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = r.unitcode
