@@ -34,7 +34,8 @@ const baseDataTables =
         "dailyjournalrows",
         "evaka_areas",
         "evaka_unit_manager",
-        "evaka_daycare"
+        "evaka_daycare",
+        "daycare_oid_map"
     ]
 
 //endpoint: table
@@ -310,6 +311,24 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "backup_cares",
             Array(2).fill(backupCareExpectation)
+        )
+    })
+    it("should return oid updated daycares", async () => {
+        const vardaUnitExpectation = { created_at: expect.any(String), uploaded_at: expect.any(String) }
+        const updateExpectation = {
+            daycare: [
+                daycareExpectation,
+                daycareExpectation
+            ],
+            varda_unit: [
+                vardaUnitExpectation
+            ]
+        }
+
+        await setupTransfers(["unit_manager", "daycare"])
+        await positiveTransferSnapshotTest(
+            "daycare_oid",
+            updateExpectation
         )
     })
 })

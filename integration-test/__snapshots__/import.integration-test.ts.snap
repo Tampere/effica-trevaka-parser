@@ -16,6 +16,30 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created daycare oid mappings 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+        "organizer_oid": "1.2.3.4",
+        "unit_oid": "1.2.3.4.5.6",
+        "varda_unit_id": 100,
+      },
+      Object {
+        "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+        "organizer_oid": "1.2.3.5",
+        "unit_oid": "1.2.3.4.5.7",
+        "varda_unit_id": null,
+      },
+    ],
+  ],
+  "tables": Array [
+    "daycare_oid_map",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created evaka areas 1`] = `
 Object {
   "inserts": Array [
@@ -79,6 +103,7 @@ Object {
           4,
           5,
         ],
+        "oph_unit_oid": null,
         "phone": null,
         "post_office": "Tenhola",
         "postal_code": "12000",
@@ -127,6 +152,7 @@ Object {
           4,
           5,
         ],
+        "oph_unit_oid": null,
         "phone": null,
         "post_office": "Pajuoja",
         "postal_code": "13000",

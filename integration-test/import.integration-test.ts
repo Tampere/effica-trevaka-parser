@@ -16,7 +16,7 @@ const tables = ["persons", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
     "dailyjournals", "dailyjournalrows",
-    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare"]
+    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -172,6 +172,10 @@ describe("GET /import csv positive", () => {
     it("should return created evaka daycares", async () => {
         await setupTables(["evaka_areas", "evaka_unit_manager"])
         return await positiveImportSnapshotTest("evaka_daycare")
+    })
+    it("should return created daycare oid mappings", async () => {
+        return await positiveImportSnapshotTest(
+            "daycare_oid_map")
     })
 })
 

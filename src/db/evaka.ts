@@ -87,7 +87,8 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
         round_the_clock boolean default false,
         unit_manager_id uuid
             constraint fk$unit_manager
-                references ${getMigrationSchemaPrefix()}evaka_unit_manager(id)
+                references ${getMigrationSchemaPrefix()}evaka_unit_manager(id),
+        oph_unit_oid text
     );
     `
 }
