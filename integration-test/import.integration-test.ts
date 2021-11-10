@@ -110,6 +110,16 @@ describe("GET /import xml positive", () => {
             getTimeSeriesResultPattern({ ...openDateRange, decisiondate: expect.any(String) }))
     })
 
+    it("should return created pay decisions", async () => {
+        return await positiveImportSnapshotTest(
+            "paydecisions")
+    })
+
+    it("should return created pay decision rows", async () => {
+        return await positiveImportSnapshotTest(
+            "paydecisionrows")
+    })
+
     it("should return created feedeviations", async () => {
         return await positiveImportSnapshotTest("feedeviations",
             getTimeSeriesResultPattern(openDateRange, openDateRange))

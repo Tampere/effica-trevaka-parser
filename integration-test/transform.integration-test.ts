@@ -33,6 +33,8 @@ const baseDataTables =
         "income",
         "incomerows",
         "decisions",
+        "paydecisions",
+        "paydecisionrows",
         "applications",
         "applicationrows",
         "dailyjournals",
@@ -266,6 +268,35 @@ describe("GET /transform positive", () => {
         const response2 = await transform("voucher_value_decisions")
         expect(response2.body.decisions).toEqual(
             expect.arrayContaining(response1.body.decisions.map((decision: any) => expect.objectContaining({ id: decision.id })))
+        )
+    })
+
+    it("should return transformed pay decisions", async () => {
+        await setupTransformations(["persons", "departments", "placements"])
+
+        const feeDecisionExpectation = {
+            id: expect.any(String),
+            head_of_family_id: expect.any(String),
+        }
+        const feeDecisionChildExpectation = {
+            id: expect.any(String),
+            fee_decision_id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        const response1 = await positiveTransformSnapshotTest(
+            "pay_decisions",
+            {
+                feeDecisions: Array(1).fill(feeDecisionExpectation),
+                feeDecisionsTodo: Array(0).fill(feeDecisionExpectation),
+                feeDecisionChildren: Array(1).fill(feeDecisionChildExpectation),
+                feeDecisionChildrenTodo: Array(0).fill(feeDecisionChildExpectation),
+            }
+        )
+        // verify maintain ids between migrations
+        const response2 = await transform("pay_decisions")
+        expect(response2.body.feeDecisions).toEqual(
+            expect.arrayContaining(response1.body.feeDecisions.map((feeDecision: any) => expect.objectContaining({ id: feeDecision.id })))
         )
     })
 

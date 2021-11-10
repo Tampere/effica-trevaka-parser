@@ -45,6 +45,18 @@ export type DecisionStatusType =
     | "SENT"
     | "ANNULLED";
 
+export type CitySpecificPayDecisionStatusMappings = Record<
+    string,
+    Record<number, FeeDecisionStatusType | null>
+>;
+
+export type FeeDecisionStatusType =
+    | "DRAFT"
+    | "WAITING_FOR_SENDING"
+    | "WAITING_FOR_MANUAL_SENDING"
+    | "SENT"
+    | "ANNULLED";
+
 export type CitySpecificDailyJournalReportCodeMappings = Record<
     string,
     Record<number, { absenceType?: string; backupCare?: boolean }>

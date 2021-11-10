@@ -259,6 +259,44 @@ Array [
 ]
 `;
 
+exports[`GET /transform positive should return transformed pay decisions 1`] = `
+Object {
+  "feeDecisionChildren": Array [
+    Object {
+      "base_fee": 49200,
+      "child_date_of_birth": "2019-06-01T00:00:00.000Z",
+      "child_id": Any<String>,
+      "effica_guid": "paydecisionrow38437813",
+      "fee": 49200,
+      "fee_decision_id": Any<String>,
+      "final_fee": 49200,
+      "id": Any<String>,
+      "placement_unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+      "service_need_option_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+      "sibling_discount": 0,
+    },
+  ],
+  "feeDecisionChildrenTodo": Array [],
+  "feeDecisions": Array [
+    Object {
+      "decision_number": "123456790",
+      "decision_type": "NORMAL",
+      "effica_guid": "paydecision3843781",
+      "effica_ssn": "020967-9992",
+      "end_date": null,
+      "family_size": 2,
+      "head_of_family_id": Any<String>,
+      "id": Any<String>,
+      "partner_id": null,
+      "start_date": "2020-03-01T00:00:00.000Z",
+      "status": "SENT",
+      "status_group": "SENT",
+    },
+  ],
+  "feeDecisionsTodo": Array [],
+}
+`;
+
 exports[`GET /transform positive should return transformed persons 1`] = `
 Array [
   Object {

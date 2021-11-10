@@ -8,6 +8,7 @@ import {
     CitySpecificDailyJournalReportCodeMappings,
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
+    CitySpecificPayDecisionStatusMappings,
     DecisionStatusType,
 } from "../types/mappings";
 
@@ -65,6 +66,16 @@ export const DECISION_STATUS_TYPE_MAPPINGS: Record<
         // 493: Vanhentunut
         999420001: "SENT", // Hyväksytty
         // 999420002: "ANNULLED", // Mitätöity
+    },
+};
+
+export const PAY_DECISION_STATUS_MAPPINGS: CitySpecificPayDecisionStatusMappings = {
+    tampere: {
+        82: "DRAFT", // Valmisteilla
+        403: null, // xxxx
+        493: null, // Vanhentunut
+        999420001: "SENT", // Hyväksytty
+        999420002: null, // Mitätöity
     },
 };
 
