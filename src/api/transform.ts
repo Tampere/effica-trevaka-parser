@@ -14,11 +14,11 @@ import { transformPayDecisionData } from "../transform/pay-decisions"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
-import { TransformOperation } from "../types/internal"
+import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
-const dependencyOrder: TransformOperation[] =
+const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
