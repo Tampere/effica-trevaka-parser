@@ -554,6 +554,61 @@ Array [
 ]
 `;
 
+exports[`GET /transfer positive should return transferred fee decisions 1`] = `
+Object {
+  "feeDecisionChildren": Array [
+    Object {
+      "base_fee": 49200,
+      "child_date_of_birth": "2019-06-01T00:00:00.000Z",
+      "child_id": Any<String>,
+      "created": Any<String>,
+      "fee": 49200,
+      "fee_alterations": Array [],
+      "fee_decision_id": Any<String>,
+      "final_fee": 49200,
+      "id": Any<String>,
+      "placement_type": "DAYCARE",
+      "placement_unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
+      "service_need_description_fi": "Kokopäiväinen",
+      "service_need_description_sv": "Kokopäiväinen",
+      "service_need_fee_coefficient": "1.00",
+      "service_need_missing": false,
+      "sibling_discount": 0,
+      "updated": Any<String>,
+    },
+  ],
+  "feeDecisions": Array [
+    Object {
+      "approved_at": null,
+      "approved_by_id": null,
+      "cancelled_at": null,
+      "created": Any<String>,
+      "decision_handler_id": null,
+      "decision_number": "123456790",
+      "decision_type": "NORMAL",
+      "document_key": null,
+      "family_size": 2,
+      "fee_thresholds": Object {
+        "incomeMultiplier": null,
+        "maxFee": null,
+        "maxIncomeThreshold": null,
+        "minFee": null,
+        "minIncomeThreshold": null,
+      },
+      "head_of_family_id": Any<String>,
+      "head_of_family_income": null,
+      "id": Any<String>,
+      "partner_id": null,
+      "partner_income": null,
+      "sent_at": null,
+      "status": "SENT",
+      "updated": Any<String>,
+      "valid_during": "[2020-03-01,)",
+    },
+  ],
+}
+`;
+
 exports[`GET /transfer positive should return transferred income 1`] = `
 Array [
   Object {

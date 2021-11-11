@@ -2,13 +2,12 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-interface Cause { stack: string }
 export class ErrorWithCause extends Error {
-    constructor(message: string, error: Cause) {
+    constructor(message: string, error: unknown) {
         super(message)
         const lineCount = (this.message.match(/\n/g) ?? []).length + 1
         this.stack = `${this.stack?.split('\n').slice(0, lineCount + 1).join('\n') ?? ""}
-        ${error.stack}`
+        ${error instanceof Error ? error.stack : ""}`
     }
 }
 

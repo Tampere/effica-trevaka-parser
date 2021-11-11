@@ -30,6 +30,8 @@ const baseDataTables =
         "applications",
         "applicationrows",
         "decisions",
+        "paydecisions",
+        "paydecisionrows",
         "dailyjournals",
         "dailyjournalrows",
         "evaka_areas",
@@ -143,6 +145,21 @@ const voucherValueDecisionExpectation = {
     partner_id: expect.any(String),
     created: expect.any(String),
     updated: expect.any(String)
+}
+
+const feeDecisionExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    head_of_family_id: expect.any(String),
+}
+
+const feeDecisionChildExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    child_id: expect.any(String),
+    fee_decision_id: expect.any(String),
 }
 
 const absenceExpectation = {
@@ -293,6 +310,18 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "voucher_value_decisions",
             Array(1).fill(voucherValueDecisionExpectation)
+        )
+    })
+
+    it("should return transferred fee decisions", async () => {
+        await setupTransformations(["persons", "families", "departments", "placements", "feedeviations", "pay_decisions"])
+        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
+        await positiveTransferSnapshotTest(
+            "fee_decisions",
+            {
+                feeDecisions: Array(1).fill(feeDecisionExpectation),
+                feeDecisionChildren: Array(1).fill(feeDecisionChildExpectation),
+            }
         )
     })
 

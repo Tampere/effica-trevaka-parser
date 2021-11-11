@@ -742,6 +742,73 @@ Object {
 }
 `;
 
+exports[`GET /import xml positive should return created pay decision rows 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "fee": "0",
+        "guid": "paydecisionrow38437811",
+        "income": null,
+        "internalid": 3843781,
+        "person": "020967-9992",
+        "rownumber": 1,
+        "rowtype": 1,
+        "specification": null,
+      },
+      Object {
+        "fee": "0",
+        "guid": "paydecisionrow38437812",
+        "income": null,
+        "internalid": 3843781,
+        "person": null,
+        "rownumber": 2,
+        "rowtype": 3,
+        "specification": "Perhekoko 2 (maksu 10.70%)",
+      },
+      Object {
+        "fee": "492",
+        "guid": "paydecisionrow38437813",
+        "income": null,
+        "internalid": 3843781,
+        "person": "010619A9501",
+        "rownumber": 3,
+        "rowtype": 5,
+        "specification": null,
+      },
+    ],
+  ],
+  "tables": Array [
+    "paydecisionrows",
+  ],
+}
+`;
+
+exports[`GET /import xml positive should return created pay decisions 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "caseworker": null,
+        "decisiondate": "2020-01-01T00:00:00.000Z",
+        "decisionmaker": null,
+        "decisionnumber": 123456790,
+        "enddate": null,
+        "fee": "492",
+        "guid": "paydecision3843781",
+        "headoffamily": "020967-9992",
+        "internaldecisionnumber": 3843781,
+        "startdate": "2020-03-01T00:00:00.000Z",
+        "status": 999420001,
+      },
+    ],
+  ],
+  "tables": Array [
+    "paydecisions",
+  ],
+}
+`;
+
 exports[`GET /import xml positive should return created persons 1`] = `
 Object {
   "inserts": Array [

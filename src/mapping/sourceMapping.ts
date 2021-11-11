@@ -226,6 +226,37 @@ export const efficaTableMapping: TypeMapping = {
         },
         primaryKeys: ["guid"],
     },
+    paydecisions: {
+        tableName: "paydecisions",
+        columns: {
+            headoffamily: { sqlType: "text", parser: nullForcingTextParser },
+            internaldecisionnumber: { sqlType: "integer", parser: nullForcingTextParser },
+            startdate: { sqlType: "date", parser: nullDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
+            fee: { sqlType: "numeric", parser: nullForcingTextParser },
+            caseworker: { sqlType: "text", parser: nullForcingTextParser },
+            decisionmaker: { sqlType: "text", parser: nullForcingTextParser },
+            decisionnumber: { sqlType: "integer", parser: nullForcingTextParser },
+            decisiondate: { sqlType: "date", parser: nullDateParser },
+            status: { sqlType: "integer", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+        primaryKeys: ["guid"],
+    },
+    paydecisionrows: {
+        tableName: "paydecisionrows",
+        columns: {
+            internalid: { sqlType: "integer", parser: nullForcingTextParser },
+            rownumber: { sqlType: "integer", parser: nullForcingTextParser },
+            person: { sqlType: "text", parser: nullForcingTextParser },
+            income: { sqlType: "numeric", parser: nullForcingTextParser },
+            specification: { sqlType: "text", parser: nullForcingTextParser },
+            fee: { sqlType: "numeric", parser: nullForcingTextParser },
+            rowtype: { sqlType: "integer", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+        primaryKeys: ["guid"],
+    },
     childminders: {
         tableName: "childminders",
         columns: {

@@ -1,0 +1,36 @@
+<!--
+SPDX-FileCopyrightText: 2021 City of Tampere
+
+SPDX-License-Identifier: LGPL-2.1-or-later
+-->
+
+<PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>1</RowNumber>
+  <Person>020967-9992</Person>
+  <Income></Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>1</RowType>
+  <GUID>paydecisionrow38437811</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>2</RowNumber>
+  <Person></Person>
+  <Income></Income>
+  <Specification>Perhekoko 2 (maksu 10.70%)</Specification>
+  <Fee>0.00</Fee>
+  <RowType>3</RowType>
+  <GUID>paydecisionrow38437812</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>3</RowNumber>
+  <Person>010619A9501</Person>
+  <Income></Income>
+  <Specification> </Specification>
+  <Fee>492.00</Fee>
+  <RowType>5</RowType>
+  <GUID>paydecisionrow38437813</GUID>
+</PayDecisionRows>

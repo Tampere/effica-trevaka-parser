@@ -10,14 +10,15 @@ import { transformDepartmentData } from "../transform/departments"
 import { transformFamilyData } from "../transform/families"
 import { transformFeeDeviationsData } from "../transform/fee-deviations"
 import { transformIncomeData } from "../transform/income"
+import { transformPayDecisionData } from "../transform/pay-decisions"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
-import { TransformOperation } from "../types/internal"
+import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
-const dependencyOrder: TransformOperation[] =
+const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
@@ -27,6 +28,7 @@ const dependencyOrder: TransformOperation[] =
         { name: "feedeviations", function: transformFeeDeviationsData },
         { name: "application", function: transformApplicationData },
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
+        { name: "pay_decisions", function: transformPayDecisionData },
         { name: "daily_journals", function: transformDailyJournalsData },
         { name: "cleanup", function: cleanupData },
     ]
@@ -129,6 +131,19 @@ router.get("/voucher_value_decisions", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform voucher value decisions total ", undefined, "*")
+})
+
+router.get("/pay_decisions", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform pay decisions total ", undefined, "*")
+    try {
+        const results = await transformPayDecisionData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform pay decisions total ", undefined, "*")
 })
 
 router.get("/daily_journals", async (req, res, next) => {
