@@ -234,7 +234,9 @@ Object {
         "serviceEnd": null,
         "serviceNeedOption": Object {
           "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
-          "name": "Kokopäiväinen",
+          "nameEn": "Full-time",
+          "nameFi": "Kokopäiväinen",
+          "nameSv": "Kokopäiväinen",
         },
         "serviceStart": null,
         "type": "DAYCARE",
