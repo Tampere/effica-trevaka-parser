@@ -175,7 +175,9 @@ JOIN (
         array_agg(unit_id ORDER BY effica_priority) AS unit_ids,
         array_agg(jsonb_build_object(
             'id', sno.id,
-            'name', sno.name_fi
+            'nameFi', sno.name_fi,
+            'nameSv', sno.name_sv,
+            'nameEn', sno.name_en
         ) ORDER BY effica_priority) FILTER (WHERE sno.id IS NOT NULL) AS service_need_options,
         array_agg(preferred_start_date ORDER BY effica_priority) AS preferred_start_dates
     FROM ${migrationSchema:name}.evaka_application_form
