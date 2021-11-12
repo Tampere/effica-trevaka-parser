@@ -4,3 +4,5 @@
 
 export type MigrationFunction = (returnAll: boolean) => Promise<any>;
 export type MigrationOperation = { name: string, function: MigrationFunction }
+
+export type FixScriptDescriptor = { filePath: string, parameters?: any }

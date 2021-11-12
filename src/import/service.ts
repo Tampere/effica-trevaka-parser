@@ -6,8 +6,9 @@ import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
 import { FileDescriptor, ImportOptions, TableDescriptor, TypeMapping } from "../types"
+import { FixScriptDescriptor } from "../types/internal"
 import { errorCodes } from "../util/error"
-import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
+import { createGenericTableQueryFromDescriptor, runQueryFile } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
 export const importFileData = async (files: FileDescriptor[], options: ImportOptions) => {
@@ -72,4 +73,12 @@ export const insertData = async (table: TableDescriptor, data: any[], mapping: T
         `WITH rows AS ( ${insert} RETURNING *) select * from rows;` :
         `WITH rows AS ( ${insert} RETURNING 1) select count(*) as ${table.tableName}_count from rows;`
     return await t.any(resultReturningQuery)
+}
+
+export const executePostImportFixes = async (cityFixScripts: FixScriptDescriptor[]) => {
+    migrationDb.tx(async (t) => {
+        for (let fix of cityFixScripts) {
+            await runQueryFile(fix.filePath, t, fix.parameters);
+        }
+    })
 }
