@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+import { FixScriptDescriptor } from "../types/internal";
 import {
     CitySpecificApplicationStatusMappings,
     CitySpecificApplicationTypeMappings,
@@ -9,8 +10,9 @@ import {
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
     CitySpecificPayDecisionStatusMappings,
-    DecisionStatusType,
+    DecisionStatusType
 } from "../types/mappings";
+import { baseQueryParameters } from "../util/queryTools";
 
 export const APPLICATION_TYPE_MAPPINGS: CitySpecificApplicationTypeMappings = {
     tampere: {
@@ -194,5 +196,15 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
             { codes: [], evakaType: "YEARLY" },
         ],
     }
+
+}
+
+export const postImportFixes: Record<string, FixScriptDescriptor[]> = {
+    tampere: [
+        {
+            filePath: "/import-fixes/tampere/families-post-import-fix.sql",
+            parameters: baseQueryParameters
+        }
+    ]
 
 }
