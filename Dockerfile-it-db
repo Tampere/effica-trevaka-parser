@@ -5,4 +5,4 @@
 FROM postgres:13-alpine
 
 COPY init.sql /docker-entrypoint-initdb.d/
-CMD ["postgres", "-c", "fsync=off"]
+CMD ["postgres", "-c", "fsync=off", "-c", "log_statement=all", "-c", "log_destination=stderr"]

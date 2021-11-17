@@ -5,6 +5,7 @@
 import { ITask } from "pg-promise";
 import { TableDescriptor } from "../types";
 import {
+    createGenericTableQueryFromDescriptor,
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
     truncateEvakaTable
@@ -119,4 +120,41 @@ export const resetEvakaMigratedData = async () => {
             await truncateEvakaTable(table, t)
         }
     })
+}
+
+export const createGenericFilteredViewQuery = (td: TableDescriptor) => {
+    console.log(td)
+    const result = td.uqKeys && td.uqKeys.length > 0 ? `
+    CREATE OR REPLACE VIEW ${getMigrationSchemaPrefix()}filtered_${td.tableName}_v
+    AS
+    SELECT *
+    FROM ${getMigrationSchemaPrefix()}${td.tableName} ${td.tableName}
+    WHERE NOT EXISTS(
+        SELECT *
+        FROM ${getMigrationSchemaPrefix()}${td.tableName}_exclusions x
+        WHERE ${td.uqKeys.map(k => `x.${k} = ${td.tableName}.${k}`).join(" AND ")}
+    );
+    ` : ""
+    return result
+}
+
+export const createGenericExclusionTableQuery = (td: TableDescriptor) => {
+    const primaryKeyStr = td.uqKeys !== undefined ? `, PRIMARY KEY (${td.uqKeys?.join(",")})` : ""
+    const exclusionCols = td.uqKeys && td.uqKeys.length > 0 ? Object.keys(td.columns).filter(k => td.uqKeys?.includes(k)) : Object.keys(td.columns)
+    return `CREATE TABLE IF NOT EXISTS 
+        ${getMigrationSchemaPrefix()}
+        ${td.tableName}_exclusions 
+        (${exclusionCols.map(c => `${c} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});
+        `
+
+}
+
+export const createGenericTableAndViewQueryFromDescriptor = (td: TableDescriptor) => {
+    return `
+    ${createGenericTableQueryFromDescriptor(td)}
+    
+    ${td.uqKeys && td.uqKeys.length > 0 ? createGenericExclusionTableQuery(td) : ""}
+
+    ${td.uqKeys && td.uqKeys.length > 0 ? createGenericFilteredViewQuery(td) : ""}
+    `
 }

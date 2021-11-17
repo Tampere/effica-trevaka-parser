@@ -25,13 +25,14 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                 time(`'${dirent.name}' parsing`)
                 const [tableName, fileType] = fileName.split(".")
                 let file: FileDescriptor;
-                if (fileType === "csv") {
+                if (fileType.toLowerCase() === "csv") {
                     const csvData = await csv(config.csvParserOptions).fromString(fileAsString)
                     file = {
                         fileName: fileName,
                         data: csvData,
                         table: collectTableDescription(tableName, csvData, extTableMapping),
-                        mapping: extTableMapping
+                        mapping: extTableMapping,
+                        importType: "ext"
                     }
                     // note that effica dumps are delivered as txt files
                 } else {
@@ -41,7 +42,8 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                         fileName: fileName,
                         data: tableData,
                         table: collectTableDescription(tableName, tableData, efficaTableMapping),
-                        mapping: efficaTableMapping
+                        mapping: efficaTableMapping,
+                        importType: "effica"
                     }
                 }
                 timeEnd(`'${dirent.name}' parsing`)
@@ -89,6 +91,7 @@ const collectTableDescription = (tableName: string, data: any, mapping: TypeMapp
         tableName,
         columns: collectDataColumnDescriptions(tableName, tableDef, data[0]),
         primaryKeys: tableDef.primaryKeys,
+        uqKeys: tableDef.uqKeys,
         tableQueryFunction: tableDef.tableQueryFunction
     }
 }

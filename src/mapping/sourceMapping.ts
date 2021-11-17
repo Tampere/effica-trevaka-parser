@@ -10,7 +10,8 @@ import { TypeMapping } from "../types"
 // booleans encoded as 0/1 (apart from code activity)
 // missing coded value seems to be 0, never null
 
-//TODO: add rest of tables
+// NOTE! Effica import (XML) default generic table formation creates a data table, an exclusion table and a filtered view,
+// make sure to provide replacements if default is overridden (CSV imports don't need any additions)
 export const efficaTableMapping: TypeMapping = {
     applications: {
         tableName: "applications",
@@ -67,7 +68,8 @@ export const efficaTableMapping: TypeMapping = {
             enddate: { sqlType: "date", parser: nullDateParser },
             roleinfamily: { sqlType: "text", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
-        }
+        },
+        uqKeys: ["personid", "familynbr", "roleinfamily", "startdate", "enddate"]
     },
     income: {
         tableName: "income",
@@ -461,6 +463,26 @@ export const extTableMapping: TypeMapping = {
             },
             name: {
                 sqlType: "text", parser: nullForcingTextParser
+            }
+        }
+    },
+    families_exclusions: {
+        tableName: "families_exclusions",
+        columns: {
+            personid: {
+                sqlType: "text", parser: nullForcingTextParser
+            },
+            familynbr: {
+                sqlType: "integer", parser: stringToNumericParser
+            },
+            roleinfamily: {
+                sqlType: "text", parser: nullForcingTextParser
+            },
+            startdate: {
+                sqlType: "date", parser: nullDateParser
+            },
+            enddate: {
+                sqlType: "date", parser: nullDateParser
             }
         }
     }

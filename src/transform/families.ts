@@ -48,29 +48,29 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
     const childQueryPart =
         `
         INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_child (hof_ssn, head_of_family, child_ssn, child_id, start_date, end_date, family_number)
-         WITH hofs AS (
-             SELECT hof.personid  AS effica_ssn,
-                    hof.startdate AS start_date,
-                    hof.enddate   AS end_date,
-                    hof.familynbr AS family_number,
-                    p.id          AS person_id
-             FROM ${getMigrationSchemaPrefix()}families hof
+        WITH hofs AS (
+            SELECT hof.personid  AS effica_ssn,
+                hof.startdate AS start_date,
+                hof.enddate   AS end_date,
+                hof.familynbr AS family_number,
+                p.id          AS person_id
+            FROM ${getMigrationSchemaPrefix()}filtered_families_v hof
+            JOIN ${getMigrationSchemaPrefix()}evaka_person p
+                ON hof.personid = p.effica_ssn
+            WHERE hof.roleinfamily = 'R'
+        ),
+        children AS (
+            SELECT child.personid                                                             AS effica_ssn,
+                child.startdate                                                            AS start_date,
+                COALESCE(child.enddate,
+                        (p.date_of_birth) + INTERVAL '18 years' - INTERVAL '1 day')::date AS end_date,
+                child.familynbr                                                            AS family_number,
+                p.id                                                                       AS person_id
+            FROM ${getMigrationSchemaPrefix()}filtered_families_v child
                 JOIN ${getMigrationSchemaPrefix()}evaka_person p
-                    ON hof.personid = p.effica_ssn
-             WHERE hof.roleinfamily = 'R'
-         ),
-              children AS (
-                  SELECT child.personid                                                             AS effica_ssn,
-                         child.startdate                                                            AS start_date,
-                         COALESCE(child.enddate,
-                                  (p.date_of_birth) + INTERVAL '18 years' - INTERVAL '1 day')::date AS end_date,
-                         child.familynbr                                                            AS family_number,
-                         p.id                                                                       AS person_id
-                  FROM ${getMigrationSchemaPrefix()}families child
-                     JOIN ${getMigrationSchemaPrefix()}evaka_person p
-                         ON child.personid = p.effica_ssn
-                  WHERE child.roleinfamily = 'B'
-              )
+                    ON child.personid = p.effica_ssn
+            WHERE child.roleinfamily = 'B'
+        )
          SELECT h.effica_ssn                         AS hof_ssn,
                 h.person_id                          AS head_of_family,
                 c.effica_ssn                         AS child_ssn,
@@ -95,12 +95,13 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
                 GREATEST(hof.startdate, partner.startdate)        AS start_date,
                 LEAST(hof.enddate, partner.enddate)               AS end_date,
                 hof.familynbr                                     AS family_number
-            FROM ${getMigrationSchemaPrefix()}families hof
-                JOIN ${getMigrationSchemaPrefix()}families partner
+            FROM ${getMigrationSchemaPrefix()}filtered_families_v hof
+                JOIN ${getMigrationSchemaPrefix()}filtered_families_v partner
                     ON partner.familynbr = hof.familynbr
                         AND daterange(hof.startdate, hof.enddate, '[]') && daterange(partner.startdate, partner.enddate, '[]')
                         AND hof.roleinfamily = 'R'
-                        AND partner.roleinfamily = 'S')
+                        AND partner.roleinfamily = 'S'
+        ) 
         SELECT ep.id   AS person_id,
             ps.partnership_id,
             ps.start_date,
