@@ -13,8 +13,8 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         id UUID NOT NULL,
         effica_guid TEXT NOT NULL,
         social_security_number TEXT UNIQUE,
-        first_name TEXT,
-        last_name TEXT,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
         email TEXT,
         language TEXT,
         date_of_birth DATE NOT NULL,
@@ -23,8 +23,8 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         post_office TEXT,
         nationalities varchar(3)[] NOT NULL,
         restricted_details_enabled BOOLEAN,
-        phone TEXT DEFAULT NULL::character varying,
-        backup_phone text DEFAULT ''::text NOT NULL,
+        phone TEXT NOT NULL,
+        backup_phone text NOT NULL,
         effica_ssn TEXT,
         PRIMARY KEY(id)
     );`
@@ -36,8 +36,8 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         COALESCE(im.evaka_id, ${getExtensionSchemaPrefix()}uuid_generate_v1mc()),
         p.guid,
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
-        trim(split_part(p.personname, ',', 1)) AS last_name,
-        trim(split_part(p.personname, ',', 2)) AS first_name,
+        COALESCE(trim(split_part(p.personname, ',', 1)), '') AS last_name,
+        COALESCE(trim(split_part(p.personname, ',', 2)), '') AS first_name,
         p.personhomeemail,
         c.extrainfo1 AS language,
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personstreetaddress, '') END AS street_address,
@@ -51,7 +51,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                 CASE
                     WHEN (length(p.phonework) <= 20 AND length(p.phonework) > 0) THEN p.phonework
                     WHEN (length(p.phonehome) <= 20 AND length(p.phonehome) > 0) THEN p.phonehome
-                    ELSE NULL
+                    ELSE ''
                 END
         END) AS phone,
         (CASE
