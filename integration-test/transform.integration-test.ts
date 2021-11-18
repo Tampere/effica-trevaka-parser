@@ -86,7 +86,7 @@ describe("GET /transform positive", () => {
         cleanUps = ["evaka_person"]
         const response1 = await positiveTransformSnapshotTest(
             "persons",
-            Array(5).fill(personExpectation)
+            Array(6).fill(personExpectation)
         )
         // verify maintain ids between migrations
         const response2 = await transform("persons")

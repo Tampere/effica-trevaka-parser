@@ -389,6 +389,24 @@ Array [
     "social_security_number": "251118A9509",
     "street_address": "HideStreet 2",
   },
+  Object {
+    "backup_phone": "",
+    "date_of_birth": Any<String>,
+    "effica_guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa6}",
+    "effica_ssn": "181101A9092",
+    "email": null,
+    "first_name": "",
+    "id": Any<String>,
+    "language": "fi",
+    "last_name": "",
+    "nationalities": Array [],
+    "phone": "",
+    "post_office": "",
+    "postal_code": "",
+    "restricted_details_enabled": false,
+    "social_security_number": "181101A9092",
+    "street_address": "",
+  },
 ]
 `;
 

@@ -234,7 +234,7 @@ describe("GET /transfer positive", () => {
         await setupTransformations(["persons"])
         await positiveTransferSnapshotTest(
             "persons",
-            Array(5).fill(personExpectation)
+            Array(6).fill(personExpectation)
         )
     })
     it("should return transferred families", async () => {
