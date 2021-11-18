@@ -13,3 +13,12 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <Period>202003</Period>
   <GUID>dailyjournal123456</GUID>
 </DailyJournals>
+<DailyJournals>
+  <DailyJournalId>123457</DailyJournalId>
+  <Unit>125</Unit>
+  <Department>1251</Department>
+  <ChildMinder></ChildMinder>
+  <OpeningDays>0000011000001100000110000011000</OpeningDays>
+  <Period>202003</Period>
+  <GUID>dailyjournal123457</GUID>
+</DailyJournals>
