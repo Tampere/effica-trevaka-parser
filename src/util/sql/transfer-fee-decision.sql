@@ -8,7 +8,9 @@ INSERT INTO fee_decision (
     valid_during,
     decision_type,
     head_of_family_id,
+    head_of_family_income,
     partner_id,
+    partner_income,
     family_size,
     fee_thresholds,
     decision_number
@@ -18,7 +20,9 @@ INSERT INTO fee_decision (
     daterange(efd.start_date, efd.end_date, '[]'),
     efd.decision_type::fee_decision_type,
     efd.head_of_family_id,
+    efd.head_of_family_income,
     efd.partner_id,
+    efd.partner_income,
     efd.family_size,
     CASE efd.family_size
         WHEN 2 THEN jsonb_build_object(

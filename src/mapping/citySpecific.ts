@@ -195,6 +195,9 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
             { codes: [], evakaType: "BI_WEEKLY_WITH_HOLIDAY_BONUS" },
             { codes: [], evakaType: "YEARLY" },
         ],
+
+        // income type for fee decisions
+        feeDecisionIncomeType: "MAIN_INCOME",
     }
 
 }

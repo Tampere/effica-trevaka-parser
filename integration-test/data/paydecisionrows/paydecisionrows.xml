@@ -8,7 +8,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <InternalId>3843781</InternalId>
   <RowNumber>1</RowNumber>
   <Person>020967-9992</Person>
-  <Income></Income>
+  <Income>100.2</Income>
   <Specification></Specification>
   <Fee>0.00</Fee>
   <RowType>1</RowType>
@@ -33,4 +33,14 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <Fee>492.00</Fee>
   <RowType>5</RowType>
   <GUID>paydecisionrow38437813</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>4</RowNumber>
+  <Person>180476-998M</Person>
+  <Income>999999</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>2</RowType>
+  <GUID>paydecisionrow38437814</GUID>
 </PayDecisionRows>

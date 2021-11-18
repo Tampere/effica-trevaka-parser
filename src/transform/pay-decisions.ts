@@ -5,7 +5,10 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
-import { PAY_DECISION_STATUS_MAPPINGS } from "../mapping/citySpecific";
+import {
+    citySpecificIncomeMappings,
+    PAY_DECISION_STATUS_MAPPINGS,
+} from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
@@ -23,10 +26,12 @@ export const transformPayDecisionData = async (returnAll: boolean = false) => {
 
 const transformPayDecisions = async <T>(t: ITask<T>, returnAll: boolean) => {
     const statusMappings = PAY_DECISION_STATUS_MAPPINGS[config.cityVariant];
+    const incomeMappings = citySpecificIncomeMappings[config.cityVariant];
     await runQueryFile("transform-pay-decision.sql", t, {
         ...baseQueryParameters,
         statusMappings,
         allStatuses: Object.keys(statusMappings),
+        incomeType: incomeMappings.feeDecisionIncomeType,
     });
 
     const feeDecisions = await runQuery(
