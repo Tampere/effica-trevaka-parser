@@ -41,3 +41,40 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <ReportCode31>0</ReportCode31>
     <GUID>dailyjournalrow123456</GUID>
 </DailyJournalRows>
+<DailyJournalRows>
+    <DailyJournalId>123457</DailyJournalId>
+    <PersonId>251118A9509</PersonId>
+    <ExtraChild>&#x20;</ExtraChild>
+    <ReportCode01>0</ReportCode01>
+    <ReportCode02>0</ReportCode02>
+    <ReportCode03>0</ReportCode03>
+    <ReportCode04>0</ReportCode04>
+    <ReportCode05>0</ReportCode05>
+    <ReportCode06>0</ReportCode06>
+    <ReportCode07>0</ReportCode07>
+    <ReportCode08>0</ReportCode08>
+    <ReportCode09>0</ReportCode09>
+    <ReportCode10>0</ReportCode10>
+    <ReportCode11>0</ReportCode11>
+    <ReportCode12>0</ReportCode12>
+    <ReportCode13>0</ReportCode13>
+    <ReportCode14>0</ReportCode14>
+    <ReportCode15>174</ReportCode15>
+    <ReportCode16>174</ReportCode16>
+    <ReportCode17>174</ReportCode17>
+    <ReportCode18>0</ReportCode18>
+    <ReportCode19>174</ReportCode19>
+    <ReportCode20>0</ReportCode20>
+    <ReportCode21>0</ReportCode21>
+    <ReportCode22>0</ReportCode22>
+    <ReportCode23>0</ReportCode23>
+    <ReportCode24>0</ReportCode24>
+    <ReportCode25>0</ReportCode25>
+    <ReportCode26>0</ReportCode26>
+    <ReportCode27>0</ReportCode27>
+    <ReportCode28>0</ReportCode28>
+    <ReportCode29>0</ReportCode29>
+    <ReportCode30>0</ReportCode30>
+    <ReportCode31>0</ReportCode31>
+    <GUID>dailyjournalrow123457</GUID>
+</DailyJournalRows>

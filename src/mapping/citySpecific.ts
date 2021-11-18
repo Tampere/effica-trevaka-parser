@@ -105,7 +105,7 @@ export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCod
         },
         174: {
             // Hoidossa muualla (X)
-            absenceType: "TEMPORARY_RELOCATION",
+            // absence counterpart for backup care (reportcode 176). for evaka only backup care should be inserted
         },
         175: {
             // Kerhon poissaolo
