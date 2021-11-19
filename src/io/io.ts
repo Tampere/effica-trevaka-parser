@@ -7,7 +7,7 @@ import * as xmlParser from "fast-xml-parser"
 import { opendir, readFile } from "fs/promises"
 import { config } from "../config"
 import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
-import { ColumnDescriptor, FileDescriptor, TableDescriptor, TypeMapping } from "../types"
+import { ColumnDescriptor, FileDescriptor, ImportType, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
@@ -32,7 +32,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                         data: csvData,
                         table: collectTableDescription(tableName, csvData, extTableMapping),
                         mapping: extTableMapping,
-                        importType: "ext"
+                        importType: ImportType.External
                     }
                     // note that effica dumps are delivered as txt files
                 } else {
@@ -43,7 +43,7 @@ export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> 
                         data: tableData,
                         table: collectTableDescription(tableName, tableData, efficaTableMapping),
                         mapping: efficaTableMapping,
-                        importType: "effica"
+                        importType: ImportType.Effica
                     }
                 }
                 timeEnd(`'${dirent.name}' parsing`)
@@ -85,13 +85,16 @@ const collectTableDescription = (tableName: string, data: any, mapping: TypeMapp
             `Type definitions for table '${tableName}' not found (${errorCodes.nonMappedTable})`
         )
     }
+    //check if table has a corresponding exclusion table
+    const exclusionColumns = extTableMapping[`${tableName}${config.exclusionSuffix}`]?.columns
+
     //note that column descriptions are collected from data, not mapping
     //this enables import to take in files that only have a subset of the columns in the mapping
     return {
         tableName,
         columns: collectDataColumnDescriptions(tableName, tableDef, data[0]),
         primaryKeys: tableDef.primaryKeys,
-        uqKeys: tableDef.uqKeys,
+        uqKeys: exclusionColumns ? Object.keys(exclusionColumns) : undefined,
         tableQueryFunction: tableDef.tableQueryFunction
     }
 }

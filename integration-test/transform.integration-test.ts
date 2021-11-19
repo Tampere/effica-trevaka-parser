@@ -21,6 +21,7 @@ const baseDataTables =
     [
         "persons",
         "codes",
+        "families_exclusion",
         "families",
         "units",
         "departments",
@@ -43,6 +44,7 @@ const baseDataTables =
         "evaka_unit_manager",
         "evaka_daycare",
         "daycare_oid_map"
+
     ]
 
 
@@ -95,7 +97,6 @@ describe("GET /transform positive", () => {
         )
     })
     it("should return transformed families", async () => {
-
         cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
         await setupTransformations(["persons"])
 

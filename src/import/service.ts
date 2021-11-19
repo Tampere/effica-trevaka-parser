@@ -6,7 +6,7 @@ import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
 import { createGenericTableAndViewQueryFromDescriptor } from "../db/evaka"
-import { FileDescriptor, ImportOptions, TableDescriptor, TypeMapping } from "../types"
+import { FileDescriptor, ImportOptions, ImportType, TableDescriptor, TypeMapping } from "../types"
 import { FixScriptDescriptor } from "../types/internal"
 import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor, runQueryFile } from "../util/queryTools"
@@ -31,9 +31,8 @@ export const importFileData = async (files: FileDescriptor[], options: ImportOpt
 export const createTables = async (files: FileDescriptor[], t: pgPromise.ITask<{}>) => {
     const sqls: string[] = files.map(f => {
         const tqf = f.table.tableQueryFunction ?
-            f.table.tableQueryFunction : f.importType == "effica" ?
+            f.table.tableQueryFunction : f.importType === ImportType.Effica ?
                 createGenericTableAndViewQueryFromDescriptor : createGenericTableQueryFromDescriptor
-        console.log(tqf.name)
         return tqf(f.table)
     })
     await Promise.all(sqls.map(s => t.none(s)))

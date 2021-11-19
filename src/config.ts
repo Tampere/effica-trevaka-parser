@@ -9,6 +9,7 @@ export const config = {
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
     migrationSchema: process.env.MIGRATION_SCHEMA ?? "migration",
     extensionSchema: process.env.EXTENSION_SCHEMA ?? "ext",
+    exclusionSuffix: "_exclusion",
     migrationDb: {
         host: process.env.PGHOST ?? "localhost",
         port: 5432,

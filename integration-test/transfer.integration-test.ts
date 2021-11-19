@@ -16,6 +16,7 @@ const baseDataTables =
     [
         "persons",
         "codes",
+        "families_exclusion",
         "families",
         "units",
         "departments",

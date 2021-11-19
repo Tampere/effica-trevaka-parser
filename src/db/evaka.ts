@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { ITask } from "pg-promise";
+import { config } from "../config";
 import { TableDescriptor } from "../types";
 import {
     createGenericTableQueryFromDescriptor,
@@ -123,30 +124,28 @@ export const resetEvakaMigratedData = async () => {
 }
 
 export const createGenericFilteredViewQuery = (td: TableDescriptor) => {
-    console.log(td)
-    const result = td.uqKeys && td.uqKeys.length > 0 ? `
+    return td.uqKeys && td.uqKeys.length > 0 ? `
     CREATE OR REPLACE VIEW ${getMigrationSchemaPrefix()}filtered_${td.tableName}_v
     AS
     SELECT *
     FROM ${getMigrationSchemaPrefix()}${td.tableName} ${td.tableName}
     WHERE NOT EXISTS(
-        SELECT *
-        FROM ${getMigrationSchemaPrefix()}${td.tableName}_exclusions x
+        SELECT 1
+        FROM ${getMigrationSchemaPrefix()}${td.tableName}${config.exclusionSuffix} x
         WHERE ${td.uqKeys.map(k => `x.${k} = ${td.tableName}.${k}`).join(" AND ")}
     );
     ` : ""
-    return result
 }
 
 export const createGenericExclusionTableQuery = (td: TableDescriptor) => {
-    const primaryKeyStr = td.uqKeys !== undefined ? `, PRIMARY KEY (${td.uqKeys?.join(",")})` : ""
     const exclusionCols = td.uqKeys && td.uqKeys.length > 0 ? Object.keys(td.columns).filter(k => td.uqKeys?.includes(k)) : Object.keys(td.columns)
+    const excTableName = td.uqKeys && td.uqKeys.length > 0 ? `${td.tableName}${config.exclusionSuffix}` : td.tableName
+    const primaryKeyStr = `, PRIMARY KEY (${exclusionCols?.join(",")})`
     return `CREATE TABLE IF NOT EXISTS 
         ${getMigrationSchemaPrefix()}
-        ${td.tableName}_exclusions 
+        ${excTableName}
         (${exclusionCols.map(c => `${c} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});
         `
-
 }
 
 export const createGenericTableAndViewQueryFromDescriptor = (td: TableDescriptor) => {
@@ -155,6 +154,6 @@ export const createGenericTableAndViewQueryFromDescriptor = (td: TableDescriptor
     
     ${td.uqKeys && td.uqKeys.length > 0 ? createGenericExclusionTableQuery(td) : ""}
 
-    ${td.uqKeys && td.uqKeys.length > 0 ? createGenericFilteredViewQuery(td) : ""}
+    ${createGenericFilteredViewQuery(td)}
     `
 }
