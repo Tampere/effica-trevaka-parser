@@ -470,7 +470,7 @@ export const extTableMapping: TypeMapping = {
     /*
     to use the exclusion mechanism for any effica import data table:
       1. add a corresponding exclusion import entry like below
-        - be sure to define a column subset that is capable of uniquely identifying each row of the original data table 
+        - be sure to define a column subset that is capable of uniquely identifying each row of the original data table
       2. switch transformation query data source from '<migrationSchema>.<tableName>' to '<migrationSchema>.filtered_<tableName>_v'
       3. create your exclusion import csv with file name matching the entry name here
       4. import original data and exclusion data (order of imports should not matter)
