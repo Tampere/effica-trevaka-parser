@@ -21,6 +21,3 @@ SELECT
     null -- no Effica row id for post import inserts
 FROM ${migrationSchema:name}.families
 WHERE guid = '{DFDECC50-FC1A-4150-BFFC-55EBFA98EC9A}';
-
--- Removes an errant one day family role that conflicts with valid data (this should be done with an exclusion instead)
-DELETE FROM ${migrationSchema:name}.families where guid = '{713E11F3-F2E9-4ADA-85CA-FBF17AC8699C}';

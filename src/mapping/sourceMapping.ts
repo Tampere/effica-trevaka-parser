@@ -2,15 +2,18 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import { createAreaTableQuery, createDaycareTableQuery, createUnitManagerTableQuery } from "../db/evaka"
+import { config } from "../config"
+import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/evaka"
 import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
+
 
 // dateformat in effica-data: yyyymmdd
 // booleans encoded as 0/1 (apart from code activity)
 // missing coded value seems to be 0, never null
 
-//TODO: add rest of tables
+// NOTE! Effica import (XML) default generic table formation creates a data table, an exclusion table and a filtered view,
+// make sure to provide replacements if default is overridden (CSV imports don't need any additions)
 export const efficaTableMapping: TypeMapping = {
     applications: {
         tableName: "applications",
@@ -111,7 +114,7 @@ export const efficaTableMapping: TypeMapping = {
             homemunicipality: { sqlType: "integer", parser: codeNumericParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys: ["guid"],
+        primaryKeys: ["guid"]
     },
     areas: {
         tableName: "areas",
@@ -461,6 +464,35 @@ export const extTableMapping: TypeMapping = {
             },
             name: {
                 sqlType: "text", parser: nullForcingTextParser
+            }
+        }
+    },
+    /*
+    to use the exclusion mechanism for any effica import data table:
+      1. add a corresponding exclusion import entry like below
+        - be sure to define a column subset that is capable of uniquely identifying each row of the original data table
+      2. switch transformation query data source from '<migrationSchema>.<tableName>' to '<migrationSchema>.filtered_<tableName>_v'
+      3. create your exclusion import csv with file name matching the entry name here
+      4. import original data and exclusion data (order of imports should not matter)
+    */
+    families_exclusion: {
+        tableQueryFunction: createGenericExclusionTableQuery,
+        tableName: `families${config.exclusionSuffix}`,
+        columns: {
+            personid: {
+                sqlType: "text", parser: nullForcingTextParser
+            },
+            familynbr: {
+                sqlType: "integer", parser: stringToNumericParser
+            },
+            roleinfamily: {
+                sqlType: "text", parser: nullForcingTextParser
+            },
+            startdate: {
+                sqlType: "date", parser: nullDateParser
+            },
+            enddate: {
+                sqlType: "date", parser: nullDateParser
             }
         }
     }

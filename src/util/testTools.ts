@@ -44,6 +44,12 @@ export const setupTransformation = async (name: string) => {
 
     const url = `/transform/${name}`
     const response = await request(app).get(url).query(queryObject)
+    if (response.error) {
+        console.log(`Transform error at ${name} transformation
+        ${response.error.text}`)
+
+    }
+
     expect(response.status).toBe(200)
     return response.body
 }

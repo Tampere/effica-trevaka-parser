@@ -16,7 +16,8 @@ const tables = ["persons", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
     "dailyjournals", "dailyjournalrows",
-    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map"]
+    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map",
+    "families_exclusion"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -50,7 +51,7 @@ describe("GET /import xml positive", () => {
     })
 
     it("should return created families", async () => {
-        return await positiveImportSnapshotTest(
+        await positiveImportSnapshotTest(
             "families",
             getTimeSeriesResultPattern(
                 closedDateRange,
@@ -59,7 +60,8 @@ describe("GET /import xml positive", () => {
                 openDateRange,
                 openDateRange,
                 openDateRange,
-                openDateRange))
+                openDateRange,
+                closedDateRange))
     })
 
     it("should return created codes", async () => {
@@ -186,6 +188,10 @@ describe("GET /import csv positive", () => {
     it("should return created daycare oid mappings", async () => {
         return await positiveImportSnapshotTest(
             "daycare_oid_map")
+    })
+    it("should return created families exclusion", async () => {
+        return await positiveImportSnapshotTest(
+            "families_exclusion")
     })
 })
 

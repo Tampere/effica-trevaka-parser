@@ -5,7 +5,8 @@
 import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
-import { FileDescriptor, ImportOptions, TableDescriptor, TypeMapping } from "../types"
+import { createGenericTableAndViewQueryFromDescriptor } from "../db/evaka"
+import { FileDescriptor, ImportOptions, ImportType, TableDescriptor, TypeMapping } from "../types"
 import { FixScriptDescriptor } from "../types/internal"
 import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor, runQueryFile } from "../util/queryTools"
@@ -13,8 +14,7 @@ import { time, timeEnd } from "../util/timing"
 
 export const importFileData = async (files: FileDescriptor[], options: ImportOptions) => {
     return await migrationDb.tx(async (t) => {
-        const tables = files.map(f => f.table)
-        const tableResult = await createTables(tables, t)
+        const tableResult = await createTables(files, t)
         const tableInserts: any[] = [];
         time("** Data inserts total")
         for await (const f of files) {
@@ -28,13 +28,15 @@ export const importFileData = async (files: FileDescriptor[], options: ImportOpt
     })
 }
 
-export const createTables = async (tables: TableDescriptor[], t: pgPromise.ITask<{}>) => {
-    const sqls: string[] = tables.map(t => {
-        const tqf = t.tableQueryFunction ?? createGenericTableQueryFromDescriptor
-        return tqf(t)
+export const createTables = async (files: FileDescriptor[], t: pgPromise.ITask<{}>) => {
+    const sqls: string[] = files.map(f => {
+        const tqf = f.table.tableQueryFunction ?
+            f.table.tableQueryFunction : f.importType === ImportType.Effica ?
+                createGenericTableAndViewQueryFromDescriptor : createGenericTableQueryFromDescriptor
+        return tqf(f.table)
     })
     await Promise.all(sqls.map(s => t.none(s)))
-    return tables.map(t => t.tableName)
+    return files.map(t => t.table.tableName)
 }
 
 const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMapping): any[] => {

@@ -223,6 +223,25 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created families exclusion 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "enddate": "2020-12-01T00:00:00.000Z",
+        "familynbr": 2,
+        "personid": "010619A9501",
+        "roleinfamily": "B",
+        "startdate": "2020-12-01T00:00:00.000Z",
+      },
+    ],
+  ],
+  "tables": Array [
+    "families_exclusion",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created unitmaps 1`] = `
 Object {
   "inserts": Array [
@@ -665,6 +684,13 @@ Object {
       },
       Object {
         "enddate": null,
+        "familynbr": 2,
+        "personid": "010619A9501",
+        "roleinfamily": "B",
+        "startdate": Any<String>,
+      },
+      Object {
+        "enddate": Any<String>,
         "familynbr": 2,
         "personid": "010619A9501",
         "roleinfamily": "B",

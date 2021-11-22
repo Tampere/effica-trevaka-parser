@@ -3,8 +3,10 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { ITask } from "pg-promise";
+import { config } from "../config";
 import { TableDescriptor } from "../types";
 import {
+    createGenericTableQueryFromDescriptor,
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
     truncateEvakaTable
@@ -119,4 +121,39 @@ export const resetEvakaMigratedData = async () => {
             await truncateEvakaTable(table, t)
         }
     })
+}
+
+export const createGenericFilteredViewQuery = (td: TableDescriptor) => {
+    return td.uqKeys && td.uqKeys.length > 0 ? `
+    CREATE OR REPLACE VIEW ${getMigrationSchemaPrefix()}filtered_${td.tableName}_v
+    AS
+    SELECT *
+    FROM ${getMigrationSchemaPrefix()}${td.tableName} ${td.tableName}
+    WHERE NOT EXISTS(
+        SELECT 1
+        FROM ${getMigrationSchemaPrefix()}${td.tableName}${config.exclusionSuffix} x
+        WHERE ${td.uqKeys.map(k => `x.${k} = ${td.tableName}.${k}`).join(" AND ")}
+    );
+    ` : ""
+}
+
+export const createGenericExclusionTableQuery = (td: TableDescriptor) => {
+    const exclusionCols = td.uqKeys && td.uqKeys.length > 0 ? Object.keys(td.columns).filter(k => td.uqKeys?.includes(k)) : Object.keys(td.columns)
+    const excTableName = td.uqKeys && td.uqKeys.length > 0 ? `${td.tableName}${config.exclusionSuffix}` : td.tableName
+    const primaryKeyStr = `, PRIMARY KEY (${exclusionCols?.join(",")})`
+    return `CREATE TABLE IF NOT EXISTS 
+        ${getMigrationSchemaPrefix()}
+        ${excTableName}
+        (${exclusionCols.map(c => `${c} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});
+        `
+}
+
+export const createGenericTableAndViewQueryFromDescriptor = (td: TableDescriptor) => {
+    return `
+    ${createGenericTableQueryFromDescriptor(td)}
+    
+    ${td.uqKeys && td.uqKeys.length > 0 ? createGenericExclusionTableQuery(td) : ""}
+
+    ${createGenericFilteredViewQuery(td)}
+    `
 }
