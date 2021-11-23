@@ -28,6 +28,7 @@ const baseDataTables =
         "extentmap",
         "unitmap",
         "childmindermap",
+        "placements_exclusion",
         "placements",
         "placementextents",
         "feedeviations",

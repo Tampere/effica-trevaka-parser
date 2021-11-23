@@ -33,7 +33,7 @@ SELECT
     p.startdate,
     p.enddate,
     edg.id
-FROM ${migrationSchema:name}.placements p
+FROM ${migrationSchema:name}.filtered_placements_v p
 LEFT JOIN ${migrationSchema:name}.evaka_person ep ON ep.effica_ssn = p.personid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = p.placementunitcode
 LEFT JOIN ${migrationSchema:name}.evaka_daycare_group edg ON edg.effica_id = p.placementdepartmentcode
