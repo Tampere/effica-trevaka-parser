@@ -11,7 +11,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_application (
     effica_id INTEGER NOT NULL,
     type TEXT CHECK (type IN ('CLUB', 'DAYCARE', 'PRESCHOOL')),
     sentdate DATE NOT NULL,
-    duedate DATE NOT NULL,
+    duedate DATE,
     guardian_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     transferapplication BOOLEAN NOT NULL,
@@ -26,10 +26,7 @@ SELECT
     a.careid,
     $(typeMappings:json)::jsonb ->> a.applicationtype::text,
     a.applicationdate,
-    a.applicationdate + CASE
-        WHEN specialhandlingtime.extrainfo1 IS NOT NULL THEN (specialhandlingtime.extrainfo1 || ' days')::interval
-        ELSE ('120 days')::interval
-    END,
+    CASE WHEN specialhandlingtime.extrainfo1 IS NOT NULL THEN a.applicationdate + (specialhandlingtime.extrainfo1 || ' days')::interval END,
     g.id,
     c.id,
     a.transferapplication,
@@ -116,3 +113,12 @@ WHERE (effica_application_id, effica_priority) IN (
     SELECT effica_application_id, effica_priority
     FROM ${migrationSchema:name}.evaka_application_form_todo
 );
+
+-- fix due date based on sent date and preferred start date
+UPDATE ${migrationSchema:name}.evaka_application ea
+SET duedate = CASE
+    WHEN ea.sentdate + '120 days'::interval > eaf.preferred_start_date THEN ea.sentdate + '120 days'::interval
+    ELSE eaf.preferred_start_date
+END
+FROM ${migrationSchema:name}.evaka_application_form eaf
+WHERE eaf.application_id = ea.id AND eaf.effica_priority = 1 AND ea.duedate IS NULL;
