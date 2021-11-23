@@ -337,6 +337,7 @@ Array [
     "postal_code": "00001",
     "restricted_details_enabled": false,
     "social_security_number": "020967-9992",
+    "source_system": "effica",
     "street_address": "Fakestreet 123",
   },
   Object {
@@ -355,6 +356,7 @@ Array [
     "postal_code": "00002",
     "restricted_details_enabled": false,
     "social_security_number": null,
+    "source_system": "effica",
     "street_address": "StreetStreet 321",
   },
   Object {
@@ -373,6 +375,7 @@ Array [
     "postal_code": "",
     "restricted_details_enabled": true,
     "social_security_number": "180476-998M",
+    "source_system": "effica",
     "street_address": "",
   },
   Object {
@@ -391,6 +394,7 @@ Array [
     "postal_code": "00001",
     "restricted_details_enabled": false,
     "social_security_number": "010619A9501",
+    "source_system": "effica",
     "street_address": "HideStreet 2",
   },
   Object {
@@ -409,6 +413,7 @@ Array [
     "postal_code": "12000",
     "restricted_details_enabled": false,
     "social_security_number": "251118A9509",
+    "source_system": "effica",
     "street_address": "HideStreet 2",
   },
   Object {
@@ -427,6 +432,7 @@ Array [
     "postal_code": "",
     "restricted_details_enabled": false,
     "social_security_number": "181101A9092",
+    "source_system": "effica",
     "street_address": "",
   },
 ]
