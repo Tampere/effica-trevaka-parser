@@ -153,6 +153,7 @@ const feeDecisionExpectation = {
     created: expect.any(String),
     updated: expect.any(String),
     head_of_family_id: expect.any(String),
+    partner_id: expect.any(String),
 }
 
 const feeDecisionChildExpectation = {

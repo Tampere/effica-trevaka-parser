@@ -15,14 +15,16 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision (
     end_date DATE,
     decision_type TEXT NOT NULL,
     head_of_family_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
+    head_of_family_income JSONB,
     partner_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
+    partner_income JSONB,
     family_size INTEGER,
     decision_number BIGINT NOT NULL,
     CHECK (head_of_family_id != partner_id)
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision
-    (id, effica_guid, effica_ssn, status, status_group, start_date, end_date, decision_type, head_of_family_id, partner_id, family_size, decision_number)
+    (id, effica_guid, effica_ssn, status, status_group, start_date, end_date, decision_type, head_of_family_id, head_of_family_income, partner_id, partner_income, family_size, decision_number)
 SELECT
     COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
     pd.guid,
@@ -38,12 +40,65 @@ SELECT
     pd.enddate,
     'NORMAL',
     head_of_family.id,
+    CASE
+        WHEN head_of_family_row.income = 999999 THEN jsonb_build_object(
+            'effect', 'MAX_FEE_ACCEPTED',
+            'data', jsonb_build_object(),
+            'totalIncome', 0,
+            'totalExpenses', 0,
+            'total', 0,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+        WHEN head_of_family_row.income IS NOT NULL THEN jsonb_build_object(
+            'effect', 'INCOME',
+            'data', jsonb_build_object(
+                $(incomeType), head_of_family_row.income * 100
+            ),
+            'totalIncome', head_of_family_row.income * 100,
+            'totalExpenses', 0,
+            'total', head_of_family_row.income * 100,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+    END,
     partner.id,
+    CASE
+        WHEN partner_row.income = 999999 THEN jsonb_build_object(
+            'effect', 'MAX_FEE_ACCEPTED',
+            'data', jsonb_build_object(),
+            'totalIncome', 0,
+            'totalExpenses', 0,
+            'total', 0,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+        WHEN partner_row.income IS NOT NULL THEN jsonb_build_object(
+            'effect', 'INCOME',
+            'data', jsonb_build_object(
+                $(incomeType), partner_row.income * 100
+            ),
+            'totalIncome', partner_row.income * 100,
+            'totalExpenses', 0,
+            'total', partner_row.income * 100,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+    END,
     (SELECT (regexp_matches(family_size_row.specification, '^Perhekoko (\d+)'))[1])::int,
     pd.decisionnumber
 FROM ${migrationSchema:name}.paydecisions pd
 LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'PAY_DECISION' AND im.effica_guid = pd.guid
 LEFT JOIN ${migrationSchema:name}.evaka_person head_of_family ON head_of_family.effica_ssn = pd.headoffamily
+LEFT JOIN (
+    SELECT *
+    FROM ${migrationSchema:name}.paydecisionrows
+    WHERE rowtype IN (1, 2) -- for some reason head of family can be in both rowtypes (and so can partner)
+) head_of_family_row ON head_of_family_row.internalid = pd.internaldecisionnumber AND head_of_family_row.person = pd.headoffamily
 LEFT JOIN (
     SELECT *
     FROM ${migrationSchema:name}.paydecisionrows

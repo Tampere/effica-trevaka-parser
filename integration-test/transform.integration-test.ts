@@ -278,6 +278,7 @@ describe("GET /transform positive", () => {
         const feeDecisionExpectation = {
             id: expect.any(String),
             head_of_family_id: expect.any(String),
+            partner_id: expect.any(String),
         }
         const feeDecisionChildExpectation = {
             id: expect.any(String),
