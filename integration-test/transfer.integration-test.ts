@@ -22,6 +22,7 @@ const baseDataTables =
         "departments",
         "unitmap",
         "childmindermap",
+        "placements_exclusion",
         "placements",
         "extentmap",
         "placementextents",

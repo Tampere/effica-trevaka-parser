@@ -495,6 +495,15 @@ export const extTableMapping: TypeMapping = {
                 sqlType: "date", parser: nullDateParser
             }
         }
-    }
+    },
+    placements_exclusion: {
+        tableQueryFunction: createGenericExclusionTableQuery,
+        tableName: `placements${config.exclusionSuffix}`,
+        columns: {
+            placementnbr: {
+                sqlType: "integer", parser: stringToNumericParser
+            }
+        }
 
+    }
 }

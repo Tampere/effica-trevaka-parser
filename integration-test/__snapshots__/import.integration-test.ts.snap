@@ -242,6 +242,21 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created placements exclusion 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "placementnbr": 16,
+      },
+    ],
+  ],
+  "tables": Array [
+    "placements_exclusion",
+  ],
+}
+`;
+
 exports[`GET /import csv positive should return created unitmaps 1`] = `
 Object {
   "inserts": Array [
@@ -1084,6 +1099,15 @@ Object {
         "placementchildminder": "010101-TP99",
         "placementdepartmentcode": null,
         "placementnbr": 15,
+        "placementunitcode": null,
+        "startdate": Any<String>,
+      },
+      Object {
+        "enddate": null,
+        "personid": "251118A9509",
+        "placementchildminder": "010101-TP99",
+        "placementdepartmentcode": null,
+        "placementnbr": 16,
         "placementunitcode": null,
         "startdate": Any<String>,
       },
