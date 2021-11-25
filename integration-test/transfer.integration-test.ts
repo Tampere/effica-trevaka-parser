@@ -36,6 +36,8 @@ const baseDataTables =
         "paydecisionrows",
         "dailyjournals",
         "dailyjournalrows",
+        "timestampheaders",
+        "timestampdetails",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare",
@@ -179,6 +181,13 @@ const backupCareExpectation = {
     child_id: expect.any(String),
     unit_id: expect.any(String),
     group_id: expect.any(String),
+}
+
+const childAttendanceExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    child_id: expect.any(String),
 }
 
 beforeAll(async () => {
@@ -345,6 +354,16 @@ describe("GET /transfer positive", () => {
             Array(2).fill(backupCareExpectation)
         )
     })
+
+    it("should return transferred child attendances", async () => {
+        await setupTransformations(["persons", "timestamps"])
+        await setupTransfers(["persons", "unit_manager", "daycare"])
+        await positiveTransferSnapshotTest(
+            "child_attendances",
+            Array(1).fill(childAttendanceExpectation)
+        )
+    })
+
     it("should return oid updated daycares", async () => {
         const vardaUnitExpectation = { created_at: expect.any(String), uploaded_at: expect.any(String) }
         const updateExpectation = {

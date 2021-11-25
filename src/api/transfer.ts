@@ -6,6 +6,7 @@ import express from "express"
 import { transferAbsences } from "../transfer/absence"
 import { transferApplicationData } from "../transfer/application"
 import { transferBackupCares } from "../transfer/backup-cares"
+import { transferChildAttendances } from "../transfer/child-attendances"
 import { transferDaycareData } from "../transfer/daycare"
 import { transferDaycareOidData } from "../transfer/daycare-oid"
 import { transferDepartmentData } from "../transfer/departments"
@@ -36,6 +37,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "application", function: transferApplicationData },
         { name: "absences", function: transferAbsences },
         { name: "backup_care", function: transferBackupCares },
+        { name: "child_attendances", function: transferChildAttendances },
         { name: "daycare_oid", function: transferDaycareOidData }
     ]
 
@@ -168,6 +170,18 @@ router.get("/backup_cares", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer backup cares total ", undefined, "*")
+})
+router.get("/child_attendances", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer child attendances total ", undefined, "*")
+    try {
+        const results = await transferChildAttendances(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer child attendances total ", undefined, "*")
 })
 router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

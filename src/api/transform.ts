@@ -13,6 +13,7 @@ import { transformIncomeData } from "../transform/income"
 import { transformPayDecisionData } from "../transform/pay-decisions"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
+import { transformTimestampsData } from "../transform/timestamps"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
@@ -30,6 +31,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
         { name: "pay_decisions", function: transformPayDecisionData },
         { name: "daily_journals", function: transformDailyJournalsData },
+        { name: "timestamps", function: transformTimestampsData },
         { name: "cleanup", function: cleanupData },
     ]
 
@@ -157,6 +159,19 @@ router.get("/daily_journals", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform daily journals total ", undefined, "*")
+})
+
+router.get("/timestamps", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform timestamps total ", undefined, "*")
+    try {
+        const results = await transformTimestampsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform timestamps total ", undefined, "*")
 })
 
 router.get("/cleanup", async (req, res, next) => {

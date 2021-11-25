@@ -521,6 +521,22 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed timestamps 1`] = `
+Object {
+  "childAttendances": Array [
+    Object {
+      "arrived": "2021-01-01T05:26:00.000Z",
+      "child_id": Any<String>,
+      "departed": "2021-01-01T14:17:00.000Z",
+      "effica_rownumber": 1122,
+      "id": Any<String>,
+      "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
+    },
+  ],
+  "childAttendancesTodo": Array [],
+}
+`;
+
 exports[`GET /transform positive should return transformed voucher value decisions 1`] = `
 Object {
   "decisions": Array [
