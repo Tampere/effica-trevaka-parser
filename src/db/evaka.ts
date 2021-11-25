@@ -13,6 +13,25 @@ import {
 } from "../util/queryTools";
 import migrationDb from "./db";
 
+export const affectedEvakaTablesList: string[] = [
+    "absence",
+    "application",
+    "backup_care",
+    "child",
+    "daycare",
+    "daycare_group",
+    "fee_decision",
+    "fridge_child",
+    "fridge_partner",
+    "income",
+    "person",
+    "placement",
+    "service_need",
+    "unit_manager",
+    "voucher_value_decision"
+]
+
+
 export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
     let user = await t.oneOrNone<{ id: string }>(
         "SELECT id FROM evaka_user WHERE type = 'UNKNOWN'::evaka_user_type AND name = 'Effica'",
@@ -156,4 +175,25 @@ export const createGenericTableAndViewQueryFromDescriptor = (td: TableDescriptor
 
     ${createGenericFilteredViewQuery(td)}
     `
+}
+
+export const vacuumAnalyzeEvaka = async () => {
+    const results: Record<string, any> = {}
+    for (let table of affectedEvakaTablesList) {
+        try {
+            let taskResult = await vacuumAnalyzeTable(table)
+            results[table] = { command: taskResult.command, duration: taskResult.duration }
+        } catch (err) {
+            results[table] = err
+        }
+    }
+    return results
+}
+
+export const vacuumAnalyzeTable = async (tableName: string) => {
+    return await migrationDb.task(async (t) => {
+        return t.result(
+            `VACUUM (ANALYZE, VERBOSE) ${tableName};`
+        )
+    })
 }
