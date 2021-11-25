@@ -80,5 +80,5 @@ An HTTP GET request to `http://localhost:3000/transform` will attempt to transfo
 
 ### Running vacuum analyze for migrated eVaka tables
 
-1. Send an HTTP GET request to `http://localhost:3000/maintenance/vacuum-analyze` in order to truncate migration target data from the configured eVaka database
+1. Send an HTTP GET request to `http://localhost:3000/maintenance/vacuum-analyze` in order to force vacuum and analyze operations for eVaka database tables affected by the migration
     - this operation will run `VACUUM (ANALYZE, VERBOSE)` for every migration target in the configured eVaka DB
