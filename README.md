@@ -68,9 +68,17 @@ An HTTP GET request to `http://localhost:3000/transform` will attempt to transfo
     - following query strings are recognized:
         - `returnAll`: default false, can be set to true in order to receive all inserted data as JSON in the response (for testing with smaller imports)
 
-## Resetting eVaka data
 
-1. Send an HTTP GET request to `http://localhost:3000/reset/evaka` in order to truncate migration target data from the configured eVaka database
+## Maintenance operations
+
+### Resetting evaka data
+
+1. Send an HTTP GET request to `http://localhost:3000/maintenance/reset-evaka` in order to truncate migration target data from the configured eVaka database
     - this operation will remove eVaka data using cascading truncations starting from the `person` and `evaka_daycare` tables
     - this means **any interconnected data in the target eVaka database will be removed**
       - consequently, this should only be used to clear a migration performed on a "clean" eVaka environment as any pre-existing data would also be removed
+
+### Running vacuum analyze for migrated eVaka tables
+
+1. Send an HTTP GET request to `http://localhost:3000/maintenance/vacuum-analyze` in order to truncate migration target data from the configured eVaka database
+    - this operation will run `VACUUM (ANALYZE, VERBOSE)` for every migration target in the configured eVaka DB

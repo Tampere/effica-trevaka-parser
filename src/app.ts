@@ -5,7 +5,7 @@
 import express from "express"
 import checkApi from "./api/check"
 import importApi from "./api/import"
-import resetApi from "./api/reset"
+import maintenanceApi from "./api/maintenance"
 import transferApi from "./api/transfer"
 import transformApi from "./api/transform"
 import { ErrorWithCause } from "./util/error"
@@ -22,7 +22,7 @@ app.use("/import", importApi)
 app.use("/check", checkApi)
 app.use("/transform", transformApi)
 app.use("/transfer", transferApi)
-app.use("/reset", resetApi)
+app.use("/maintenance", maintenanceApi)
 app.use(errorHandler)
 
 export default app
