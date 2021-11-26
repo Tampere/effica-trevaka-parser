@@ -13,13 +13,13 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
     time("**** Import total ", undefined, "*")
     const reqPath = req.query.path ?? "/xml"
-    const tableName = req.query.tableName
+    const importTarget = req.query.importTarget
     const basePath = `${__dirname}/../..`
     const path = basePath + reqPath
     const importOptions: ImportOptions = {
         path,
         returnAll: req.query.returnAll === "true",
-        importTarget: typeof tableName === "string" ? tableName : undefined
+        importTarget: typeof importTarget === "string" ? importTarget : undefined
     }
     try {
         const files: FileDescriptor[] = await readFilesFromDir(importOptions)
