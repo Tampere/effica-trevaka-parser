@@ -7,23 +7,29 @@ import * as xmlParser from "fast-xml-parser"
 import { opendir, readFile } from "fs/promises"
 import { config } from "../config"
 import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
-import { ColumnDescriptor, FileDescriptor, ImportType, TableDescriptor, TypeMapping } from "../types"
+import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
-export async function readFilesFromDir(path: string): Promise<FileDescriptor[]> {
+export async function readFilesFromDir(importOptions: ImportOptions): Promise<FileDescriptor[]> {
     const files: FileDescriptor[] = []
     try {
-        const dir = await opendir(path)
+        const dir = await opendir(importOptions.path)
+
         for await (const dirent of dir) {
             if (dirent.isFile()) {
                 const fileName = dirent.name.toLowerCase()
                 if (fileName.endsWith(".license")) continue
                 time(`'${dirent.name}' reading`)
-                const fileAsString = await readFile(`${path}/${dirent.name}`, { encoding: "utf-8" })
+                const fileAsString = await readFile(`${importOptions.path}/${dirent.name}`, { encoding: "utf-8" })
                 timeEnd(`'${dirent.name}' reading`)
                 time(`'${dirent.name}' parsing`)
-                const [tableName, fileType] = fileName.split(".")
+
+                const fileInfo = fileName.split(".")
+                const fileType = fileInfo[1]
+                //importTarget allows importing to a single table from multiple files
+                const tableName = importOptions.importTarget ?? fileInfo[0]
+
                 let file: FileDescriptor;
                 if (fileType.toLowerCase() === "csv") {
                     const csvData = await csv(config.csvParserOptions).fromString(fileAsString)

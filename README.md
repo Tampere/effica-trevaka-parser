@@ -41,12 +41,14 @@ npm run integration-test
 1. Place XML files of table data or CSV files of external data under a directory called `xml` under the project root.
    - this is the directory the application will read by default, individual requests can be configured to target different locations relative to project root
    - all data tables used in XML or CSV data must be typed and described in `src/mapping/sourceMapping.ts`
+   - by default the file name without extension is assumed to match the target table in the mapping
 2. Prepare a Postgres DB and configure the connection under `migrationDb` in `src/config.ts`
 3. Start the application with `npm start` 
 4. Send an HTTP GET request to `http://localhost:3000/import`
    - following query strings are recognized:
-     - `path`: directory path relative to project root to read for XML or CSV data, if missing, default path `/xml` will be used
-     - `returnAll`: default false, can be set to true in order to receive all inserted data as JSON in the response (for testing with smaller imports) 
+     - `path`: default: `/xml`,  directory path relative to project root to read for XML or CSV data
+     - `returnAll`: default: false, can be set to true in order to receive all inserted data as JSON in the response (for testing with smaller imports)
+     - `importTarget`: default: name of the read file without extension, can be used to give an explicit target table name for all files in the directory described by `path`, by default the table name is assumed to be the file name without extension (this parameter is useful for importing data split into several files with one request)
 
 ## Transforming imported data
 

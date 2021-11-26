@@ -23,7 +23,7 @@ export interface TableQueryFunction { (td: TableDescriptor): string }
 export type TypeMapping = Record<string, TableDescriptor>
 export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date" | "text[]" | "uuid" | "point" | "integer[]" | "daterange"
 
-export type ImportOptions = { returnAll: boolean, path: string }
+export type ImportOptions = { returnAll: boolean, path: string, importTarget?: string }
 export enum ImportType {
     Effica = "EFFICA",
     External = "EXT"
