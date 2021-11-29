@@ -13,11 +13,16 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
     time("**** Import total ", undefined, "*")
     const reqPath = req.query.path ?? "/xml"
+    const importTarget = req.query.importTarget
     const basePath = `${__dirname}/../..`
     const path = basePath + reqPath
-    const importOptions: ImportOptions = { path, returnAll: req.query.returnAll === "true" }
+    const importOptions: ImportOptions = {
+        path,
+        returnAll: req.query.returnAll === "true",
+        importTarget: typeof importTarget === "string" ? importTarget : undefined
+    }
     try {
-        const files: FileDescriptor[] = await readFilesFromDir(path)
+        const files: FileDescriptor[] = await readFilesFromDir(importOptions)
         const importResult = await importFileData(files, importOptions)
         res.status(200).json(importResult)
     } catch (err) {
