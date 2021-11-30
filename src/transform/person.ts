@@ -26,12 +26,21 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         phone TEXT NOT NULL,
         backup_phone text NOT NULL,
         effica_ssn TEXT,
+        source_system TEXT NOT NULL CHECK (source_system IN ('effica', 'evaka')),
         PRIMARY KEY(id)
     );`
 
+    const evakaPersonInsert = `
+    INSERT INTO ${getMigrationSchemaPrefix()}evaka_person
+        (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth, source_system)
+    SELECT
+        id, 'evaka-' || id, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, social_security_number, date_of_birth, 'evaka'
+    FROM person
+    `
+
     const insertQueryPart = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
-    (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth)
+    (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth, source_system)
         SELECT
         COALESCE(im.evaka_id, ${getExtensionSchemaPrefix()}uuid_generate_v1mc()),
         p.guid,
@@ -74,16 +83,20 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                         WHEN '+' THEN 1800
                         WHEN 'A' THEN 2000 END
                         + substr(personid, 5, 2)::smallint, '-', substr(personid, 3, 2), '-',
-                    substr(personid, 1, 2))::date AS date_of_birth
+                    substr(personid, 1, 2))::date AS date_of_birth,
+        'effica'
         FROM ${getMigrationSchemaPrefix()}persons p
         LEFT JOIN ${getMigrationSchemaPrefix()}idmap im ON im.type = 'PERSON' AND im.effica_guid = p.guid
         LEFT JOIN ${getMigrationSchemaPrefix()}codes c
-        ON p.mothertongue = c.code AND c.codetype = 'SPRAK'`
+        ON p.mothertongue = c.code AND c.codetype = 'SPRAK'
+        ON CONFLICT (social_security_number) DO NOTHING
+    `
 
     const insertQuery = wrapWithReturning("evaka_person", insertQueryPart, returnAll)
 
     return await migrationDb.tx(async (t) => {
         await runQuery(tableQuery, t)
+        await runQuery(evakaPersonInsert, t)
         const ret = await runQuery(insertQuery, t, true)
         // maintain ids between migrations
         await runQuery(`

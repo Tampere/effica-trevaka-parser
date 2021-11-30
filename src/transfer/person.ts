@@ -30,6 +30,7 @@ export const transferPersonData = async (returnAll: boolean = false) => {
             ${config.mockVtj ? `'2021-05-01'::timestamptz` : 'null'},
             ${config.mockVtj ? `'2021-05-01'::timestamptz` : 'null'}
         FROM ${getMigrationSchemaPrefix()}evaka_person p
+        ON CONFLICT (social_security_number) DO NOTHING
     `
     const insertQuery = wrapWithReturning("person", insertQueryPart, returnAll)
 
