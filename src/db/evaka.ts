@@ -18,6 +18,7 @@ export const affectedEvakaTablesList: string[] = [
     "application",
     "backup_care",
     "child",
+    "child_attendance",
     "daycare",
     "daycare_group",
     "fee_decision",

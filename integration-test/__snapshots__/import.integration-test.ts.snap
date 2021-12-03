@@ -1119,6 +1119,52 @@ Object {
 }
 `;
 
+exports[`GET /import xml positive should return created timestamp details 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "day": 1,
+        "endtime1": "1617",
+        "endtime2": null,
+        "endtime3": null,
+        "guid": "timestampdetails-112201",
+        "rownumber": 1122,
+        "starttime1": "0726",
+        "starttime2": null,
+        "starttime3": null,
+      },
+    ],
+  ],
+  "tables": Array [
+    "timestampdetails",
+  ],
+}
+`;
+
+exports[`GET /import xml positive should return created timestamp headers 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "childminder": "010101-TP99",
+        "department": 0,
+        "guid": "timestampheader-1122",
+        "period": "202101",
+        "personid": "251118A9509",
+        "placementnumber": 13,
+        "rownumber": 1122,
+        "rowtype": "R",
+        "unit": 0,
+      },
+    ],
+  ],
+  "tables": Array [
+    "timestampheaders",
+  ],
+}
+`;
+
 exports[`GET /import xml positive should return created units 1`] = `
 Object {
   "inserts": Array [

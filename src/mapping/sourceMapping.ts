@@ -324,6 +324,34 @@ export const efficaTableMapping: TypeMapping = {
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
     },
+    timestampheaders: {
+        tableName: "timestampheaders",
+        columns: {
+            rownumber: { sqlType: "integer", parser: nullForcingTextParser },
+            childminder: { sqlType: "text", parser: nullForcingTextParser },
+            period: { sqlType: "text", parser: nullForcingTextParser },
+            rowtype: { sqlType: "text", parser: nullForcingTextParser },
+            unit: { sqlType: "integer", parser: nullForcingTextParser },
+            department: { sqlType: "integer", parser: nullForcingTextParser },
+            personid: { sqlType: "text", parser: nullForcingTextParser },
+            placementnumber: { sqlType: "integer", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    timestampdetails: {
+        tableName: "timestampdetails",
+        columns: {
+            rownumber: { sqlType: "integer", parser: nullForcingTextParser },
+            day: { sqlType: "integer", parser: nullForcingTextParser },
+            starttime1: { sqlType: "text", parser: nullForcingTextParser },
+            endtime1: { sqlType: "text", parser: nullForcingTextParser },
+            starttime2: { sqlType: "text", parser: nullForcingTextParser },
+            endtime2: { sqlType: "text", parser: nullForcingTextParser },
+            starttime3: { sqlType: "text", parser: nullForcingTextParser },
+            endtime3: { sqlType: "text", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
 }
 
 export const extTableMapping: TypeMapping = {

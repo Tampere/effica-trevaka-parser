@@ -15,7 +15,7 @@ const baseUrl = "/import"
 const tables = ["persons", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
-    "dailyjournals", "dailyjournalrows",
+    "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
     "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map",
     "families_exclusion", "placements_exclusion"]
 
@@ -139,6 +139,14 @@ describe("GET /import xml positive", () => {
 
     it("should return created daily journal rows", async () => {
         return await positiveImportSnapshotTest("dailyjournalrows")
+    })
+
+    it("should return created timestamp headers", async () => {
+        return await positiveImportSnapshotTest("timestampheaders")
+    })
+
+    it("should return created timestamp details", async () => {
+        return await positiveImportSnapshotTest("timestampdetails")
     })
 
     it("should return created applications", async () => {

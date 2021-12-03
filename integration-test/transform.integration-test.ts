@@ -41,6 +41,8 @@ const baseDataTables =
         "applicationrows",
         "dailyjournals",
         "dailyjournalrows",
+        "timestampheaders",
+        "timestampdetails",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare",
@@ -325,6 +327,23 @@ describe("GET /transform positive", () => {
                 absencesTodo: Array(1).fill(absenceExpectation),
                 backupCares: Array(2).fill(backupCareExpectation),
                 backupCaresTodo: Array(0).fill(backupCareExpectation),
+            }
+        )
+    })
+
+    it("should return transformed timestamps", async () => {
+        await setupTransformations(["persons"])
+
+        const childAttendanceExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "timestamps",
+            {
+                childAttendances: Array(1).fill(childAttendanceExpectation),
+                childAttendancesTodo: Array(0).fill(childAttendanceExpectation),
             }
         )
     })
