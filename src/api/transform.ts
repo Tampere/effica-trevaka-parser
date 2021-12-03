@@ -31,7 +31,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
         { name: "pay_decisions", function: transformPayDecisionData },
         { name: "daily_journals", function: transformDailyJournalsData },
-        { name: "timestamps", function: transformTimestampsData },
+        // { name: "timestamps", function: transformTimestampsData }, // TODO: enable timestamps
         { name: "cleanup", function: cleanupData },
     ]
 

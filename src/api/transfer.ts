@@ -37,7 +37,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "application", function: transferApplicationData },
         { name: "absences", function: transferAbsences },
         { name: "backup_care", function: transferBackupCares },
-        { name: "child_attendances", function: transferChildAttendances },
+        // { name: "child_attendances", function: transferChildAttendances }, // TODO: enable child attendances
         { name: "daycare_oid", function: transferDaycareOidData }
     ]
 
