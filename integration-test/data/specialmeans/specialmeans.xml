@@ -1,0 +1,15 @@
+<!--
+SPDX-FileCopyrightText: 2021 City of Tampere
+
+SPDX-License-Identifier: LGPL-2.1-or-later
+-->
+
+<SpecialMeans>
+    <PersonId>010619A9501</PersonId>
+    <SpecialNeedCode>207</SpecialNeedCode>
+    <Mean>438</Mean>
+    <StartDate>20190808</StartDate>
+    <EndDate>20200531</EndDate>
+    <SpecialNeedNbr>1111</SpecialNeedNbr>
+    <GUID>specialmeans010619A95011</GUID>
+</SpecialMeans>

@@ -527,6 +527,42 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed special means 1`] = `
+Object {
+  "assistanceActions": Array [
+    Object {
+      "actions": Array [
+        "10",
+      ],
+      "child_id": Any<String>,
+      "effica_ssn": "010619A9501",
+      "end_date": "2020-05-31T00:00:00.000Z",
+      "id": Any<String>,
+      "start_date": "2019-08-08T00:00:00.000Z",
+    },
+  ],
+  "assistanceActionsTodo": Array [],
+}
+`;
+
+exports[`GET /transform positive should return transformed special needs 1`] = `
+Object {
+  "assistanceNeeds": Array [
+    Object {
+      "bases": Array [
+        "DEVELOPMENTAL_DISABILITY",
+      ],
+      "child_id": Any<String>,
+      "effica_ssn": "010619A9501",
+      "end_date": "2020-05-31T00:00:00.000Z",
+      "id": Any<String>,
+      "start_date": "2019-08-08T00:00:00.000Z",
+    },
+  ],
+  "assistanceNeedsTodo": Array [],
+}
+`;
+
 exports[`GET /transform positive should return transformed timestamps 1`] = `
 Object {
   "childAttendances": Array [

@@ -5,6 +5,8 @@
 import express from "express"
 import { transferAbsences } from "../transfer/absence"
 import { transferApplicationData } from "../transfer/application"
+import { transferAssistanceActionsData } from "../transfer/assistance-actions"
+import { transferAssistanceNeedsData } from "../transfer/assistance-needs"
 import { transferBackupCares } from "../transfer/backup-cares"
 import { transferChildAttendances } from "../transfer/child-attendances"
 import { transferDaycareData } from "../transfer/daycare"
@@ -26,6 +28,8 @@ const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transferPersonData },
         { name: "families", function: transferFamiliesData },
+        { name: "assistance_needs", function: transferAssistanceNeedsData },
+        { name: "assistance_actions", function: transferAssistanceActionsData },
         { name: "income", function: transferIncomeData },
         { name: "unit_manager", function: transferUnitManagerData },
         { name: "daycare", function: transferDaycareData },
@@ -86,6 +90,30 @@ router.get("/families", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer families total ", undefined, "*")
+})
+router.get("/assistance_needs", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer assistance needs total ", undefined, "*")
+    try {
+        const results = await transferAssistanceNeedsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer assistance needs total ", undefined, "*")
+})
+router.get("/assistance_actions", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer assistance actions total ", undefined, "*")
+    try {
+        const results = await transferAssistanceActionsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer assistance actions total ", undefined, "*")
 })
 router.get("/application", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

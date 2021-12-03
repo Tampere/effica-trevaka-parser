@@ -271,6 +271,55 @@ Object {
 }
 `;
 
+exports[`GET /transfer positive should return transferred assistance actions 1`] = `
+Object {
+  "assistanceActionOptions": Array [
+    Object {
+      "action_id": Any<String>,
+      "created": Any<String>,
+      "option_id": Any<String>,
+    },
+  ],
+  "assistanceActions": Array [
+    Object {
+      "child_id": Any<String>,
+      "created": Any<String>,
+      "end_date": "2020-05-31T00:00:00.000Z",
+      "id": Any<String>,
+      "measures": "{}",
+      "other_action": "",
+      "start_date": "2019-08-08T00:00:00.000Z",
+      "updated": Any<String>,
+      "updated_by": Any<String>,
+    },
+  ],
+}
+`;
+
+exports[`GET /transfer positive should return transferred assistance needs 1`] = `
+Object {
+  "assistanceBases": Array [
+    Object {
+      "created": Any<String>,
+      "need_id": Any<String>,
+      "option_id": Any<String>,
+    },
+  ],
+  "assistanceNeeds": Array [
+    Object {
+      "capacity_factor": "0",
+      "child_id": Any<String>,
+      "created": Any<String>,
+      "end_date": "2020-05-31T00:00:00.000Z",
+      "id": Any<String>,
+      "start_date": "2019-08-08T00:00:00.000Z",
+      "updated": Any<String>,
+      "updated_by": Any<String>,
+    },
+  ],
+}
+`;
+
 exports[`GET /transfer positive should return transferred backup cares 1`] = `
 Array [
   Object {

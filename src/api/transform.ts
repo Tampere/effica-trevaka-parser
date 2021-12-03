@@ -14,6 +14,8 @@ import { transformPayDecisionData } from "../transform/pay-decisions"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
 import { transformTimestampsData } from "../transform/timestamps"
+import { transformSpecialMeansData } from "../transform/special-means"
+import { transformSpecialNeedsData } from "../transform/special-needs"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
@@ -23,6 +25,8 @@ const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
+        { name: "special_needs", function: transformSpecialNeedsData },
+        { name: "special_means", function: transformSpecialMeansData },
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
         { name: "placements", function: transformPlacementsData },
@@ -70,6 +74,32 @@ router.get("/families", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform families total ", undefined, "*")
+})
+
+router.get("/special_needs", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform special needs total ", undefined, "*")
+    try {
+        const results = await transformSpecialNeedsData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform special needs total ", undefined, "*")
+})
+
+router.get("/special_means", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform special means total ", undefined, "*")
+    try {
+        const results = await transformSpecialMeansData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform special means total ", undefined, "*")
 })
 
 router.get("/departments", async (req, res, next) => {

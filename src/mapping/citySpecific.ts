@@ -10,9 +10,41 @@ import {
     CitySpecificDeviationTypeMappings,
     CitySpecificIncomeMappings,
     CitySpecificPayDecisionStatusMappings,
+    CitySpecificSpecialMeanMappings,
+    CitySpecificSpecialNeedMappings,
     DecisionStatusType
 } from "../types/mappings";
 import { baseQueryParameters } from "../util/queryTools";
+
+export const SPECIAL_NEED_MAPPINGS: CitySpecificSpecialNeedMappings = {
+    tampere: {
+        207: "DEVELOPMENTAL_DISABILITY", // F Kehitysvamma
+        240: "EXTENDED_COMPULSORY_EDUCATION", // V Pidennetty oppivelvollisuus
+        252: "CHILD_ACCULTURATION_SUPPORT", // S Lapsen ja perheen kotout.
+        440: "INTENSIFIED_ASSISTANCE", // 1. TEHOSTETTU Tuki
+        441: "SPECIAL_ASSISTANCE_DECISION", // 2. ERITYINEN Tuki
+    },
+};
+
+export const SPECIAL_MEAN_MAPPINGS: CitySpecificSpecialMeanMappings = {
+    tampere: {
+        // 375: null, // Tuettu esiopetus
+        379: 30, // Integr. erityisryhmä - Kalevanharju
+        // 380: null, // Pienryhmä
+        // 381: null, // Kuntoutussuunnitelma
+        415: 40, // Tukitoimi: Henkilökuntalisäys
+        416: 70, // Kelton / Elton  tuki
+        432: 20, // Erho
+        // 433: null, // Esiop. uusi toimintamalli
+        434: 10, // Henkilökohtainen avustaja
+        // 435: null, // Integroitu erityisryhmä
+        436: 50, // Integroitu ryhmä (vaka/eo)
+        // 437: null, // Paikkatarve 2
+        438: 10, // Ryhmäavustaja
+        // 439: null, // Varhaisk. tuen uusi toimintama
+        446: 60, // Osa-aikainen erityisopetus
+    },
+};
 
 export const APPLICATION_TYPE_MAPPINGS: CitySpecificApplicationTypeMappings = {
     tampere: {

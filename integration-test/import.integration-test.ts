@@ -12,7 +12,7 @@ import { setupTables } from "../src/util/testTools"
 
 const baseUrl = "/import"
 
-const tables = ["persons", "codes", "income", "incomerows", "families",
+const tables = ["persons", "specialneeds", "specialmeans", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
     "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
@@ -48,6 +48,14 @@ afterAll(async () => {
 describe("GET /import xml positive", () => {
     it("should return created persons", async () => {
         return await positiveImportSnapshotTest("persons")
+    })
+
+    it("should return created special needs", async () => {
+        return await positiveImportSnapshotTest("specialneeds")
+    })
+
+    it("should return created special means", async () => {
+        return await positiveImportSnapshotTest("specialmeans")
     })
 
     it("should return created families", async () => {

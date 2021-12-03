@@ -18,6 +18,8 @@ const baseDataTables =
         "codes",
         "families_exclusion",
         "families",
+        "specialneeds",
+        "specialmeans",
         "units",
         "departments",
         "unitmap",
@@ -97,6 +99,32 @@ const fridgePartnerExpectation = {
     person_id: expect.any(String),
     created: expect.any(String),
     updated: expect.any(String)
+}
+
+const assistanceNeedExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    updated_by: expect.any(String),
+    child_id: expect.any(String),
+}
+const assistanceBasisExpectation = {
+    need_id: expect.any(String),
+    option_id: expect.any(String),
+    created: expect.any(String),
+}
+
+const assistanceActionExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+    updated_by: expect.any(String),
+    child_id: expect.any(String),
+}
+const assistanceActionOptionRefExpectation = {
+    action_id: expect.any(String),
+    option_id: expect.any(String),
+    created: expect.any(String),
 }
 
 const applicationExpectation = {
@@ -257,6 +285,28 @@ describe("GET /transfer positive", () => {
             {
                 children: Array(3).fill(fridgeChildExpectation),
                 partners: Array(4).fill(fridgePartnerExpectation)
+            }
+        )
+    })
+    it("should return transferred assistance needs", async () => {
+        await setupTransformations(["persons", "special_needs"])
+        await setupTransfers(["persons"])
+        await positiveTransferSnapshotTest(
+            "assistance_needs",
+            {
+                assistanceNeeds: Array(1).fill(assistanceNeedExpectation),
+                assistanceBases: Array(1).fill(assistanceBasisExpectation),
+            }
+        )
+    })
+    it("should return transferred assistance actions", async () => {
+        await setupTransformations(["persons", "special_means"])
+        await setupTransfers(["persons"])
+        await positiveTransferSnapshotTest(
+            "assistance_actions",
+            {
+                assistanceActions: Array(1).fill(assistanceActionExpectation),
+                assistanceActionOptions: Array(1).fill(assistanceActionOptionRefExpectation),
             }
         )
     })

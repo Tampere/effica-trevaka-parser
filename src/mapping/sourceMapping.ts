@@ -116,6 +116,29 @@ export const efficaTableMapping: TypeMapping = {
         },
         primaryKeys: ["guid"]
     },
+    specialneeds: {
+        tableName: "specialneeds",
+        columns: {
+            personid: { sqlType: "text", parser: nullForcingTextParser },
+            specialneedcode: { sqlType: "integer", parser: nullForcingTextParser },
+            startdate: { sqlType: "date", parser: nullForcingTextParser },
+            enddate: { sqlType: "date", parser: nullForcingTextParser },
+            specialneednbr: { sqlType: "integer", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    specialmeans: {
+        tableName: "specialmeans",
+        columns: {
+            personid: { sqlType: "text", parser: nullForcingTextParser },
+            specialneedcode: { sqlType: "integer", parser: nullForcingTextParser },
+            mean: { sqlType: "integer", parser: nullForcingTextParser },
+            startdate: { sqlType: "date", parser: nullForcingTextParser },
+            enddate: { sqlType: "date", parser: nullForcingTextParser },
+            specialneednbr: { sqlType: "integer", parser: nullForcingTextParser },
+            guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
     areas: {
         tableName: "areas",
         columns: {
