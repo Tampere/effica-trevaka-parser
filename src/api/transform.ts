@@ -25,8 +25,8 @@ const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
-        { name: "special_needs", function: transformSpecialNeedsData },
-        { name: "special_means", function: transformSpecialMeansData },
+        // { name: "special_needs", function: transformSpecialNeedsData }, // TODO: enable special needs
+        // { name: "special_means", function: transformSpecialMeansData }, // TODO: enable special means
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
         { name: "placements", function: transformPlacementsData },
