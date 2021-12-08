@@ -45,10 +45,32 @@ npm run integration-test
 2. Prepare a Postgres DB and configure the connection under `migrationDb` in `src/config.ts`
 3. Start the application with `npm start` 
 4. Send an HTTP GET request to `http://localhost:3000/import`
-   - following query strings are recognized:
+   - following query parameters are recognized:
      - `path`: default: `/xml`,  directory path relative to project root to read for XML or CSV data
      - `returnAll`: default: false, can be set to true in order to receive all inserted data as JSON in the response (for testing with smaller imports)
      - `importTarget`: default: name of the read file without extension, can be used to give an explicit target table name for all files in the directory described by `path`, by default the table name is assumed to be the file name without extension (this parameter is useful for importing data split into several files with one request)
+
+If the XML source files for the imported data are large (hundreds of megabytes), a partitioning import interface utilizing a buffered line reader can be used to alleviate memory consumption concerns. It functions slightly differently to the basic import.
+
+1. Place the large XML files of table data under a directory called `xml` under the project root.
+   - this is the directory the application will read by default, individual requests can be configured to target different locations relative to project root
+   - note that only one table can be targeted by a single partitioned import request
+     - if you have data for multiple tables, the files must not be in the same directory for reading
+   - all data tables used in XML data must be typed and described in `src/mapping/sourceMapping.ts`
+     - this description needs to match the element contents of the files exactly
+   - the XML file content must be line separated uniformly -> one XML data element must take up the same number of lines for every element in the file
+     - by default the element line length is assumed to be the number of columns in the source mapping + 2 (for beginning and end tags)
+
+2. Prepare a Postgres DB and configure the connection under `migrationDb` in `src/config.ts`
+3. Start the application with `npm start`
+4. Send an HTTP GET request to `http://localhost:3000/import/partition`
+   - following query parameters are required:
+     - `importTarget`: must be used to give an explicit target table name for all files in the directory described by `path`
+   - following query parameters are optional:
+   - - `path`: default: `/xml`, directory path relative to project root to read for XML data
+     - `bufferSize`: default 60000, the max number of lines in read buffer before persisting
+       - default value can be changed in application configuration (`defaultPartitionBufferSize`)
+       - in actuality the number of lines used is most likely smaller (divisible by the element line length)
 
 ## Transforming imported data
 

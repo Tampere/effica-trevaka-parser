@@ -135,9 +135,7 @@ export async function readFilesFromDirAsPartitions(importOptions: PartitionImpor
                     const fileName = dirent.name.toLowerCase()
                     if (fileName.endsWith(".license")) continue
 
-                    const fileInfo = fileName.split(".")
-                    const fileType = fileInfo[1]
-                    if (fileType === 'csv') {
+                    if (fileName.split(".")[1] === 'csv') {
                         throw new Error("CSV partitioning not supported")
                     }
                     const importResult = await importFileInParts(importOptions, dirent, fileName, t)
@@ -151,10 +149,9 @@ export async function readFilesFromDirAsPartitions(importOptions: PartitionImpor
     })
 }
 
-const importFileInParts = async (importOptions: PartitionImportOptions, dirent: Dirent, fileName: string, t: pgPromise.ITask<{}>) => {
+async function importFileInParts(importOptions: PartitionImportOptions, dirent: Dirent, fileName: string, t: pgPromise.ITask<{}>) {
     const memUse: number[] = []
     let lines: string[] = []
-    let bufferString = ""
     let line: Buffer | boolean
     let lineNumber = 0
     const maxBufferSize = importOptions.bufferSize
@@ -177,7 +174,6 @@ const importFileInParts = async (importOptions: PartitionImportOptions, dirent: 
     console.log(`Attempting to read at '${fullpath}'`)
     const lineReader = new LineReader(fullpath)
     let parts: number = 1
-    time(`'${dirent.name}' reading`)
 
     const fileDesc = {
         fileName: fileName,
@@ -186,45 +182,47 @@ const importFileInParts = async (importOptions: PartitionImportOptions, dirent: 
         importType: ImportType.Effica
     }
 
+    let memUsage = 0
     //roll through the file using buffer
     while (line = lineReader.next()) {
-        //lines.push(line.toString())
-        bufferString = `${bufferString}${line}`
+        lines.push(line.toString())
         lineNumber++
 
         //parse, persist and clear buffer
         if (lineNumber === lineLimit) {
-            //console.log(`Partition ${parts} for '${fileName}' into '${tableName}'`)
-            memUse[parts - 1] = v8.getHeapStatistics().used_heap_size / 1024 / 1024
 
-            let result = await persistXmlPartition({
+            memUsage = v8.getHeapStatistics().used_heap_size / 1024 / 1024
+            memUse[parts - 1] = memUsage
+            console.log(`Partition ${parts} for '${fileName}' into '${tableName}' | heapUse: ${memUsage.toPrecision(5)} MB | actual buffer size: ${lineLimit}`)
+            let result = await importFileDataWithExistingTx([{
                 ...fileDesc,
                 fileName: `${fileName}_part${parts}`,
-                data: processXmlPartitionString(bufferString, fileName)
-            },
+                data: processXmlPartition(lines, fileName)
+            }],
                 importOptions, t)
             results.push(result)
             lineNumber = 0
             lines = []
-            bufferString = ""
             parts++
         }
     }
 
     //check for overflow and persist
     if (lines.length > 0) {
-        let result = await persistXmlPartition({
+
+        memUsage = v8.getHeapStatistics().used_heap_size / 1024 / 1024
+        memUse[parts - 1] = memUsage
+        let result = await importFileDataWithExistingTx([{
             ...fileDesc,
             fileName: parts === 1 ? fileName : `${fileName}_part${parts}`,
             data: processXmlPartition(lines, fileName)
-        },
+        }],
             importOptions, t)
 
         results.push(result)
-        lineNumber = 0
-        lines = []
     }
-    console.log(`Buffer size: ${maxBufferSize} lines (${parts} partitions)`)
+
+    console.log(`Max buffer size: ${maxBufferSize} (${lineLimit} fitted) lines (${parts} partitions)`)
     console.log(
         {
             maxHeapUse: `${Math.max(...memUse).toPrecision(5)} MB`,
@@ -234,18 +232,7 @@ const importFileInParts = async (importOptions: PartitionImportOptions, dirent: 
     return results
 }
 
-
-const persistXmlPartition = async (fd: FileDescriptor, importOptions: PartitionImportOptions, t: pgPromise.ITask<{}>) => {
-    const result = importFileDataWithExistingTx([fd], importOptions, t)
-    return result;
-}
-
 const processXmlPartition = (parts: string[], fileName: string) => {
     const result = stripXmlOverhead(xmlParser.parse(parts.join("\n"), config.xmlParserOptions), fileName)
-    return result
-}
-
-const processXmlPartitionString = (bufferString: string, fileName: string) => {
-    const result = stripXmlOverhead(xmlParser.parse(bufferString, config.xmlParserOptions), fileName)
     return result
 }

@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import express from "express"
+import { config } from "../config"
 import { importFileData } from "../import/service"
 import { readFilesFromDir, readFilesFromDirAsPartitions } from "../io/io"
 import { FileDescriptor, ImportOptions, PartitionImportOptions } from "../types"
@@ -37,14 +38,14 @@ router.get("/partition", async (req, res, next) => {
     const importTarget = req.query.importTarget
     const basePath = `${__dirname}/../..`
     const path = basePath + reqPath
+    const maxBufferSize = req.query.bufferSize ?? config.defaultPartitionBufferSize
     const importOptions: PartitionImportOptions = {
         path,
-        returnAll: req.query.returnAll === "true",
-        importTarget: typeof importTarget === "string" ? importTarget : "no target"
+        bufferSize: +maxBufferSize,
+        importTarget: typeof importTarget === "string" ? importTarget : "no target set"
     }
     try {
         const importResult = await readFilesFromDirAsPartitions(importOptions)
-        //console.log(importResult)
         res.status(200).json(importResult)
     } catch (err) {
         next(new ErrorWithCause(`Import operation failed, transaction rolled back:`, err))
