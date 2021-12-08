@@ -23,6 +23,8 @@ const baseDataTables =
         "codes",
         "families_exclusion",
         "families",
+        "specialneeds",
+        "specialmeans",
         "units",
         "departments",
         "extentmap",
@@ -154,6 +156,38 @@ describe("GET /transform positive", () => {
             { child: fridgeChildExpectation, partner: fridgePartnerExpectation }
         )
 
+    })
+    it("should return transformed special needs", async () => {
+        await setupTransformations(["persons"])
+
+        const assistanceNeedExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "special_needs",
+            {
+                "assistanceNeeds": Array(1).fill(assistanceNeedExpectation),
+                "assistanceNeedsTodo": Array(0).fill(assistanceNeedExpectation),
+            }
+        )
+    })
+    it("should return transformed special means", async () => {
+        await setupTransformations(["persons"])
+
+        const assistanceActionExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "special_means",
+            {
+                assistanceActions: Array(1).fill(assistanceActionExpectation),
+                assistanceActionsTodo: Array(0).fill(assistanceActionExpectation),
+            }
+        )
     })
     it("should return transformed departments", async () => {
         cleanUps = ["evaka_daycare_group"]

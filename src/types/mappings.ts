@@ -2,6 +2,15 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+export type CitySpecificSpecialNeedMappings = Record<
+    string,
+    Record<number, string>
+>;
+export type CitySpecificSpecialMeanMappings = Record<
+    string,
+    Record<number, number>
+>;
+
 export type ApplicationType = "CLUB" | "DAYCARE" | "PRESCHOOL";
 export type CitySpecificApplicationTypeMappings = Record<
     string,
