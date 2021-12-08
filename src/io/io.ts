@@ -4,10 +4,16 @@
 
 import csv from "csvtojson/v2"
 import * as xmlParser from "fast-xml-parser"
+import { Dirent } from "fs"
 import { opendir, readFile } from "fs/promises"
+import LineReader from "n-readlines"
+import pgPromise from "pg-promise"
+import v8 from "v8"
 import { config } from "../config"
+import migrationDb from "../db/db"
+import { importFileDataWithExistingTx } from "../import/service"
 import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
-import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, TableDescriptor, TypeMapping } from "../types"
+import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
@@ -116,4 +122,130 @@ const collectDataColumnDescriptions = (tableName: string, td: TableDescriptor, d
         dataDescription[columnKey] = columnDef
     })
     return dataDescription
+}
+
+export async function readFilesFromDirAsPartitions(importOptions: PartitionImportOptions): Promise<Record<string, any[]>> {
+    const results: Record<string, any[]> = {}
+    return await migrationDb.tx(async (t) => {
+        try {
+            const dir = await opendir(importOptions.path)
+
+            for await (const dirent of dir) {
+                if (dirent.isFile()) {
+                    const fileName = dirent.name.toLowerCase()
+                    if (fileName.endsWith(".license")) continue
+
+                    const fileInfo = fileName.split(".")
+                    const fileType = fileInfo[1]
+                    if (fileType === 'csv') {
+                        throw new Error("CSV partitioning not supported")
+                    }
+                    const importResult = await importFileInParts(importOptions, dirent, fileName, t)
+                    results[fileName] = importResult
+                }
+            }
+        } catch (err) {
+            throw new ErrorWithCause(`Parsing file data failed:`, err)
+        }
+        return results
+    })
+}
+
+const importFileInParts = async (importOptions: PartitionImportOptions, dirent: Dirent, fileName: string, t: pgPromise.ITask<{}>) => {
+    const memUse: number[] = []
+    let lines: string[] = []
+    let bufferString = ""
+    let line: Buffer | boolean
+    let lineNumber = 0
+    const maxBufferSize = importOptions.bufferSize
+
+    if (!importOptions.importTarget) {
+        throw new Error("Invalid import target defined")
+    }
+    const tableName = importOptions.importTarget
+    const elementColumnCount = Object.keys(efficaTableMapping[tableName]?.columns).length
+    if (!elementColumnCount) {
+        throw new Error(`No column definitions found for ${tableName}`)
+    }
+
+    //used buffer size must be a multiple of the target element size
+    const elementLineCount = elementColumnCount + 2
+    const lineLimit = Math.floor(maxBufferSize / elementLineCount) * elementLineCount
+
+    let results: any[] = []
+    const fullpath = `${importOptions.path}/${dirent.name}`
+    console.log(`Attempting to read at '${fullpath}'`)
+    const lineReader = new LineReader(fullpath)
+    let parts: number = 1
+    time(`'${dirent.name}' reading`)
+
+    const fileDesc = {
+        fileName: fileName,
+        table: efficaTableMapping[tableName],
+        mapping: efficaTableMapping,
+        importType: ImportType.Effica
+    }
+
+    //roll through the file using buffer
+    while (line = lineReader.next()) {
+        //lines.push(line.toString())
+        bufferString = `${bufferString}${line}`
+        lineNumber++
+
+        //parse, persist and clear buffer
+        if (lineNumber === lineLimit) {
+            //console.log(`Partition ${parts} for '${fileName}' into '${tableName}'`)
+            memUse[parts - 1] = v8.getHeapStatistics().used_heap_size / 1024 / 1024
+
+            let result = await persistXmlPartition({
+                ...fileDesc,
+                fileName: `${fileName}_part${parts}`,
+                data: processXmlPartitionString(bufferString, fileName)
+            },
+                importOptions, t)
+            results.push(result)
+            lineNumber = 0
+            lines = []
+            bufferString = ""
+            parts++
+        }
+    }
+
+    //check for overflow and persist
+    if (lines.length > 0) {
+        let result = await persistXmlPartition({
+            ...fileDesc,
+            fileName: parts === 1 ? fileName : `${fileName}_part${parts}`,
+            data: processXmlPartition(lines, fileName)
+        },
+            importOptions, t)
+
+        results.push(result)
+        lineNumber = 0
+        lines = []
+    }
+    console.log(`Buffer size: ${maxBufferSize} lines (${parts} partitions)`)
+    console.log(
+        {
+            maxHeapUse: `${Math.max(...memUse).toPrecision(5)} MB`,
+            avgHeapUse: `${(memUse.reduce((p, c) => p + c, 0) / memUse.length).toPrecision(5)} MB`
+        })
+
+    return results
+}
+
+
+const persistXmlPartition = async (fd: FileDescriptor, importOptions: PartitionImportOptions, t: pgPromise.ITask<{}>) => {
+    const result = importFileDataWithExistingTx([fd], importOptions, t)
+    return result;
+}
+
+const processXmlPartition = (parts: string[], fileName: string) => {
+    const result = stripXmlOverhead(xmlParser.parse(parts.join("\n"), config.xmlParserOptions), fileName)
+    return result
+}
+
+const processXmlPartitionString = (bufferString: string, fileName: string) => {
+    const result = stripXmlOverhead(xmlParser.parse(bufferString, config.xmlParserOptions), fileName)
+    return result
 }

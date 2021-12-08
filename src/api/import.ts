@@ -4,8 +4,8 @@
 
 import express from "express"
 import { importFileData } from "../import/service"
-import { readFilesFromDir } from "../io/io"
-import { FileDescriptor, ImportOptions } from "../types"
+import { readFilesFromDir, readFilesFromDirAsPartitions } from "../io/io"
+import { FileDescriptor, ImportOptions, PartitionImportOptions } from "../types"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
@@ -24,6 +24,27 @@ router.get("/", async (req, res, next) => {
     try {
         const files: FileDescriptor[] = await readFilesFromDir(importOptions)
         const importResult = await importFileData(files, importOptions)
+        res.status(200).json(importResult)
+    } catch (err) {
+        next(new ErrorWithCause(`Import operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Import total ", undefined, "*")
+})
+
+router.get("/partition", async (req, res, next) => {
+    time("**** Import total ", undefined, "*")
+    const reqPath = req.query.path ?? "/xml"
+    const importTarget = req.query.importTarget
+    const basePath = `${__dirname}/../..`
+    const path = basePath + reqPath
+    const importOptions: PartitionImportOptions = {
+        path,
+        returnAll: req.query.returnAll === "true",
+        importTarget: typeof importTarget === "string" ? importTarget : "no target"
+    }
+    try {
+        const importResult = await readFilesFromDirAsPartitions(importOptions)
+        //console.log(importResult)
         res.status(200).json(importResult)
     } catch (err) {
         next(new ErrorWithCause(`Import operation failed, transaction rolled back:`, err))

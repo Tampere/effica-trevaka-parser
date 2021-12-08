@@ -24,6 +24,7 @@ export type TypeMapping = Record<string, TableDescriptor>
 export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date" | "text[]" | "uuid" | "point" | "integer[]" | "daterange"
 
 export type ImportOptions = { returnAll: boolean, path: string, importTarget?: string }
+export type PartitionImportOptions = { path: string, importTarget: string, bufferSize: number }
 export enum ImportType {
     Effica = "EFFICA",
     External = "EXT"
