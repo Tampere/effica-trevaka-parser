@@ -26,5 +26,6 @@ export const config = {
     csvParserOptions: {
         trim: true,
         delimiter: "|"
-    }
+    },
+    defaultPartitionBufferSize: 60000 //line buffer for partitioned file reading and data persisting
 }

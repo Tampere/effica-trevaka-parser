@@ -6,7 +6,7 @@ import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
 import { createGenericTableAndViewQueryFromDescriptor } from "../db/evaka"
-import { FileDescriptor, ImportOptions, ImportType, TableDescriptor, TypeMapping } from "../types"
+import { FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
@@ -25,6 +25,17 @@ export const importFileData = async (files: FileDescriptor[], options: ImportOpt
         timeEnd("** Data inserts total")
         return { tables: tableResult, inserts: tableInserts }
     })
+}
+
+export const importFileDataWithExistingTx = async (files: FileDescriptor[], options: PartitionImportOptions, t: pgPromise.ITask<{}>) => {
+    const tableResult = await createTables(files, t)
+    const tableInserts: any[] = [];
+
+    for await (const f of files) {
+        const insertResult = await insertData(f.table, f.data, f.mapping, { ...options, returnAll: false }, t)
+        tableInserts.push(insertResult)
+    }
+    return { tables: tableResult, inserts: tableInserts }
 }
 
 export const createTables = async (files: FileDescriptor[], t: pgPromise.ITask<{}>) => {
