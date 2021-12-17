@@ -101,7 +101,7 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
                 END) AS effect,
                 (i.summa * 100)::int AS income_total
             FROM ${getMigrationSchemaPrefix()}income i
-            LEFT JOIN ${getMigrationSchemaPrefix()}incomerows ir 
+            LEFT JOIN ${getMigrationSchemaPrefix()}filtered_incomerows_v ir
                     ON i.personid = ir.personid 
                         AND daterange(i.startdate, i.enddate, '[]') && daterange(ir.startdate, ir.enddate, '[]')
             GROUP BY i.personid, i.maxincome, i.incomemissing, i.startdate, i.enddate, i.summa
