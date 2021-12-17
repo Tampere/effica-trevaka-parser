@@ -556,5 +556,17 @@ export const extTableMapping: TypeMapping = {
             }
         }
 
+    },
+    incomerows_exclusion: {
+        tableQueryFunction: createGenericExclusionTableQuery,
+        tableName: `incomerows${config.exclusionSuffix}`,
+        columns: {
+            personid: { sqlType: "text", parser: nullForcingTextParser },
+            startdate: { sqlType: "date", parser: nullDateParser },
+            enddate: { sqlType: "date", parser: nullDateParser },
+            incomeperiod: { sqlType: "integer", parser: nullForcingTextParser },
+            incometype: { sqlType: "integer", parser: nullForcingTextParser },
+            summa: { sqlType: "numeric", parser: nullForcingTextParser }
+        }
     }
 }

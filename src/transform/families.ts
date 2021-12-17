@@ -81,6 +81,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
          FROM hofs h
             JOIN children c
                 ON h.family_number = c.family_number
+                    AND GREATEST(h.start_date, c.start_date) <= LEAST(h.end_date, c.end_date)
                     AND daterange(h.start_date, h.end_date, '[]') &&
                         daterange(c.start_date, c.end_date, '[]')
         `
