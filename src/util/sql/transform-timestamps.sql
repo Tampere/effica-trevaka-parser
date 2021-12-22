@@ -20,7 +20,7 @@ SELECT
     d.starttime::time,
     d.endtime::time
 FROM details d
-JOIN ${migrationSchema:name}.timestampheaders h ON h.rownumber = d.rownumber
+JOIN ${migrationSchema:name}.timestampheaders h ON h.rownumber = d.rownumber AND h.rowtype = 'R'
 WHERE starttime IS NOT NULL OR endtime IS NOT NULL;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_child_attendance;
