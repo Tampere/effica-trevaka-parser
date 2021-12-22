@@ -16,39 +16,52 @@ WITH
 calendar AS (
     -- create full calendar from date ranges
     SELECT
-        personid,
-        (generate_series(startdate, enddate, interval '1 day'))::date AS date,
-        $(typeMappings:json)::jsonb ->> mean::text AS action
-    FROM ${migrationSchema:name}.specialmeans
+        child.effica_ssn,
+        child.id AS child_id,
+        (
+            generate_series(
+                sm.startdate,
+                COALESCE(
+                    sm.enddate,
+                    make_date(date_part('year', child.date_of_birth)::int, 7, 31) + interval '6 years',
+                    sm.startdate + interval '6 years' - interval '1 day' -- child may be null
+                ),
+                interval '1 day'
+            )
+        )::date AS date,
+        $(typeMappings:json)::jsonb ->> sm.mean::text AS action
+    FROM ${migrationSchema:name}.specialmeans sm
+    LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = sm.personid
 ),
 groups AS (
     -- group calendar by person and date
     SELECT
-        personid,
+        effica_ssn,
+        child_id,
         date,
         array_agg(DISTINCT action ORDER BY action) FILTER (WHERE action IS NOT NULL) AS actions,
         -- add row number based on date to find gaps and islands
         ROW_NUMBER() OVER(
             PARTITION BY
-                personid,
+                effica_ssn,
+                child_id,
                 array_agg(DISTINCT action ORDER BY action) FILTER (WHERE action IS NOT NULL)
             ORDER BY date
         ) AS days
     FROM calendar
     WHERE action IS NOT NULL
-    GROUP BY personid, date
+    GROUP BY effica_ssn, child_id, date
 )
 INSERT INTO ${migrationSchema:name}.evaka_assistance_action
     (effica_ssn, child_id, start_date, end_date, actions)
 SELECT
-    g.personid,
-    child.id,
-    min(g.date),
-    max(g.date),
-    g.actions
-FROM groups g
-LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = g.personid
-GROUP BY g.personid, child.id, date - (days || ' days')::interval, g.actions;
+    effica_ssn,
+    child_id,
+    min(date),
+    max(date),
+    actions
+FROM groups
+GROUP BY effica_ssn, child_id, date - (days || ' days')::interval, actions;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_assistance_action_todo;
 CREATE TABLE ${migrationSchema:name}.evaka_assistance_action_todo AS
