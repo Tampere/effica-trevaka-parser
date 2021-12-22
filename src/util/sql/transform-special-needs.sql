@@ -17,7 +17,7 @@ calendar AS (
     -- create full calendar from date ranges
     SELECT
         personid,
-        (generate_series(startdate, enddate, interval '1 day'))::date AS date,
+        (generate_series(startdate, COALESCE(enddate, '2025-12-31'::date), interval '1 day'))::date AS date,
         $(typeMappings:json)::jsonb ->> specialneedcode::text AS basis
     FROM ${migrationSchema:name}.specialneeds
 ),
