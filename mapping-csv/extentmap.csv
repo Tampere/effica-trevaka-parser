@@ -1,0 +1,26 @@
+effica_name|effica_id|days|evaka_id|evaka_name
+Kokopäivähoito¤¤Heldagsomsorg 5-7t/d|999340002|0|86ef70a0-bf85-11eb-91e6-1fb57a101161|Kokopäiväinen
+Kokopäivähoito¤¤Heldagsomsorg 5-7t/d|999340002|20|86ef70a0-bf85-11eb-91e6-1fb57a101161|Kokopäiväinen
+Kokopäivähoito¤¤Heldagsomsorg 5-7t/d|999340002|21|86ef70a0-bf85-11eb-91e6-1fb57a101161|Kokopäiväinen
+Kokopäivähoito¤¤Heldagsomsorg 5-7t/d|999340002|10|503590f0-b961-11eb-b520-53740af3f7ee|Kokopäiväinen, 10 pv sopimus
+Kokopäivähoito¤¤Heldagsomsorg 5-7t/d|999340002|15|503591ae-b961-11eb-b521-1fca99358eef|Kokopäiväinen, 15 pv sopimus
+Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d|999340003|0|86ef7370-bf85-11eb-91e7-6fcd728c518d|Osapäiväinen, max 5h päivässä
+Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d|999340003|10|50359280-b961-11eb-b523-237115533645|Osapäiväinen, max 5h päivässä; 10 pv sopimus
+Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d|999340003|15|503592da-b961-11eb-b524-7f27c780d83a|Osapäiväinen, max 5h päivässä; 15 pv sopimus
+1. Hoitoaikavaraus enintään 85 h/kk¤¤|482|0|50359334-b961-11eb-b525-f3febdfea5d3|Osapäiväinen, max 20h viikossa
+Hoitoaika enintään 20 h/vko¤¤|461|0|50359334-b961-11eb-b525-f3febdfea5d3|Osapäiväinen, max 20h viikossa
+Kerhot¤¤Kerho, Tilapäinen|151|0|ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb|Kerho
+Kerhot¤¤Kerho, Tilapäinen|151|4|ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb|Kerho
+Kerhot¤¤Kerho, Tilapäinen|151|8|ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb|Kerho
+Kerhot¤¤Kerho, Tilapäinen|151|12|ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb|Kerho
+Kesäkerho¤¤Sommarklubb|269|0|ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb|Kerho
+Koululaisten vuorohoito¤¤Koululaisten vuorohoito|158|0|1b4413f6-d99d-11eb-89ac-a3a978104bce|Koululaisen vuorohoito
+Tilapäinen hoito / kp¤¤Tilapäinen hoito / kp|153|0|5035938e-b961-11eb-b526-6b30323c87a8|Tilapäinen varhaiskasvatus
+Tilapäinen hoito / op¤¤Tilapäinen hoito / op|152|0|5035938e-b961-11eb-b526-6b30323c87a8|Tilapäinen varhaiskasvatus
+Enintään 5 t/pv päivähoito+eo¤¤|396|20|503593e8-b961-11eb-b527-a3dcdfb628ec|Esiopetusta täydentävä varhaiskasvatus - max 5 h päivässä
+Enintään 5 t/pv päivähoito+eo¤¤|396|0|503593e8-b961-11eb-b527-a3dcdfb628ec|Esiopetusta täydentävä varhaiskasvatus - max 5 h päivässä
+Enintään 5 t/pv päivähoito+eo¤¤|396|10|bc6a42d0-fa74-11eb-9a2b-d315a7916074|Esiopetusta täydentävä varhaiskasvatus – max 5 h päivässä; 10 pv sopimus
+Enintään 5 t/pv päivähoito+eo¤¤|396|15|bc6a44ec-fa74-11eb-9a2c-73b53c2af869|Esiopetusta täydentävä varhaiskasvatus – max 5 h päivässä; 15 pv sopimus
+Yli 5 t/pv päivähoito + esiop¤¤Förskoleklass + omsorg &gt; 7t/d|999340006|0|50359442-b961-11eb-b528-df3290c0d63e|Esiopetusta täydentävä varhaiskasvatus – yli 5 h päivässä
+Yli 5 t/pv päivähoito + esiop¤¤Förskoleklass + omsorg &gt; 7t/d|999340006|10|bc6a4550-fa74-11eb-9a2d-035acd5db9aa|Esiopetusta täydentävä varhaiskasvatus – yli 5 h päivässä; 10 pv sopimus
+Yli 5 t/pv päivähoito + esiop¤¤Förskoleklass + omsorg &gt; 7t/d|999340006|15|bc6a45a0-fa74-11eb-9a2e-fb411a8588da|Esiopetusta täydentävä varhaiskasvatus – yli 5 h päivässä; 15 pv sopimus
