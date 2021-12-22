@@ -103,7 +103,12 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
             FROM ${getMigrationSchemaPrefix()}income i
             LEFT JOIN ${getMigrationSchemaPrefix()}filtered_incomerows_v ir
                     ON i.personid = ir.personid 
-                        AND daterange(i.startdate, i.enddate, '[]') && daterange(ir.startdate, ir.enddate, '[]')
+                        AND (
+                            -- some incomerows seems to be broken (enddate is before startdate where it should be null)
+                            (ir.startdate > ir.enddate AND i.startdate = ir.startdate AND i.enddate IS NULL)
+                            OR
+                            ((ir.enddate IS NULL OR ir.enddate > ir.startdate) AND daterange(i.startdate, i.enddate, '[]') && daterange(ir.startdate, ir.enddate, '[]'))
+                        )
             GROUP BY i.personid, i.maxincome, i.incomemissing, i.startdate, i.enddate, i.summa
         ) 
         SELECT
