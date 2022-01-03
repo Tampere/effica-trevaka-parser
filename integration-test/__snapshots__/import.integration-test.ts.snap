@@ -208,12 +208,16 @@ Object {
       Object {
         "days": 0,
         "effica_id": 100,
+        "effica_name": "Kokopäivähoito",
         "evaka_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+        "evaka_name": "Kokopäiväinen",
       },
       Object {
         "days": 15,
         "effica_id": 101,
+        "effica_name": "Kokopäivähoito",
         "evaka_id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
+        "evaka_name": "Kokopäiväinen 15 pv sopimus",
       },
     ],
   ],
