@@ -390,9 +390,11 @@ export const extTableMapping: TypeMapping = {
     extentmap: {
         tableName: "extentmap",
         columns: {
+            effica_name: { sqlType: "text", parser: nullForcingTextParser },
             effica_id: { sqlType: "integer", parser: stringToNumericParser },
             days: { sqlType: "integer", parser: nullForcingTextParser },
-            evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
+            evaka_id: { sqlType: "uuid", parser: nullForcingTextParser },
+            evaka_name: { sqlType: "text", parser: nullForcingTextParser }
         }
     },
     unitmap: {
