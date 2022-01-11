@@ -328,10 +328,10 @@ describe("GET /transfer positive", () => {
             "placements",
             {
                 children: Array(2).fill(childExpectation),
-                placements: Array(3).fill(placementExpectation),
-                serviceNeeds: Array(2).fill(serviceNeedExpectation),
+                placements: Array(4).fill(placementExpectation),
+                serviceNeeds: Array(4).fill(serviceNeedExpectation),
                 daycareGroups: Array(1).fill(daycareGroupExpectation),
-                groupPlacements: Array(3).fill(groupPlacementExpectation),
+                groupPlacements: Array(4).fill(groupPlacementExpectation),
             }
         )
     })

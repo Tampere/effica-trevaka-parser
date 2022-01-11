@@ -229,15 +229,23 @@ describe("GET /transform positive", () => {
             "placements",
             {
                 placements: [
-                    placementExpectation,
-                    placementExpectation,
-                    { ...placementExpectation, daycare_group_id: null }
+                    placementExpectation, // 11
+                    placementExpectation, // 12
+                    { ...placementExpectation, daycare_group_id: null }, // 13
+                    placementExpectation // 18
                 ],
                 placementsTodo: [
-                    { ...placementExpectation, daycare_group_id: null },
-                    { ...placementExpectation, daycare_group_id: null }
+                    { ...placementExpectation, daycare_group_id: null }, // 14
+                    { ...placementExpectation, daycare_group_id: null }, // 15
+                    { ...placementExpectation, daycare_group_id: null }, // 16
+                    { ...placementExpectation, daycare_group_id: null }, // 17
                 ],
-                serviceNeeds: Array(2).fill(serviceNeedExpectation),
+                serviceNeeds: [
+                    serviceNeedExpectation, // 11
+                    serviceNeedExpectation, // 12
+                    serviceNeedExpectation, // 131
+                    serviceNeedExpectation, // 18
+                ],
                 serviceNeedsTodo: []
             }
         )

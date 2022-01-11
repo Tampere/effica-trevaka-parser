@@ -81,14 +81,54 @@ SELECT *, 'UNIT MISSING'
 FROM ${migrationSchema:name}.evaka_placement
 WHERE unit_id IS NULL;
 
--- insert overlapping placements to todo table
+-- should not migrate placements that do not have a service need set (service need is needed for varda                  )
+INSERT INTO ${migrationSchema:name}.evaka_placement_todo
+SELECT p.*, 'PLACEMENTEXTENT MISSING'
+FROM ${migrationSchema:name}.evaka_placement p
+WHERE
+    NOT EXISTS (
+        SELECT pe.placementnbr
+        FROM ${migrationSchema:name}.placementextents pe
+        WHERE p.effica_placement_nbr = pe.placementnbr
+    );
+
+-- placement has a service need not defined in evaka
+INSERT INTO ${migrationSchema:name}.evaka_placement_todo
+SELECT p.*, 'PLACEMENTEXTENT MAPPING MISSING'
+FROM ${migrationSchema:name}.evaka_placement p
+    JOIN ${migrationSchema:name}.placementextents pe ON pe.placementnbr = p.effica_placement_nbr
+WHERE
+    NOT EXISTS (
+        SELECT em.effica_id
+        FROM ${migrationSchema:name}.extentmap em
+        WHERE em.effica_id = pe.extentcode
+    );
+
+-- remove problematic placements from migration at this point to filter out unnecessary overlapping placements
+DELETE FROM ${migrationSchema:name}.evaka_placement
+WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_todo);
+
+-- insert overlapping placements to todo table: only the placements that have a placementextent mapped in extentmap
 INSERT INTO ${migrationSchema:name}.evaka_placement_todo
 SELECT DISTINCT p1.*, 'OVERLAPPING PLACEMENT'
 FROM ${migrationSchema:name}.evaka_placement p1
 JOIN ${migrationSchema:name}.evaka_placement p2 ON p1.effica_ssn = p2.effica_ssn
     AND p1.effica_placement_nbr <> p2.effica_placement_nbr
     AND p1.end_date >= p1.start_date AND p2.end_date >= p2.start_date
-    AND daterange(p1.start_date, p1.end_date, '[]') && daterange(p2.start_date, p2.end_date, '[]');
+    AND daterange(p1.start_date, p1.end_date, '[]') && daterange(p2.start_date, p2.end_date, '[]')
+WHERE
+    EXISTS (
+        SELECT em1.effica_id
+        FROM ${migrationSchema:name}.placementextents pe1
+        JOIN ${migrationSchema:name}.extentmap em1 ON em1.effica_id = pe1.extentcode AND em1.days = pe1.days
+        WHERE p1.effica_placement_nbr = pe1.placementnbr
+    ) AND
+    EXISTS (
+        SELECT em2.effica_id
+        FROM ${migrationSchema:name}.placementextents pe2
+        JOIN ${migrationSchema:name}.extentmap em2 ON em2.effica_id = pe2.extentcode AND em2.days = pe2.days
+        WHERE p2.effica_placement_nbr = pe2.placementnbr
+    );
 
 -- remove problematic placements from migration
 DELETE FROM ${migrationSchema:name}.evaka_placement

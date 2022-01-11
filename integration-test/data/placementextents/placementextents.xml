@@ -6,7 +6,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 <placementextent>
     <placementnbr>11</placementnbr>
-    <extentnbr>1</extentnbr>
+    <extentnbr>11</extentnbr>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <hours>0</hours>
@@ -14,8 +14,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <extentcode>100</extentcode>
 </placementextent>
 <placementextent>
-    <placementnbr>13</placementnbr>
-    <extentnbr>2</extentnbr>
+    <placementnbr>12</placementnbr>
+    <extentnbr>12</extentnbr>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <hours>0</hours>
@@ -24,10 +24,58 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 </placementextent>
 <placementextent>
     <placementnbr>13</placementnbr>
-    <extentnbr>3</extentnbr>
+    <extentnbr>131</extentnbr>
     <startdate>20200301</startdate>
     <enddate></enddate>
     <hours>0</hours>
     <days>15</days>
     <extentcode>101</extentcode>
+</placementextent>
+<placementextent>
+    <!-- should be removed as a duplicate of 131 -->
+    <placementnbr>13</placementnbr>
+    <extentnbr>132</extentnbr>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <hours>0</hours>
+    <days>15</days>
+    <extentcode>101</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>14</placementnbr>
+    <extentnbr>14</extentnbr>
+    <startdate>20210101</startdate>
+    <enddate>20211231</enddate>
+    <hours>0</hours>
+    <days>15</days>
+    <extentcode>101</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>15</placementnbr>
+    <extentnbr>15</extentnbr>
+    <startdate>20210801</startdate>
+    <enddate></enddate>
+    <hours>0</hours>
+    <days>15</days>
+    <extentcode>101</extentcode>
+</placementextent>
+<placementextent>
+    <!-- ERROR CASE: missing from extentmap, placement is marked with 'PLACEMENTEXTENT MAPPING MISSING', so should not be visible in -->
+    <placementnbr>17</placementnbr>
+    <extentnbr>17</extentnbr>
+    <startdate>20190801</startdate>
+    <enddate>20191231</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>200</extentcode>
+</placementextent>
+<placementextent>
+    <!-- OK CASE: overlapping with 17, but it has missing option -->
+    <placementnbr>18</placementnbr>
+    <extentnbr>18</extentnbr>
+    <startdate>20190801</startdate>
+    <enddate>20191231</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>100</extentcode>
 </placementextent>

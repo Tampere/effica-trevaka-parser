@@ -5,6 +5,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 -->
 
 <placement>
+    <!-- no end date, should be marked ending at 2021-02-28 due to placement 12 -->
     <placementnbr>11</placementnbr>
     <personid>010619A9501</personid>
     <placementunitcode>123</placementunitcode>
@@ -14,6 +15,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate></enddate>
 </placement>
 <placement>
+    <!-- no end date, should be marked ending at 2025-07-31 due to childs birth year-->
     <placementnbr>12</placementnbr>
     <personid>010619A9501</personid>
     <placementunitcode>123</placementunitcode>
@@ -23,6 +25,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate></enddate>
 </placement>
 <placement>
+    <!-- no end date, should be marked ending at 2020-12-31 due to placement 14 -->
     <placementnbr>13</placementnbr>
     <personid>251118A9509</personid>
     <placementunitcode>0</placementunitcode>
@@ -32,6 +35,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate></enddate>
 </placement>
 <placement>
+    <!-- has end date, should be marked as OVERLAPPING PLACEMENT due to placement 15-->
     <placementnbr>14</placementnbr>
     <personid>251118A9509</personid>
     <placementunitcode>0</placementunitcode>
@@ -41,6 +45,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate>20211231</enddate>
 </placement>
 <placement>
+    <!-- should be marked as OVERLAPPING PLACEMENT due to placement 14-->
     <placementnbr>15</placementnbr>
     <personid>251118A9509</personid>
     <placementunitcode>0</placementunitcode>
@@ -50,6 +55,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate></enddate>
 </placement>
 <placement>
+    <!-- should be marked as PLACEMENTEXTENT MISSING -->
     <placementnbr>16</placementnbr>
     <personid>251118A9509</personid>
     <placementunitcode>0</placementunitcode>
@@ -57,4 +63,22 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <placementchildminder>010101-TP99</placementchildminder>
     <startdate>20210801</startdate>
     <enddate></enddate>
+</placement>
+<placement>
+    <placementnbr>17</placementnbr>
+    <personid>251118A9509</personid>
+    <placementunitcode>0</placementunitcode>
+    <placementdepartmentcode>0</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20190801</startdate>
+    <enddate>20191231</enddate>
+</placement>
+<placement>
+    <placementnbr>18</placementnbr>
+    <personid>251118A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20190801</startdate>
+    <enddate>20191231</enddate>
 </placement>
