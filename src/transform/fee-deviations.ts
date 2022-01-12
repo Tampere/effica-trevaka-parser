@@ -9,7 +9,7 @@ import {
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
     runQuery,
-    wrapWithReturning,
+    selectFromTable,
 } from "../util/queryTools";
 
 export const transformFeeDeviationsData = async (
@@ -19,16 +19,16 @@ export const transformFeeDeviationsData = async (
     DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fee_alteration CASCADE;
     CREATE TABLE ${getMigrationSchemaPrefix()}evaka_fee_alteration(
         id UUID PRIMARY KEY DEFAULT ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
-        person_id UUID NOT NULL REFERENCES ${getMigrationSchemaPrefix()}evaka_person,
-        type TEXT NOT NULL,
+        person_id UUID REFERENCES ${getMigrationSchemaPrefix()}evaka_person,
+        type TEXT,
         amount INTEGER NOT NULL,
         is_absolute BOOLEAN NOT NULL,
         valid_from DATE NOT NULL,
         valid_to DATE,
-        notes TEXT NOT NULL
+        notes TEXT
     );`;
 
-    const insertQueryPart = `
+    const insertQuery = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_fee_alteration
         (person_id, type, amount, is_absolute, valid_from, valid_to, notes)
     SELECT
@@ -43,20 +43,45 @@ export const transformFeeDeviationsData = async (
         fd.enddate,
         $(deviationTypes:json)::jsonb -> fd.deviationtype::text ->> 'notes'
     FROM ${getMigrationSchemaPrefix()}feedeviations fd
-    JOIN ${getMigrationSchemaPrefix()}evaka_placement ep ON ep.effica_placement_nbr = fd.placementnbr
+    LEFT JOIN ${getMigrationSchemaPrefix()}evaka_placement ep ON ep.effica_placement_nbr = fd.placementnbr
     WHERE fd.deviationtype IS NOT NULL AND (fd.sum != 0 OR fd.procent != 0)
     `;
 
-    const insertQuery = wrapWithReturning(
-        "evaka_fee_alteration",
-        insertQueryPart,
-        returnAll
-    );
+    const updateQueries = `
+    DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_fee_alteration_todo;
+    CREATE TABLE ${getMigrationSchemaPrefix()}evaka_fee_alteration_todo AS
+    SELECT *, 'TODO' AS reason
+    FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration
+    WHERE 1 = 2;
+
+    INSERT INTO ${getMigrationSchemaPrefix()}evaka_fee_alteration_todo
+    SELECT *, 'TYPE MISSING'
+    FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration
+    WHERE type IS NULL;
+
+    INSERT INTO ${getMigrationSchemaPrefix()}evaka_fee_alteration_todo
+    SELECT *, 'PLACEMENT MISSING'
+    FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration
+    WHERE person_id IS NULL;
+
+    DELETE FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration
+    WHERE id IN (SELECT id FROM ${getMigrationSchemaPrefix()}evaka_fee_alteration_todo);
+    `;
 
     return await migrationDb.tx(async (t) => {
         await runQuery(tableQuery, t);
-        return await runQuery(insertQuery, t, true, {
+        await runQuery(insertQuery, t, true, {
             deviationTypes: DEVIATION_TYPE_MAPPINGS[config.cityVariant],
         });
+        await runQuery(updateQueries, t);
+        return await runQuery(
+            selectFromTable(
+                "evaka_fee_alteration",
+                config.migrationSchema,
+                returnAll
+            ),
+            t,
+            true
+        );
     });
 };

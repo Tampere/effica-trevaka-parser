@@ -82,7 +82,9 @@ export const DEVIATION_TYPE_MAPPINGS: CitySpecificDeviationTypeMappings = {
     tampere: {
         5: { type: "DISCOUNT", notes: "ALENNUS" },
         39: { type: "DISCOUNT", notes: "ALENNUS AP/IP" },
+        40: { type: "DISCOUNT", notes: "MAKSUTON AP-IP" },
         41: { type: "DISCOUNT", notes: "MAKSUTON OSUUS" },
+        47: { type: "DISCOUNT", notes: "SISARALENNUS" },
         48: { type: "RELIEF", notes: "ULKOKUNTALAINEN" },
     },
 };

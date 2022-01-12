@@ -30,3 +30,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <days>0</days>
     <extentcode>101</extentcode>
 </feedeviation>
+<feedeviation>
+    <placementnbr>13</placementnbr>
+    <rownbr>3</rownbr>
+    <serviceform>3</serviceform>
+    <deviationtype>999</deviationtype>
+    <startdate>20200301</startdate>
+    <enddate></enddate>
+    <sum>10</sum>
+    <procent>0</procent>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>101</extentcode>
+</feedeviation>

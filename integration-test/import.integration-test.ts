@@ -154,7 +154,7 @@ describe("GET /import xml positive", () => {
 
     it("should return created feedeviations", async () => {
         return await positiveImportSnapshotTest("feedeviations",
-            getTimeSeriesResultPattern(openDateRange, openDateRange))
+            getTimeSeriesResultPattern(openDateRange, openDateRange, openDateRange))
     })
 
     it("should return created childminders", async () => {
