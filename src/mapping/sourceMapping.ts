@@ -401,7 +401,8 @@ export const extTableMapping: TypeMapping = {
         tableName: "unitmap",
         columns: {
             effica_id: { sqlType: "integer", parser: stringToNumericParser },
-            evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
+            evaka_id: { sqlType: "uuid", parser: nullForcingTextParser },
+            name: { sqlType: "text", parser: nullForcingTextParser }
         }
     },
     childmindermap: {

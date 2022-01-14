@@ -28,8 +28,8 @@ const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transferPersonData },
         { name: "families", function: transferFamiliesData },
-        // { name: "assistance_needs", function: transferAssistanceNeedsData }, // TODO: enable assistance needs
-        // { name: "assistance_actions", function: transferAssistanceActionsData }, // TODO: enable assistance actions
+        { name: "assistance_needs", function: transferAssistanceNeedsData },
+        { name: "assistance_actions", function: transferAssistanceActionsData },
         { name: "income", function: transferIncomeData },
         { name: "unit_manager", function: transferUnitManagerData },
         { name: "daycare", function: transferDaycareData },
@@ -41,7 +41,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "application", function: transferApplicationData },
         { name: "absences", function: transferAbsences },
         { name: "backup_care", function: transferBackupCares },
-        // { name: "child_attendances", function: transferChildAttendances }, // TODO: enable child attendances
+        { name: "child_attendances", function: transferChildAttendances },
         { name: "daycare_oid", function: transferDaycareOidData }
     ]
 

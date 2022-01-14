@@ -13,9 +13,9 @@ import { transformIncomeData } from "../transform/income"
 import { transformPayDecisionData } from "../transform/pay-decisions"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
-import { transformTimestampsData } from "../transform/timestamps"
 import { transformSpecialMeansData } from "../transform/special-means"
 import { transformSpecialNeedsData } from "../transform/special-needs"
+import { transformTimestampsData } from "../transform/timestamps"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
@@ -25,8 +25,8 @@ const dependencyOrder: MigrationOperation[] =
     [
         { name: "persons", function: transformPersonData },
         { name: "families", function: transformFamilyData },
-        // { name: "special_needs", function: transformSpecialNeedsData }, // TODO: enable special needs
-        // { name: "special_means", function: transformSpecialMeansData }, // TODO: enable special means
+        { name: "special_needs", function: transformSpecialNeedsData },
+        { name: "special_means", function: transformSpecialMeansData },
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
         { name: "placements", function: transformPlacementsData },
@@ -35,7 +35,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },
         { name: "pay_decisions", function: transformPayDecisionData },
         { name: "daily_journals", function: transformDailyJournalsData },
-        // { name: "timestamps", function: transformTimestampsData }, // TODO: enable timestamps
+        { name: "timestamps", function: transformTimestampsData },
         { name: "cleanup", function: cleanupData },
     ]
 
