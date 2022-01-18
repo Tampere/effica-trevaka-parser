@@ -7,8 +7,28 @@ WITH details AS (
     SELECT
         rownumber,
         day,
-        unnest(ARRAY[starttime1, starttime2, starttime3]) AS starttime,
-        unnest(ARRAY[endtime1, endtime2, endtime3]) AS endtime
+        unnest(ARRAY[
+            starttime1::time,
+            starttime2::time,
+            starttime3::time
+        ]) AS starttime,
+        unnest(ARRAY[
+            CASE WHEN starttime1 IS NOT NULL THEN COALESCE(
+                endtime1::time,
+                starttime2::time - interval '1 minute',
+                starttime3::time - interval '1 minute',
+                '2359'::time
+            ) END,
+            CASE WHEN starttime2 IS NOT NULL THEN COALESCE(
+                endtime2::time,
+                starttime3::time - interval '1 minute',
+                '2359'::time
+            ) END,
+            CASE WHEN starttime3 IS NOT NULL THEN COALESCE(
+                endtime3::time,
+                '2359'::time
+            ) END
+        ]) AS endtime
     FROM ${migrationSchema:name}.timestampdetails
 )
 SELECT
@@ -17,8 +37,8 @@ SELECT
     h.childminder,
     h.personid,
     (h.period || lpad(d.day::text, 2, '0'))::date AS date,
-    d.starttime::time,
-    d.endtime::time
+    d.starttime,
+    d.endtime
 FROM details d
 JOIN ${migrationSchema:name}.timestampheaders h ON h.rownumber = d.rownumber AND h.rowtype = 'R'
 WHERE starttime IS NOT NULL OR endtime IS NOT NULL;
