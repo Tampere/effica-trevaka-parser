@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_assistance_need;
 CREATE TABLE ${migrationSchema:name}.evaka_assistance_need (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
-    effica_ssn TEXT NOT NULL,
+    effica_ssn TEXT,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,

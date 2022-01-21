@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
+import { config } from "../config"
 import migrationDb from "../db/db"
 import { getExtensionSchemaPrefix, getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/queryTools"
 
@@ -96,7 +97,9 @@ export const transformPersonData = async (returnAll: boolean = false) => {
 
     return await migrationDb.tx(async (t) => {
         await runQuery(tableQuery, t)
-        await runQuery(evakaPersonInsert, t)
+        if (config.copyPersonsFromEvaka) {
+            await runQuery(evakaPersonInsert, t)
+        }
         const ret = await runQuery(insertQuery, t, true)
         // maintain ids between migrations
         await runQuery(`
