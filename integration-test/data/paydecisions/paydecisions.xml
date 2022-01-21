@@ -17,3 +17,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <Status>999420001</Status>
   <GUID>paydecision3843781</GUID>
 </PayDecision>
+<PayDecision>
+  <HeadOfFamily>180476-998M</HeadOfFamily>
+  <InternalDecisionNumber>3843782</InternalDecisionNumber>
+  <StartDate>20200301</StartDate>
+  <EndDate>99991231</EndDate>
+  <Fee>492.00</Fee>
+  <CaseWorker></CaseWorker>
+  <DecisionMaker></DecisionMaker>
+  <DecisionNumber>123456791</DecisionNumber>
+  <DecisionDate>20200101</DecisionDate>
+  <Status>999420001</Status>
+  <GUID>paydecision3843782</GUID>
+</PayDecision>

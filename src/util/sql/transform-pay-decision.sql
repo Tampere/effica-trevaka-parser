@@ -107,7 +107,7 @@ LEFT JOIN (
 LEFT JOIN ${migrationSchema:name}.evaka_person partner ON partner.effica_ssn = partner_row.person
 LEFT JOIN ${migrationSchema:name}.paydecisionrows family_size_row ON family_size_row.rowtype = 3
     AND family_size_row.internalid = pd.internaldecisionnumber
-WHERE (
+WHERE EXISTS (SELECT 1 FROM ${migrationSchema:name}.paydecisionrows pdr WHERE pdr.internalid = pd.internaldecisionnumber) AND (
     $(statusMappings:json)::jsonb ->> pd.status::text IS NOT NULL OR -- include all known status types
     pd.status::text NOT IN ($(allStatuses:csv)) -- include all unknown status codes
 );
