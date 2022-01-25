@@ -83,18 +83,22 @@ CREATE TABLE ${migrationSchema:name}.evaka_application_form (
     unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     service_need_option_id UUID,
     preferred_start_date DATE NOT NULL,
-    PRIMARY KEY (effica_application_id, effica_priority)
+    PRIMARY KEY (effica_application_id, effica_priority),
+    effica_unit_id INTEGER,
+    effica_childminder_id TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_application_form
-    (effica_application_id, effica_priority, application_id, unit_id, service_need_option_id, preferred_start_date)
+    (effica_application_id, effica_priority, application_id, unit_id, service_need_option_id, preferred_start_date, effica_unit_id, effica_childminder_id)
 SELECT
     r.careid,
     r.priority,
     ea.id,
     COALESCE(um.evaka_id, cm.evaka_id),
     em.evaka_id,
-    r.startdate
+    r.startdate,
+    r.unitcode,
+    r.childminder
 FROM ${migrationSchema:name}.applicationrows r
 JOIN ${migrationSchema:name}.evaka_application ea ON ea.effica_id = r.careid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = r.unitcode

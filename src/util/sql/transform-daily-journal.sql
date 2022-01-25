@@ -115,7 +115,10 @@ CREATE TABLE ${migrationSchema:name}.evaka_backup_care (
     unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     group_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare_group,
     start_date DATE NOT NULL,
-    end_date DATE NOT NULL
+    end_date DATE NOT NULL,
+    effica_unit_id INTEGER,
+    effica_department_id INTEGER,
+    effica_childminder_id TEXT
 );
 
 WITH backup_cares AS (
@@ -125,22 +128,35 @@ WITH backup_cares AS (
         edg.id AS group_id,
         d.date,
         ROW_NUMBER() OVER(PARTITION BY child.id, d.unit_id, edg.id ORDER BY d.date) AS days
+        d.unit as effica_unit_id,
+        d.department as effica_department_id,
+        d.childminder as effica_childminder_id
     FROM ${migrationSchema:name}.dailyjournals_view d
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
     LEFT JOIN ${migrationSchema:name}.evaka_daycare_group edg ON edg.effica_id = d.department
     WHERE d.reportcode IN ($(backupCareTypes:csv))
-    GROUP BY child_id, unit_id, group_id, d.date
+    GROUP BY child_id, unit_id, group_id, d.date, d.unit, d.department, d.childminder
 )
 INSERT INTO ${migrationSchema:name}.evaka_backup_care
-    (child_id, unit_id, group_id, start_date, end_date)
+    (child_id, unit_id, group_id, start_date, end_date, effica_unit_id, effica_department_id, effica_childminder_id)
 SELECT DISTINCT
     child_id,
     unit_id,
     group_id,
     min(date),
-    max(date)
+    max(date),
+    effica_unit_id,
+    effica_department_id,
+    effica_childminder_id
 FROM backup_cares
-GROUP BY child_id, unit_id, group_id, date - (days || ' days')::interval;
+GROUP BY
+    child_id,
+    unit_id,
+    group_id,
+    date - (days || ' days')::interval,
+    effica_unit_id,
+    effica_department_id,
+    effica_childminder_id;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_backup_care_todo;
 

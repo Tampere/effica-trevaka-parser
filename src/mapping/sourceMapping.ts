@@ -571,5 +571,13 @@ export const extTableMapping: TypeMapping = {
             incometype: { sqlType: "integer", parser: nullForcingTextParser },
             summa: { sqlType: "numeric", parser: nullForcingTextParser }
         }
-    }
+    },
+    unwantedunits: {
+        tableName: "unwantedunits",
+        columns: {
+            effica_id: { sqlType: "integer", parser: stringToNumericParser },
+            name: { sqlType: "text", parser: nullForcingTextParser }
+        }
+    },
+
 }

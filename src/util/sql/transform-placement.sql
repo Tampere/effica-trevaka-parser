@@ -12,11 +12,14 @@ CREATE TABLE ${migrationSchema:name}.evaka_placement (
     unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     start_date DATE NOT NULL,
     end_date DATE,
-    daycare_group_id UUID
+    daycare_group_id UUID,
+    effica_unit_id INTEGER,
+    effica_department_id INTEGER,
+    effica_childminder_id TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_placement
-    (effica_placement_nbr, effica_ssn, type, child_id, unit_id, start_date, end_date, daycare_group_id)
+    (effica_placement_nbr, effica_ssn, type, child_id, unit_id, start_date, end_date, daycare_group_id, effica_unit_id, effica_department_id, effica_childminder_id)
 SELECT
     p.placementnbr,
     p.personid,
@@ -32,7 +35,10 @@ SELECT
     COALESCE(um.evaka_id, cm.evaka_id),
     p.startdate,
     p.enddate,
-    edg.id
+    edg.id,
+    p.placementunitcode,
+    p.placementdepartmentcode,
+    p.placementchildminder
 FROM ${migrationSchema:name}.filtered_placements_v p
 LEFT JOIN ${migrationSchema:name}.evaka_person ep ON ep.effica_ssn = p.personid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = p.placementunitcode

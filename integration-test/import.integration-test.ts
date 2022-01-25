@@ -14,7 +14,7 @@ const baseUrl = "/import"
 
 const tables = ["persons", "specialneeds", "specialmeans", "codes", "income", "incomerows", "families",
     "units", "departments", "placements", "placementextents", "decisions",
-    "feedeviations", "childminders", "evaka_areas", "unitmap", "childmindermap",
+    "feedeviations", "childminders", "evaka_areas", "unitmap", "unwantedunits", "childmindermap",
     "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
     "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map",
     "families_exclusion", "placements_exclusion"]
@@ -212,6 +212,9 @@ describe("GET /import csv positive", () => {
     })
     it("should return created unitmaps", async () => {
         return await positiveImportSnapshotTest("unitmap")
+    })
+    it("should return created unwantedunits", async () => {
+        return await positiveImportSnapshotTest("unwantedunits")
     })
     it("should return created childmindermaps", async () => {
         return await positiveImportSnapshotTest("childmindermap")

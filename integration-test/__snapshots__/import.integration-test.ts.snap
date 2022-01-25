@@ -281,6 +281,26 @@ Object {
 }
 `;
 
+exports[`GET /import csv positive should return created unwantedunits 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "effica_id": 123,
+        "name": "Päiväkoti yksi",
+      },
+      Object {
+        "effica_id": 125,
+        "name": "Päiväkoti kaksi",
+      },
+    ],
+  ],
+  "tables": Array [
+    "unwantedunits",
+  ],
+}
+`;
+
 exports[`GET /import xml positive should return created application rows 1`] = `
 Object {
   "inserts": Array [
@@ -1215,7 +1235,7 @@ Object {
         "placementchildminder": null,
         "placementdepartmentcode": null,
         "placementnbr": 17,
-        "placementunitcode": null,
+        "placementunitcode": 999,
         "startdate": Any<String>,
       },
       Object {
