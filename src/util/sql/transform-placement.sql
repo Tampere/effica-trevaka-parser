@@ -133,3 +133,19 @@ WHERE
 -- remove problematic placements from migration
 DELETE FROM ${migrationSchema:name}.evaka_placement
 WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_todo);
+
+-- fix transfer applications
+UPDATE ${migrationSchema:name}.evaka_application ea
+SET transferapplication = TRUE
+WHERE EXISTS (
+    SELECT 1
+    FROM ${migrationSchema:name}.evaka_placement ep
+    WHERE ep.child_id = ea.child_id
+        AND CASE ep.type
+            WHEN 'DAYCARE_PART_TIME' THEN 'DAYCARE'
+            WHEN 'DAYCARE_FIVE_YEAR_OLDS' THEN 'DAYCARE'
+            WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN 'DAYCARE'
+            ELSE ep.type
+            END = ea.type
+        AND daterange(ep.start_date, ep.end_date, '[]') @> ea.sentdate
+);

@@ -213,7 +213,7 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed placements", async () => {
-        await setupTransformations(["persons", "departments"])
+        await setupTransformations(["persons", "families", "departments", "application"])
 
         const placementExpectation = {
             id: expect.any(String),
@@ -223,6 +223,11 @@ describe("GET /transform positive", () => {
         const serviceNeedExpectation = {
             id: expect.any(String),
             placement_id: expect.any(String)
+        }
+        const applicationExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            guardian_id: expect.any(String),
         }
 
         await positiveTransformSnapshotTest(
@@ -246,7 +251,11 @@ describe("GET /transform positive", () => {
                     serviceNeedExpectation, // 131
                     serviceNeedExpectation, // 18
                 ],
-                serviceNeedsTodo: []
+                serviceNeedsTodo: [],
+                applications: [
+                    applicationExpectation,
+                    applicationExpectation,
+                ]
             }
         )
     })
@@ -406,7 +415,7 @@ describe("GET /transform positive", () => {
         }
 
         const response1 = await positiveTransformSnapshotTest("application", {
-            applications: Array(1).fill(applicationExpectation),
+            applications: Array(2).fill(applicationExpectation),
             applicationsTodo: Array(0).fill(applicationExpectation),
             applicationForms: Array(1).fill(applicationFormExpectation),
             applicationFormsTodo: Array(0).fill(applicationFormExpectation),

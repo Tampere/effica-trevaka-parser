@@ -314,11 +314,22 @@ Object {
   "inserts": Array [
     Array [
       Object {
-        "applicationdate": "2021-08-01T00:00:00.000Z",
+        "applicationdate": "2025-08-01T00:00:00.000Z",
         "applicationtype": 999940001,
         "careid": 12345,
         "guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
         "personid": "010619A9501",
+        "placeneed": "1",
+        "specialhandlingtime": "0",
+        "status": 999962042,
+        "transferapplication": false,
+      },
+      Object {
+        "applicationdate": "2020-04-01T00:00:00.000Z",
+        "applicationtype": 999940001,
+        "careid": 12346,
+        "guid": "12F28AA0-E059-4203-98F9-EE3D37738B00",
+        "personid": "251118A9509",
         "placeneed": "1",
         "specialhandlingtime": "0",
         "status": 999962042,
