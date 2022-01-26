@@ -27,12 +27,16 @@ SELECT
     d.unit,
     d.department,
     d.childminder,
+    COALESCE(um.evaka_id, cm.evaka_id) AS unit_id,
     r.personid,
     (d.period || r.day_of_month)::date AS date,
     r.reportcode
 FROM rows r
 JOIN ${migrationSchema:name}.dailyjournals d ON d.dailyjournalid = r.dailyjournalid
-WHERE r.reportcode != 0;
+LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = d.unit
+LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = d.childminder
+LEFT JOIN ${migrationSchema:name}.evaka_daycare ed ON ed.id = um.evaka_id OR ed.id = cm.evaka_id
+WHERE r.reportcode != 0 AND (ed.id IS NULL OR NOT 'CLUB' = ANY(ed.type));
 
 -- absences
 
@@ -117,15 +121,13 @@ CREATE TABLE ${migrationSchema:name}.evaka_backup_care (
 WITH backup_cares AS (
     SELECT
         child.id AS child_id,
-        COALESCE(um.evaka_id, cm.evaka_id) AS unit_id,
+        d.unit_id,
         edg.id AS group_id,
         d.date,
-        ROW_NUMBER() OVER(PARTITION BY child.id, COALESCE(um.evaka_id, cm.evaka_id), edg.id ORDER BY d.date) AS days
+        ROW_NUMBER() OVER(PARTITION BY child.id, d.unit_id, edg.id ORDER BY d.date) AS days
     FROM ${migrationSchema:name}.dailyjournals_view d
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
-    LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = d.unit
     LEFT JOIN ${migrationSchema:name}.evaka_daycare_group edg ON edg.effica_id = d.department
-    LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = d.childminder
     WHERE d.reportcode IN ($(backupCareTypes:csv))
     GROUP BY child_id, unit_id, group_id, d.date
 )
