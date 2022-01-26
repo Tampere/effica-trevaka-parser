@@ -44,3 +44,13 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <RowType>2</RowType>
   <GUID>paydecisionrow38437814</GUID>
 </PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843783</InternalId>
+  <RowNumber>1</RowNumber>
+  <Person>180476-998M</Person>
+  <Income>999999</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>2</RowType>
+  <GUID>paydecisionrow38437815</GUID>
+</PayDecisionRows>

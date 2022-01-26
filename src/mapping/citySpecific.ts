@@ -107,7 +107,7 @@ export const DECISION_STATUS_TYPE_MAPPINGS: Record<
 
 export const PAY_DECISION_STATUS_MAPPINGS: CitySpecificPayDecisionStatusMappings = {
     tampere: {
-        82: "DRAFT", // Valmisteilla
+        82: null, // Valmisteilla
         403: null, // xxxx
         493: null, // Vanhentunut
         999420001: "SENT", // Hyväksytty
