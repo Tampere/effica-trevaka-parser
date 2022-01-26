@@ -264,7 +264,7 @@ Object {
       "sentdate": "2025-08-01T00:00:00.000Z",
       "service_worker_note": "",
       "status": "SENT",
-      "transferapplication": false,
+      "transferapplication": true,
       "updated": Any<String>,
     },
     Object {
@@ -282,7 +282,7 @@ Object {
       "sentdate": "2020-04-01T00:00:00.000Z",
       "service_worker_note": "",
       "status": "SENT",
-      "transferapplication": true,
+      "transferapplication": false,
       "updated": Any<String>,
     },
   ],

@@ -137,7 +137,14 @@ WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_placement_todo);
 -- fix transfer applications
 UPDATE ${migrationSchema:name}.evaka_application ea
 SET transferapplication = TRUE
-WHERE EXISTS (
+FROM (
+    SELECT application_id, MIN(effica_priority) AS top_priority
+    FROM ${migrationSchema:name}.evaka_application_form
+    GROUP BY application_id
+) priorities
+JOIN ${migrationSchema:name}.evaka_application_form eaf
+    ON eaf.application_id = priorities.application_id AND eaf.effica_priority = priorities.top_priority
+WHERE eaf.application_id = ea.id AND priorities.application_id = ea.id AND EXISTS (
     SELECT 1
     FROM ${migrationSchema:name}.evaka_placement ep
     WHERE ep.child_id = ea.child_id
@@ -147,5 +154,5 @@ WHERE EXISTS (
             WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN 'DAYCARE'
             ELSE ep.type
             END = ea.type
-        AND daterange(ep.start_date, ep.end_date, '[]') @> ea.sentdate
+        AND daterange(ep.start_date, ep.end_date, '[]') @> eaf.preferred_start_date
 );
