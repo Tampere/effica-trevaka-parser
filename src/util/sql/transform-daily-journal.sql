@@ -2,6 +2,7 @@
 --
 -- SPDX-License-Identifier: LGPL-2.1-or-later
 
+DROP VIEW IF EXISTS ${migrationSchema:name}.dailyjournals_view;
 CREATE OR REPLACE VIEW ${migrationSchema:name}.dailyjournals_view AS
 WITH rows AS (
     SELECT
@@ -127,7 +128,7 @@ WITH backup_cares AS (
         d.unit_id,
         edg.id AS group_id,
         d.date,
-        ROW_NUMBER() OVER(PARTITION BY child.id, d.unit_id, edg.id ORDER BY d.date) AS days
+        ROW_NUMBER() OVER(PARTITION BY child.id, d.unit_id, edg.id ORDER BY d.date) AS days,
         d.unit as effica_unit_id,
         d.department as effica_department_id,
         d.childminder as effica_childminder_id
