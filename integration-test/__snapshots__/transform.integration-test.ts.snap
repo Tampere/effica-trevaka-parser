@@ -31,12 +31,24 @@ Object {
   "applications": Array [
     Object {
       "child_id": Any<String>,
-      "duedate": "2021-11-29T00:00:00.000Z",
+      "duedate": "2025-11-29T00:00:00.000Z",
       "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
       "effica_id": 12345,
       "guardian_id": Any<String>,
       "id": Any<String>,
-      "sentdate": "2021-08-01T00:00:00.000Z",
+      "sentdate": "2025-08-01T00:00:00.000Z",
+      "status": "SENT",
+      "transferapplication": false,
+      "type": "DAYCARE",
+    },
+    Object {
+      "child_id": Any<String>,
+      "duedate": null,
+      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B00",
+      "effica_id": 12346,
+      "guardian_id": Any<String>,
+      "id": Any<String>,
+      "sentdate": "2020-04-01T00:00:00.000Z",
       "status": "SENT",
       "transferapplication": false,
       "type": "DAYCARE",
@@ -440,6 +452,32 @@ Array [
 
 exports[`GET /transform positive should return transformed placements 1`] = `
 Object {
+  "applications": Array [
+    Object {
+      "child_id": Any<String>,
+      "duedate": "2025-11-29T00:00:00.000Z",
+      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
+      "effica_id": 12345,
+      "guardian_id": Any<String>,
+      "id": Any<String>,
+      "sentdate": "2025-08-01T00:00:00.000Z",
+      "status": "SENT",
+      "transferapplication": true,
+      "type": "DAYCARE",
+    },
+    Object {
+      "child_id": Any<String>,
+      "duedate": null,
+      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B00",
+      "effica_id": 12346,
+      "guardian_id": Any<String>,
+      "id": Any<String>,
+      "sentdate": "2020-04-01T00:00:00.000Z",
+      "status": "SENT",
+      "transferapplication": false,
+      "type": "DAYCARE",
+    },
+  ],
   "placements": Array [
     Object {
       "child_id": Any<String>,

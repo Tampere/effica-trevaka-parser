@@ -23,7 +23,7 @@ const transferApplications = async <T>(t: ITask<T>, returnAll: boolean) => {
     await runQueryFile("transfer-application.sql", t, baseQueryParameters);
 
     const applications = await runQuery(
-        selectFromTable("application", "", returnAll, ["sentdate"]),
+        selectFromTable("application", "", returnAll, ["sentdate DESC"]),
         t,
         true
     );

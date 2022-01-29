@@ -41,7 +41,17 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
-    return { placements, placementsTodo };
+    const applications = await runQuery(
+        selectFromTable(
+            "evaka_application",
+            config.migrationSchema,
+            returnAll,
+            ["sentdate DESC"]
+        ),
+        t,
+        true
+    );
+    return { placements, placementsTodo, applications };
 };
 
 const transformExtents = async <T>(t: ITask<T>, returnAll: boolean) => {

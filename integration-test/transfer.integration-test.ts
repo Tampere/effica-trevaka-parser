@@ -311,12 +311,12 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred applications", async () => {
-        await setupTransformations(["persons", "families", "application"])
+        await setupTransformations(["persons", "families", "application", "placements"])
         await setupTransfers(["persons", "families"])
         await positiveTransferSnapshotTest(
             "application",
             {
-                applications: Array(1).fill(applicationExpectation),
+                applications: Array(2).fill(applicationExpectation),
                 applicationForms: Array(1).fill(applicationFormExpectation)
             }
         )
