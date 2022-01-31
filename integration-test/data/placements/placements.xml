@@ -65,9 +65,10 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate></enddate>
 </placement>
 <placement>
+    <!-- should be marked as UNIT MISSING -->
     <placementnbr>17</placementnbr>
     <personid>251118A9509</personid>
-    <placementunitcode>0</placementunitcode>
+    <placementunitcode>999</placementunitcode>
     <placementdepartmentcode>0</placementdepartmentcode>
     <placementchildminder></placementchildminder>
     <startdate>20190801</startdate>

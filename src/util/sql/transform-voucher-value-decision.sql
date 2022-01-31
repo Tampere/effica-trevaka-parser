@@ -26,7 +26,9 @@ CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
     voucher_value INTEGER NOT NULL,
     final_co_payment INTEGER NOT NULL,
     capacity_factor NUMERIC(4, 2) NOT NULL,
-    CHECK (head_of_family_id != partner_id)
+    CHECK (head_of_family_id != partner_id),
+    effica_unit_id INTEGER,
+    effica_childminder_id TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
@@ -51,7 +53,9 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     co_payment,
     voucher_value,
     final_co_payment,
-    capacity_factor
+    capacity_factor,
+    effica_unit_id,
+    effica_childminder_id
 ) SELECT
     COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
     d.guid,
@@ -79,7 +83,9 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     0, -- TODO: co payment
     d.totalsum * 100,
     d.paydecision * 100,
-    d.factor
+    d.factor,
+    d.decisionunitcode,
+    d.decisionchildminder
 FROM ${migrationSchema:name}.decisions d
 LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'DECISION' AND im.effica_guid = d.guid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child f_child ON f_child.child_ssn = d.personid

@@ -50,18 +50,22 @@ CREATE TABLE ${migrationSchema:name}.evaka_child_attendance (
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     arrived TIMESTAMP WITH TIME ZONE,
     departed TIMESTAMP WITH TIME ZONE,
-    unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare
+    unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
+    effica_unit_id INTEGER,
+    effica_childminder_id TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_child_attendance
-    (id, effica_rownumber, child_id, arrived, departed, unit_id)
+    (id, effica_rownumber, child_id, arrived, departed, unit_id, effica_unit_id, effica_childminder_id)
 SELECT
     ${extensionSchema:name}.uuid_generate_v1mc(),
     t.rownumber,
     child.id,
     (t.date + t.starttime) AT TIME ZONE 'Europe/Helsinki',
     (t.date + t.endtime) AT TIME ZONE 'Europe/Helsinki',
-    COALESCE(um.evaka_id, cm.evaka_id)
+    COALESCE(um.evaka_id, cm.evaka_id),
+    t.unit,
+    t.childminder
 FROM ${migrationSchema:name}.timestamps_view t
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = t.personid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = t.unit
