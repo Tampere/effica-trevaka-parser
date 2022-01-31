@@ -68,7 +68,7 @@ export type FeeDecisionStatusType =
 
 export type CitySpecificDailyJournalReportCodeMappings = Record<
     string,
-    Record<number, { absenceType?: string; backupCare?: boolean }>
+    Record<number, { absenceType?: AbsenceType; backupCare?: boolean }>
 >;
 
 export type AbsenceType =
@@ -76,8 +76,6 @@ export type AbsenceType =
     | "SICKLEAVE"
     | "UNKNOWN_ABSENCE"
     | "PLANNED_ABSENCE"
-    | "TEMPORARY_RELOCATION"
-    | "TEMPORARY_VISITOR"
     | "PARENTLEAVE"
     | "FORCE_MAJEURE";
 
