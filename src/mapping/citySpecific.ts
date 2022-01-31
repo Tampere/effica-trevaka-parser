@@ -159,7 +159,7 @@ export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCod
         },
         409: {
             // Työntasausvp - Lapsi hoidossa
-            absenceType: "TEMPORARY_RELOCATION",
+            // absence counterpart for backup care (reportcode 176). for evaka only backup care should be inserted
         },
         410: {
             // Työntasausvp - Lapsi poissa
