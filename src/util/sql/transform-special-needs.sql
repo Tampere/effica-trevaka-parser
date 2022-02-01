@@ -16,7 +16,7 @@ WITH
 calendar AS (
     -- create full calendar from date ranges
     SELECT
-        child.effica_ssn,
+        sn.personid as effica_ssn,
         child.id AS child_id,
         (
             generate_series(

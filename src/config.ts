@@ -4,6 +4,7 @@
 
 export const config = {
     cityVariant: process.env.CITY_VARIANT ?? "tampere",
+    copyPersonsFromEvaka: process.env.COPY_PERSONS_FROM_EVAKA?.toUpperCase() === "TRUE",
     mockVtj: process.env.MOCK_VTJ?.toUpperCase() === "TRUE",
     port: process.env.PORT ?? 3000,
     isTimed: process.env.ISTIMED?.toUpperCase() === "TRUE",
