@@ -52,7 +52,7 @@ export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
 
 export const createUnitManagerTableQuery = (td: TableDescriptor): string => {
     return `
-    create table ${getMigrationSchemaPrefix()}${td.tableName}
+    create table if not exists ${getMigrationSchemaPrefix()}${td.tableName}
     (
         id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
             constraint unit_manager_pkey
@@ -66,7 +66,7 @@ export const createUnitManagerTableQuery = (td: TableDescriptor): string => {
 
 export const createDaycareTableQuery = (td: TableDescriptor): string => {
     return `
-    create table ${getMigrationSchemaPrefix()}${td.tableName}
+    create table if not exists ${getMigrationSchemaPrefix()}${td.tableName}
     (
         id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
             constraint daycare_pkey
