@@ -47,7 +47,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_absence (
     effica_dailyjournalids INTEGER[] NOT NULL,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     date DATE NOT NULL,
-    care_type TEXT NOT NULL,
+    category TEXT NOT NULL CHECK (category IN ('BILLABLE', 'NONBILLABLE')),
     absence_type TEXT
 );
 
@@ -57,20 +57,20 @@ WITH absences AS (
         child.id AS child_id,
         d.date,
         unnest(CASE ep.type
-            WHEN 'CLUB' THEN ARRAY['CLUB']
-            WHEN 'SCHOOL_SHIFT_CARE' THEN ARRAY['SCHOOL_SHIFT_CARE']
-            WHEN 'PRESCHOOL' THEN ARRAY['PRESCHOOL']
-            WHEN 'PREPARATORY' THEN ARRAY['PRESCHOOL']
-            WHEN 'PRESCHOOL_DAYCARE' THEN ARRAY['PRESCHOOL_DAYCARE'] -- PRESCHOOL for non billable
-            WHEN 'PREPARATORY_DAYCARE' THEN ARRAY['PRESCHOOL_DAYCARE'] -- PRESCHOOL for non billable
-            WHEN 'DAYCARE' THEN ARRAY['DAYCARE']
-            WHEN 'DAYCARE_PART_TIME' THEN ARRAY['DAYCARE']
-            WHEN 'DAYCARE_FIVE_YEAR_OLDS' THEN ARRAY['DAYCARE'] -- DAYCARE_5YO_FREE for non billable
-            WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN ARRAY['DAYCARE'] -- DAYCARE_5YO_FREE for non billable
-            WHEN 'TEMPORARY_DAYCARE' THEN ARRAY['DAYCARE']
-            WHEN 'TEMPORARY_DAYCARE_PART_DAY' THEN ARRAY['DAYCARE']
+            WHEN 'CLUB' THEN ARRAY['NONBILLABLE']
+            WHEN 'SCHOOL_SHIFT_CARE' THEN ARRAY['NONBILLABLE']
+            WHEN 'PRESCHOOL' THEN ARRAY['NONBILLABLE']
+            WHEN 'PREPARATORY' THEN ARRAY['NONBILLABLE']
+            WHEN 'PRESCHOOL_DAYCARE' THEN ARRAY['BILLABLE'] -- or NONBILLABLE
+            WHEN 'PREPARATORY_DAYCARE' THEN ARRAY['BILLABLE'] -- or NONBILLABLE
+            WHEN 'DAYCARE' THEN ARRAY['BILLABLE']
+            WHEN 'DAYCARE_PART_TIME' THEN ARRAY['BILLABLE']
+            WHEN 'DAYCARE_FIVE_YEAR_OLDS' THEN ARRAY['BILLABLE'] -- or NONBILLABLE
+            WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN ARRAY['BILLABLE'] -- or NONBILLABLE
+            WHEN 'TEMPORARY_DAYCARE' THEN ARRAY['BILLABLE']
+            WHEN 'TEMPORARY_DAYCARE_PART_DAY' THEN ARRAY['BILLABLE']
             ELSE ARRAY['UNKNOWN']
-        END) AS care_type,
+        END) AS category,
         $(absenceTypeMappings:json)::jsonb ->> d.reportcode::text AS absence_type
     FROM ${migrationSchema:name}.dailyjournals_view d
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
@@ -80,15 +80,15 @@ WITH absences AS (
         OR d.reportcode::text NOT IN ($(allReportCodes:csv)) -- include all unknown reportcodes
 )
 INSERT INTO ${migrationSchema:name}.evaka_absence
-    (effica_dailyjournalids, child_id, date, care_type, absence_type)
+    (effica_dailyjournalids, child_id, date, category, absence_type)
 SELECT DISTINCT
     array_agg(DISTINCT dailyjournalid),
     child_id,
     date,
-    care_type,
+    category,
     (array_agg(absence_type))[1]
 FROM absences a
-GROUP BY child_id, date, care_type;
+GROUP BY child_id, date, category;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_absence_todo;
 
@@ -98,7 +98,7 @@ FROM ${migrationSchema:name}.evaka_absence WHERE child_id IS NULL;
 
 INSERT INTO ${migrationSchema:name}.evaka_absence_todo
 SELECT *, 'PLACEMENT MISSING'
-FROM ${migrationSchema:name}.evaka_absence WHERE care_type = 'UNKNOWN';
+FROM ${migrationSchema:name}.evaka_absence WHERE category = 'UNKNOWN';
 
 INSERT INTO ${migrationSchema:name}.evaka_absence_todo
 SELECT *, 'TYPE MISSING'

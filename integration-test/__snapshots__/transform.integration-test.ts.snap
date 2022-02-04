@@ -65,7 +65,7 @@ Object {
   "absences": Array [
     Object {
       "absence_type": "SICKLEAVE",
-      "care_type": "DAYCARE",
+      "category": "BILLABLE",
       "child_id": Any<String>,
       "date": "2020-03-09T00:00:00.000Z",
       "effica_dailyjournalids": Array [
@@ -77,7 +77,7 @@ Object {
   "absencesTodo": Array [
     Object {
       "absence_type": null,
-      "care_type": "DAYCARE",
+      "category": "BILLABLE",
       "child_id": Any<String>,
       "date": "2020-03-24T00:00:00.000Z",
       "effica_dailyjournalids": Array [
