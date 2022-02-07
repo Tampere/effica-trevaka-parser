@@ -697,6 +697,7 @@ Object {
       "child_id": Any<String>,
       "departed": "2021-01-01T14:17:00.000Z",
       "effica_childminder_id": "010101-TP99",
+      "effica_placement_number": 13,
       "effica_rownumber": 1122,
       "effica_unit_id": 0,
       "id": Any<String>,
