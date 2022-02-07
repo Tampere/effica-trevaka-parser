@@ -9,7 +9,7 @@ import {
     createGenericTableQueryFromDescriptor,
     getExtensionSchemaPrefix,
     getMigrationSchemaPrefix,
-    truncateEvakaTable
+    truncateEvakaTables
 } from "../util/queryTools";
 import migrationDb from "./db";
 
@@ -132,14 +132,13 @@ export const createAreaTableQuery = (td: TableDescriptor): string => {
     `
 }
 
+//NOTE: This reset removes migrated data from evaka with the exception of daycare, daycare_acl and unit_manager tables
 export const resetEvakaMigratedData = async () => {
     const evakaMigrationTables: string[] = [
-        "person", "daycare", "unit_manager"
+        "person", "daycare_group", "varda_unit", "decision"
     ]
     return await migrationDb.tx(async (t) => {
-        for (let table of evakaMigrationTables) {
-            await truncateEvakaTable(table, t)
-        }
+        await truncateEvakaTables(evakaMigrationTables, t)
     })
 }
 

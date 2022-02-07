@@ -53,8 +53,11 @@ export const dropTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
 
 }
 
-export const truncateEvakaTable = async (tableName: string, t?: pgPromise.ITask<{}>) => {
-    const query = `TRUNCATE TABLE ${tableName} CASCADE;`
+export const truncateEvakaTables = async (tableNames: string[], t?: pgPromise.ITask<{}>) => {
+    if (!tableNames || tableNames.length === 0) {
+        throw new Error("No tables specified for evaka truncate call")
+    }
+    const query = `TRUNCATE TABLE ${tableNames.join(",")} CASCADE;`
     if (!t) {
         return await db.tx(async t => t.any(query))
     } else {

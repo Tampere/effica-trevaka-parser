@@ -6,7 +6,7 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { initDb } from "../src/init"
-import { dropTable, truncateEvakaTable } from "../src/util/queryTools"
+import { dropTable, truncateEvakaTables } from "../src/util/queryTools"
 import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 
 const baseUrl = "/transform"
@@ -73,9 +73,9 @@ afterEach(async () => {
         await dropTable(table)
     }
     cleanUps = []
-    for (const table of evakaDataCleanups) {
-        await truncateEvakaTable(table)
-    }
+
+    await truncateEvakaTables(evakaDataCleanups)
+
 })
 
 afterAll(async () => {
