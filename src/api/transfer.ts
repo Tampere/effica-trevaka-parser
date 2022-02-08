@@ -19,6 +19,7 @@ import { transferFeeDecisionData } from "../transfer/fee-decisions"
 import { transferIncomeData } from "../transfer/income"
 import { transferPersonData } from "../transfer/person"
 import { transferPlacementsData } from "../transfer/placements"
+import { transferVarda } from "../transfer/varda"
 import { transferVoucherValueDecisions } from "../transfer/voucher-value-decisions"
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
@@ -245,6 +246,18 @@ router.get("/daycare_oid", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer daycare varda ids total ", undefined, "*")
+})
+
+router.get("/varda", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer varda total ", undefined, "*")
+    try {
+        const results = await transferVarda(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer varda total ", undefined, "*")
 })
 
 

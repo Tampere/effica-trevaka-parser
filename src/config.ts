@@ -18,6 +18,10 @@ export const config = {
         password: process.env.PGPASSWORD ?? "postgres",
         database: process.env.PGDATABASE ?? "migration",
     },
+    varda: {
+        apiUrl: process.env.VARDA_API_URL,
+        basicAuth: process.env.VARDA_BASIC_AUTH,
+    },
     xmlParserOptions: {
         parseNodeValue: true,
         arrayMode: true,
