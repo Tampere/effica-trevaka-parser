@@ -29,6 +29,7 @@ beforeEach(async () => {
     await setupTransformation("persons");
     await setupTransfer("persons");
     await dropTable("varda_child");
+    await dropTable("varda_person");
     await truncateEvakaTables(["varda_organizer_child", "person"]);
 });
 
@@ -88,10 +89,10 @@ it("should import, transform and transfer varda data", async () => {
                     url: "localhost/lapsi/13",
                     lahdejarjestelma: "57",
                     id: 13,
-                    henkilo: "localhost/henkilo/23",
-                    henkilo_oid: "1.1.1.3",
+                    henkilo: "localhost/henkilo/21",
+                    henkilo_oid: "1.1.1.1",
                     vakatoimija: null,
-                    vakatoimija_oid: "2.2.2.1",
+                    vakatoimija_oid: "2.2.2.3",
                     oma_organisaatio: null,
                     oma_organisaatio_oid: null,
                     paos_organisaatio: null,
@@ -111,7 +112,7 @@ it("should import, transform and transfer varda data", async () => {
             sukunimi: "Child",
             henkilo_oid: "1.1.1.1",
             syntyma_pvm: "2019-06-01",
-            lapsi: ["localhost/lapsi/11"],
+            lapsi: ["localhost/lapsi/11", "localhost/lapsi/13"],
             tyontekija: [],
             turvakielto: false,
         },
@@ -124,18 +125,6 @@ it("should import, transform and transfer varda data", async () => {
             henkilo_oid: "1.1.1.2",
             syntyma_pvm: "2018-11-25",
             lapsi: ["localhost/lapsi/12"],
-            tyontekija: [],
-            turvakielto: false,
-        },
-        "localhost/henkilo/23": {
-            url: "localhost/henkilo/23",
-            id: 23,
-            etunimet: "",
-            kutsumanimi: "",
-            sukunimi: "",
-            henkilo_oid: "1.1.1.3",
-            syntyma_pvm: "2001-11-18",
-            lapsi: ["localhost/lapsi/13"],
             tyontekija: [],
             turvakielto: false,
         },

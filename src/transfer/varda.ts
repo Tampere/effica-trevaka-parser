@@ -12,7 +12,9 @@ import {
 export const transferVarda = async (returnAll: boolean = false) => {
     return await migrationDb.tx(async (t) => {
         return await runQuery(
-            wrapWithReturning("varda_organizer_child", transferSql, returnAll),
+            wrapWithReturning("varda_organizer_child", transferSql, returnAll, [
+                "varda_child_id",
+            ]),
             t,
             true,
             baseQueryParameters

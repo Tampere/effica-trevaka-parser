@@ -16,7 +16,8 @@ export const transformVarda = async (returnAll: boolean = false) => {
             wrapWithReturning(
                 "evaka_varda_organizer_child",
                 transformSql,
-                returnAll
+                returnAll,
+                ["varda_child_id"]
             ),
             t,
             true,
@@ -40,13 +41,14 @@ const transformSql = `
     INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child
         (evaka_person_id, varda_person_oid, varda_person_id, varda_child_id, organizer_oid)
     SELECT
-        ep.id, vc.henkilo_oid, vc.henkilo_id, vc.id, CASE
+        ep.id, vp.henkilo_oid, vp.id, vc.id, CASE
             WHEN vc.paos_kytkin THEN vc.paos_organisaatio_oid
             ELSE vc.vakatoimija_oid
         END
     FROM $(migrationSchema:name).varda_child vc
+    JOIN $(migrationSchema:name).varda_person vp ON vp.id = vc.henkilo_id
     CROSS JOIN $(migrationSchema:name).evaka_person ep
-    WHERE upper(vc.etunimet) = upper(ep.first_name)
-        AND upper(vc.sukunimi) = upper(ep.last_name)
-        AND vc.syntyma_pvm = ep.date_of_birth
+    WHERE upper(vp.etunimet) = upper(ep.first_name)
+        AND upper(vp.sukunimi) = upper(ep.last_name)
+        AND vp.syntyma_pvm = ep.date_of_birth
 `;

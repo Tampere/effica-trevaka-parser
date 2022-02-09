@@ -13,7 +13,22 @@ Array [
     "paos_organisaatio_oid": null,
     "sukunimi": "Child",
     "syntyma_pvm": 2019-06-01T00:00:00.000Z,
+    "url": "localhost/henkilo/21",
     "vakatoimija_oid": "2.2.2.1",
+  },
+  Object {
+    "etunimet": "Christian",
+    "henkilo": "localhost/henkilo/21",
+    "henkilo_id": "21",
+    "henkilo_oid": "1.1.1.1",
+    "id": "13",
+    "kutsumanimi": "Christian",
+    "paos_kytkin": false,
+    "paos_organisaatio_oid": null,
+    "sukunimi": "Child",
+    "syntyma_pvm": 2019-06-01T00:00:00.000Z,
+    "url": "localhost/henkilo/21",
+    "vakatoimija_oid": "2.2.2.3",
   },
   Object {
     "etunimet": "Camilla",
@@ -26,20 +41,8 @@ Array [
     "paos_organisaatio_oid": "2.2.2.2",
     "sukunimi": "Child",
     "syntyma_pvm": 2018-11-25T00:00:00.000Z,
+    "url": "localhost/henkilo/22",
     "vakatoimija_oid": null,
-  },
-  Object {
-    "etunimet": "",
-    "henkilo": "localhost/henkilo/23",
-    "henkilo_id": "23",
-    "henkilo_oid": "1.1.1.3",
-    "id": "13",
-    "kutsumanimi": "",
-    "paos_kytkin": false,
-    "paos_organisaatio_oid": null,
-    "sukunimi": "",
-    "syntyma_pvm": 2001-11-18T00:00:00.000Z,
-    "vakatoimija_oid": "2.2.2.1",
   },
 ]
 `;
@@ -62,10 +65,10 @@ Array [
   },
   Object {
     "evaka_person_id": Any<String>,
-    "organizer_oid": "2.2.2.1",
+    "organizer_oid": "2.2.2.3",
     "varda_child_id": "13",
-    "varda_person_id": "23",
-    "varda_person_oid": "1.1.1.3",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
   },
 ]
 `;
@@ -96,11 +99,11 @@ Array [
     "created_at": Any<Date>,
     "evaka_person_id": Any<String>,
     "modified_at": Any<Date>,
-    "organizer_oid": "2.2.2.1",
+    "organizer_oid": "2.2.2.3",
     "uploaded_at": null,
     "varda_child_id": "13",
-    "varda_person_id": "23",
-    "varda_person_oid": "1.1.1.3",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
   },
 ]
 `;
