@@ -99,17 +99,30 @@ interface VardaPersonRow {
     sukunimi: string;
     henkilo_oid: string;
     syntyma_pvm: string;
+    lapsi: string[];
+    tyontekija: string[];
+    turvakielto: boolean;
 }
 
 interface VardaChildRow {
+    url: string;
+    lahdejarjestelma: string;
     id: number;
     henkilo_id: number | null;
     henkilo: string;
     henkilo_oid: string;
     vakatoimija: string | null;
     vakatoimija_oid: string | null;
+    oma_organisaatio_nimi: string | null;
+    oma_organisaatio: string | null;
+    oma_organisaatio_oid: string | null;
+    paos_organisaatio_nimi: string | null;
+    paos_organisaatio: string | null;
     paos_organisaatio_oid: string | null;
     paos_kytkin: boolean;
+    varhaiskasvatuspaatokset_top: string[];
+    tunniste: string | null;
+    muutos_pvm: string | null;
 }
 
 const tableSql = `
@@ -120,17 +133,31 @@ const tableSql = `
         kutsumanimi TEXT NOT NULL,
         sukunimi TEXT NOT NULL,
         henkilo_oid TEXT NOT NULL,
-        syntyma_pvm DATE NOT NULL
+        syntyma_pvm DATE NOT NULL,
+        lapsi TEXT[] NOT NULL,
+        tyontekija TEXT[] NOT NULL,
+        turvakielto BOOLEAN NOT NULL
     );
 
     CREATE TABLE IF NOT EXISTS $(migrationSchema:name).varda_child (
+        url TEXT NOT NULL,
+        lahdejarjestelma TEXT NOT NULL,
         id BIGINT PRIMARY KEY,
         henkilo_id BIGINT REFERENCES $(migrationSchema:name).varda_person,
         henkilo TEXT NOT NULL,
         henkilo_oid TEXT NOT NULL,
+        vakatoimija TEXT,
         vakatoimija_oid TEXT,
+        oma_organisaatio_nimi TEXT,
+        oma_organisaatio TEXT,
+        oma_organisaatio_oid TEXT,
+        paos_organisaatio_nimi TEXT,
+        paos_organisaatio TEXT,
         paos_organisaatio_oid TEXT,
         paos_kytkin BOOLEAN NOT NULL,
+        varhaiskasvatuspaatokset_top TEXT[] NOT NULL,
+        tunniste TEXT,
+        muutos_pvm TEXT
         CHECK (vakatoimija_oid IS NOT NULL OR paos_organisaatio_oid IS NOT NULL)
     );
 `;
@@ -151,12 +178,23 @@ const updateSql = `
 
 const childColumns = new pgp.helpers.ColumnSet(
     [
+        "url",
+        "lahdejarjestelma",
         "id",
         "henkilo",
         "henkilo_oid",
+        "vakatoimija",
         "vakatoimija_oid",
+        "oma_organisaatio_nimi",
+        "oma_organisaatio",
+        "oma_organisaatio_oid",
+        "paos_organisaatio_nimi",
+        "paos_organisaatio",
         "paos_organisaatio_oid",
         "paos_kytkin",
+        "varhaiskasvatuspaatokset_top",
+        "tunniste",
+        "muutos_pvm",
     ],
     {
         table: {
@@ -175,6 +213,9 @@ const personColumns = new pgp.helpers.ColumnSet(
         "sukunimi",
         "henkilo_oid",
         "syntyma_pvm",
+        "lapsi",
+        "tyontekija",
+        "turvakielto",
     ],
     {
         table: {
