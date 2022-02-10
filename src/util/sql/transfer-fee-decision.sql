@@ -83,6 +83,7 @@ INSERT INTO fee_decision_child (
     service_need_fee_coefficient,
     service_need_description_fi,
     service_need_description_sv,
+    service_need_contract_days_per_month,
     base_fee,
     fee,
     fee_alterations,
@@ -98,6 +99,7 @@ INSERT INTO fee_decision_child (
     sno.fee_coefficient,
     sno.fee_description_fi,
     sno.fee_description_sv,
+    sno.contract_days_per_month,
     efdc.base_fee,
     efdc.fee,
     '[]', -- fee alterations
