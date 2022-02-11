@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should import, transform and transfer varda data 1`] = `
+Array [
+  Object {
+    "etunimet": "Christian",
+    "henkilo": "localhost/henkilo/21",
+    "henkilo_id": "21",
+    "henkilo_oid": "1.1.1.1",
+    "id": "11",
+    "kutsumanimi": "Christian",
+    "lahdejarjestelma": "93",
+    "lapsi": Array [
+      "localhost/lapsi/11",
+      "localhost/lapsi/13",
+    ],
+    "muutos_pvm": "2022-02-09T11:29:00.249Z",
+    "oma_organisaatio": null,
+    "oma_organisaatio_nimi": null,
+    "oma_organisaatio_oid": null,
+    "paos_kytkin": false,
+    "paos_organisaatio": null,
+    "paos_organisaatio_nimi": null,
+    "paos_organisaatio_oid": null,
+    "sukunimi": "Child",
+    "syntyma_pvm": 2019-06-01T00:00:00.000Z,
+    "tunniste": "tunniste1",
+    "turvakielto": false,
+    "tyontekija": Array [],
+    "url": "localhost/lapsi/11",
+    "vakatoimija": "localhost/organisaatio/2.2.2.1",
+    "vakatoimija_oid": "2.2.2.1",
+    "varhaiskasvatuspaatokset_top": Array [
+      "localhost/paatos/1",
+      "localhost/paatos/2",
+    ],
+  },
+  Object {
+    "etunimet": "Christian",
+    "henkilo": "localhost/henkilo/21",
+    "henkilo_id": "21",
+    "henkilo_oid": "1.1.1.1",
+    "id": "13",
+    "kutsumanimi": "Christian",
+    "lahdejarjestelma": "57",
+    "lapsi": Array [
+      "localhost/lapsi/11",
+      "localhost/lapsi/13",
+    ],
+    "muutos_pvm": "2022-02-09T11:29:47.317Z",
+    "oma_organisaatio": null,
+    "oma_organisaatio_nimi": null,
+    "oma_organisaatio_oid": null,
+    "paos_kytkin": false,
+    "paos_organisaatio": null,
+    "paos_organisaatio_nimi": null,
+    "paos_organisaatio_oid": null,
+    "sukunimi": "Child",
+    "syntyma_pvm": 2019-06-01T00:00:00.000Z,
+    "tunniste": "tunniste2",
+    "turvakielto": false,
+    "tyontekija": Array [],
+    "url": "localhost/lapsi/13",
+    "vakatoimija": "localhost/organisaatio/2.2.2.3",
+    "vakatoimija_oid": "2.2.2.3",
+    "varhaiskasvatuspaatokset_top": Array [],
+  },
+  Object {
+    "etunimet": "Camilla",
+    "henkilo": "localhost/henkilo/22",
+    "henkilo_id": "22",
+    "henkilo_oid": "1.1.1.2",
+    "id": "12",
+    "kutsumanimi": "Camilla",
+    "lahdejarjestelma": "45",
+    "lapsi": Array [
+      "localhost/lapsi/12",
+    ],
+    "muutos_pvm": "2022-02-09T11:29:00.249Z",
+    "oma_organisaatio": "localhost/organisaatio/2.2.2.4",
+    "oma_organisaatio_nimi": "Kaupunki 1",
+    "oma_organisaatio_oid": "2.2.2.4",
+    "paos_kytkin": true,
+    "paos_organisaatio": "localhost/organisaatio/2.2.2.2",
+    "paos_organisaatio_nimi": "Perhepäivähoitaja 1",
+    "paos_organisaatio_oid": "2.2.2.2",
+    "sukunimi": "Child",
+    "syntyma_pvm": 2018-11-25T00:00:00.000Z,
+    "tunniste": null,
+    "turvakielto": true,
+    "tyontekija": Array [
+      "localhost/tyontekija/1",
+    ],
+    "url": "localhost/lapsi/12",
+    "vakatoimija": null,
+    "vakatoimija_oid": null,
+    "varhaiskasvatuspaatokset_top": Array [
+      "localhost/paatos/3",
+    ],
+  },
+]
+`;
+
+exports[`should import, transform and transfer varda data 2`] = `
+Array [
+  Object {
+    "evaka_person_id": Any<String>,
+    "organizer_oid": "2.2.2.1",
+    "varda_child_id": "11",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
+  },
+  Object {
+    "evaka_person_id": Any<String>,
+    "organizer_oid": "2.2.2.2",
+    "varda_child_id": "12",
+    "varda_person_id": "22",
+    "varda_person_oid": "1.1.1.2",
+  },
+  Object {
+    "evaka_person_id": Any<String>,
+    "organizer_oid": "2.2.2.3",
+    "varda_child_id": "13",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
+  },
+]
+`;
+
+exports[`should import, transform and transfer varda data 3`] = `
+Array [
+  Object {
+    "created_at": Any<Date>,
+    "evaka_person_id": Any<String>,
+    "modified_at": Any<Date>,
+    "organizer_oid": "2.2.2.1",
+    "uploaded_at": null,
+    "varda_child_id": "11",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
+  },
+  Object {
+    "created_at": Any<Date>,
+    "evaka_person_id": Any<String>,
+    "modified_at": Any<Date>,
+    "organizer_oid": "2.2.2.2",
+    "uploaded_at": null,
+    "varda_child_id": "12",
+    "varda_person_id": "22",
+    "varda_person_oid": "1.1.1.2",
+  },
+  Object {
+    "created_at": Any<Date>,
+    "evaka_person_id": Any<String>,
+    "modified_at": Any<Date>,
+    "organizer_oid": "2.2.2.3",
+    "uploaded_at": null,
+    "varda_child_id": "13",
+    "varda_person_id": "21",
+    "varda_person_oid": "1.1.1.1",
+  },
+]
+`;

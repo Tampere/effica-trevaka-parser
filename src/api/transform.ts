@@ -16,6 +16,7 @@ import { transformPlacementsData } from "../transform/placements"
 import { transformSpecialMeansData } from "../transform/special-means"
 import { transformSpecialNeedsData } from "../transform/special-needs"
 import { transformTimestampsData } from "../transform/timestamps"
+import { transformVarda } from "../transform/varda"
 import { transformVoucherValueDecisionData } from "../transform/voucher-value-decisions"
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
@@ -202,6 +203,19 @@ router.get("/timestamps", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform timestamps total ", undefined, "*")
+})
+
+router.get("/varda", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform varda total ", undefined, "*")
+    try {
+        const results = await transformVarda(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform varda total ", undefined, "*")
 })
 
 router.get("/cleanup", async (req, res, next) => {
