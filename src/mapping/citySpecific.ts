@@ -99,9 +99,9 @@ export const DECISION_STATUS_TYPE_MAPPINGS: Record<
 > = {
     tampere: {
         82: "DRAFT", // Valmisteilla
-        // 493: Vanhentunut
+        493: null, // Vanhentunut
         999420001: "SENT", // Hyväksytty
-        // 999420002: "ANNULLED", // Mitätöity
+        999420002: null, // Mitätöity
     },
 };
 

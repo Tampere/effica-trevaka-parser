@@ -98,7 +98,11 @@ LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.per
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = d.decisionunitcode
 LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = d.decisionchildminder
 LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = d.extent AND em.days = d.days
-WHERE decisiontype IN ($(types:csv));
+WHERE decisiontype IN ($(types:csv))
+    AND (
+        $(statusMappings:json)::jsonb ->> d.decisionstatus::text IS NOT NULL OR -- include all mapped statuses
+        d.decisionstatus::text NOT IN ($(allStatuses:csv)) -- include all unknown statuses
+    );
 
 -- maintain ids between migrations
 INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)

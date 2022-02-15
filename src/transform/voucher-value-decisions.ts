@@ -22,6 +22,9 @@ export const transformVoucherValueDecisionData = async (
         await runQueryFile("transform-voucher-value-decision.sql", t, {
             ...baseQueryParameters,
             statusMappings: DECISION_STATUS_TYPE_MAPPINGS[config.cityVariant],
+            allStatuses: Object.keys(
+                DECISION_STATUS_TYPE_MAPPINGS[config.cityVariant]
+            ),
             types: VOUCHER_VALUE_DECISION_TYPES[config.cityVariant],
         });
 
