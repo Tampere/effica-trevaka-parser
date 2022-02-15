@@ -123,7 +123,7 @@ export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCod
         },
         170: {
             // Kesäajan maksuton poissaolo
-            // TODO: uusi poissaolotyyppi
+            absenceType: "FREE_ABSENCE",
         },
         171: {
             // Muu poissaolo (P)
