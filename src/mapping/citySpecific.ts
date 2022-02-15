@@ -135,7 +135,7 @@ export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCod
         },
         173: {
             // Sopimuksen ylitys (Y)
-            // TODO: läsnäolo
+            // ignore attendance
         },
         174: {
             // Hoidossa muualla (X)
@@ -151,7 +151,7 @@ export const DAILYJOURNAL_REPORTCODE_MAPPINGS: CitySpecificDailyJournalReportCod
         },
         177: {
             // Hoitopäivä yli 13 tuntia (L)
-            // TODO: läsnäolo
+            // ignore attendance
         },
         178: {
             // Hyvityspäivä (-)
