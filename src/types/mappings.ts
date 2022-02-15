@@ -77,7 +77,8 @@ export type AbsenceType =
     | "UNKNOWN_ABSENCE"
     | "PLANNED_ABSENCE"
     | "PARENTLEAVE"
-    | "FORCE_MAJEURE";
+    | "FORCE_MAJEURE"
+    | "FREE_ABSENCE";
 
 export type EfficaIncomeCodeMapping = {
     codes: number[],
