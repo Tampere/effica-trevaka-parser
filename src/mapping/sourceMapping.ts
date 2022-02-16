@@ -264,7 +264,7 @@ export const efficaTableMapping: TypeMapping = {
             status: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
-        primaryKeys: ["decisionnumber"],
+        primaryKeys: ["internaldecisionnumber"],
     },
     paydecisionrows: {
         tableName: "paydecisionrows",

@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_fee_decision (
     id UUID PRIMARY KEY,
     effica_guid TEXT,
+    effica_internal_decision_number INTEGER UNIQUE NOT NULL,
     effica_ssn TEXT NOT NULL,
     status TEXT,
     status_group TEXT,
@@ -19,15 +20,16 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision (
     partner_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     partner_income JSONB,
     family_size INTEGER,
-    decision_number BIGINT UNIQUE NOT NULL,
+    decision_number BIGINT NOT NULL,
     CHECK (head_of_family_id != partner_id)
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision
-    (id, effica_guid, effica_ssn, status, status_group, start_date, end_date, decision_type, head_of_family_id, head_of_family_income, partner_id, partner_income, family_size, decision_number)
+    (id, effica_guid, effica_internal_decision_number, effica_ssn, status, status_group, start_date, end_date, decision_type, head_of_family_id, head_of_family_income, partner_id, partner_income, family_size, decision_number)
 SELECT
     ${extensionSchema:name}.uuid_generate_v1mc(),
     pd.guid,
+    pd.internaldecisionnumber,
     pd.headoffamily,
     $(statusMappings:json)::jsonb ->> pd.status::text,
     CASE $(statusMappings:json)::jsonb ->> pd.status::text
@@ -128,7 +130,7 @@ SELECT DISTINCT fd1.*, 'OVERLAPPING FEE DECISION'
 FROM ${migrationSchema:name}.evaka_fee_decision fd1
 JOIN ${migrationSchema:name}.evaka_fee_decision fd2 ON fd1.effica_ssn = fd2.effica_ssn
     AND fd1.status_group = fd2.status_group
-    AND fd1.decision_number != fd2.decision_number
+    AND fd1.effica_internal_decision_number != fd2.effica_internal_decision_number
     AND (fd1.end_date >= fd1.start_date OR fd1.end_date IS NULL)
     AND (fd2.end_date >= fd2.start_date OR fd2.end_date IS NULL)
     AND daterange(fd1.start_date, fd1.end_date, '[]') && daterange(fd2.start_date, fd2.end_date, '[]');
@@ -178,7 +180,7 @@ SELECT
     pdr.fee * 100
 FROM ${migrationSchema:name}.paydecisionrows pdr
 JOIN ${migrationSchema:name}.paydecisions pd ON pd.internaldecisionnumber = pdr.internalid
-LEFT JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.decision_number = pd.decisionnumber
+LEFT JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_internal_decision_number = pd.internaldecisionnumber
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = pdr.person
 LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
     AND daterange(ep.start_date, ep.end_date) @> efd.start_date
