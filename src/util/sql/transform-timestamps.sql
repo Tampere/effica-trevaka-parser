@@ -114,5 +114,20 @@ AND EXISTS (
     AND tstzrange(a.arrived, a.departed) && tstzrange(b.arrived, b.departed)
 );
 
+INSERT INTO ${migrationSchema:name}.evaka_child_attendance_todo
+SELECT *, 'OVERLAPPING ATTENDANCE PLACEMENT'
+FROM ${migrationSchema:name}.evaka_child_attendance a
+WHERE a.effica_placement_number <> 0
+AND a.departed >= a.arrived
+AND EXISTS (
+    SELECT 1
+    FROM ${migrationSchema:name}.evaka_child_attendance b
+    WHERE a.id <> b.id
+    AND b.effica_placement_number <> 0
+    AND a.child_id = b.child_id
+    AND b.departed >= b.arrived
+    AND tstzrange(a.arrived, a.departed) && tstzrange(b.arrived, b.departed)
+);
+
 DELETE FROM ${migrationSchema:name}.evaka_child_attendance
 WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_child_attendance_todo);
