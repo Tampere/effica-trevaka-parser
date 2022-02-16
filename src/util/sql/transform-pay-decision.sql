@@ -7,7 +7,7 @@
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_fee_decision (
     id UUID PRIMARY KEY,
-    effica_guid TEXT UNIQUE NOT NULL,
+    effica_guid TEXT,
     effica_ssn TEXT NOT NULL,
     status TEXT,
     status_group TEXT,
@@ -19,14 +19,14 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision (
     partner_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     partner_income JSONB,
     family_size INTEGER,
-    decision_number BIGINT NOT NULL,
+    decision_number BIGINT UNIQUE NOT NULL,
     CHECK (head_of_family_id != partner_id)
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision
     (id, effica_guid, effica_ssn, status, status_group, start_date, end_date, decision_type, head_of_family_id, head_of_family_income, partner_id, partner_income, family_size, decision_number)
 SELECT
-    COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
+    ${extensionSchema:name}.uuid_generate_v1mc(),
     pd.guid,
     pd.headoffamily,
     $(statusMappings:json)::jsonb ->> pd.status::text,
@@ -92,7 +92,6 @@ SELECT
     (SELECT (regexp_matches(family_size_row.specification, '^Perhekoko (\d+)'))[1])::int,
     pd.decisionnumber
 FROM ${migrationSchema:name}.paydecisions pd
-LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'PAY_DECISION' AND im.effica_guid = pd.guid
 LEFT JOIN ${migrationSchema:name}.evaka_person head_of_family ON head_of_family.effica_ssn = pd.headoffamily
 LEFT JOIN (
     SELECT *
@@ -112,14 +111,6 @@ WHERE EXISTS (SELECT 1 FROM ${migrationSchema:name}.paydecisionrows pdr WHERE pd
     pd.status::text NOT IN ($(allStatuses:csv)) -- include all unknown status codes
 );
 
--- maintain ids between migrations
-INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)
-SELECT 'PAY_DECISION', pd.guid, ea.id
-FROM ${migrationSchema:name}.paydecisions pd
-JOIN ${migrationSchema:name}.evaka_fee_decision ea ON ea.effica_guid = pd.guid
-ON CONFLICT (type, effica_guid) DO
-UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
-
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision_todo CASCADE;
 
 CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_todo AS
@@ -137,7 +128,7 @@ SELECT DISTINCT fd1.*, 'OVERLAPPING FEE DECISION'
 FROM ${migrationSchema:name}.evaka_fee_decision fd1
 JOIN ${migrationSchema:name}.evaka_fee_decision fd2 ON fd1.effica_ssn = fd2.effica_ssn
     AND fd1.status_group = fd2.status_group
-    AND fd1.effica_guid != fd2.effica_guid
+    AND fd1.decision_number != fd2.decision_number
     AND (fd1.end_date >= fd1.start_date OR fd1.end_date IS NULL)
     AND (fd2.end_date >= fd2.start_date OR fd2.end_date IS NULL)
     AND daterange(fd1.start_date, fd1.end_date, '[]') && daterange(fd2.start_date, fd2.end_date, '[]');
@@ -160,7 +151,7 @@ WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_fee_decision_todo);
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision_child CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
-    effica_guid TEXT NOT NULL,
+    effica_guid TEXT,
     fee_decision_id UUID REFERENCES ${migrationSchema:name}.evaka_fee_decision,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     child_date_of_birth DATE,
@@ -187,7 +178,7 @@ SELECT
     pdr.fee * 100
 FROM ${migrationSchema:name}.paydecisionrows pdr
 JOIN ${migrationSchema:name}.paydecisions pd ON pd.internaldecisionnumber = pdr.internalid
-LEFT JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_guid = pd.guid
+LEFT JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.decision_number = pd.decisionnumber
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = pdr.person
 LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
     AND daterange(ep.start_date, ep.end_date) @> efd.start_date

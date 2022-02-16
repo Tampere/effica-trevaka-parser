@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_voucher_value_decision CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
     id UUID PRIMARY KEY,
-    effica_guid TEXT NOT NULL,
+    effica_guid TEXT,
     effica_ssn TEXT,
     effica_decision_date DATE,
     status TEXT,
@@ -57,7 +57,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     effica_unit_id,
     effica_childminder_id
 ) SELECT
-    COALESCE(im.evaka_id, ${extensionSchema:name}.uuid_generate_v1mc()),
+    ${extensionSchema:name}.uuid_generate_v1mc(),
     d.guid,
     d.personid,
     d.decisiondate,
@@ -87,7 +87,6 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     d.decisionunitcode,
     d.decisionchildminder
 FROM ${migrationSchema:name}.decisions d
-LEFT JOIN ${migrationSchema:name}.idmap im ON im.type = 'DECISION' AND im.effica_guid = d.guid
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_child f_child ON f_child.child_ssn = d.personid
     AND daterange(f_child.start_date, f_child.end_date, '[]') @> d.decisiondate
 LEFT JOIN ${migrationSchema:name}.evaka_fridge_partner f_partner1 ON f_partner1.person_id = f_child.head_of_family
@@ -103,14 +102,6 @@ WHERE decisiontype IN ($(types:csv))
         $(statusMappings:json)::jsonb ->> d.decisionstatus::text IS NOT NULL OR -- include all mapped statuses
         d.decisionstatus::text NOT IN ($(allStatuses:csv)) -- include all unknown statuses
     );
-
--- maintain ids between migrations
-INSERT INTO ${migrationSchema:name}.idmap (type, effica_guid, evaka_id)
-SELECT 'DECISION', d.guid, ed.id
-FROM ${migrationSchema:name}.decisions d
-JOIN ${migrationSchema:name}.evaka_voucher_value_decision ed ON ed.effica_guid = d.guid
-ON CONFLICT (type, effica_guid) DO
-UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
 
 -- fix null end dates from next start dates
 WITH

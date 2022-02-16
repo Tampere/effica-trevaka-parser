@@ -91,14 +91,9 @@ afterAll(async () => {
 describe("GET /transform positive", () => {
     it("should return transformed persons", async () => {
         cleanUps = ["evaka_person"]
-        const response1 = await positiveTransformSnapshotTest(
+        await positiveTransformSnapshotTest(
             "persons",
             Array(6).fill(personExpectation)
-        )
-        // verify maintain ids between migrations
-        const response2 = await transform("persons")
-        expect(response2.body).toEqual(
-            expect.arrayContaining(response1.body.map((person: any) => expect.objectContaining({ id: person.id })))
         )
     })
     it("should return transformed families", async () => {
@@ -312,17 +307,12 @@ describe("GET /transform positive", () => {
             child_id: expect.any(String),
         }
 
-        const response1 = await positiveTransformSnapshotTest(
+        await positiveTransformSnapshotTest(
             "voucher_value_decisions",
             {
                 decisions: Array(1).fill(voucherValueDecisionExpectation),
                 decisionsTodo: Array(0).fill(voucherValueDecisionExpectation)
             }
-        )
-        // verify maintain ids between migrations
-        const response2 = await transform("voucher_value_decisions")
-        expect(response2.body.decisions).toEqual(
-            expect.arrayContaining(response1.body.decisions.map((decision: any) => expect.objectContaining({ id: decision.id })))
         )
     })
 
@@ -340,7 +330,7 @@ describe("GET /transform positive", () => {
             child_id: expect.any(String),
         }
 
-        const response1 = await positiveTransformSnapshotTest(
+        await positiveTransformSnapshotTest(
             "pay_decisions",
             {
                 feeDecisions: Array(1).fill(feeDecisionExpectation),
@@ -348,11 +338,6 @@ describe("GET /transform positive", () => {
                 feeDecisionChildren: Array(1).fill(feeDecisionChildExpectation),
                 feeDecisionChildrenTodo: Array(0).fill(feeDecisionChildExpectation),
             }
-        )
-        // verify maintain ids between migrations
-        const response2 = await transform("pay_decisions")
-        expect(response2.body.feeDecisions).toEqual(
-            expect.arrayContaining(response1.body.feeDecisions.map((feeDecision: any) => expect.objectContaining({ id: feeDecision.id })))
         )
     })
 
@@ -414,17 +399,12 @@ describe("GET /transform positive", () => {
             application_id: expect.any(String),
         }
 
-        const response1 = await positiveTransformSnapshotTest("application", {
+        await positiveTransformSnapshotTest("application", {
             applications: Array(2).fill(applicationExpectation),
             applicationsTodo: Array(0).fill(applicationExpectation),
             applicationForms: Array(1).fill(applicationFormExpectation),
             applicationFormsTodo: Array(0).fill(applicationFormExpectation),
         })
-        // verify maintain ids between migrations
-        const response2 = await transform("application")
-        expect(response2.body.applications).toEqual(
-            expect.arrayContaining(response1.body.applications.map((application: any) => expect.objectContaining({ id: application.id })))
-        )
     })
 
     it("should return cleanups", async () => {
