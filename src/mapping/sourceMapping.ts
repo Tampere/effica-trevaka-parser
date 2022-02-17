@@ -28,7 +28,6 @@ export const efficaTableMapping: TypeMapping = {
             applicationtype: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys: ["guid"],
     },
     applicationrows: {
         tableName: "applicationrows",
@@ -114,7 +113,6 @@ export const efficaTableMapping: TypeMapping = {
             homemunicipality: { sqlType: "integer", parser: codeNumericParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys: ["guid"]
     },
     specialneeds: {
         tableName: "specialneeds",
@@ -250,7 +248,6 @@ export const efficaTableMapping: TypeMapping = {
             grandtotal: { sqlType: "numeric", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser }
         },
-        primaryKeys: ["guid"],
     },
     paydecisions: {
         tableName: "paydecisions",
@@ -267,7 +264,7 @@ export const efficaTableMapping: TypeMapping = {
             status: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
-        primaryKeys: ["guid"],
+        primaryKeys: ["internaldecisionnumber"],
     },
     paydecisionrows: {
         tableName: "paydecisionrows",
@@ -281,7 +278,6 @@ export const efficaTableMapping: TypeMapping = {
             rowtype: { sqlType: "integer", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
-        primaryKeys: ["guid"],
     },
     childminders: {
         tableName: "childminders",

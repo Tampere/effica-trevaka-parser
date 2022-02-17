@@ -12,7 +12,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
     DROP TABLE IF EXISTS ${getMigrationSchemaPrefix()}evaka_person CASCADE;
     CREATE TABLE ${getMigrationSchemaPrefix()}evaka_person(
         id UUID NOT NULL,
-        effica_guid TEXT NOT NULL,
+        effica_guid TEXT,
         social_security_number TEXT UNIQUE,
         first_name TEXT NOT NULL,
         last_name TEXT NOT NULL,
@@ -43,7 +43,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_person 
     (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth, source_system)
         SELECT
-        COALESCE(im.evaka_id, ${getExtensionSchemaPrefix()}uuid_generate_v1mc()),
+        ${getExtensionSchemaPrefix()}uuid_generate_v1mc(),
         p.guid,
         CASE WHEN p.personid ILIKE '%TP%' THEN NULL ELSE personid END AS social_security_number,
         COALESCE(trim(split_part(p.personname, ',', 1)), '') AS last_name,
@@ -87,7 +87,6 @@ export const transformPersonData = async (returnAll: boolean = false) => {
                     substr(personid, 1, 2))::date AS date_of_birth,
         'effica'
         FROM ${getMigrationSchemaPrefix()}persons p
-        LEFT JOIN ${getMigrationSchemaPrefix()}idmap im ON im.type = 'PERSON' AND im.effica_guid = p.guid
         LEFT JOIN ${getMigrationSchemaPrefix()}codes c
         ON p.mothertongue = c.code AND c.codetype = 'SPRAK'
         ON CONFLICT (social_security_number) DO NOTHING
@@ -100,17 +99,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         if (config.copyPersonsFromEvaka) {
             await runQuery(evakaPersonInsert, t)
         }
-        const ret = await runQuery(insertQuery, t, true)
-        // maintain ids between migrations
-        await runQuery(`
-            INSERT INTO ${getMigrationSchemaPrefix()}idmap (type, effica_guid, evaka_id)
-            SELECT 'PERSON', p.guid, ep.id
-            FROM ${getMigrationSchemaPrefix()}persons p
-            JOIN ${getMigrationSchemaPrefix()}evaka_person ep ON ep.effica_guid = p.guid
-            ON CONFLICT (type, effica_guid) DO
-            UPDATE SET evaka_id = EXCLUDED.evaka_id, updated = now() WHERE idmap.evaka_id != EXCLUDED.evaka_id;
-        `, t)
-        return ret;
+        return await runQuery(insertQuery, t, true)
     })
 
 }

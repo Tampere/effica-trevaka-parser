@@ -302,6 +302,7 @@ Object {
       "decision_number": "123456790",
       "decision_type": "NORMAL",
       "effica_guid": "paydecision3843781",
+      "effica_internal_decision_number": 3843781,
       "effica_ssn": "020967-9992",
       "end_date": null,
       "family_size": 2,
