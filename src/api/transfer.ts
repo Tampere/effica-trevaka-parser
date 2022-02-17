@@ -32,8 +32,9 @@ const dependencyOrder: MigrationOperation[] =
         { name: "assistance_needs", function: transferAssistanceNeedsData },
         { name: "assistance_actions", function: transferAssistanceActionsData },
         { name: "income", function: transferIncomeData },
-        { name: "unit_manager", function: transferUnitManagerData },
-        { name: "daycare", function: transferDaycareData },
+        // daycare transfers suspended after locking down daycare data in production
+        //{ name: "unit_manager", function: transferUnitManagerData },
+        //{ name: "daycare", function: transferDaycareData },
         { name: "departments", function: transferDepartmentData },
         { name: "placements", function: transferPlacementsData },
         { name: "fee_alterations", function: transferFeeAlterationsData },

@@ -47,7 +47,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_absence (
     effica_dailyjournalids INTEGER[] NOT NULL,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     date DATE NOT NULL,
-    category TEXT NOT NULL CHECK (category IN ('BILLABLE', 'NONBILLABLE')),
+    category TEXT NOT NULL CHECK (category IN ('BILLABLE', 'NONBILLABLE', 'UNKNOWN')),
     absence_type TEXT
 );
 
