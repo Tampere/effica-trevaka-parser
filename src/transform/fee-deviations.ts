@@ -25,12 +25,14 @@ export const transformFeeDeviationsData = async (
         is_absolute BOOLEAN NOT NULL,
         valid_from DATE NOT NULL,
         valid_to DATE,
-        notes TEXT
+        notes TEXT,
+        effica_placement_nbr INTEGER,
+        effica_row_nbr INTEGER
     );`;
 
     const insertQuery = `
     INSERT INTO ${getMigrationSchemaPrefix()}evaka_fee_alteration
-        (person_id, type, amount, is_absolute, valid_from, valid_to, notes)
+        (person_id, type, amount, is_absolute, valid_from, valid_to, notes, effica_placement_nbr, effica_row_nbr)
     SELECT
         ep.child_id,
         $(deviationTypes:json)::jsonb -> fd.deviationtype::text ->> 'type',
@@ -41,7 +43,9 @@ export const transformFeeDeviationsData = async (
         fd.sum != 0,
         fd.startdate,
         fd.enddate,
-        $(deviationTypes:json)::jsonb -> fd.deviationtype::text ->> 'notes'
+        $(deviationTypes:json)::jsonb -> fd.deviationtype::text ->> 'notes',
+        fd.placementnbr,
+        fd.rownbr
     FROM ${getMigrationSchemaPrefix()}feedeviations fd
     LEFT JOIN ${getMigrationSchemaPrefix()}evaka_placement ep ON ep.effica_placement_nbr = fd.placementnbr
     WHERE fd.deviationtype IS NOT NULL AND (fd.sum != 0 OR fd.procent != 0)

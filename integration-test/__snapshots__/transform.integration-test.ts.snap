@@ -215,6 +215,8 @@ exports[`GET /transform positive should return transformed feedeviations 1`] = `
 Array [
   Object {
     "amount": 10,
+    "effica_placement_nbr": 12,
+    "effica_row_nbr": 2,
     "id": Any<String>,
     "is_absolute": true,
     "notes": "ALENNUS AP/IP",
@@ -286,7 +288,9 @@ Object {
       "base_fee": 49200,
       "child_date_of_birth": "2019-06-01T00:00:00.000Z",
       "child_id": Any<String>,
-      "effica_guid": "paydecisionrow38437813",
+      "effica_internal_decision_number": 3843781,
+      "effica_paydecisionrows_guid": "paydecisionrow38437813",
+      "effica_ssn": "010619A9501",
       "fee": 49200,
       "fee_decision_id": Any<String>,
       "final_fee": 49200,
