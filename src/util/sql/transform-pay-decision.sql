@@ -153,7 +153,7 @@ WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_fee_decision_todo);
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision_child CASCADE;
 CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
     id UUID PRIMARY KEY DEFAULT ${extensionSchema:name}.uuid_generate_v1mc(),
-    effica_guid TEXT,
+    effica_paydecisionrows_guid TEXT,
     fee_decision_id UUID REFERENCES ${migrationSchema:name}.evaka_fee_decision,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     child_date_of_birth DATE,
@@ -162,11 +162,13 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
     service_need_option_id UUID,
     base_fee INTEGER NOT NULL,
     fee INTEGER NOT NULL,
-    final_fee INTEGER NOT NULL
+    final_fee INTEGER NOT NULL,
+    effica_internal_decision_number INTEGER,
+    effica_ssn TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision_child
-    (effica_guid, fee_decision_id, child_id, child_date_of_birth, sibling_discount, placement_unit_id, service_need_option_id, base_fee, fee, final_fee)
+    (effica_paydecisionrows_guid, fee_decision_id, child_id, child_date_of_birth, sibling_discount, placement_unit_id, service_need_option_id, base_fee, fee, final_fee, effica_internal_decision_number, effica_ssn)
 SELECT
     pdr.guid,
     efd.id,
@@ -177,10 +179,12 @@ SELECT
     esn.option_id,
     pdr.fee * 100,
     pdr.fee * 100,
-    pdr.fee * 100
+    pdr.fee * 100,
+    pd.internaldecisionnumber,
+    child.effica_ssn
 FROM ${migrationSchema:name}.paydecisionrows pdr
 JOIN ${migrationSchema:name}.paydecisions pd ON pd.internaldecisionnumber = pdr.internalid
-LEFT JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_internal_decision_number = pd.internaldecisionnumber
+JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_internal_decision_number = pd.internaldecisionnumber
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = pdr.person
 LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
     AND daterange(ep.start_date, ep.end_date) @> efd.start_date
