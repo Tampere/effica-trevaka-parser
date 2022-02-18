@@ -101,6 +101,21 @@ WHERE decisiontype IN ($(types:csv))
     AND (
         $(statusMappings:json)::jsonb ->> d.decisionstatus::text IS NOT NULL OR -- include all mapped statuses
         d.decisionstatus::text NOT IN ($(allStatuses:csv)) -- include all unknown statuses
+    )
+    -- filter replaced decisions (only add newest from overlapping decisions)
+    AND NOT EXISTS (
+        SELECT 1
+        FROM $(migrationSchema:name).decisions d2
+        WHERE d2.personid = d.personid
+            AND d2.decisiontype = d.decisiontype
+            AND d2.decisionstatus = d.decisionstatus
+            AND (d2.startdate <= d2.enddate OR d2.startdate IS NULL OR d2.enddate IS NULL)
+            AND (d.startdate <= d.enddate OR d.startdate IS NULL OR d.enddate IS NULL)
+            AND daterange(d2.startdate, d2.enddate, '[]') && daterange(d.startdate, d.enddate, '[]')
+            AND (
+                d2.decisiondate > d.decisiondate OR
+                d2.decisiondate = d.decisiondate AND d2.decisionnbr > d.decisionnbr
+            )
     );
 
 -- fix null end dates from next start dates
