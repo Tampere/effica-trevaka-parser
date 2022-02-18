@@ -83,3 +83,13 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <startdate>20190801</startdate>
     <enddate>20191231</enddate>
 </placement>
+<placement>
+    <!-- SHOULD BE MARKED AS PLACEMENTEXTENT MAPPING MISSING: all the placementextents are not wanted -->
+    <placementnbr>19</placementnbr>
+    <personid>251118A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20220101</startdate>
+    <enddate></enddate>
+</placement>

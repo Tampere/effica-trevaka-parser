@@ -102,12 +102,12 @@ WHERE
 INSERT INTO ${migrationSchema:name}.evaka_placement_todo
 SELECT p.*, 'PLACEMENTEXTENT MAPPING MISSING'
 FROM ${migrationSchema:name}.evaka_placement p
-    JOIN ${migrationSchema:name}.placementextents pe ON pe.placementnbr = p.effica_placement_nbr
 WHERE
     NOT EXISTS (
-        SELECT em.effica_id
-        FROM ${migrationSchema:name}.extentmap em
-        WHERE em.effica_id = pe.extentcode
+        SELECT pe.placementnbr
+        FROM ${migrationSchema:name}.placementextents pe
+            JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = pe.extentcode AND em.days = pe.days
+        WHERE pe.placementnbr = p.effica_placement_nbr
     );
 
 -- remove problematic placements from migration at this point to filter out unnecessary overlapping placements
