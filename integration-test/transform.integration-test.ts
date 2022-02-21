@@ -207,7 +207,7 @@ describe("GET /transform positive", () => {
         )
     })
 
-    it("should return transformed placements", async () => {
+        it("should return transformed placements", async () => {
         await setupTransformations(["persons", "families", "departments", "application"])
 
         const placementExpectation = {
@@ -239,14 +239,17 @@ describe("GET /transform positive", () => {
                     { ...placementExpectation, daycare_group_id: null }, // 15
                     { ...placementExpectation, daycare_group_id: null }, // 16
                     { ...placementExpectation, daycare_group_id: null }, // 17
+                    { ...placementExpectation }, // 19
                 ],
                 serviceNeeds: [
-                    serviceNeedExpectation, // 11
+                    serviceNeedExpectation, // 111
                     serviceNeedExpectation, // 12
                     serviceNeedExpectation, // 131
                     serviceNeedExpectation, // 18
                 ],
-                serviceNeedsTodo: [],
+                serviceNeedsTodo: [
+                    serviceNeedExpectation, // 191
+                ],
                 applications: [
                     applicationExpectation,
                     applicationExpectation,

@@ -6,12 +6,22 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 <placementextent>
     <placementnbr>11</placementnbr>
-    <extentnbr>11</extentnbr>
+    <extentnbr>111</extentnbr>
     <startdate>20200301</startdate>
-    <enddate></enddate>
+    <enddate>20200801</enddate>
     <hours>0</hours>
     <days>0</days>
     <extentcode>100</extentcode>
+</placementextent>
+<placementextent>
+    <!-- SHOULD RESULT IN OPTION MISSING -->
+    <placementnbr>11</placementnbr>
+    <extentnbr>112</extentnbr>
+    <startdate>20200802</startdate>
+    <enddate></enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>10000</extentcode>
 </placementextent>
 <placementextent>
     <placementnbr>12</placementnbr>
@@ -78,4 +88,24 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <hours>0</hours>
     <days>0</days>
     <extentcode>100</extentcode>
+</placementextent>
+<placementextent>
+<!-- SHOULD NOT RESULT IN OPTION MISSING, WHILE PLACEMENT IS MARKED WITH 'PLACEMENTEXTENT MAPPING MISSING' -->
+    <placementnbr>19</placementnbr>
+    <extentnbr>191</extentnbr>
+    <startdate>20220101</startdate>
+    <enddate>20220131</enddate>
+    <hours>0</hours>
+    <days>100</days>
+    <extentcode>100</extentcode>
+</placementextent>
+<placementextent>
+    <!-- SHOULD NOT RESULT IN OPTION MISSING, WHILE PLACEMENT IS MARKED WITH 'PLACEMENTEXTENT MAPPING MISSING' -->
+    <placementnbr>19</placementnbr>
+    <extentnbr>192</extentnbr>
+    <startdate>20220201</startdate>
+    <enddate></enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>10000</extentcode>
 </placementextent>

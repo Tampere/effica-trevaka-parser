@@ -115,7 +115,8 @@ describe("GET /import xml positive", () => {
                 openDateRange,
                 openDateRange,
                 closedDateRange,
-                closedDateRange
+                closedDateRange,
+                openDateRange,
             )
         )
     })
@@ -124,6 +125,7 @@ describe("GET /import xml positive", () => {
         return await positiveImportSnapshotTest(
             "placementextents",
             getTimeSeriesResultPattern(
+                closedDateRange,
                 openDateRange,
                 openDateRange,
                 openDateRange,
@@ -131,7 +133,9 @@ describe("GET /import xml positive", () => {
                 closedDateRange,
                 openDateRange,
                 closedDateRange,
-                closedDateRange
+                closedDateRange,
+                closedDateRange,
+                openDateRange
             )
         )
     })
