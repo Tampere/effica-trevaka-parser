@@ -4,6 +4,7 @@
 
 import express from "express"
 import checkApi from "./api/check"
+import copyApi from "./api/copy"
 import importApi from "./api/import"
 import maintenanceApi from "./api/maintenance"
 import transferApi from "./api/transfer"
@@ -23,6 +24,7 @@ app.use("/check", checkApi)
 app.use("/transform", transformApi)
 app.use("/transfer", transferApi)
 app.use("/maintenance", maintenanceApi)
+app.use("/copy", copyApi)
 app.use(errorHandler)
 
 export default app
