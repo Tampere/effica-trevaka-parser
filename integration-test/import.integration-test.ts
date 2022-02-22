@@ -30,6 +30,11 @@ const openDateRange: DateRangeExpectation = {
     enddate: null
 }
 
+const daycareExpectation: DateRangeExpectation = {
+    created: expect.any(String),
+    updated: expect.any(String)
+}
+
 beforeAll(async () => {
     await initDb()
 })
@@ -228,7 +233,12 @@ describe("GET /import csv positive", () => {
     })
     it("should return created evaka daycares", async () => {
         await setupTables(["evaka_areas", "evaka_unit_manager"])
-        return await positiveImportSnapshotTest("evaka_daycare")
+        return await positiveImportSnapshotTest(
+            "evaka_daycare",
+            getTimeSeriesResultPattern(
+                daycareExpectation,
+                daycareExpectation,
+            ))
     })
     it("should return created daycare oid mappings", async () => {
         return await positiveImportSnapshotTest(

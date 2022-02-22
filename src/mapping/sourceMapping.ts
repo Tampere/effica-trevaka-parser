@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { config } from "../config"
-import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/evaka"
+import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/tables"
 import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
