@@ -5,7 +5,7 @@
 import pgPromise from "pg-promise"
 import { config } from "../config"
 import migrationDb, { pgp } from "../db/db"
-import { createGenericTableAndViewQueryFromDescriptor } from "../db/evaka"
+import { createGenericTableAndViewQueryFromDescriptor } from "../db/tables"
 import { FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor } from "../util/queryTools"

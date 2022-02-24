@@ -27,20 +27,21 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
         email, schedule, additional_info,
         unit_manager_id,
         cost_center, upload_to_varda,
-        0, -- TODO: capacity
+        capacity,
         decision_daycare_name, decision_preschool_name,
-        '', -- TODO: decision_handler
-        '', -- TODO: decision_handler_address
+        decision_handler,
+        decision_handler_address,
         street_address, postal_code, post_office, mailing_po_box, location,
         mailing_street_address, mailing_postal_code, mailing_post_office,
         invoiced_by_municipality, provider_type::unit_provider_type, language::unit_language, upload_to_koski,
         oph_unit_oid,
-        null, -- TODO: oph_organizer_oid
+        oph_organizer_oid,
         operation_days, ghost_unit,
         daycare_apply_period, preschool_apply_period, club_apply_period,
         null, -- TODO: finance_decision_handler
-        round_the_clock, '{}',
-        false -- TODO: upload_children_to_varda
+        round_the_clock,
+        enabled_pilot_features,
+        upload_children_to_varda
     FROM ${getMigrationSchemaPrefix()}evaka_daycare
     `
     const insertQuery = wrapWithReturning("daycare", insertQueryPart, returnAll)

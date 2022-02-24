@@ -10,6 +10,8 @@ export const nonNullTextParser = (v: undefined | string | null | number): string
 export const activityParser = (v: string): boolean => v?.toUpperCase() === "A"
 export const numericBooleanParser = (v: undefined | number): boolean => v === 1
 
+export const forceNullValue = (v: any) => null
+
 //indefinite time = null or infinity
 export const nullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { config } from "../config"
-import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/evaka"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/tables"
+import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 
@@ -438,8 +438,15 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "text", parser: nullForcingTextParser },
             url:
                 { sqlType: "text", parser: nullForcingTextParser },
+            created:
+                { sqlType: "timestamptz", parser: nullForcingTextParser },
+            updated:
+                { sqlType: "timestamptz", parser: nullForcingTextParser },
             backup_location:
                 { sqlType: "text", parser: nullForcingTextParser },
+            //not transferred between environments, value forced to null
+            language_emphasis_id:
+                { sqlType: "uuid", parser: forceNullValue },
             opening_date:
                 { sqlType: "date", parser: nullDateParser },
             closing_date:
@@ -450,13 +457,21 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "text", parser: nullForcingTextParser },
             additional_info:
                 { sqlType: "text", parser: nullForcingTextParser },
+            unit_manager_id:
+                { sqlType: "uuid", parser: nullForcingTextParser },
             cost_center:
                 { sqlType: "text", parser: nullForcingTextParser },
             upload_to_varda:
                 { sqlType: "boolean", parser: csvStringBooleanParser },
+            capacity:
+                { sqlType: "integer", parser: stringToNumericParser },
             decision_daycare_name:
                 { sqlType: "text", parser: nonNullTextParser },
             decision_preschool_name:
+                { sqlType: "text", parser: nonNullTextParser },
+            decision_handler:
+                { sqlType: "text", parser: nonNullTextParser },
+            decision_handler_address:
                 { sqlType: "text", parser: nonNullTextParser },
             street_address:
                 { sqlType: "text", parser: nonNullTextParser },
@@ -482,6 +497,10 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "text", parser: nullForcingTextParser },
             upload_to_koski:
                 { sqlType: "boolean", parser: csvStringBooleanParser },
+            oph_unit_oid:
+                { sqlType: "text", parser: nullForcingTextParser },
+            oph_organizer_oid:
+                { sqlType: "text", parser: nullForcingTextParser },
             operation_days:
                 { sqlType: "integer[]", parser: csvStringArrayParser },
             ghost_unit:
@@ -490,10 +509,17 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "daterange", parser: nullForcingTextParser },
             preschool_apply_period:
                 { sqlType: "daterange", parser: nullForcingTextParser },
+            club_apply_period:
+                { sqlType: "daterange", parser: nullForcingTextParser },
+            //employees are not transferred, but column is needed for compatibility
+            finance_decision_handler:
+                { sqlType: "uuid", parser: forceNullValue },
             round_the_clock:
                 { sqlType: "boolean", parser: csvStringBooleanParser },
-            unit_manager_id:
-                { sqlType: "uuid", parser: nullForcingTextParser }
+            enabled_pilot_features:
+                { sqlType: "text[]", parser: csvStringArrayParser },
+            upload_children_to_varda:
+                { sqlType: "boolean", parser: csvStringBooleanParser }
         }
 
     },
