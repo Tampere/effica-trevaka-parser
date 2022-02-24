@@ -5,11 +5,12 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
+import { SPECIAL_CARE_UNITS } from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
     runQueryFile,
-    selectFromTable,
+    selectFromTable
 } from "../util/queryTools";
 
 export const transformPlacementsData = async (returnAll: boolean = false) => {
@@ -29,7 +30,8 @@ const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
             "effica_placement_nbr",
         ]),
         t,
-        true
+        true,
+        { specialCareUnits: SPECIAL_CARE_UNITS[config.cityVariant] }
     );
     const placementsTodo = await runQuery(
         selectFromTable(

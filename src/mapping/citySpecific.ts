@@ -2,7 +2,6 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import { FixScriptDescriptor } from "../types/internal";
 import {
     CitySpecificApplicationStatusMappings,
     CitySpecificApplicationTypeMappings,
@@ -14,7 +13,6 @@ import {
     CitySpecificSpecialNeedMappings,
     DecisionStatusType
 } from "../types/mappings";
-import { baseQueryParameters } from "../util/queryTools";
 
 export const SPECIAL_NEED_MAPPINGS: CitySpecificSpecialNeedMappings = {
     tampere: {
@@ -236,12 +234,8 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
 
 }
 
-export const postImportFixes: Record<string, FixScriptDescriptor[]> = {
-    tampere: [
-        {
-            filePath: "/import-fixes/tampere/families-post-import-fix.sql",
-            parameters: baseQueryParameters
-        }
-    ]
-
+//units that offer care for children ages 0-18 (erho), this affects placement end date marking
+//if none, use impossible effica id value (<1)
+export const SPECIAL_CARE_UNITS: Record<string, number[]> = {
+    tampere: [272]
 }

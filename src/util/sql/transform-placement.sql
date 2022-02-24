@@ -15,11 +15,12 @@ CREATE TABLE ${migrationSchema:name}.evaka_placement (
     daycare_group_id UUID,
     effica_unit_id INTEGER,
     effica_department_id INTEGER,
-    effica_childminder_id TEXT
+    effica_childminder_id TEXT,
+    child_date_of_birth DATE
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_placement
-    (effica_placement_nbr, effica_ssn, type, child_id, unit_id, start_date, end_date, daycare_group_id, effica_unit_id, effica_department_id, effica_childminder_id)
+    (effica_placement_nbr, effica_ssn, type, child_id, unit_id, start_date, end_date, daycare_group_id, effica_unit_id, effica_department_id, effica_childminder_id, child_date_of_birth)
 SELECT
     p.placementnbr,
     p.personid,
@@ -38,7 +39,8 @@ SELECT
     edg.id,
     p.placementunitcode,
     p.placementdepartmentcode,
-    p.placementchildminder
+    p.placementchildminder,
+    ep.date_of_birth
 FROM ${migrationSchema:name}.filtered_placements_v p
 LEFT JOIN ${migrationSchema:name}.evaka_person ep ON ep.effica_ssn = p.personid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = p.placementunitcode
@@ -67,10 +69,16 @@ WHERE ${migrationSchema:name}.evaka_placement.effica_placement_nbr = data2.effic
 
 -- fix null end dates based on placement type
 UPDATE ${migrationSchema:name}.evaka_placement
-SET end_date = (CASE type
-    WHEN 'PRESCHOOL_DAYCARE' THEN ${migrationSchema:name}.preschool_daycare_end_date(start_date)
-    ELSE ${migrationSchema:name}.daycare_end_date(effica_ssn, start_date)
-END)
+SET end_date = (
+    CASE
+        WHEN effica_unit_id IN ($(specialCareUnits:csv))
+            THEN child_date_of_birth + interval '18 years' - interval '1 days'
+        ELSE
+            CASE type
+                WHEN 'PRESCHOOL_DAYCARE' THEN ${migrationSchema:name}.preschool_daycare_end_date(start_date)
+                ELSE ${migrationSchema:name}.daycare_end_date(effica_ssn, start_date)
+                END
+        END)
 WHERE end_date IS NULL;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_placement_todo CASCADE;
