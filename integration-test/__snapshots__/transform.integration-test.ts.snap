@@ -493,6 +493,7 @@ Object {
   ],
   "placements": Array [
     Object {
+      "child_date_of_birth": "2019-06-01T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": Any<String>,
       "effica_childminder_id": null,
@@ -507,6 +508,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
     },
     Object {
+      "child_date_of_birth": "2019-06-01T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": Any<String>,
       "effica_childminder_id": null,
@@ -521,6 +523,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": null,
       "effica_childminder_id": "010101-TP99",
@@ -535,6 +538,7 @@ Object {
       "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": Any<String>,
       "effica_childminder_id": null,
@@ -551,6 +555,7 @@ Object {
   ],
   "placementsTodo": Array [
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": null,
       "effica_childminder_id": "010101-TP99",
@@ -566,6 +571,7 @@ Object {
       "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": null,
       "effica_childminder_id": "010101-TP99",
@@ -581,6 +587,7 @@ Object {
       "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": null,
       "effica_childminder_id": null,
@@ -596,6 +603,7 @@ Object {
       "unit_id": null,
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": null,
       "effica_childminder_id": null,
@@ -611,6 +619,7 @@ Object {
       "unit_id": null,
     },
     Object {
+      "child_date_of_birth": "2018-11-25T00:00:00.000Z",
       "child_id": Any<String>,
       "daycare_group_id": Any<String>,
       "effica_childminder_id": null,

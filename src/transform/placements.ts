@@ -23,15 +23,14 @@ export const transformPlacementsData = async (returnAll: boolean = false) => {
 };
 
 const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
-    await runQueryFile("transform-placement.sql", t, baseQueryParameters);
+    await runQueryFile("transform-placement.sql", t, { ...baseQueryParameters, erhoUnits: SPECIAL_CARE_UNITS[config.cityVariant] });
 
     const placements = await runQuery(
         selectFromTable("evaka_placement", config.migrationSchema, returnAll, [
             "effica_placement_nbr",
         ]),
         t,
-        true,
-        { specialCareUnits: SPECIAL_CARE_UNITS[config.cityVariant] }
+        true
     );
     const placementsTodo = await runQuery(
         selectFromTable(

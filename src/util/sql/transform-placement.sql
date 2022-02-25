@@ -71,8 +71,8 @@ WHERE ${migrationSchema:name}.evaka_placement.effica_placement_nbr = data2.effic
 UPDATE ${migrationSchema:name}.evaka_placement
 SET end_date = (
     CASE
-        WHEN effica_unit_id IN ($(specialCareUnits:csv))
-            THEN child_date_of_birth + interval '18 years' - interval '1 days'
+        WHEN effica_unit_id IN ($(erhoUnits:csv))
+            THEN child_date_of_birth + INTERVAL '18 years' - INTERVAL '1 days'
         ELSE
             CASE type
                 WHEN 'PRESCHOOL_DAYCARE' THEN ${migrationSchema:name}.preschool_daycare_end_date(start_date)
