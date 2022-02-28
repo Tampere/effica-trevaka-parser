@@ -103,21 +103,25 @@ WHERE decisiontype IN ($(types:csv))
         d.decisionstatus::text NOT IN ($(allStatuses:csv)) -- include all unknown statuses
     );
 
--- fix null end dates from next start dates
+-- fix end dates from next start dates
 WITH
 data1 AS (
     SELECT *
     FROM ${migrationSchema:name}.evaka_voucher_value_decision
-    WHERE valid_to IS NULL AND status_group IS NOT NULL
+    WHERE status_group IS NOT NULL
 ),
 data2 AS (
-    SELECT data1.effica_ssn, data1.status_group, data1.decision_number, MIN(data2.valid_from) - INTERVAL '1 day' AS new_valid_to
+    SELECT data1.effica_ssn, data1.status_group, data1.decision_number, LEAST(data1.valid_to, MIN(data2.valid_from) - INTERVAL '1 day') AS new_valid_to
     FROM data1, ${migrationSchema:name}.evaka_voucher_value_decision data2
     WHERE data1.effica_ssn = data2.effica_ssn
     AND data1.status_group = data2.status_group
     AND data1.decision_number <> data2.decision_number
+    AND (
+        data1.effica_decision_date < data2.effica_decision_date OR
+        data1.effica_decision_date = data2.effica_decision_date AND data1.decision_number < data2.decision_number
+    )
     AND data2.valid_from > data1.valid_from
-    GROUP BY data1.effica_ssn, data1.status_group, data1.decision_number
+    GROUP BY data1.effica_ssn, data1.status_group, data1.decision_number, data1.valid_to
 )
 UPDATE ${migrationSchema:name}.evaka_voucher_value_decision
 SET valid_to = data2.new_valid_to
@@ -125,6 +129,22 @@ FROM data2
 WHERE ${migrationSchema:name}.evaka_voucher_value_decision.effica_ssn = data2.effica_ssn
 AND ${migrationSchema:name}.evaka_voucher_value_decision.status_group = data2.status_group
 AND ${migrationSchema:name}.evaka_voucher_value_decision.decision_number = data2.decision_number;
+
+-- filter replaced decisions (only add newest from overlapping decisions)
+DELETE FROM ${migrationSchema:name}.evaka_voucher_value_decision d
+WHERE EXISTS (
+    SELECT 1
+    FROM $(migrationSchema:name).evaka_voucher_value_decision d2
+    WHERE d2.effica_ssn = d.effica_ssn
+        AND d2.status_group = d.status_group
+        AND (d2.valid_from <= d2.valid_to OR d2.valid_from IS NULL OR d2.valid_to IS NULL)
+        AND (d.valid_from <= d.valid_to OR d.valid_from IS NULL OR d.valid_to IS NULL)
+        AND daterange(d2.valid_from, d2.valid_to, '[]') && daterange(d.valid_from, d.valid_to, '[]')
+        AND (
+            d2.effica_decision_date > d.effica_decision_date OR
+            d2.effica_decision_date = d.effica_decision_date AND d2.decision_number > d.decision_number
+        )
+);
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_voucher_value_decision_todo;
 
