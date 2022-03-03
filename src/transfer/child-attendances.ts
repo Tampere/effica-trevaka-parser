@@ -17,8 +17,9 @@ export const transferChildAttendances = async (returnAll: boolean = false) => {
         });
         return await runQuery(
             selectFromTable("child_attendance", "", returnAll, [
-                "arrived",
-                "departed",
+                "date",
+                "start_time",
+                "end_time",
             ]),
             t,
             true
