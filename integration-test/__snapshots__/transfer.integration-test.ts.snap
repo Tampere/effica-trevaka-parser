@@ -366,11 +366,12 @@ Array [
 exports[`GET /transfer positive should return transferred child attendances 1`] = `
 Array [
   Object {
-    "arrived": "2021-01-01T05:26:00.000Z",
     "child_id": Any<String>,
     "created": Any<String>,
-    "departed": "2021-01-01T14:17:00.000Z",
+    "date": "2021-01-01T00:00:00.000Z",
+    "end_time": "16:17:00",
     "id": Any<String>,
+    "start_time": "07:26:00",
     "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
     "updated": Any<String>,
   },
