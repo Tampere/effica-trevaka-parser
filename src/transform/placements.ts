@@ -5,11 +5,12 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
+import { SPECIAL_CARE_UNITS } from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
     runQueryFile,
-    selectFromTable,
+    selectFromTable
 } from "../util/queryTools";
 
 export const transformPlacementsData = async (returnAll: boolean = false) => {
@@ -22,7 +23,7 @@ export const transformPlacementsData = async (returnAll: boolean = false) => {
 };
 
 const transformPlacements = async <T>(t: ITask<T>, returnAll: boolean) => {
-    await runQueryFile("transform-placement.sql", t, baseQueryParameters);
+    await runQueryFile("transform-placement.sql", t, { ...baseQueryParameters, erhoUnits: SPECIAL_CARE_UNITS[config.cityVariant] });
 
     const placements = await runQuery(
         selectFromTable("evaka_placement", config.migrationSchema, returnAll, [
