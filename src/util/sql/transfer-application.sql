@@ -164,7 +164,8 @@ SELECT
             'docVersion', 0,
             'additionalDetails', jsonb_build_object(
                 'otherInfo', ''
-            )
+            ),
+            'type', 'CLUB'
         )
     END,
     true
@@ -186,3 +187,20 @@ JOIN (
 ) eaf ON eaf.application_id = ea.id
 JOIN ${migrationSchema:name}.evaka_person c ON c.id = ea.child_id
 JOIN ${migrationSchema:name}.evaka_person g ON g.id = ea.guardian_id;
+
+-- fix transfer applications
+UPDATE application a
+SET transferapplication = TRUE
+FROM application_form af
+WHERE af.application_id = a.id AND af.latest = TRUE AND EXISTS (
+    SELECT 1
+    FROM placement p
+    WHERE p.child_id = a.child_id
+        AND CASE p.type::text
+            WHEN 'DAYCARE_PART_TIME' THEN 'DAYCARE'
+            WHEN 'DAYCARE_FIVE_YEAR_OLDS' THEN 'DAYCARE'
+            WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN 'DAYCARE'
+            ELSE p.type::text
+            END = af.document ->> 'type'
+        AND daterange(p.start_date, p.end_date, '[]') @> to_date((af.document ->> 'preferredStartDate'), 'YYYY-MM-DD')
+);

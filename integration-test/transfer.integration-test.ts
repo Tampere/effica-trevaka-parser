@@ -309,8 +309,8 @@ describe("GET /transfer positive", () => {
         )
     })
     it("should return transferred applications", async () => {
-        await setupTransformations(["persons", "families", "application", "placements"])
-        await setupTransfers(["persons", "families"])
+        await setupTransformations(["persons", "families", "application", "departments", "placements"])
+        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "application",
             {

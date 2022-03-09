@@ -40,7 +40,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "fee_alterations", function: transferFeeAlterationsData },
         { name: "voucher_value_decisions", function: transferVoucherValueDecisions },
         { name: "fee_decisions", function: transferFeeDecisionData },
-        { name: "application", function: transferApplicationData },
+        { name: "application", function: transferApplicationData }, // must be transferred after placements to fix transfer application bit
         { name: "absences", function: transferAbsences },
         { name: "backup_care", function: transferBackupCares },
         { name: "child_attendances", function: transferChildAttendances },
