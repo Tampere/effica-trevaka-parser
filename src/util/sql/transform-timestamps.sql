@@ -88,6 +88,11 @@ FROM ${migrationSchema:name}.evaka_child_attendance
 WHERE child_id IS NULL;
 
 INSERT INTO ${migrationSchema:name}.evaka_child_attendance_todo
+SELECT *, '0-DURATION'
+FROM ${migrationSchema:name}.evaka_child_attendance
+WHERE start_time = end_time;
+
+INSERT INTO ${migrationSchema:name}.evaka_child_attendance_todo
 SELECT *, 'TIME MISSING'
 FROM ${migrationSchema:name}.evaka_child_attendance
 WHERE date IS NULL OR start_time IS NULL OR end_time IS NULL;
@@ -118,7 +123,7 @@ AND EXISTS (
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_child_attendance_todo
-SELECT *, 'OVERLAPPING ATTENDANCE PLACEMENT'
+SELECT *, 'OVERLAPPING ATTENDANCE WITH PLACEMENT'
 FROM ${migrationSchema:name}.evaka_child_attendance a
 WHERE a.effica_placement_number <> 0
 AND EXISTS (
