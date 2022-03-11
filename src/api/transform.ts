@@ -30,7 +30,7 @@ const dependencyOrder: MigrationOperation[] =
         { name: "special_means", function: transformSpecialMeansData },
         { name: "income", function: transformIncomeData },
         { name: "departments", function: transformDepartmentData },
-        { name: "application", function: transformApplicationData }, // must be transformed before placements to fix transfer application bit
+        { name: "application", function: transformApplicationData },
         { name: "placements", function: transformPlacementsData },
         { name: "feedeviations", function: transformFeeDeviationsData },
         { name: "voucher_value_decisions", function: transformVoucherValueDecisionData },

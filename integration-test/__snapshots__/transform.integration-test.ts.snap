@@ -475,7 +475,7 @@ Object {
       "id": Any<String>,
       "sentdate": "2025-08-01T00:00:00.000Z",
       "status": "SENT",
-      "transferapplication": true,
+      "transferapplication": false,
       "type": "DAYCARE",
     },
     Object {
