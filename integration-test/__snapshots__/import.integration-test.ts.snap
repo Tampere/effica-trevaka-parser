@@ -1124,7 +1124,7 @@ Object {
     Array [
       Object {
         "days": 0,
-        "enddate": Any<String>,
+        "enddate": null,
         "extentcode": 100,
         "extentnbr": 111,
         "hours": "0",
