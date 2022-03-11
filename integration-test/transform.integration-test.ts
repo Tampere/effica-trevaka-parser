@@ -274,10 +274,8 @@ describe("GET /transform positive", () => {
 
     it("should return transformed income", async () => {
         cleanUps = ["evaka_income", "evaka_person"]
-        //TODO: application transformation?
         await setupTransformations(["persons"])
 
-        //TODO: add application id?
         const incomeExpectation =
             [
                 {

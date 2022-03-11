@@ -9,8 +9,6 @@ import { CitySpecificIncomeMapping } from "../types/mappings"
 import { createSqlConditionalForCoefficients, createSqlConditionalForIncomeCodes, createTotalSumClauseForIncomeTypes, getExtensionSchemaPrefix, getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/queryTools"
 
 export const transformIncomeData = async (returnAll: boolean = false) => {
-    //TODO: add application id FK constraint?
-
     const incomeMapping: CitySpecificIncomeMapping = citySpecificIncomeMappings[config.cityVariant]
     if (!incomeMapping) {
         throw new Error(`No income mapping found for city variant ${config.cityVariant}`)
@@ -61,10 +59,9 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
         $$ LANGUAGE SQL;
         `
 
-    //TODO: add application id?
     const incomeQueryPart =
         `
-        INSERT INTO ${getMigrationSchemaPrefix()}evaka_income (person_id, person_ssn, data, effect, valid_from, valid_to, income_total)
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_income (person_id, person_ssn, data, effect, valid_from, valid_to, income_total, application_id)
         WITH data_agg AS
             (SELECT
                 i.personid as person_ssn,    
@@ -124,7 +121,8 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
             da.effect,
             da.valid_from,
             da.valid_to,
-            da.income_total
+            da.income_total,
+            null -- application_id, no data available and quite pointless information as evaka will remove this link on income edit
         FROM data_agg da
             JOIN ${getMigrationSchemaPrefix()}evaka_person ep
                 ON da.person_ssn = ep.effica_ssn

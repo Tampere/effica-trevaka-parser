@@ -53,7 +53,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personstreetaddress, '') END AS street_address,
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personzipcode, '') END AS postal_code,
         CASE WHEN p.secretaddress IS TRUE THEN '' ELSE coalesce(p.personcity, '') END AS post_office,
-        '{}', -- TODO: nationality
+        '{}', -- nationality, data is fetched from vtj
         p.secretaddress AS restricted_details_enabled,
         (CASE
             WHEN (length(p.personmobilephone) <= 20 AND length(p.personmobilephone) > 0) THEN p.personmobilephone

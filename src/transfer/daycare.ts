@@ -22,7 +22,7 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
         id, name, type::care_types[],
         care_area_id,
         phone, url, backup_location,
-        null, -- TODO: language_emphasis_id
+        null, -- language_emphasis_id, no data available
         opening_date, closing_date,
         email, schedule, additional_info,
         unit_manager_id,
@@ -38,7 +38,7 @@ export const transferDaycareData = async (returnAll: boolean = false) => {
         oph_organizer_oid,
         operation_days, ghost_unit,
         daycare_apply_period, preschool_apply_period, club_apply_period,
-        null, -- TODO: finance_decision_handler
+        null, -- finance_decision_handler, no data available
         round_the_clock,
         enabled_pilot_features,
         upload_children_to_varda

@@ -17,8 +17,6 @@ export const transferDaycareOidData = async (returnAll: boolean = false) => {
     WHERE ed.id = map.evaka_id
     `
 
-    //TODO: what actually is the correct uploaded_at, as that is used to decide whether unit info in varda is up to date
-    //do we force unit updates or try to "sync" up with Effica updates
     const insertVardaUnitQueryPart = `
     INSERT INTO varda_unit (evaka_daycare_id, varda_unit_id, uploaded_at)
     SELECT 
