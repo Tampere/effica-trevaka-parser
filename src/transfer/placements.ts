@@ -51,9 +51,9 @@ const transferPlacementData = async <T>(t: ITask<T>, returnAll: boolean) => {
 
 const transferServiceNeedData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
-    INSERT INTO service_need (id, option_id, placement_id, start_date, end_date, shift_care)
-    SELECT id, option_id, placement_id, start_date, end_date, false
-    FROM ${getMigrationSchemaPrefix()}evaka_service_need
+    INSERT INTO service_need (option_id, placement_id, start_date, end_date, shift_care)
+    SELECT option_id, id, start_date, end_date, false
+    FROM ${getMigrationSchemaPrefix()}evaka_placement
     `;
     const insertQuery = wrapWithReturning(
         "service_need",

@@ -176,7 +176,7 @@ SELECT
     child.date_of_birth,
     0, -- TODO: sibling discount
     ep.unit_id,
-    esn.option_id,
+    ep.option_id,
     pdr.fee * 100,
     pdr.fee * 100,
     pdr.fee * 100,
@@ -188,8 +188,6 @@ JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_internal_decis
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = pdr.person
 LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
     AND daterange(ep.start_date, ep.end_date, '[]') @> efd.start_date
-LEFT JOIN ${migrationSchema:name}.evaka_service_need esn ON esn.placement_id = ep.id
-    AND daterange(esn.start_date, esn.end_date, '[]') @> efd.start_date
 WHERE pdr.rowtype = 5;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision_child_todo;

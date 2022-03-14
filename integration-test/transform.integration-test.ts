@@ -215,10 +215,6 @@ describe("GET /transform positive", () => {
             child_id: expect.any(String),
             daycare_group_id: expect.any(String)
         }
-        const serviceNeedExpectation = {
-            id: expect.any(String),
-            placement_id: expect.any(String)
-        }
         const applicationExpectation = {
             id: expect.any(String),
             child_id: expect.any(String),
@@ -229,26 +225,19 @@ describe("GET /transform positive", () => {
             "placements",
             {
                 placements: [
-                    placementExpectation, // 11
-                    placementExpectation, // 12
-                    { ...placementExpectation, daycare_group_id: null }, // 13
-                    placementExpectation // 18
+                    placementExpectation, // p=11, e=111
+                    placementExpectation, // p=12, e=12
+                    { ...placementExpectation, daycare_group_id: null }, // p=13, e=131
+                    placementExpectation, // p=18, e=18
                 ],
                 placementsTodo: [
-                    { ...placementExpectation, daycare_group_id: null }, // 14
-                    { ...placementExpectation, daycare_group_id: null }, // 15
-                    { ...placementExpectation, daycare_group_id: null }, // 16
-                    { ...placementExpectation, daycare_group_id: null }, // 17
-                    { ...placementExpectation }, // 19
-                ],
-                serviceNeeds: [
-                    serviceNeedExpectation, // 111
-                    serviceNeedExpectation, // 12
-                    serviceNeedExpectation, // 131
-                    serviceNeedExpectation, // 18
-                ],
-                serviceNeedsTodo: [
-                    serviceNeedExpectation, // 191
+                    placementExpectation, // p=11, p=112
+                    { ...placementExpectation, daycare_group_id: null }, // p=14, e=14
+                    { ...placementExpectation, daycare_group_id: null }, // p=15, e=15
+                    { ...placementExpectation, daycare_group_id: null }, // p=17, e=17
+                    { ...placementExpectation, daycare_group_id: null }, // p=17, e=17
+                    placementExpectation, // p=19, e=191
+                    placementExpectation, // p=19, e=192
                 ],
                 applications: [
                     applicationExpectation,

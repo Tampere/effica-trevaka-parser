@@ -130,7 +130,7 @@ describe("GET /import xml positive", () => {
         return await positiveImportSnapshotTest(
             "placementextents",
             getTimeSeriesResultPattern(
-                closedDateRange,
+                openDateRange,
                 openDateRange,
                 openDateRange,
                 openDateRange,

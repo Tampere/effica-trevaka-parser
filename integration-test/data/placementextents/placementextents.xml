@@ -8,7 +8,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <placementnbr>11</placementnbr>
     <extentnbr>111</extentnbr>
     <startdate>20200301</startdate>
-    <enddate>20200801</enddate>
+    <enddate></enddate>
     <hours>0</hours>
     <days>0</days>
     <extentcode>100</extentcode>
@@ -26,7 +26,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <placementextent>
     <placementnbr>12</placementnbr>
     <extentnbr>12</extentnbr>
-    <startdate>20200301</startdate>
+    <startdate>20210301</startdate>
     <enddate></enddate>
     <hours>0</hours>
     <days>15</days>
