@@ -106,3 +106,5 @@ INSERT INTO fee_decision_child (
     efdc.final_fee
 FROM ${migrationSchema:name}.evaka_fee_decision_child efdc
 JOIN service_need_option sno ON sno.id = efdc.service_need_option_id;
+
+SELECT setval('fee_decision_number_sequence', (SELECT COALESCE(max(decision_number), 1) FROM fee_decision));
