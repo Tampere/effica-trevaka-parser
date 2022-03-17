@@ -31,6 +31,7 @@ export const affectedEvakaTablesList: string[] = [
     "daycare_group_placement",
     "fee_alteration",
     "fee_decision",
+    "fee_decision_child",
     "fridge_child",
     "fridge_partner",
     "income",
@@ -38,6 +39,7 @@ export const affectedEvakaTablesList: string[] = [
     "placement",
     "service_need",
     "unit_manager",
+    "varda_unit",
     "voucher_value_decision"
 ]
 
