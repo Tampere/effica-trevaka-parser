@@ -74,7 +74,8 @@ SELECT
 FROM ${migrationSchema:name}.timestamps_view t
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = t.personid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = t.unit
-LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = t.childminder;
+LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = t.childminder
+WHERE daterange($(selectionPeriodStartDate:csv)::date, $(selectionPeriodEndDate:csv)::date,'[]') @> t.date;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_child_attendance_todo;
 CREATE TABLE ${migrationSchema:name}.evaka_child_attendance_todo AS

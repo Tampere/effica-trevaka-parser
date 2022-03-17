@@ -94,3 +94,4 @@ export type CitySpecificIncomeMapping = {
 }
 
 export type CitySpecificIncomeMappings = Record<string, CitySpecificIncomeMapping>
+export type SelectionPeriod = { startDate: string, endDate: string }

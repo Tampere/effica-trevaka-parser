@@ -5,11 +5,12 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
+import { MARKINGS_SELECTION_PERIOD } from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
     runQueryFile,
-    selectFromTable,
+    selectFromTable
 } from "../util/queryTools";
 
 export const transformTimestampsData = async (returnAll: boolean = false) => {
@@ -21,8 +22,11 @@ export const transformTimestampsData = async (returnAll: boolean = false) => {
 };
 
 const transformTimestamps = async <T>(t: ITask<T>, returnAll: boolean) => {
+    const selectionPeriod = getSelectionPeriod(config.cityVariant)
     await runQueryFile("transform-timestamps.sql", t, {
         ...baseQueryParameters,
+        selectionPeriodStartDate: selectionPeriod.startDate,
+        selectionPeriodEndDate: selectionPeriod.endDate
     });
 
     const childAttendances = await runQuery(
@@ -45,3 +49,7 @@ const transformTimestamps = async <T>(t: ITask<T>, returnAll: boolean) => {
     );
     return { childAttendances, childAttendancesTodo };
 };
+
+const getSelectionPeriod = (cityVariant: string) => {
+    return MARKINGS_SELECTION_PERIOD[cityVariant]
+}
