@@ -242,7 +242,7 @@ export const SPECIAL_CARE_UNITS: Record<string, number[]> = {
 }
 
 /*
-As Effica is still in limited use for daily attendance, absence and backup care markings during the initial history data migration
+As Effica is still in limited use for daily attendance, absence and backup care markings during the initial history data migration,
 an additional markings focused migration phase is required to synchronize the final state of Effica with eVaka.
 This is the single entry value for the inclusive markings data selection period used in the transformation of migration data.
 */

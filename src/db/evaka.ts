@@ -17,12 +17,21 @@ import { createDaycareTableQuery, createUnitManagerTableQuery } from "./tables";
 export const affectedEvakaTablesList: string[] = [
     "absence",
     "application",
+    "application_form",
+    "assistance_action",
+    "assistance_action_option_ref",
+    "assistance_basis_option_ref",
+    "assistance_need",
     "backup_care",
     "child",
     "child_attendance",
     "daycare",
+    "daycare_caretaker",
     "daycare_group",
+    "daycare_group_placement",
+    "fee_alteration",
     "fee_decision",
+    "fee_decision_child",
     "fridge_child",
     "fridge_partner",
     "income",
@@ -30,6 +39,7 @@ export const affectedEvakaTablesList: string[] = [
     "placement",
     "service_need",
     "unit_manager",
+    "varda_unit",
     "voucher_value_decision"
 ]
 
