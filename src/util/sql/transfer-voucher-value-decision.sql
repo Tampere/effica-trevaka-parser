@@ -110,3 +110,5 @@ LEFT JOIN fee_thresholds ft ON ft.valid_during @> vvd.effica_decision_date
 LEFT JOIN service_need_option sno ON sno.id = vvd.service_need_option_id
 LEFT JOIN voucher_value vv ON vv.validity @> vvd.effica_decision_date
 GROUP BY vvd.id, ft.id, sno.id, vv.id;
+
+SELECT setval('voucher_value_decision_number_sequence', (SELECT COALESCE(max(decision_number), 1) FROM voucher_value_decision));
