@@ -20,7 +20,7 @@ export const transferFeeDecisionData = async (returnAll: boolean = false) => {
 };
 
 const transferFeeDecisions = async <T>(t: ITask<T>, returnAll: boolean) => {
-    await runQueryFile("transfer-fee-decision.sql", t, baseQueryParameters);
+    await runQueryFile("transfer-fee-decision.sql", t, baseQueryParameters, true);
 
     const feeDecisions = await runQuery(
         selectFromTable("fee_decision", "", returnAll, ["valid_during"]),

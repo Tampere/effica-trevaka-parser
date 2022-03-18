@@ -14,9 +14,14 @@ export const transferVoucherValueDecisions = async (
     returnAll: boolean = false
 ) => {
     return await migrationDb.tx(async (t) => {
-        await runQueryFile("transfer-voucher-value-decision.sql", t, {
-            ...baseQueryParameters,
-        });
+        await runQueryFile(
+            "transfer-voucher-value-decision.sql",
+            t,
+            {
+                ...baseQueryParameters,
+            },
+            true
+        );
         return await runQuery(
             selectFromTable("voucher_value_decision", "", returnAll, [
                 "decision_number",
