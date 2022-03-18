@@ -308,7 +308,7 @@ Object {
       "effica_guid": "paydecision3843781",
       "effica_internal_decision_number": 3843781,
       "effica_ssn": "020967-9992",
-      "end_date": null,
+      "end_date": "2025-07-31T00:00:00.000Z",
       "family_size": 2,
       "head_of_family_id": Any<String>,
       "head_of_family_income": Object {
@@ -785,7 +785,7 @@ Object {
       "status": "SENT",
       "status_group": "APPROVED",
       "valid_from": "2020-04-01T00:00:00.000Z",
-      "valid_to": null,
+      "valid_to": "2025-07-31T00:00:00.000Z",
       "voucher_value": 1000,
     },
   ],

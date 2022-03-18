@@ -209,3 +209,12 @@ WHERE service_need_option_id IS NULL;
 
 DELETE FROM ${migrationSchema:name}.evaka_fee_decision_child
 WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_fee_decision_child_todo);
+
+-- fix decision end dates (based on oldest child)
+UPDATE ${migrationSchema:name}.evaka_fee_decision d
+SET end_date = make_date(date_part('year', (
+    SELECT min(child_date_of_birth)
+    FROM ${migrationSchema:name}.evaka_fee_decision_child
+    WHERE fee_decision_id = d.id
+) + interval '6 years')::int, 7, 31)
+WHERE end_date IS NULL;
