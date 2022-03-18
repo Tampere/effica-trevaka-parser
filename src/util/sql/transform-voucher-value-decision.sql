@@ -11,7 +11,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
     status TEXT,
     status_group TEXT,
     valid_from DATE,
-    valid_to DATE,
+    valid_to DATE NOT NULL,
     decision_number BIGINT,
     head_of_family_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     partner_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
@@ -69,7 +69,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
         WHEN 'WAITING_FOR_MANUAL_SENDING' THEN 'APPROVED'
     END,
     d.startdate,
-    d.enddate,
+    COALESCE(d.enddate, make_date(date_part('year', child.date_of_birth + interval '6 years')::int, 7, 31)),
     d.decisionnbr,
     f_child.head_of_family,
     f_partner2.person_id,
