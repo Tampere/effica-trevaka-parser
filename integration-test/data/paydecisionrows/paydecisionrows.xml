@@ -45,6 +45,26 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <GUID>paydecisionrow38437814</GUID>
 </PayDecisionRows>
 <PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>5</RowNumber>
+  <Person>010619A9501</Person>
+  <Income></Income>
+  <Specification> </Specification>
+  <Fee>-288.00</Fee>
+  <RowType>5</RowType>
+  <GUID>paydecisionrow38437815</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843781</InternalId>
+  <RowNumber>5</RowNumber>
+  <Person>010619A9501</Person>
+  <Income></Income>
+  <Specification> </Specification>
+  <Fee>-100.00</Fee>
+  <RowType>5</RowType>
+  <GUID>paydecisionrow38437816</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
   <InternalId>3843783</InternalId>
   <RowNumber>1</RowNumber>
   <Person>180476-998M</Person>
@@ -52,5 +72,5 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <Specification></Specification>
   <Fee>0.00</Fee>
   <RowType>2</RowType>
-  <GUID>paydecisionrow38437815</GUID>
+  <GUID>paydecisionrow38437831</GUID>
 </PayDecisionRows>

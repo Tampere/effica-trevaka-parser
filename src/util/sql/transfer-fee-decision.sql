@@ -100,10 +100,15 @@ INSERT INTO fee_decision_child (
     sno.fee_description_fi,
     sno.fee_description_sv,
     sno.contract_days_per_month,
-    efdc.base_fee,
-    efdc.fee,
-    '[]', -- fee alterations
-    efdc.final_fee
+    (select max(faa1) from unnest(efdc.fee_and_deviations) faa1),
+    (select max(faa2) from unnest(efdc.fee_and_deviations) faa2),
+    (select jsonb_agg(jsonb_build_object(
+        'type', 'DISCOUNT',
+        'amount', abs(faa3),
+        'isAbsolute', true,
+        'effect', faa3
+        )) from unnest(efdc.fee_and_deviations) faa3 where faa3 < 0),
+    (select sum(faa4) from unnest(efdc.fee_and_deviations) faa4)
 FROM ${migrationSchema:name}.evaka_fee_decision_child efdc
 JOIN service_need_option sno ON sno.id = efdc.service_need_option_id;
 

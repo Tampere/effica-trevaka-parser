@@ -160,26 +160,21 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
     sibling_discount INTEGER NOT NULL,
     placement_unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     service_need_option_id UUID,
-    base_fee INTEGER NOT NULL,
-    fee INTEGER NOT NULL,
-    final_fee INTEGER NOT NULL,
+    fee_and_deviations INTEGER[],
     effica_internal_decision_number INTEGER,
     effica_ssn TEXT
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision_child
-    (effica_paydecisionrows_guid, fee_decision_id, child_id, child_date_of_birth, sibling_discount, placement_unit_id, service_need_option_id, base_fee, fee, final_fee, effica_internal_decision_number, effica_ssn)
+    (fee_decision_id, child_id, child_date_of_birth, sibling_discount, placement_unit_id, service_need_option_id, fee_and_deviations, effica_internal_decision_number, effica_ssn)
 SELECT
-    pdr.guid,
     efd.id,
     child.id,
     child.date_of_birth,
-    0, -- TODO: sibling discount
+    0, -- NO USABLE DATA AVAILABLE ON EFFICA SIDE
     ep.unit_id,
     ep.option_id,
-    pdr.fee * 100,
-    pdr.fee * 100,
-    pdr.fee * 100,
+    array_agg(pdr.fee * 100),
     pd.internaldecisionnumber,
     child.effica_ssn
 FROM ${migrationSchema:name}.paydecisionrows pdr
@@ -188,7 +183,15 @@ JOIN ${migrationSchema:name}.evaka_fee_decision efd ON efd.effica_internal_decis
 LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = pdr.person
 LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
     AND daterange(ep.start_date, ep.end_date, '[]') @> efd.start_date
-WHERE pdr.rowtype = 5;
+WHERE pdr.rowtype = 5
+GROUP BY
+    efd.id,
+    child.id,
+    child.date_of_birth,
+    ep.unit_id,
+    ep.option_id,
+    pd.internaldecisionnumber,
+    child.effica_ssn;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_fee_decision_child_todo;
 
