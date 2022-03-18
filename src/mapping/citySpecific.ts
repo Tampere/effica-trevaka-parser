@@ -11,7 +11,8 @@ import {
     CitySpecificPayDecisionStatusMappings,
     CitySpecificSpecialMeanMappings,
     CitySpecificSpecialNeedMappings,
-    DecisionStatusType
+    DecisionStatusType,
+    SelectionPeriod
 } from "../types/mappings";
 
 export const SPECIAL_NEED_MAPPINGS: CitySpecificSpecialNeedMappings = {
@@ -238,4 +239,13 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
 //if none, use impossible effica id value (<1)
 export const SPECIAL_CARE_UNITS: Record<string, number[]> = {
     tampere: [272]
+}
+
+/*
+As Effica is still in limited use for daily attendance, absence and backup care markings during the initial history data migration,
+an additional markings focused migration phase is required to synchronize the final state of Effica with eVaka.
+This is the single entry value for the inclusive markings data selection period used in the transformation of migration data.
+*/
+export const MARKINGS_SELECTION_PERIOD: Record<string, SelectionPeriod> = {
+    tampere: { startDate: '1900-01-01', endDate: '2022-02-28' }
 }

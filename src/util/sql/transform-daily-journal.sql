@@ -76,8 +76,10 @@ WITH absences AS (
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
     LEFT JOIN ${migrationSchema:name}.evaka_placement ep ON ep.child_id = child.id
         AND daterange(ep.start_date, ep.end_date, '[]') @> d.date
-    WHERE $(absenceTypeMappings:json)::jsonb ->> d.reportcode::text IS NOT NULL -- include all known absence types
-        OR d.reportcode::text NOT IN ($(allReportCodes:csv)) -- include all unknown reportcodes
+    WHERE
+        ($(absenceTypeMappings:json)::jsonb ->> d.reportcode::text IS NOT NULL -- include all known absence types
+            OR d.reportcode::text NOT IN ($(allReportCodes:csv))) -- include all unknown reportcodes
+        AND daterange($(selectionPeriodStartDate:csv)::date, $(selectionPeriodEndDate:csv)::date,'[]') @> d.date
 )
 INSERT INTO ${migrationSchema:name}.evaka_absence
     (effica_dailyjournalids, child_id, date, category, absence_type)
@@ -136,6 +138,7 @@ WITH backup_cares AS (
     LEFT JOIN ${migrationSchema:name}.evaka_person child ON child.effica_ssn = d.personid
     LEFT JOIN ${migrationSchema:name}.evaka_daycare_group edg ON edg.effica_id = d.department
     WHERE d.reportcode IN ($(backupCareTypes:csv))
+        AND daterange($(selectionPeriodStartDate:csv)::date, $(selectionPeriodEndDate:csv)::date,'[]') @> d.date
     GROUP BY child_id, unit_id, group_id, d.date, d.unit, d.department, d.childminder
 )
 INSERT INTO ${migrationSchema:name}.evaka_backup_care

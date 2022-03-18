@@ -5,12 +5,12 @@
 import { ITask } from "pg-promise";
 import { config } from "../config";
 import migrationDb from "../db/db";
-import { DAILYJOURNAL_REPORTCODE_MAPPINGS } from "../mapping/citySpecific";
+import { DAILYJOURNAL_REPORTCODE_MAPPINGS, MARKINGS_SELECTION_PERIOD } from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
     runQueryFile,
-    selectFromTable,
+    selectFromTable
 } from "../util/queryTools";
 
 export const transformDailyJournalsData = async (
@@ -24,11 +24,14 @@ export const transformDailyJournalsData = async (
 };
 
 const transformDailyJournals = async <T>(t: ITask<T>, returnAll: boolean) => {
+    const selectionPeriod = getExaminationPeriod(config.cityVariant)
     await runQueryFile("transform-daily-journal.sql", t, {
         ...baseQueryParameters,
         allReportCodes: getAllReportCodes(config.cityVariant),
         absenceTypeMappings: getAbsenceTypeMappings(config.cityVariant),
         backupCareTypes: getBackupCareTypes(config.cityVariant),
+        selectionPeriodStartDate: selectionPeriod.startDate,
+        selectionPeriodEndDate: selectionPeriod.endDate
     });
 
     const absences = await runQuery(
@@ -87,3 +90,7 @@ const getBackupCareTypes = (cityVariant: string) => {
         .filter(([_, { backupCare }]) => backupCare === true)
         .map(([reportcode]) => reportcode);
 };
+
+const getExaminationPeriod = (cityVariant: string) => {
+    return MARKINGS_SELECTION_PERIOD[cityVariant]
+}
