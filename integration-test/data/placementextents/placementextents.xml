@@ -77,7 +77,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate>20191231</enddate>
     <hours>0</hours>
     <days>0</days>
-    <extentcode>200</extentcode>
+    <extentcode>1000</extentcode>
 </placementextent>
 <placementextent>
     <!-- OK CASE: overlapping with 17, but it has missing option -->
@@ -108,4 +108,40 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <hours>0</hours>
     <days>0</days>
     <extentcode>10000</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>20</placementnbr>
+    <extentnbr>200</extentnbr>
+    <startdate>20190801</startdate>
+    <enddate>20200731</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>200</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>21</placementnbr>
+    <extentnbr>210</extentnbr>
+    <startdate>20200801</startdate>
+    <enddate>20200802</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>100</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>22</placementnbr>
+    <extentnbr>220</extentnbr>
+    <startdate>20200803</startdate>
+    <enddate>20210731</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>100</extentcode>
+</placementextent>
+<placementextent>
+    <placementnbr>23</placementnbr>
+    <extentnbr>230</extentnbr>
+    <startdate>20190801</startdate>
+    <enddate>20200731</enddate>
+    <hours>0</hours>
+    <days>0</days>
+    <extentcode>200</extentcode>
 </placementextent>

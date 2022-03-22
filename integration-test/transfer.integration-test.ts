@@ -272,7 +272,7 @@ describe("GET /transfer positive", () => {
         await setupTransformations(["persons"])
         await positiveTransferSnapshotTest(
             "persons",
-            Array(6).fill(personExpectation)
+            Array(10).fill(personExpectation)
         )
     })
     it("should return transferred families", async () => {
@@ -325,11 +325,11 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "placements",
             {
-                children: Array(2).fill(childExpectation),
-                placements: Array(4).fill(placementExpectation),
-                serviceNeeds: Array(4).fill(serviceNeedExpectation),
+                children: Array(4).fill(childExpectation),
+                placements: Array(8).fill(placementExpectation),
+                serviceNeeds: Array(8).fill(serviceNeedExpectation),
                 daycareGroups: Array(1).fill(daycareGroupExpectation),
-                groupPlacements: Array(4).fill(groupPlacementExpectation),
+                groupPlacements: Array(8).fill(groupPlacementExpectation),
             }
         )
     })
@@ -379,8 +379,12 @@ describe("GET /transfer positive", () => {
         await positiveTransferSnapshotTest(
             "fee_decisions",
             {
-                feeDecisions: Array(1).fill(feeDecisionExpectation),
-                feeDecisionChildren: Array(1).fill(feeDecisionChildExpectation),
+                feeDecisions: [
+                    {...feeDecisionExpectation, partner_id: null},
+                    feeDecisionExpectation,
+                    {...feeDecisionExpectation, partner_id: null}
+                ],
+                feeDecisionChildren: Array(3).fill(feeDecisionChildExpectation),
             }
         )
     })

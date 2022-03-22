@@ -93,3 +93,39 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <startdate>20220101</startdate>
     <enddate></enddate>
 </placement>
+<placement>
+    <placementnbr>20</placementnbr>
+    <personid>251115A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20190801</startdate>
+    <enddate>20200731</enddate>
+</placement>
+<placement>
+    <placementnbr>21</placementnbr>
+    <personid>251115A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20200801</startdate>
+    <enddate>20200802</enddate>
+</placement>
+<placement>
+    <placementnbr>22</placementnbr>
+    <personid>251115A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20200803</startdate>
+    <enddate>20210731</enddate>
+</placement>
+<placement>
+    <placementnbr>23</placementnbr>
+    <personid>251114A9509</personid>
+    <placementunitcode>123</placementunitcode>
+    <placementdepartmentcode>1231</placementdepartmentcode>
+    <placementchildminder></placementchildminder>
+    <startdate>20190801</startdate>
+    <enddate>20200731</enddate>
+</placement>

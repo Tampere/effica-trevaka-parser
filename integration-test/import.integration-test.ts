@@ -74,7 +74,11 @@ describe("GET /import xml positive", () => {
                 openDateRange,
                 openDateRange,
                 openDateRange,
-                closedDateRange
+                closedDateRange,
+                openDateRange,
+                openDateRange,
+                openDateRange,
+                openDateRange,
             )
         )
     })
@@ -122,6 +126,10 @@ describe("GET /import xml positive", () => {
                 closedDateRange,
                 closedDateRange,
                 openDateRange,
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
             )
         )
     })
@@ -140,7 +148,11 @@ describe("GET /import xml positive", () => {
                 closedDateRange,
                 closedDateRange,
                 closedDateRange,
-                openDateRange
+                openDateRange,
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
+                closedDateRange,
             )
         )
     })

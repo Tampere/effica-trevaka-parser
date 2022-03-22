@@ -33,7 +33,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <PayDecision>
   <HeadOfFamily>180476-998M</HeadOfFamily>
   <InternalDecisionNumber>3843783</InternalDecisionNumber>
-  <StartDate>20200201</StartDate>
+  <StartDate>20200203</StartDate>
   <EndDate>20200228</EndDate>
   <Fee>492.00</Fee>
   <CaseWorker></CaseWorker>
@@ -42,4 +42,46 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <DecisionDate>20200101</DecisionDate>
   <Status>82</Status>
   <GUID>paydecision3843783</GUID>
+</PayDecision>
+<PayDecision>
+  <!-- Relates to placement 21, ERROR CASE START AFTER END -->
+  <HeadOfFamily>180476-999M</HeadOfFamily>
+  <InternalDecisionNumber>3843784</InternalDecisionNumber>
+  <StartDate>20200802</StartDate>
+  <EndDate>20200801</EndDate>
+  <Fee>492.00</Fee>
+  <CaseWorker></CaseWorker>
+  <DecisionMaker></DecisionMaker>
+  <DecisionNumber>123456793</DecisionNumber>
+  <DecisionDate>20200101</DecisionDate>
+  <Status>999420001</Status>
+  <GUID>paydecision3843784</GUID>
+</PayDecision>
+<PayDecision>
+  <!-- Relates to placement 22, END DATE SHOULD BE SET TO 31.7.2021 -->
+  <HeadOfFamily>180476-999M</HeadOfFamily>
+  <InternalDecisionNumber>3843785</InternalDecisionNumber>
+  <StartDate>20200803</StartDate>
+  <EndDate></EndDate>
+  <Fee>492.00</Fee>
+  <CaseWorker></CaseWorker>
+  <DecisionMaker></DecisionMaker>
+  <DecisionNumber>123456794</DecisionNumber>
+  <DecisionDate>20200101</DecisionDate>
+  <Status>999420001</Status>
+  <GUID>paydecision3843785</GUID>
+</PayDecision>
+<PayDecision>
+  <!-- Relates to placement 23, END DATE SHOULD BE SET TO 31.7.2021 -->
+  <HeadOfFamily>180475-999M</HeadOfFamily>
+  <InternalDecisionNumber>3843786</InternalDecisionNumber>
+  <StartDate>20190801</StartDate>
+  <EndDate></EndDate>
+  <Fee>492.00</Fee>
+  <CaseWorker></CaseWorker>
+  <DecisionMaker></DecisionMaker>
+  <DecisionNumber>123456795</DecisionNumber>
+  <DecisionDate>20190701</DecisionDate>
+  <Status>999420001</Status>
+  <GUID>paydecision3843786</GUID>
 </PayDecision>

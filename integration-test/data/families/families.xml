@@ -60,4 +60,31 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <enddate>20201201</enddate>
     <roleinfamily>B</roleinfamily>
 </personinfamily>
-
+<personinfamily>
+    <familynbr>3</familynbr>
+    <personid>180476-999M</personid>
+    <startdate>20151125</startdate>
+    <enddate></enddate>
+    <roleinfamily>S</roleinfamily>
+</personinfamily>
+<personinfamily>
+    <familynbr>3</familynbr>
+    <personid>251115A9509</personid>
+    <startdate>20151125</startdate>
+    <enddate></enddate>
+    <roleinfamily>B</roleinfamily>
+</personinfamily>
+<personinfamily>
+    <familynbr>4</familynbr>
+    <personid>180475-999M</personid>
+    <startdate>20151125</startdate>
+    <enddate></enddate>
+    <roleinfamily>S</roleinfamily>
+</personinfamily>
+<personinfamily>
+    <familynbr>4</familynbr>
+    <personid>251114A9509</personid>
+    <startdate>20151125</startdate>
+    <enddate></enddate>
+    <roleinfamily>B</roleinfamily>
+</personinfamily>

@@ -93,7 +93,7 @@ describe("GET /transform positive", () => {
         cleanUps = ["evaka_person"]
         await positiveTransformSnapshotTest(
             "persons",
-            Array(6).fill(personExpectation)
+            Array(10).fill(personExpectation)
         )
     })
     it("should return transformed families", async () => {
@@ -229,6 +229,10 @@ describe("GET /transform positive", () => {
                     placementExpectation, // p=12, e=12
                     { ...placementExpectation, daycare_group_id: null }, // p=13, e=131
                     placementExpectation, // p=18, e=18
+                    placementExpectation, // p=20, e=200
+                    placementExpectation, // p=21, e=210
+                    placementExpectation, // p=22, e=220
+                    placementExpectation, // p=23, e=230
                 ],
                 placementsTodo: [
                     placementExpectation, // p=11, p=112
@@ -312,20 +316,26 @@ describe("GET /transform positive", () => {
         const feeDecisionExpectation = {
             id: expect.any(String),
             head_of_family_id: expect.any(String),
-            partner_id: expect.any(String),
+            partner_id: expect.any(String) || null
         }
         const feeDecisionChildExpectation = {
             id: expect.any(String),
             fee_decision_id: expect.any(String),
-            child_id: expect.any(String),
+            child_id: expect.any(String)
         }
 
         await positiveTransformSnapshotTest(
             "pay_decisions",
             {
-                feeDecisions: Array(1).fill(feeDecisionExpectation),
-                feeDecisionsTodo: Array(0).fill(feeDecisionExpectation),
-                feeDecisionChildren: Array(1).fill(feeDecisionChildExpectation),
+                feeDecisions: [
+                    {...feeDecisionExpectation, partner_id: null},
+                    feeDecisionExpectation,
+                    {...feeDecisionExpectation, partner_id: null}
+                ],
+                feeDecisionsTodo: [
+                    {...feeDecisionExpectation, partner_id: null}
+                ],
+                feeDecisionChildren: Array(3).fill(feeDecisionChildExpectation),
                 feeDecisionChildrenTodo: Array(0).fill(feeDecisionChildExpectation),
             }
         )

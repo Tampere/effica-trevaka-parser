@@ -74,3 +74,83 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <RowType>2</RowType>
   <GUID>paydecisionrow38437831</GUID>
 </PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843784</InternalId>
+  <RowNumber>1</RowNumber>
+  <Person>180476-999M</Person>
+  <Income>999999</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>1</RowType>
+  <GUID>paydecisionrow38437841</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843784</InternalId>
+  <RowNumber>2</RowNumber>
+  <Person>251115A9509</Person>
+  <Income>999999</Income>
+  <Specification>Perhekoko 2 (maksu 10.70%)</Specification>
+  <Fee>0.00</Fee>
+  <RowType>3</RowType>
+  <GUID>paydecisionrow38437842</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843785</InternalId>
+  <RowNumber>2</RowNumber>
+  <Person>180476-999M</Person>
+  <Income>0</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>1</RowType>
+  <GUID>paydecisionrow38437851</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843785</InternalId>
+  <RowNumber>2</RowNumber>
+  <Person></Person>
+  <Income></Income>
+  <Specification>Perhekoko 2 (maksu 10.70%)</Specification>
+  <Fee>0.00</Fee>
+  <RowType>3</RowType>
+  <GUID>paydecisionrow38437852</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843785</InternalId>
+  <RowNumber>3</RowNumber>
+  <Person>251115A9509</Person>
+  <Income>999999</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>5</RowType>
+  <GUID>paydecisionrow38437853</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843786</InternalId>
+  <RowNumber>1</RowNumber>
+  <Person>180475-999M</Person>
+  <Income>0</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>1</RowType>
+  <GUID>paydecisionrow38437861</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843786</InternalId>
+  <RowNumber>2</RowNumber>
+  <Person></Person>
+  <Income></Income>
+  <Specification>Perhekoko 2 (maksu 10.70%)</Specification>
+  <Fee>0.00</Fee>
+  <RowType>3</RowType>
+  <GUID>paydecisionrow38437862</GUID>
+</PayDecisionRows>
+<PayDecisionRows>
+  <InternalId>3843786</InternalId>
+  <RowNumber>3</RowNumber>
+  <Person>251114A9509</Person>
+  <Income>999999</Income>
+  <Specification></Specification>
+  <Fee>0.00</Fee>
+  <RowType>5</RowType>
+  <GUID>paydecisionrow38437863</GUID>
+</PayDecisionRows>

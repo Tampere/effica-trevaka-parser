@@ -215,9 +215,18 @@ WHERE id IN (SELECT id FROM ${migrationSchema:name}.evaka_fee_decision_child_tod
 
 -- fix decision end dates (based on oldest child)
 UPDATE ${migrationSchema:name}.evaka_fee_decision d
-SET end_date = make_date(date_part('year', (
-    SELECT min(child_date_of_birth)
-    FROM ${migrationSchema:name}.evaka_fee_decision_child
-    WHERE fee_decision_id = d.id
-) + interval '6 years')::int, 7, 31)
+SET end_date = CASE
+    WHEN 'PRESCHOOL_DAYCARE' = (SELECT sno.valid_placement_type FROM ${migrationSchema:name}.evaka_fee_decision_child efd JOIN service_need_option sno ON sno.id = efd.service_need_option_id WHERE fee_decision_id = d.id)
+        THEN make_date(date_part('year', (
+            SELECT min(child_date_of_birth)
+            FROM ${migrationSchema:name}.evaka_fee_decision_child
+            WHERE fee_decision_id = d.id
+        ) + interval '7 years')::int, 7, 31)
+    ELSE
+        make_date(date_part('year', (
+            SELECT min(child_date_of_birth)
+            FROM ${migrationSchema:name}.evaka_fee_decision_child
+            WHERE fee_decision_id = d.id
+        ) + interval '6 years')::int, 7, 31)
+END
 WHERE end_date IS NULL;
