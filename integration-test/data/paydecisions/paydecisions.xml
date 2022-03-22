@@ -58,7 +58,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <GUID>paydecision3843784</GUID>
 </PayDecision>
 <PayDecision>
-  <!-- Relates to placement 22, END DATE SHOULD BE SET TO 31.7.2021 -->
+  <!-- Relates to placement 22 -->
   <HeadOfFamily>180476-999M</HeadOfFamily>
   <InternalDecisionNumber>3843785</InternalDecisionNumber>
   <StartDate>20200803</StartDate>
@@ -72,7 +72,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <GUID>paydecision3843785</GUID>
 </PayDecision>
 <PayDecision>
-  <!-- Relates to placement 23, END DATE SHOULD BE SET TO 31.7.2021 -->
+  <!-- Relates to placement 23 -->
   <HeadOfFamily>180475-999M</HeadOfFamily>
   <InternalDecisionNumber>3843786</InternalDecisionNumber>
   <StartDate>20190801</StartDate>

@@ -291,9 +291,9 @@ Object {
       "effica_paydecisionrows_guid": null,
       "effica_ssn": "010619A9501",
       "fee_and_deviations": Array [
-        -10000,
-        -28800,
-        49200,
+        -100,
+        -288,
+        492,
       ],
       "fee_decision_id": Any<String>,
       "id": Any<String>,
@@ -340,7 +340,7 @@ Object {
       "effica_guid": "paydecision3843786",
       "effica_internal_decision_number": 3843786,
       "effica_ssn": "180475-999M",
-      "end_date": "2021-07-31T00:00:00.000Z",
+      "end_date": "2099-12-31T00:00:00.000Z",
       "family_size": 2,
       "head_of_family_id": Any<String>,
       "head_of_family_income": Object {
@@ -368,7 +368,7 @@ Object {
       "effica_guid": "paydecision3843781",
       "effica_internal_decision_number": 3843781,
       "effica_ssn": "020967-9992",
-      "end_date": "2025-07-31T00:00:00.000Z",
+      "end_date": "2099-12-31T00:00:00.000Z",
       "family_size": 2,
       "head_of_family_id": Any<String>,
       "head_of_family_income": Object {
@@ -405,7 +405,7 @@ Object {
       "effica_guid": "paydecision3843785",
       "effica_internal_decision_number": 3843785,
       "effica_ssn": "180476-999M",
-      "end_date": "2021-07-31T00:00:00.000Z",
+      "end_date": "2099-12-31T00:00:00.000Z",
       "family_size": 2,
       "head_of_family_id": Any<String>,
       "head_of_family_income": Object {
@@ -1049,7 +1049,7 @@ Object {
       "status": "SENT",
       "status_group": "APPROVED",
       "valid_from": "2020-04-01T00:00:00.000Z",
-      "valid_to": "2025-07-31T00:00:00.000Z",
+      "valid_to": "2099-12-31T00:00:00.000Z",
       "voucher_value": 1000,
     },
   ],

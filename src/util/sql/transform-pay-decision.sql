@@ -174,7 +174,7 @@ SELECT
     0, -- NO USABLE DATA AVAILABLE ON EFFICA SIDE
     ep.unit_id,
     ep.option_id,
-    array_agg(pdr.fee * 100),
+    array_agg(pdr.fee),
     pd.internaldecisionnumber,
     child.effica_ssn
 FROM ${migrationSchema:name}.paydecisionrows pdr

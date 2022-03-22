@@ -685,13 +685,13 @@ Object {
       "fee": 49200,
       "fee_alterations": Array [
         Object {
-          "amount": 10000,
+          "amount": 100,
           "effect": -10000,
           "isAbsolute": true,
           "type": "DISCOUNT",
         },
         Object {
-          "amount": 28800,
+          "amount": 288,
           "effect": -28800,
           "isAbsolute": true,
           "type": "DISCOUNT",
@@ -748,7 +748,7 @@ Object {
       "sent_at": null,
       "status": "SENT",
       "updated": Any<String>,
-      "valid_during": "[2019-08-01,2021-08-01)",
+      "valid_during": "[2019-08-01,2100-01-01)",
     },
     Object {
       "approved_at": null,
@@ -795,7 +795,7 @@ Object {
       "sent_at": null,
       "status": "SENT",
       "updated": Any<String>,
-      "valid_during": "[2020-03-01,2025-08-01)",
+      "valid_during": "[2020-03-01,2100-01-01)",
     },
     Object {
       "approved_at": null,
@@ -833,7 +833,7 @@ Object {
       "sent_at": null,
       "status": "SENT",
       "updated": Any<String>,
-      "valid_during": "[2020-08-03,2021-08-01)",
+      "valid_during": "[2020-08-03,2100-01-01)",
     },
   ],
 }
@@ -1609,7 +1609,7 @@ Array [
     "status": "SENT",
     "updated": Any<String>,
     "valid_from": "2020-04-01T00:00:00.000Z",
-    "valid_to": "2025-07-31T00:00:00.000Z",
+    "valid_to": "2099-12-31T00:00:00.000Z",
     "voucher_value": 1000,
   },
 ]
