@@ -69,7 +69,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
         WHEN 'WAITING_FOR_MANUAL_SENDING' THEN 'APPROVED'
     END,
     d.startdate,
-    COALESCE(d.enddate, make_date(date_part('year', child.date_of_birth + interval '6 years')::int, 7, 31)),
+    COALESCE(d.enddate, '2099-12-31'),
     d.decisionnbr,
     f_child.head_of_family,
     f_partner2.person_id,
