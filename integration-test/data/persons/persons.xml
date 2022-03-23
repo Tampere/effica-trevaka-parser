@@ -100,3 +100,67 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <homemunicipality>2</homemunicipality>
     <guid>{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa6}</guid>
 </person>
+<person>
+    <personid>251115A9509</personid>
+    <personname></personname>
+    <secretaddress></secretaddress>
+    <personstreetaddress></personstreetaddress>
+    <personcity></personcity>
+    <personzipcode></personzipcode>
+    <personhomeemail></personhomeemail>
+    <personmobilephone></personmobilephone>
+    <phonework></phonework>
+    <phonehome></phonehome>
+    <mothertongue>1</mothertongue>
+    <nationality>3</nationality>
+    <homemunicipality>2</homemunicipality>
+    <guid>{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa7}</guid>
+</person>
+<person>
+    <personid>180476-999M</personid>
+    <personname></personname>
+    <secretaddress></secretaddress>
+    <personstreetaddress></personstreetaddress>
+    <personcity></personcity>
+    <personzipcode></personzipcode>
+    <personhomeemail></personhomeemail>
+    <personmobilephone></personmobilephone>
+    <phonework></phonework>
+    <phonehome></phonehome>
+    <mothertongue>1</mothertongue>
+    <nationality>3</nationality>
+    <homemunicipality>2</homemunicipality>
+    <guid>{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa8}</guid>
+</person>
+<person>
+    <personid>180475-999M</personid>
+    <personname></personname>
+    <secretaddress></secretaddress>
+    <personstreetaddress></personstreetaddress>
+    <personcity></personcity>
+    <personzipcode></personzipcode>
+    <personhomeemail></personhomeemail>
+    <personmobilephone></personmobilephone>
+    <phonework></phonework>
+    <phonehome></phonehome>
+    <mothertongue>1</mothertongue>
+    <nationality>3</nationality>
+    <homemunicipality>2</homemunicipality>
+    <guid>{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa9}</guid>
+</person>
+<person>
+    <personid>251114A9509</personid>
+    <personname></personname>
+    <secretaddress></secretaddress>
+    <personstreetaddress></personstreetaddress>
+    <personcity></personcity>
+    <personzipcode></personzipcode>
+    <personhomeemail></personhomeemail>
+    <personmobilephone></personmobilephone>
+    <phonework></phonework>
+    <phonehome></phonehome>
+    <mothertongue>1</mothertongue>
+    <nationality>3</nationality>
+    <homemunicipality>2</homemunicipality>
+    <guid>{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa10}</guid>
+</person>
