@@ -17,7 +17,7 @@ export const transferDepartmentData = async (returnAll: boolean = false) => {
 
     const caretakersQueryPart = `
         INSERT INTO daycare_caretaker (group_id, amount, start_date, end_date)
-        SELECT id, $(amount), start_date, end_date FROM daycare_group
+        SELECT id, $(amount), start_date, end_date FROM ${getMigrationSchemaPrefix()}evaka_daycare_group
     `;
 
     const caretakersQuery = wrapWithReturning(
