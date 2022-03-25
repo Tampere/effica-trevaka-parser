@@ -36,7 +36,7 @@ export const transformPersonData = async (returnAll: boolean = false) => {
         (id, effica_guid, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, effica_ssn, date_of_birth, source_system)
     SELECT
         id, 'evaka-' || id, social_security_number, last_name, first_name, email, language, street_address, postal_code, post_office, nationalities, restricted_details_enabled, phone, backup_phone, social_security_number, date_of_birth, 'evaka'
-    FROM person
+    FROM person WHERE social_security_number IS NOT NULL
     `
 
     const insertQueryPart = `
