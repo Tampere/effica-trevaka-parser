@@ -12,19 +12,19 @@ Developed for assisting in the migration of early education data from the old ed
 ## Configuration
 The parser provides some configuration options to make the tool usable in different environments:
 
-| Environmental variable    | Description                                                                                                              | Default value |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `MIGRATION_SCHEMA`        | The database schema used to create import and transformation tables                                                      | `migration`   |
-| `EXTENSION_SCHEMA`        | The database schema used to look for necessary database extensions (UUID generation, gist exclusions)                    | `ext`         |
-| `ISTIMED`                 | true/false for enabling per operation timing print outs to console                                                       | `false`       |
-| `PGHOST`                  | The host of the migration database                                                                                       | `localhost`   |
-| `PGUSER`                  | The user used in connecting to the migration database                                                                    | `postgres`    |
-| `PGDATABASE`              | The name of the database used for migration                                                                              | `migration`   |
-| `PGPASSWORD`              | The password used to connect to the migration database                                                                   | `postgres`    |
-| `COPY_PERSONS_FROM_EVAKA` | Whether migration tool prefers existing data if overlapping ssns. Basically false for dev use, true for actual migration | `false`       |
-| `MOCKVTJ`                 | Whether person previous vtj-update dates are set to a static value. This is used if target eVaka has no VTJ integration  | `false`       |
-| `VARDA_API_URL`           | Varda API base URL for Varda harvesting client (check eVaka config for the value, select suitable environment)           |               |
-| `VARDA_BASIC_AUTH`        | Varda client BASE64 authentication string                                                                                |               |
+| Environmental variable    | Description                                                                                                               | Default value |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `MIGRATION_SCHEMA`        | The database schema used to create import and transformation tables                                                       | `migration`   |
+| `EXTENSION_SCHEMA`        | The database schema used to look for necessary database extensions (UUID generation, gist exclusions)                     | `ext`         |
+| `ISTIMED`                 | true/false for enabling per operation timing print outs to console                                                        | `false`       |
+| `PGHOST`                  | The host of the migration database                                                                                        | `localhost`   |
+| `PGUSER`                  | The user used in connecting to the migration database                                                                     | `postgres`    |
+| `PGDATABASE`              | The name of the database used for migration                                                                               | `migration`   |
+| `PGPASSWORD`              | The password used to connect to the migration database                                                                    | `postgres`    |
+| `COPY_PERSONS_FROM_EVAKA` | Whether migration tool prefers existing data if overlapping ssns. Basically false for dev use, true for actual migration  | `false`       |
+| `MOCKVTJ`                 | Whether person's previous vtj-update dates are set to a static value. This is used if target eVaka has no VTJ integration | `false`       |
+| `VARDA_API_URL`           | Varda API base URL for Varda harvesting client (check eVaka config for the value, select suitable environment)            |               |
+| `VARDA_BASIC_AUTH`        | Varda client BASE64 authentication string                                                                                 |               |
 
 The necessary database objects for the default configuration on the accompanying docker db are created with the `init.sql` initialization script upon container composition. If using another database, configure parser to match its requirements.
 
