@@ -12,15 +12,19 @@ Developed for assisting in the migration of early education data from the old ed
 ## Configuration
 The parser provides some configuration options to make the tool usable in different environments:
 
-| Environmental variable | Description                                                                                           | Default value |
-| ---------------------- | ----------------------------------------------------------------------------------------------------- | ------------- |
-| `MIGRATION_SCHEMA`     | The database schema used to create import and transformation tables                                   | `migration`   |
-| `EXTENSION_SCHEMA`     | The database schema used to look for necessary database extensions (UUID generation, gist exclusions) | `ext`         |
-| `ISTIMED`              | true/false for enabling per operation timing print outs to console                                    | `false`       |
-| `PGHOST`               | The host of the migration database                                                                    | `localhost`   |
-| `PGUSER`               | The user used in connecting to the migration database                                                 | `postgres`    |
-| `PGDATABASE`           | The name of the database used for migration                                                           | `migration`   |
-| `PGPASSWORD`           | The password used to connect to the migration database                                                | `postgres`    |
+| Environmental variable    | Description                                                                                                              | Default value |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| `MIGRATION_SCHEMA`        | The database schema used to create import and transformation tables                                                      | `migration`   |
+| `EXTENSION_SCHEMA`        | The database schema used to look for necessary database extensions (UUID generation, gist exclusions)                    | `ext`         |
+| `ISTIMED`                 | true/false for enabling per operation timing print outs to console                                                       | `false`       |
+| `PGHOST`                  | The host of the migration database                                                                                       | `localhost`   |
+| `PGUSER`                  | The user used in connecting to the migration database                                                                    | `postgres`    |
+| `PGDATABASE`              | The name of the database used for migration                                                                              | `migration`   |
+| `PGPASSWORD`              | The password used to connect to the migration database                                                                   | `postgres`    |
+| `COPY_PERSONS_FROM_EVAKA` | Whether migration tool prefers existing data if overlapping ssns. Basically false for dev use, true for actual migration | `false`       |
+| `MOCKVTJ`                 | Whether person previous vtj-update dates are set to a static value. This is used if target eVaka has no VTJ integration  | `false`       |
+| `VARDA_API_URL`           | Varda API base URL for Varda harvesting client (check eVaka config for the value, select suitable environment)           |               |
+| `VARDA_BASIC_AUTH`        | Varda client BASE64 authentication string                                                                                |               |
 
 The necessary database objects for the default configuration on the accompanying docker db are created with the `init.sql` initialization script upon container composition. If using another database, configure parser to match its requirements.
 
@@ -72,7 +76,21 @@ If the XML source files for the imported data are large (hundreds of megabytes),
        - default value can be changed in application configuration (`defaultPartitionBufferSize`)
        - in actuality the number of lines used is most likely smaller (divisible by the element line length)
 
+## Copying daycare and unit manager information from eVaka
+
+Depending on the migration structure, it may be required to use daycare and unit manager information prepared in eVaka for transforming related data. A simple endpoint was created to facilitate this during migration. This operation is not immediately testable with the accompanying DB container and requires target eVaka DB to actually have daycare and unit manager data. If using eVaka units in the migration, this step replaces daycare and unit manager CSV-import.
+
+1. Configure migration tool to connect to an eVaka DB with existing daycare and unit manager data as well as a migration schema
+2. Start the application with `npm start`
+3. Send an HTTP GET request to `http://localhost:3000/copy/um-and-daycare`
+   - no query parameters are required
+   - depending on the outcome the request will result in:
+     -  a 200 status code response with copied numbers for both elements
+     -  a 500 status code error response
+
 ## Transforming imported data
+
+**NOTE**: Ensure that your configured migration schema exists **before** starting the migration tool. DB functions required by the transformation phase are created during migration tool initialization.
 
 1. Send an HTTP GET request to `http://localhost:3000/transform/<element>` where element is the target of the transformation
    - transformations have per element prerequisites for pre-existing imported and/or transformed data
@@ -97,8 +115,11 @@ An HTTP GET request to `http://localhost:3000/transform` will attempt to transfo
 
 ### Resetting evaka data
 
+**NOTE**: This endpoint is meant to facilitate migration testing and development (changing datasets) and **not intended for production use**.
+
 1. Send an HTTP GET request to `http://localhost:3000/maintenance/reset-evaka` in order to truncate migration target data from the configured eVaka database
-    - this operation will remove eVaka data using cascading truncations starting from the `person` and `evaka_daycare` tables
+    - this operation will remove eVaka data using cascading truncations starting from the `person`, `daycare_group`, `varda_unit` and `decision` tables
+    - `daycare` and `unit_manager` are intentionally spared to retain eVaka unit and unit access right data
     - this means **any interconnected data in the target eVaka database will be removed**
       - consequently, this should only be used to clear a migration performed on a "clean" eVaka environment as any pre-existing data would also be removed
 
