@@ -250,6 +250,7 @@ describe("GET /import csv positive", () => {
             getTimeSeriesResultPattern(
                 daycareExpectation,
                 daycareExpectation,
+                daycareExpectation
             ))
     })
     it("should return created daycare oid mappings", async () => {

@@ -207,7 +207,7 @@ describe("GET /transform positive", () => {
         )
     })
 
-        it("should return transformed placements", async () => {
+    it("should return transformed placements", async () => {
         await setupTransformations(["persons", "families", "departments", "application"])
 
         const placementExpectation = {
@@ -328,12 +328,12 @@ describe("GET /transform positive", () => {
             "pay_decisions",
             {
                 feeDecisions: [
-                    {...feeDecisionExpectation, partner_id: null},
+                    { ...feeDecisionExpectation, partner_id: null },
                     feeDecisionExpectation,
-                    {...feeDecisionExpectation, partner_id: null}
+                    { ...feeDecisionExpectation, partner_id: null }
                 ],
                 feeDecisionsTodo: [
-                    {...feeDecisionExpectation, partner_id: null}
+                    { ...feeDecisionExpectation, partner_id: null }
                 ],
                 feeDecisionChildren: Array(3).fill(feeDecisionChildExpectation),
                 feeDecisionChildrenTodo: Array(0).fill(feeDecisionChildExpectation),
@@ -402,7 +402,7 @@ describe("GET /transform positive", () => {
         await positiveTransformSnapshotTest("application", {
             applications: Array(2).fill(applicationExpectation),
             applicationsTodo: Array(0).fill(applicationExpectation),
-            applicationForms: Array(1).fill(applicationFormExpectation),
+            applicationForms: Array(2).fill(applicationFormExpectation),
             applicationFormsTodo: Array(0).fill(applicationFormExpectation),
         })
     })

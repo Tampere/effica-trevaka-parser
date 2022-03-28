@@ -20,3 +20,19 @@ SPDX-License-Identifier: LGPL-2.1-or-later
   <CareId>12345</CareId>
   <GUID>52F59481-5533-49E4-8D9F-85E6E180B768</GUID>
 </ApplicationRows>
+<ApplicationRows>
+  <PersonId>010619A9501</PersonId>
+  <Priority>2</Priority>
+  <UnitCode>0</UnitCode>
+  <ChildMinder>&#x20;</ChildMinder>
+  <AreaCode>4010401</AreaCode>
+  <StartDate>20210901</StartDate>
+  <Hours>0.00</Hours>
+  <ChildMinderCare>1</ChildMinderCare>
+  <UnitCare>0</UnitCare>
+  <Days>0</Days>
+  <Extent>100</Extent>
+  <Type>BOA</Type>
+  <CareId>12345</CareId>
+  <GUID>testguid2</GUID>
+</ApplicationRows>

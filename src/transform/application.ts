@@ -8,12 +8,13 @@ import migrationDb from "../db/db";
 import {
     APPLICATION_STATUS_MAPPINGS,
     APPLICATION_TYPE_MAPPINGS,
+    CHILDMINDER_APPLICATION_UNIT
 } from "../mapping/citySpecific";
 import {
     baseQueryParameters,
     runQuery,
     runQueryFile,
-    selectFromTable,
+    selectFromTable
 } from "../util/queryTools";
 
 export const transformApplicationData = async (returnAll: boolean = false) => {
@@ -30,6 +31,7 @@ const transformApplications = async <T>(t: ITask<T>, returnAll: boolean) => {
         typeMappings: APPLICATION_TYPE_MAPPINGS[config.cityVariant],
         allTypes: Object.keys(APPLICATION_TYPE_MAPPINGS[config.cityVariant]),
         statusMappings: APPLICATION_STATUS_MAPPINGS[config.cityVariant],
+        childminderApplicationUnit: CHILDMINDER_APPLICATION_UNIT[config.cityVariant]
     });
 
     const applications = await runQuery(

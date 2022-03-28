@@ -85,7 +85,10 @@ SELECT
     r.careid,
     r.priority,
     ea.id,
-    COALESCE(um.evaka_id, cm.evaka_id),
+    CASE r.childmindercare
+        WHEN '1' THEN ${childminderApplicationUnit}
+        ELSE um.evaka_id
+    END,
     em.evaka_id,
     r.startdate,
     r.unitcode,
