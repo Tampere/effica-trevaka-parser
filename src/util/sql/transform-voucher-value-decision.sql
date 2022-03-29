@@ -76,11 +76,11 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     d.familysize,
     child.id,
     child.date_of_birth,
-    0, -- TODO: base co payment
-    0, -- TODO: sibling discount
+    d.paydecision * 100,
+    0, -- NO USABLE DATA AVAILABLE ON EFFICA SIDE
     COALESCE(um.evaka_id, cm.evaka_id),
     em.evaka_id,
-    0, -- TODO: co payment
+    d.paydecision * 100,
     d.totalsum * 100,
     d.paydecision * 100,
     d.factor,

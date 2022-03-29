@@ -1027,11 +1027,11 @@ exports[`GET /transform positive should return transformed voucher value decisio
 Object {
   "decisions": Array [
     Object {
-      "base_co_payment": 0,
+      "base_co_payment": 100,
       "capacity_factor": "0.00",
       "child_date_of_birth": "2019-06-01T00:00:00.000Z",
       "child_id": Any<String>,
-      "co_payment": 0,
+      "co_payment": 100,
       "decision_number": "1",
       "effica_childminder_id": null,
       "effica_decision_date": "2020-12-01T00:00:00.000Z",
