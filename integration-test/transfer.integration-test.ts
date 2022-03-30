@@ -254,7 +254,7 @@ describe("GET /transfer positive", () => {
         await setupTransfers(["unit_manager"])
         await positiveTransferSnapshotTest(
             "daycare",
-            Array(2).fill(daycareExpectation)
+            Array(3).fill(daycareExpectation)
         )
     })
     it("should return transferred departments", async () => {
@@ -380,9 +380,9 @@ describe("GET /transfer positive", () => {
             "fee_decisions",
             {
                 feeDecisions: [
-                    {...feeDecisionExpectation, partner_id: null},
+                    { ...feeDecisionExpectation, partner_id: null },
                     feeDecisionExpectation,
-                    {...feeDecisionExpectation, partner_id: null}
+                    { ...feeDecisionExpectation, partner_id: null }
                 ],
                 feeDecisionChildren: Array(3).fill(feeDecisionChildExpectation),
             }

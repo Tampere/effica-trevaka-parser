@@ -28,6 +28,16 @@ Object {
       "service_need_option_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
     },
+    Object {
+      "application_id": Any<String>,
+      "effica_application_id": 12345,
+      "effica_childminder_id": null,
+      "effica_priority": 2,
+      "effica_unit_id": 0,
+      "preferred_start_date": "2021-09-01T00:00:00.000Z",
+      "service_need_option_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
+      "unit_id": "cecdf326-0a56-11ec-90a9-e73454a1ee1a",
+    },
   ],
   "applicationFormsTodo": Array [],
   "applications": Array [

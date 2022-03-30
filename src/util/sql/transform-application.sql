@@ -85,7 +85,10 @@ SELECT
     r.careid,
     r.priority,
     ea.id,
-    COALESCE(um.evaka_id, cm.evaka_id),
+    CASE r.childmindercare
+        WHEN '1' THEN ${childminderApplicationUnit}
+        ELSE um.evaka_id
+    END,
     em.evaka_id,
     r.startdate,
     r.unitcode,
@@ -93,7 +96,6 @@ SELECT
 FROM ${migrationSchema:name}.applicationrows r
 JOIN ${migrationSchema:name}.evaka_application ea ON ea.effica_id = r.careid
 LEFT JOIN ${migrationSchema:name}.unitmap um ON um.effica_id = r.unitcode
-LEFT JOIN ${migrationSchema:name}.childmindermap cm ON cm.effica_id = r.childminder
 LEFT JOIN ${migrationSchema:name}.extentmap em ON em.effica_id = r.extent AND em.days = r.days;
 
 DROP TABLE IF EXISTS ${migrationSchema:name}.evaka_application_form_todo CASCADE;

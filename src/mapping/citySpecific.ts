@@ -249,3 +249,9 @@ This is the single entry value for the inclusive markings data selection period 
 export const MARKINGS_SELECTION_PERIOD: Record<string, SelectionPeriod> = {
     tampere: { startDate: '1900-01-01', endDate: '2022-02-28' }
 }
+
+
+//eVaka ID of the unit that every childminder application is addressed to, used in application form transformation
+export const CHILDMINDER_APPLICATION_UNIT: Record<string, string> = {
+    tampere: 'cecdf326-0a56-11ec-90a9-e73454a1ee1a'
+}
