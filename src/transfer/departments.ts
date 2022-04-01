@@ -26,11 +26,21 @@ export const transferDepartmentData = async (returnAll: boolean = false) => {
         returnAll
     );
 
+    // from V84__create_message_accounts.sql
+    const messageAccountQuery = `
+    INSERT INTO message_account (daycare_group_id)
+    SELECT id
+    FROM daycare_group
+    ON CONFLICT DO NOTHING
+    RETURNING *;
+    `;
+
     return await migrationDb.tx(async (t) => {
         const groups = await runQuery(insertQuery, t, true);
         const caretakers = await runQuery(caretakersQuery, t, true, {
             amount: 3,
         });
-        return { groups, caretakers };
+        const messageAccounts = await runQuery(messageAccountQuery, t, true);
+        return { groups, caretakers, messageAccounts };
     });
 }

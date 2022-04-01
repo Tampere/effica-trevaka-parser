@@ -218,6 +218,12 @@ const childAttendanceExpectation = {
     child_id: expect.any(String),
 }
 
+const messageAccountExpectation = {
+    id: expect.any(String),
+    created: expect.any(String),
+    updated: expect.any(String),
+}
+
 beforeAll(async () => {
     await initDb()
 
@@ -265,6 +271,10 @@ describe("GET /transfer positive", () => {
             {
                 groups: Array(2).fill(daycareGroupExpectation),
                 caretakers: Array(2).fill(caretakersExpectation),
+                messageAccounts: Array(2).fill({
+                    ...messageAccountExpectation,
+                    daycare_group_id: expect.any(String)
+                }),
             }
         )
     })
@@ -272,7 +282,13 @@ describe("GET /transfer positive", () => {
         await setupTransformations(["persons"])
         await positiveTransferSnapshotTest(
             "persons",
-            Array(10).fill(personExpectation)
+            {
+                persons: Array(10).fill(personExpectation),
+                messageAccounts: Array(10).fill({
+                    ...messageAccountExpectation,
+                    person_id: expect.any(String),
+                })
+            }
         )
     })
     it("should return transferred families", async () => {

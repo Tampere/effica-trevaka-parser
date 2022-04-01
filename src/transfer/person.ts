@@ -34,8 +34,19 @@ export const transferPersonData = async (returnAll: boolean = false) => {
     `
     const insertQuery = wrapWithReturning("person", insertQueryPart, returnAll)
 
+    // from V84__create_message_accounts.sql
+    const messageAccountQuery = `
+    INSERT INTO message_account (person_id)
+    SELECT id
+    FROM person
+    ON CONFLICT DO NOTHING
+    RETURNING *;
+    `;
+
     return await migrationDb.tx(async (t) => {
-        return await runQuery(insertQuery, t, true)
+        const persons = await runQuery(insertQuery, t, true)
+        const messageAccounts = await runQuery(messageAccountQuery, t, true);
+        return { persons, messageAccounts };
     })
 
 }
