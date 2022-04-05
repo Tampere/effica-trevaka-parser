@@ -103,7 +103,10 @@ INSERT INTO voucher_value_decision (
     sno.fee_description_sv,
     sno.voucher_value_description_fi,
     sno.voucher_value_description_sv,
-    vv.age_under_three_coefficient,
+    CASE
+        WHEN age(vvd.valid_from, vvd.child_date_of_birth) < interval '3 years' THEN vv.age_under_three_coefficient
+        ELSE 1.00
+    END,
     vvd.capacity_factor
 FROM ${migrationSchema:name}.evaka_voucher_value_decision vvd
 LEFT JOIN fee_thresholds ft ON ft.valid_during @> vvd.effica_decision_date
