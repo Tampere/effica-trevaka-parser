@@ -648,7 +648,7 @@ Object {
     Array [
       Object {
         "caseworker": "FAKE",
-        "ceiling": "0",
+        "ceiling": "10",
         "days": 0,
         "decisionchildminder": null,
         "decisiondate": Any<String>,

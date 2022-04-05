@@ -81,7 +81,7 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     COALESCE(um.evaka_id, cm.evaka_id),
     em.evaka_id,
     d.paydecision * 100,
-    d.totalsum * 100,
+    d.ceiling * 100,
     d.paydecision * 100,
     d.factor,
     d.decisionunitcode,
