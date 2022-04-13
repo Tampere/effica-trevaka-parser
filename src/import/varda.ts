@@ -106,7 +106,7 @@ interface VardaPersonRow {
 
 interface VardaChildRow {
     url: string;
-    lahdejarjestelma: string;
+    lahdejarjestelma: string | null;
     id: number;
     henkilo_id: number | null;
     henkilo: string;
@@ -141,7 +141,7 @@ const tableSql = `
 
     CREATE TABLE IF NOT EXISTS $(migrationSchema:name).varda_child (
         url TEXT NOT NULL,
-        lahdejarjestelma TEXT NOT NULL,
+        lahdejarjestelma TEXT,
         id BIGINT PRIMARY KEY,
         henkilo_id BIGINT REFERENCES $(migrationSchema:name).varda_person,
         henkilo TEXT NOT NULL,

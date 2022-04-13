@@ -20,7 +20,7 @@ export interface VardaV1Children {
 
 export interface VardaV1Child {
     url: string;
-    lahdejarjestelma: string;
+    lahdejarjestelma: string | null;
     id: number;
     henkilo: string; // person url
     henkilo_oid: string;
