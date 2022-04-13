@@ -10,7 +10,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_voucher_value_decision(
     effica_decision_date DATE,
     status TEXT,
     status_group TEXT,
-    valid_from DATE,
+    valid_from DATE NOT NULL,
     valid_to DATE NOT NULL,
     decision_number BIGINT,
     head_of_family_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
@@ -76,12 +76,12 @@ INSERT INTO ${migrationSchema:name}.evaka_voucher_value_decision (
     d.familysize,
     child.id,
     child.date_of_birth,
-    0, -- TODO: base co payment
-    0, -- TODO: sibling discount
+    d.paydecision * 100,
+    0, -- NO USABLE DATA AVAILABLE ON EFFICA SIDE
     COALESCE(um.evaka_id, cm.evaka_id),
     em.evaka_id,
-    0, -- TODO: co payment
-    d.totalsum * 100,
+    d.paydecision * 100,
+    d.ceiling * 100,
     d.paydecision * 100,
     d.factor,
     d.decisionunitcode,
@@ -137,6 +137,37 @@ WHERE EXISTS (
     FROM $(migrationSchema:name).evaka_voucher_value_decision d2
     WHERE d2.effica_ssn = d.effica_ssn
         AND d2.status_group = d.status_group
+        AND d2.id <> d.id
+        AND d.valid_to >= d.valid_from AND d2.valid_to >= d2.valid_from
+        AND daterange(d.valid_from, d.valid_to, '[]') <@ daterange(d2.valid_from, d2.valid_to, '[]')
+        AND (
+            d2.effica_decision_date > d.effica_decision_date OR
+            d2.effica_decision_date = d.effica_decision_date AND d2.decision_number > d.decision_number
+        )
+);
+
+-- fix partly overlapping decisions
+UPDATE ${migrationSchema:name}.evaka_voucher_value_decision d
+SET valid_from = (
+    SELECT d2.valid_to + interval '1 day'
+    FROM ${migrationSchema:name}.evaka_voucher_value_decision d2
+    WHERE d2.effica_ssn = d.effica_ssn
+        AND d2.status_group = d.status_group
+        AND d2.id <> d.id
+        AND (d2.valid_from <= d2.valid_to OR d2.valid_from IS NULL OR d2.valid_to IS NULL)
+        AND (d.valid_from <= d.valid_to OR d.valid_from IS NULL OR d.valid_to IS NULL)
+        AND daterange(d2.valid_from, d2.valid_to, '[]') && daterange(d.valid_from, d.valid_to, '[]')
+        AND (
+            d2.effica_decision_date > d.effica_decision_date OR
+            d2.effica_decision_date = d.effica_decision_date AND d2.decision_number > d.decision_number
+        )
+)
+WHERE EXISTS (
+    SELECT 1
+    FROM ${migrationSchema:name}.evaka_voucher_value_decision d2
+    WHERE d2.effica_ssn = d.effica_ssn
+        AND d2.status_group = d.status_group
+        AND d2.id <> d.id
         AND (d2.valid_from <= d2.valid_to OR d2.valid_from IS NULL OR d2.valid_to IS NULL)
         AND (d.valid_from <= d.valid_to OR d.valid_from IS NULL OR d.valid_to IS NULL)
         AND daterange(d2.valid_from, d2.valid_to, '[]') && daterange(d.valid_from, d.valid_to, '[]')

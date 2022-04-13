@@ -21,7 +21,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <paydecision>1</paydecision>
     <sum>10</sum>
     <factor>0.00</factor>
-    <ceiling>0.00</ceiling>
+    <ceiling>10.00</ceiling>
     <familysize>5</familysize>
     <totalsum>10</totalsum>
     <grandtotal>10</grandtotal>
