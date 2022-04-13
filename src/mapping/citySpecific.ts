@@ -218,6 +218,7 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
 
         //maps effica income period codes to evaka income periods
         incomePeriodMap: [
+            //some effica info is missing incomeperiod (code 0), the mapped period shouldn't matter because values seems to always be 0
             { codes: [83], evakaType: "MONTHLY_NO_HOLIDAY_BONUS" },
             { codes: [111], evakaType: "DAILY_ALLOWANCE_21_5" },
             { codes: [112], evakaType: "DAILY_ALLOWANCE_25" },
@@ -231,6 +232,10 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
 
         // income type for fee decisions
         feeDecisionIncomeType: "MAIN_INCOME",
+
+        // some incomerows rows need to be skipped if they use unwanted or erroneous incomeperiods
+        // skipping rows only effects income detail listings, not actual total sums
+        ignoredIncomePeriodCodes: [0, 450]
     }
 
 }
