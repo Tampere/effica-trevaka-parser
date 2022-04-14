@@ -234,7 +234,7 @@ export const citySpecificIncomeMappings: CitySpecificIncomeMappings = {
         feeDecisionIncomeType: "MAIN_INCOME",
 
         // some incomerows rows need to be skipped if they use unwanted or erroneous incomeperiods
-        // skipping rows only effects income detail listings, not actual total sums
+        // skipping rows only affects income detail listings, not actual total sums
         ignoredIncomePeriodCodes: [0, 450]
     }
 
