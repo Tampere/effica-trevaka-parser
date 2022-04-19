@@ -8,6 +8,9 @@ import { citySpecificIncomeMappings } from "../mapping/citySpecific"
 import { CitySpecificIncomeMapping } from "../types/mappings"
 import { createSqlConditionalForCoefficients, createSqlConditionalForIncomeCodes, createTotalSumClauseForIncomeTypes, getExtensionSchemaPrefix, getMigrationSchemaPrefix, runQuery, wrapWithReturning } from "../util/queryTools"
 
+const getIgnoredIncomePeriodFilterClause = (mapping: CitySpecificIncomeMapping) => {
+    return mapping.ignoredIncomePeriodCodes.length > 0 ? `AND ir.incomeperiod NOT IN (${mapping.ignoredIncomePeriodCodes.join(",")})` : ""
+}
 export const transformIncomeData = async (returnAll: boolean = false) => {
     const incomeMapping: CitySpecificIncomeMapping = citySpecificIncomeMappings[config.cityVariant]
     if (!incomeMapping) {
@@ -106,6 +109,8 @@ export const transformIncomeData = async (returnAll: boolean = false) => {
                             OR
                             ((ir.enddate IS NULL OR ir.enddate > ir.startdate) AND daterange(i.startdate, i.enddate, '[]') && daterange(ir.startdate, ir.enddate, '[]'))
                         )
+                    -- a compatibility addition to ignore Effica era data ambiguity, filters out incomerows with specified incomeperiod codes
+                    ${getIgnoredIncomePeriodFilterClause(incomeMapping)}
             GROUP BY i.personid, i.maxincome, i.incomemissing, i.startdate, i.enddate, i.summa
         ) 
         SELECT
