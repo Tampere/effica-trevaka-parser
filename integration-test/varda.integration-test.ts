@@ -11,12 +11,12 @@ import { dropTable, truncateEvakaTables } from "../src/util/queryTools";
 import {
     setupTable,
     setupTransfer,
-    setupTransformation,
+    setupTransformation
 } from "../src/util/testTools";
 import {
     VardaClient,
     VardaV1Children,
-    VardaV1Person,
+    VardaV1Person
 } from "../src/util/varda-client";
 
 beforeAll(async () => {
@@ -24,16 +24,17 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+    await truncateEvakaTables(["varda_organizer_child", "person"]);
     await setupTable("persons");
     await setupTable("codes");
     await setupTransformation("persons");
     await setupTransfer("persons");
     await dropTable("varda_child");
     await dropTable("varda_person");
-    await truncateEvakaTables(["varda_organizer_child", "person"]);
 });
 
 afterAll(async () => {
+    await truncateEvakaTables(["varda_organizer_child", "person"]);
     await db.$pool.end();
 });
 
