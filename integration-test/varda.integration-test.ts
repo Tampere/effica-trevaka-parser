@@ -160,6 +160,7 @@ it("should import, transform and transfer varda data", async () => {
 
 const transformExpectation = {
     evaka_person_id: expect.any(String),
+    row_id: expect.any(String),
 };
 
 const transferExpectation = {

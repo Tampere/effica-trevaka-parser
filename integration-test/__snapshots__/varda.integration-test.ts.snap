@@ -106,6 +106,7 @@ Array [
   Object {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.1",
+    "row_id": Any<String>,
     "varda_child_id": "11",
     "varda_person_id": "21",
     "varda_person_oid": "1.1.1.1",
@@ -113,6 +114,7 @@ Array [
   Object {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.2",
+    "row_id": Any<String>,
     "varda_child_id": "12",
     "varda_person_id": "22",
     "varda_person_oid": "1.1.1.2",
@@ -120,6 +122,7 @@ Array [
   Object {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.3",
+    "row_id": Any<String>,
     "varda_child_id": "13",
     "varda_person_id": "21",
     "varda_person_oid": "1.1.1.1",

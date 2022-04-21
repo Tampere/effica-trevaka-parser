@@ -35,7 +35,8 @@ const tableSql = `
         varda_person_oid TEXT NOT NULL,
         varda_person_id BIGINT NOT NULL,
         varda_child_id BIGINT NOT NULL,
-        organizer_oid TEXT NOT NULL
+        organizer_oid TEXT NOT NULL,
+        row_id UUID NOT NULL DEFAULT $(extensionSchema:name).uuid_generate_v1mc()
     );
 
     DROP TABLE IF EXISTS $(migrationSchema:name).evaka_varda_organizer_child_todo;
@@ -45,6 +46,7 @@ const tableSql = `
         varda_person_id BIGINT NOT NULL,
         varda_child_id BIGINT NOT NULL,
         organizer_oid TEXT NOT NULL,
+        row_id UUID NOT NULL,
         reason TEXT NOT NULL
     );
 `;
@@ -78,24 +80,16 @@ const todoSql =
     INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child_todo
     SELECT a.*, 'AMBIGUOUS MATCH TO EVAKA PERSON' as reason
     FROM $(migrationSchema:name).evaka_varda_organizer_child a
-    JOIN $(migrationSchema:name).evaka_varda_organizer_child b on a.evaka_person_id = b.evaka_person_id
-        AND a.varda_person_id <> b.varda_person_id;
-
-    INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child_todo
-    SELECT a.*, 'AMBIGUOUS MATCH TO VARDA PERSON' as reason
-    FROM $(migrationSchema:name).evaka_varda_organizer_child a
-    JOIN $(migrationSchema:name).evaka_varda_organizer_child b on a.varda_person_id = b.varda_person_id
-        AND a.evaka_person_id IS NOT NULL
-        AND b.evaka_person_id IS NOT NULL
-        AND a.evaka_person_id <> b.evaka_person_id;
+    JOIN $(migrationSchema:name).evaka_varda_organizer_child b ON a.evaka_person_id = b.evaka_person_id
+        AND a.varda_person_id = b.varda_person_id
+        AND a.varda_child_id = b.varda_child_id
+        AND a.row_id <> b.row_id;
 
     DELETE FROM $(migrationSchema:name).evaka_varda_organizer_child a
     WHERE EXISTS (
         SELECT FROM $(migrationSchema:name).evaka_varda_organizer_child_todo b
-        WHERE b.evaka_person_id = a.evaka_person_id
-            AND b.varda_person_oid = a.varda_person_oid
-            AND b.varda_person_id = a.varda_person_id
-        );
+        WHERE a.row_id = b.row_id
+    );
 
     INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child_todo
     SELECT null,
@@ -106,6 +100,7 @@ const todoSql =
                 WHEN vc.paos_kytkin THEN vc.paos_organisaatio_oid
                 ELSE vc.vakatoimija_oid
                 END,
+            $(extensionSchema:name).uuid_generate_v1mc() as row_id,
             'MISSING EVAKA MATCH' as reason
     FROM $(migrationSchema:name).varda_person vp
                 JOIN $(migrationSchema:name).varda_child vc ON vp.id = vc.henkilo_id
@@ -117,11 +112,11 @@ const todoSql =
                         $(migrationSchema:name).normalize_text(k.etunimet) =
                         $(migrationSchema:name).normalize_text(ep.first_name)
                     OR
-                        $(migrationSchema:name).normalize_text(ep.first_name) ilike
-                        '%' || $(migrationSchema:name).normalize_text(k.kutsumanimi) || '%'
+                        ' ' || $(migrationSchema:name).normalize_text(ep.first_name) || ' ' ilike
+                        '% ' || $(migrationSchema:name).normalize_text(k.kutsumanimi) || ' %'
                 )
-                AND $(migrationSchema:name).normalize_text(ep.last_name) ilike
-                    '%' || $(migrationSchema:name).normalize_text(k.sukunimi) || '%'
+                AND ' ' || $(migrationSchema:name).normalize_text(ep.last_name) || ' ' ilike
+                    '% ' || $(migrationSchema:name).normalize_text(k.sukunimi) || ' %'
                 AND k.syntyma_pvm = ep.date_of_birth
                 AND k.id = vp.id
     );
