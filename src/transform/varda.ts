@@ -51,39 +51,46 @@ const tableSql = `
     );
 `;
 
+const personMatcherClause =
+    `
+WHERE (
+        $(migrationSchema:name).normalize_text(k.etunimet) =
+        $(migrationSchema:name).normalize_text(ep.first_name)
+        OR
+        ' ' || $(migrationSchema:name).normalize_text(ep.first_name) || ' ' ilike
+        '% ' || $(migrationSchema:name).normalize_text(k.kutsumanimi) || ' %'
+    )
+    AND ' ' || $(migrationSchema:name).normalize_text(ep.last_name) || ' ' ilike
+        '% ' || $(migrationSchema:name).normalize_text(k.sukunimi) || ' %'
+    AND k.syntyma_pvm = ep.date_of_birth
+`
+
 const transformSql =
     `
     INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child
         (evaka_person_id, varda_person_oid, varda_person_id, varda_child_id, organizer_oid)
     SELECT
-        ep.id, vp.henkilo_oid, vp.id, vc.id, CASE
+        ep.id, k.henkilo_oid, k.id, vc.id, CASE
             WHEN vc.paos_kytkin THEN vc.paos_organisaatio_oid
             ELSE vc.vakatoimija_oid
         END
     FROM $(migrationSchema:name).varda_child vc
-    JOIN $(migrationSchema:name).varda_person vp ON vp.id = vc.henkilo_id
+    JOIN $(migrationSchema:name).varda_person k ON k.id = vc.henkilo_id
     CROSS JOIN person ep
-    WHERE (
-        $(migrationSchema:name).normalize_text(vp.etunimet) =
-        $(migrationSchema:name).normalize_text(ep.first_name)
-      OR
-        $(migrationSchema:name).normalize_text(ep.first_name) ilike
-           '%' || $(migrationSchema:name).normalize_text(vp.kutsumanimi) || '%'
-        )
-      AND $(migrationSchema:name).normalize_text(ep.last_name) ilike
-          '%' || $(migrationSchema:name).normalize_text(vp.sukunimi) || '%'
-      AND vp.syntyma_pvm = ep.date_of_birth
+    ${personMatcherClause}
     `;
 
 const todoSql =
     `
     INSERT INTO $(migrationSchema:name).evaka_varda_organizer_child_todo
-    SELECT a.*, 'AMBIGUOUS MATCH TO EVAKA PERSON' as reason
+    SELECT a.*, 'MULTIPLE EVAKA MATCHES' as reason
     FROM $(migrationSchema:name).evaka_varda_organizer_child a
-    JOIN $(migrationSchema:name).evaka_varda_organizer_child b ON a.evaka_person_id = b.evaka_person_id
-        AND a.varda_person_id = b.varda_person_id
-        AND a.varda_child_id = b.varda_child_id
-        AND a.row_id <> b.row_id;
+    WHERE exists
+        (SELECT
+        FROM $(migrationSchema:name).evaka_varda_organizer_child b
+        WHERE a.varda_person_id = b.varda_person_id
+            and a.varda_child_id = b.varda_child_id
+            and a.row_id <> b.row_id);
 
     DELETE FROM $(migrationSchema:name).evaka_varda_organizer_child a
     WHERE EXISTS (
@@ -108,16 +115,7 @@ const todoSql =
             SELECT
             FROM $(migrationSchema:name).varda_person k
                         CROSS JOIN person ep
-            WHERE (
-                        $(migrationSchema:name).normalize_text(k.etunimet) =
-                        $(migrationSchema:name).normalize_text(ep.first_name)
-                    OR
-                        ' ' || $(migrationSchema:name).normalize_text(ep.first_name) || ' ' ilike
-                        '% ' || $(migrationSchema:name).normalize_text(k.kutsumanimi) || ' %'
-                )
-                AND ' ' || $(migrationSchema:name).normalize_text(ep.last_name) || ' ' ilike
-                    '% ' || $(migrationSchema:name).normalize_text(k.sukunimi) || ' %'
-                AND k.syntyma_pvm = ep.date_of_birth
+            ${personMatcherClause}
                 AND k.id = vp.id
     );
     `
