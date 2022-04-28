@@ -6,21 +6,22 @@ import axios, { Axios } from "axios";
 import { config } from "../config";
 
 export interface VardaClient {
-    getChildren: () => Promise<VardaV1Children>;
+    getChildren: () => Promise<VardaV1Page<VardaV1Child>>;
     getByUrl: <T>(url: string) => Promise<T | null>;
     getPersonBySsn: (ssn: string) => Promise<VardaV1Person | null>;
+    getUnits: () => Promise<VardaV1Page<VardaV1Unit>>;
 }
 
-export interface VardaV1Children {
+export interface VardaV1Page<T> {
     count: number;
     next: string | null;
     previous: string | null;
-    results: VardaV1Child[];
+    results: T[];
 }
 
 export interface VardaV1Child {
     url: string;
-    lahdejarjestelma: string;
+    lahdejarjestelma: string | null;
     id: number;
     henkilo: string; // person url
     henkilo_oid: string;
@@ -49,6 +50,21 @@ export interface VardaV1Person {
     lapsi: string[];
     tyontekija: string[];
     turvakielto: boolean;
+}
+
+export interface VardaV1Unit {
+    url: string;
+    lahdejarjestelma: string | null;
+    id: number;
+    vakajarjestaja: string; // organizer url
+    vakajarjestaja_oid: string | null;
+    organisaatio_oid: string;
+    nimi: string;
+    alkamis_pvm: string;
+    paattymis_pvm: string | null;
+    hallinnointijarjestelma: string;
+    tunniste: string | null;
+    muutos_pvm: string;
 }
 
 export class AxiosVardaClient implements VardaClient {
@@ -80,7 +96,7 @@ export class AxiosVardaClient implements VardaClient {
     getChildren = async () => {
         const { httpClient, apiUrl } = await this.initialize();
         const url = `${apiUrl}/v1/lapset/`;
-        const { data } = await httpClient.get<VardaV1Children>(url);
+        const { data } = await httpClient.get<VardaV1Page<VardaV1Child>>(url);
         return data;
     };
     getByUrl = async <T>(url: string) => {
@@ -110,6 +126,12 @@ export class AxiosVardaClient implements VardaClient {
         if (status === 404) {
             return null;
         }
+        return data;
+    };
+    getUnits = async (): Promise<VardaV1Page<VardaV1Unit>> => {
+        const { httpClient, apiUrl } = await this.initialize();
+        const url = `${apiUrl}/v1/toimipaikat/`;
+        const { data } = await httpClient.get<VardaV1Page<VardaV1Unit>>(url);
         return data;
     };
 }

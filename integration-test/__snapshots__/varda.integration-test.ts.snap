@@ -1,5 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should import varda unit data 1`] = `
+Array [
+  Object {
+    "alkamis_pvm": 2022-01-01T00:00:00.000Z,
+    "hallinnointijarjestelma": "VARDA",
+    "id": "11",
+    "lahdejarjestelma": "93",
+    "muutos_pvm": "2022-02-09T11:29:00.249Z",
+    "nimi": "Toimipaikka 1",
+    "organisaatio_oid": "",
+    "paattymis_pvm": null,
+    "tunniste": "tunniste1",
+    "url": "localhost/toimipaikka/11",
+    "vakajarjestaja": "localhost/organisaatio/2.2.2.1",
+    "vakajarjestaja_oid": "2.2.2.1",
+  },
+  Object {
+    "alkamis_pvm": 2020-01-01T00:00:00.000Z,
+    "hallinnointijarjestelma": "VARDA",
+    "id": "12",
+    "lahdejarjestelma": "45",
+    "muutos_pvm": "2022-02-09T11:29:00.249Z",
+    "nimi": "Toimipaikka 2",
+    "organisaatio_oid": "",
+    "paattymis_pvm": 2020-12-31T00:00:00.000Z,
+    "tunniste": "tunniste2",
+    "url": "localhost/toimipaikka/12",
+    "vakajarjestaja": "localhost/organisaatio/2.2.2.4",
+    "vakajarjestaja_oid": "2.2.2.4",
+  },
+  Object {
+    "alkamis_pvm": 2021-01-01T00:00:00.000Z,
+    "hallinnointijarjestelma": "VARDA",
+    "id": "13",
+    "lahdejarjestelma": "57",
+    "muutos_pvm": "2022-02-09T11:29:00.249Z",
+    "nimi": "Toimipaikka 3",
+    "organisaatio_oid": "",
+    "paattymis_pvm": null,
+    "tunniste": "tunniste3",
+    "url": "localhost/toimipaikka/13",
+    "vakajarjestaja": "localhost/organisaatio/2.2.2.3",
+    "vakajarjestaja_oid": "2.2.2.3",
+  },
+]
+`;
+
 exports[`should import, transform and transfer varda data 1`] = `
 Array [
   Object {

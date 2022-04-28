@@ -5,7 +5,7 @@
 import express from "express"
 import { config } from "../config"
 import { importFileData } from "../import/service"
-import { importVarda, importVardaPersonData } from "../import/varda"
+import { importVarda, importVardaPersonData, importVardaUnitData } from "../import/varda"
 import { readFilesFromDir, readFilesFromDirAsPartitions } from "../io/io"
 import { FileDescriptor, ImportOptions, PartitionImportOptions } from "../types"
 import { ErrorWithCause } from "../util/error"
@@ -54,6 +54,22 @@ router.get("/partition", async (req, res, next) => {
     }
     timeEnd("**** Import total ", undefined, "*")
 })
+
+router.get("/varda/unit", async (req, res, next) => {
+    time("**** Import total ", undefined, "*");
+    try {
+        const importResult = await importVardaUnitData(new AxiosVardaClient());
+        res.status(200).json(importResult);
+    } catch (err) {
+        next(
+            new ErrorWithCause(
+                `Import operation failed, transaction rolled back:`,
+                err
+            )
+        );
+    }
+    timeEnd("**** Import total ", undefined, "*");
+});
 
 router.get("/varda", async (req, res, next) => {
     time("**** Import total ", undefined, "*");

@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import db from "../src/db/db";
-import { importVarda } from "../src/import/varda";
+import { importVarda, importVardaUnitData } from "../src/import/varda";
 import { initDb } from "../src/init";
 import { transferVarda } from "../src/transfer/varda";
 import { transformVarda } from "../src/transform/varda";
@@ -15,8 +15,10 @@ import {
 } from "../src/util/testTools";
 import {
     VardaClient,
-    VardaV1Children,
-    VardaV1Person
+    VardaV1Child,
+    VardaV1Page,
+    VardaV1Person,
+    VardaV1Unit
 } from "../src/util/varda-client";
 
 beforeAll(async () => {
@@ -29,6 +31,7 @@ beforeEach(async () => {
     await setupTable("codes");
     await setupTransformation("persons");
     await setupTransfer("persons");
+    await dropTable("varda_unit");
     await dropTable("varda_child");
     await dropTable("varda_person");
 });
@@ -38,8 +41,87 @@ afterAll(async () => {
     await db.$pool.end();
 });
 
+it("should import varda unit data", async () => {
+    const mockDataByUrl: Record<string, VardaV1Page<VardaV1Unit>> = {
+        "localhost/v1/toimipaikat": {
+            count: 3,
+            next: "localhost/v1/toimipaikat?page=2",
+            previous: null,
+            results: [
+                {
+                    url: "localhost/toimipaikka/11",
+                    lahdejarjestelma: "93",
+                    id: 11,
+                    vakajarjestaja: "localhost/organisaatio/2.2.2.1",
+                    vakajarjestaja_oid: "2.2.2.1",
+                    organisaatio_oid: "",
+                    nimi: "Toimipaikka 1",
+                    alkamis_pvm: "2022-01-01",
+                    paattymis_pvm: null,
+                    hallinnointijarjestelma: "VARDA",
+                    tunniste: "tunniste1",
+                    muutos_pvm: "2022-02-09T11:29:00.249Z",
+                },
+                {
+                    url: "localhost/toimipaikka/12",
+                    lahdejarjestelma: "45",
+                    id: 12,
+                    vakajarjestaja: "localhost/organisaatio/2.2.2.4",
+                    vakajarjestaja_oid: "2.2.2.4",
+                    organisaatio_oid: "",
+                    nimi: "Toimipaikka 2",
+                    alkamis_pvm: "2020-01-01",
+                    paattymis_pvm: "2020-12-31",
+                    hallinnointijarjestelma: "VARDA",
+                    tunniste: "tunniste2",
+                    muutos_pvm: "2022-02-09T11:29:00.249Z",
+                },
+            ],
+        },
+        "localhost/v1/toimipaikat?page=2": {
+            count: 3,
+            next: null,
+            previous: "localhost/v1/toimipaikat",
+            results: [
+                {
+                    url: "localhost/toimipaikka/13",
+                    lahdejarjestelma: "57",
+                    id: 13,
+                    vakajarjestaja: "localhost/organisaatio/2.2.2.3",
+                    vakajarjestaja_oid: "2.2.2.3",
+                    organisaatio_oid: "",
+                    nimi: "Toimipaikka 3",
+                    alkamis_pvm: "2021-01-01",
+                    paattymis_pvm: null,
+                    hallinnointijarjestelma: "VARDA",
+                    tunniste: "tunniste3",
+                    muutos_pvm: "2022-02-09T11:29:00.249Z",
+                },
+            ],
+        },
+    };
+    const client: VardaClient = {
+        //@ts-ignore
+        getUnits: jest.fn(() => mockDataByUrl["localhost/v1/toimipaikat"]),
+        //@ts-ignore
+        getByUrl: jest.fn((url) => {
+            const mockData = mockDataByUrl[url];
+            if (mockData === undefined) {
+                return Promise.reject("404");
+            }
+            return Promise.resolve(mockData);
+        }),
+    };
+
+    const importData = await importVardaUnitData(client);
+    expect(importData).toMatchSnapshot();
+});
+
 it("should import, transform and transfer varda data", async () => {
-    const mockDataByUrl: Record<string, VardaV1Children | VardaV1Person> = {
+    const mockDataByUrl: Record<
+        string,
+        VardaV1Page<VardaV1Child> | VardaV1Person
+    > = {
         "localhost//v1/lapset": {
             count: 3,
             next: "localhost//v1/lapset?page=2",
