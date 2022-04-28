@@ -62,3 +62,10 @@ BEGIN
     RAISE EXCEPTION 'Unsupported preschool daycare start date %', input;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
+
+DROP FUNCTION IF EXISTS ${migrationSchema:name}.normalize_text(text) CASCADE;
+CREATE FUNCTION ${migrationSchema:name}.normalize_text(input text) RETURNS text AS $$
+BEGIN
+    RETURN upper(unaccent(replace(input, '''', '´')));
+END
+$$ LANGUAGE plpgsql IMMUTABLE;

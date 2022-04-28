@@ -11,14 +11,14 @@ import { dropTable, truncateEvakaTables } from "../src/util/queryTools";
 import {
     setupTable,
     setupTransfer,
-    setupTransformation,
+    setupTransformation
 } from "../src/util/testTools";
 import {
     VardaClient,
     VardaV1Child,
     VardaV1Page,
     VardaV1Person,
-    VardaV1Unit,
+    VardaV1Unit
 } from "../src/util/varda-client";
 
 beforeAll(async () => {
@@ -26,6 +26,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+    await truncateEvakaTables(["varda_organizer_child", "person"]);
     await setupTable("persons");
     await setupTable("codes");
     await setupTransformation("persons");
@@ -33,10 +34,10 @@ beforeEach(async () => {
     await dropTable("varda_unit");
     await dropTable("varda_child");
     await dropTable("varda_person");
-    await truncateEvakaTables(["varda_organizer_child", "person"]);
 });
 
 afterAll(async () => {
+    await truncateEvakaTables(["varda_organizer_child", "person"]);
     await db.$pool.end();
 });
 
@@ -241,6 +242,7 @@ it("should import, transform and transfer varda data", async () => {
 
 const transformExpectation = {
     evaka_person_id: expect.any(String),
+    row_id: expect.any(String),
 };
 
 const transferExpectation = {
