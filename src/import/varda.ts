@@ -7,8 +7,10 @@ import migrationDb, { pgp } from "../db/db";
 import { baseQueryParameters } from "../util/queryTools";
 import {
     VardaClient,
-    VardaV1Children,
+    VardaV1Child,
+    VardaV1Page,
     VardaV1Person,
+    VardaV1Unit,
 } from "../util/varda-client";
 
 export const importVarda = async (vardaClient: VardaClient) => {
@@ -40,7 +42,9 @@ const importVardaChildData = async (vardaClient: VardaClient) => {
         if (++pageNumber % 50 === 0) {
             console.log(`Loading page ${pageNumber}`);
         }
-        const data = await vardaClient.getByUrl<VardaV1Children>(nextUrl);
+        const data = await vardaClient.getByUrl<VardaV1Page<VardaV1Child>>(
+            nextUrl
+        );
         if (data === null) {
             throw Error(`Next url '${nextUrl}' returned 404`);
         }
@@ -91,6 +95,42 @@ export const importVardaPersonData = async (vardaClient: VardaClient) => {
     return data;
 };
 
+export const importVardaUnitData = async (vardaClient: VardaClient) => {
+    await migrationDb.none(tableSql, baseQueryParameters);
+    let units = await vardaClient.getUnits();
+    const unitCount = units.count;
+    const pageCount = Math.ceil(unitCount / units.results.length);
+    console.log(`Unit count=${unitCount}, page count=${pageCount}`);
+    let pageNumber = 1;
+    while (true) {
+        const results = units.results.map((result) => ({
+            ...result,
+        }));
+        const insertSql = pgp.helpers.insert(results, unitColumns);
+        await migrationDb.none(insertSql);
+
+        const nextUrl = units.next;
+        if (nextUrl === null) {
+            break;
+        }
+
+        if (++pageNumber % 50 === 0) {
+            console.log(`Loading page ${pageNumber}`);
+        }
+        const data = await vardaClient.getByUrl<VardaV1Page<VardaV1Unit>>(
+            nextUrl
+        );
+        if (data === null) {
+            throw Error(`Next url '${nextUrl}' returned 404`);
+        }
+        units = data;
+    }
+    return migrationDb.manyOrNone(
+        "SELECT * FROM $(migrationSchema:name).varda_unit ORDER BY id",
+        baseQueryParameters
+    );
+};
+
 interface VardaPersonRow {
     url: string;
     id: number;
@@ -106,7 +146,7 @@ interface VardaPersonRow {
 
 interface VardaChildRow {
     url: string;
-    lahdejarjestelma: string;
+    lahdejarjestelma: string | null;
     id: number;
     henkilo_id: number | null;
     henkilo: string;
@@ -141,7 +181,7 @@ const tableSql = `
 
     CREATE TABLE IF NOT EXISTS $(migrationSchema:name).varda_child (
         url TEXT NOT NULL,
-        lahdejarjestelma TEXT NOT NULL,
+        lahdejarjestelma TEXT,
         id BIGINT PRIMARY KEY,
         henkilo_id BIGINT REFERENCES $(migrationSchema:name).varda_person,
         henkilo TEXT NOT NULL,
@@ -159,6 +199,21 @@ const tableSql = `
         tunniste TEXT,
         muutos_pvm TEXT
         CHECK (vakatoimija_oid IS NOT NULL OR paos_organisaatio_oid IS NOT NULL)
+    );
+
+    CREATE TABLE IF NOT EXISTS $(migrationSchema:name).varda_unit (
+        url TEXT NOT NULL,
+        lahdejarjestelma TEXT,
+        id BIGINT PRIMARY KEY,
+        vakajarjestaja TEXT NOT NULL,
+        vakajarjestaja_oid TEXT,
+        organisaatio_oid TEXT NOT NULL,
+        nimi TEXT NOT NULL,
+        alkamis_pvm DATE NOT NULL,
+        paattymis_pvm DATE,
+        hallinnointijarjestelma TEXT NOT NULL,
+        tunniste TEXT,
+        muutos_pvm TEXT
     );
 `;
 
@@ -220,6 +275,29 @@ const personColumns = new pgp.helpers.ColumnSet(
     {
         table: {
             table: "varda_person",
+            schema: config.migrationSchema,
+        },
+    }
+);
+
+const unitColumns = new pgp.helpers.ColumnSet(
+    [
+        "url",
+        "lahdejarjestelma",
+        "id",
+        "vakajarjestaja",
+        "vakajarjestaja_oid",
+        "organisaatio_oid",
+        "nimi",
+        "alkamis_pvm",
+        "paattymis_pvm",
+        "hallinnointijarjestelma",
+        "tunniste",
+        "muutos_pvm",
+    ],
+    {
+        table: {
+            table: "varda_unit",
             schema: config.migrationSchema,
         },
     }
