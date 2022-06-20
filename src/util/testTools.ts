@@ -7,11 +7,12 @@ import app from "../app"
 import db from "../db/db"
 import { dropTable } from "./queryTools"
 
-export const importTable = async (tableName: string) => {
+export const importTable = async (tableName: string, importTarget?: string) => {
     const importUrl = "/import"
     const queryObject = {
         path: `/integration-test/data/${tableName}`,
         returnAll: "true",
+        importTarget,
     }
 
     const response = await request(app).get(importUrl).query(queryObject)
@@ -22,11 +23,11 @@ export const importTable = async (tableName: string) => {
     return response.body
 }
 
-export const setupTable = async (tableName: string) => {
+export const setupTable = async (tableName: string, importTarget?: string) => {
     await db.tx(async t => {
         return dropTable(tableName, t)
     })
-    return await importTable(tableName)
+    return await importTable(tableName, importTarget)
 }
 
 export const setupTables = async (tables: string[]) => {

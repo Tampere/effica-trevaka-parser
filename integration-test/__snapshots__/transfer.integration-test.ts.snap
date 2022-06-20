@@ -974,6 +974,52 @@ Array [
 ]
 `;
 
+exports[`GET /transfer positive should return transferred pedagogical document data 1`] = `
+Array [
+  Object {
+    "child_id": Any<String>,
+    "created": "2022-02-14T00:00:00.000Z",
+    "created_by": Any<String>,
+    "description": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+    "email_job_created_at": null,
+    "email_sent": false,
+    "id": Any<String>,
+    "updated": "2022-02-14T00:00:00.000Z",
+    "updated_by": Any<String>,
+  },
+  Object {
+    "child_id": Any<String>,
+    "created": "2022-02-14T00:00:00.000Z",
+    "created_by": Any<String>,
+    "description": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+    "email_job_created_at": null,
+    "email_sent": false,
+    "id": Any<String>,
+    "updated": "2022-02-14T00:00:00.000Z",
+    "updated_by": Any<String>,
+  },
+]
+`;
+
+exports[`GET /transfer positive should return transferred pedagogical document pdf 1`] = `
+Array [
+  Object {
+    "$metadata": Object {
+      "attempts": 1,
+      "httpStatusCode": 200,
+      "totalRetryDelay": 0,
+    },
+  },
+  Object {
+    "$metadata": Object {
+      "attempts": 1,
+      "httpStatusCode": 200,
+      "totalRetryDelay": 0,
+    },
+  },
+]
+`;
+
 exports[`GET /transfer positive should return transferred persons 1`] = `
 Object {
   "messageAccounts": Array [

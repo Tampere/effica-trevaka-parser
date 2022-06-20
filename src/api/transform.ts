@@ -11,6 +11,7 @@ import { transformFamilyData } from "../transform/families"
 import { transformFeeDeviationsData } from "../transform/fee-deviations"
 import { transformIncomeData } from "../transform/income"
 import { transformPayDecisionData } from "../transform/pay-decisions"
+import { transformPedagogicalDocumentData } from "../transform/pedagogical-documents"
 import { transformPersonData } from "../transform/person"
 import { transformPlacementsData } from "../transform/placements"
 import { transformSpecialMeansData } from "../transform/special-means"
@@ -203,6 +204,19 @@ router.get("/timestamps", async (req, res, next) => {
         next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transform timestamps total ", undefined, "*")
+})
+
+router.get("/pedagogical_documents", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transform pedagogical documents total ", undefined, "*")
+    try {
+        const results = await transformPedagogicalDocumentData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transform pedagogical documents total ", undefined, "*")
 })
 
 router.get("/varda", async (req, res, next) => {

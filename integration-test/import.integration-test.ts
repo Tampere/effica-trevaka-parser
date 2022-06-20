@@ -17,7 +17,10 @@ const tables = ["persons", "specialneeds", "specialmeans", "codes", "income", "i
     "feedeviations", "childminders", "evaka_areas", "unitmap", "unwantedunits", "childmindermap",
     "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
     "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map",
-    "families_exclusion", "placements_exclusion"]
+    "families_exclusion", "placements_exclusion",
+    "paydecisions", "paydecisionrows",
+    // päikky
+    "archiveddocument"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -210,6 +213,10 @@ describe("GET /import xml positive", () => {
             "applicationrows")
     })
 
+    it("should return created archived documents", async() => {
+        return await positiveImportSnapshotTest("archiveddocument", undefined, "archiveddocument")
+    })
+
     it("should work even if XML elements have mixed case", async () => {
         const queryObject = {
             path: "/integration-test/data/mixedcase",
@@ -298,10 +305,11 @@ const getTimeSeriesResultPattern = (...expectations: DateRangeExpectation[]) => 
     }
 }
 
-const positiveImportSnapshotTest = async (tableName: string, resultPattern?: any) => {
+const positiveImportSnapshotTest = async (tableName: string, resultPattern?: any, importTarget?: string) => {
     const queryObject = {
         path: `/integration-test/data/${tableName}`,
         returnAll: "true",
+        importTarget
     }
 
     const response = await request(app).get(baseUrl).query(queryObject)

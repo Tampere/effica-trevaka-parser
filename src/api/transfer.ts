@@ -17,6 +17,7 @@ import { transferFamiliesData } from "../transfer/families"
 import { transferFeeAlterationsData } from "../transfer/fee-alterations"
 import { transferFeeDecisionData } from "../transfer/fee-decisions"
 import { transferIncomeData } from "../transfer/income"
+import { transferPedagogicalDocumentData, transferPedagogicalDocumentPdf } from "../transfer/pedagogical-documents"
 import { transferPersonData } from "../transfer/person"
 import { transferPlacementsData } from "../transfer/placements"
 import { transferVarda } from "../transfer/varda"
@@ -212,6 +213,32 @@ router.get("/child_attendances", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer child attendances total ", undefined, "*")
+})
+router.get("/pedagogical_documents/data", async (req, res, next) => {
+    const returnAll = req.query.returnAll === "true"
+    time("**** Transfer pedagogical document data total ", undefined, "*")
+    try {
+        const results = await transferPedagogicalDocumentData(returnAll)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer pedagogical document data total ", undefined, "*")
+})
+router.get("/pedagogical_documents/pdf", async (req, res, next) => {
+    time("**** Transfer pedagogical document pdf total ", undefined, "*")
+    try {
+        const reqPath = req.query.path ?? "/xml"
+        const basePath = `${__dirname}/../..`
+        const path = basePath + reqPath
+        const results = await transferPedagogicalDocumentPdf(path)
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
+    }
+    timeEnd("**** Transfer pedagogical document pdf total ", undefined, "*")
 })
 router.get("/unit_manager", async (req, res, next) => {
     const returnAll = req.query.returnAll === "true"

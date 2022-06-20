@@ -17,6 +17,7 @@ export const nullDateParser = (v: number | string): string | null => {
     const stringValue = `${v}`
     return stringValue === "" || v == null || stringValue === "99999999" || stringValue === "99991231" ? null : DateTime.fromISO(stringValue).toISODate()
 }
+export const dateParser = (format: string = "yyyy-MM-dd") => (text: string) => DateTime.fromFormat(text, format)
 export const booleanParser = (v: boolean): boolean => v === true
 export const codeNumericParser = (v: number | null | undefined) => v == null || v === 0 ? null : v
 export const stringToNumericParser = (v: null | string) => v == null || v === "" || v === " " ? null : +v
