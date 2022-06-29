@@ -9,6 +9,7 @@ import importApi from "./api/import"
 import maintenanceApi from "./api/maintenance"
 import transferApi from "./api/transfer"
 import transformApi from "./api/transform"
+import vardaApi from "./api/varda"
 import { ErrorWithCause } from "./util/error"
 
 const app: express.Application = express()
@@ -25,6 +26,7 @@ app.use("/transform", transformApi)
 app.use("/transfer", transferApi)
 app.use("/maintenance", maintenanceApi)
 app.use("/copy", copyApi)
+app.use("/varda", vardaApi)
 app.use(errorHandler)
 
 export default app
