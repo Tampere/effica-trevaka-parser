@@ -127,3 +127,46 @@ An HTTP GET request to `http://localhost:3000/transform` will attempt to transfo
 
 1. Send an HTTP GET request to `http://localhost:3000/maintenance/vacuum-analyze` in order to force vacuum and analyze operations for eVaka database tables affected by the migration
     - this operation will run `VACUUM (ANALYZE, VERBOSE)` for every migration target in the configured eVaka DB
+
+
+## Varda-client API
+
+The parser implements a Varda-client for harvesting Varda information in order to fulfill eVaka-Varda integration prerequisite mappings. Additionally the parser exposes some endpoints for checking and reviewing Varda data directly. These endpoints are provided to help with verifying eVaka's Varda data deliveries and comparing existing Varda data with eVaka delivered content.
+
+**NOTE**: Be sure to configure `VARDA_API_URL` and `VARDA_BASIC_AUTH` environmental variables before using any Varda-related endpoints!
+
+### Checking Varda person data
+
+To fetch individual Varda child (Lapsi) elements and data by numeric Varda-id:
+
+1. Send an HTTP GET request to `http://localhost:3000/varda/child-data-by-varda-id/<vardaChildId>`
+  - this operation will fetch a summary of the Varda child element and return it as JSON
+
+To fetch individual Varda person (Henkilo) elements and all related child data by numeric Varda-id:
+
+1. Send an HTTP GET request to `http://localhost:3000/varda/person-data-by-varda-id/<vardaPersonId>` 
+  - this operation will fetch the direct person data and the data summary for every child element of the given Varda person and return it as JSON
+
+### Checking Varda unit data
+
+To fetch Varda data for a given numeric unit id:
+
+1. Send an HTTP GET request to `http://localhost:3000/varda/unit-data-by-varda-id/<vardaUnitId>`
+  - this operation will fetch the direct unit data for the given Varda unit-id and return it as JSON
+
+To fetch all unit data for the Varda organizer corresponding to the provided credentials:
+
+1. Send an HTTP GET request to `http://localhost:3000/varda/units`
+  - this operation will fetch direct unit data for all units accessible for the provided credentials and return it as JSON
+  - this operation can take some minutes depending on the number of units accessible
+
+### Checking Varda mapping data
+
+As Tampere had some uncertainty about the manual eVaka-Varda unit mapping, an endpoint was created to get basic comparison information about mapped units. Going through the generated comparison results before starting eVaka-Varda -integration is **highly recommended**, as running eVaka Varda-updates against a faulty mapping can create quite a mess and require manual recovery steps.
+
+To get a rudimentary comparison (name and closing status) of the mapped eVaka unit and corresponding existing Varda unit:
+
+1. Send an HTTP GET request to `http://localhost:3000/varda/unit-mapping-check`
+  - this operation will fetch all eVaka mappings in `varda_unit` table, corresponding unit names in eVaka `daycare` table and corresponding Varda-unit data based on the mapped unit id
+    - data is bifurcated into misses and matches by comparing the unit name as well as the closing status (does the unit have a closing date) in both systems
+    - the comparison results and data are then returned as JSON

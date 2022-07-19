@@ -96,3 +96,19 @@ export type CitySpecificIncomeMapping = {
 
 export type CitySpecificIncomeMappings = Record<string, CitySpecificIncomeMapping>
 export type SelectionPeriod = { startDate: string, endDate: string }
+
+export interface VardaUnitMappingRow {
+    evaka_daycare_id: string
+    varda_unit_id: number
+    name: string | null
+    is_closed: boolean
+}
+
+export type MappingComparison = {
+    evakaId: string
+    vardaId: number
+    evakaName: string | null
+    vardaName: string
+    evakaIsClosed: boolean
+    vardaIsClosed: boolean | null
+}

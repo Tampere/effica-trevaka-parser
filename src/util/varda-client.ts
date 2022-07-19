@@ -159,6 +159,24 @@ export class AxiosVardaClient implements VardaClient {
         return data;
     };
 
+    getAllUnits = async (): Promise<VardaV1Unit[]> => {
+        const { httpClient, apiUrl } = await this.initialize();
+        const allUnits: VardaV1Unit[] = []
+        let count = 0;
+        let url = `${apiUrl}/v1/toimipaikat/`;
+        let result = null
+        do {
+            count++
+            console.log(`Processing page ${count}`)
+            result = await httpClient.get<VardaV1Page<VardaV1Unit>>(url)
+            result.data.results.forEach(r => allUnits.push(r))
+            url = result.data.next ?? ""
+        }
+        while (url.length > 0)
+
+        return allUnits;
+    };
+
     getUnit = async (unitVardaId: string): Promise<VardaV1Unit> => {
         const { httpClient, apiUrl } = await this.initialize();
         const url = `${apiUrl}/v1/toimipaikat/${unitVardaId}/`
