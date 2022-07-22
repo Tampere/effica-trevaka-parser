@@ -67,6 +67,27 @@ export interface VardaV1Unit {
     muutos_pvm: string;
 }
 
+export interface VardaV1Decision {
+    url: string
+    lahdejarjestelma: number
+    id: number
+    lapsi: string
+    lapsi_tunniste: string | null
+    varhaiskasvatussuhteet_top: string[]
+    alkamis_pvm: string
+    hakemus_pvm: string
+    vuorohoito_kytkin: boolean
+    tilapainen_vaka_kytkin: boolean
+    pikakasittely_kytkin: boolean
+    tuntimaara_viikossa: number
+    paivittainen_vaka_kytkin: boolean
+    kokopaivainen_vaka_kytkin: boolean
+    jarjestamismuoto_koodi: string
+    paattymis_pvm: string
+    tunniste: string | null,
+    muutos_pvm: string
+}
+
 export class AxiosVardaClient implements VardaClient {
     private httpClient: Axios | null = null;
     private initialize = async () => {
@@ -101,10 +122,13 @@ export class AxiosVardaClient implements VardaClient {
     };
     getByUrl = async <T>(url: string) => {
         const { httpClient } = await this.initialize();
-        const { status, data } = await httpClient.get<T>(url, {
+        const { status, data, statusText } = await httpClient.get<T>(url, {
             validateStatus: (status: number) =>
                 (status >= 200 && status < 300) || status === 404,
         });
+        if (config.logResponses) {
+            console.log({ url, status, statusText })
+        }
         if (status === 404) {
             return null;
         }
@@ -134,4 +158,29 @@ export class AxiosVardaClient implements VardaClient {
         const { data } = await httpClient.get<VardaV1Page<VardaV1Unit>>(url);
         return data;
     };
+
+    getAllUnits = async (): Promise<VardaV1Unit[]> => {
+        const { httpClient, apiUrl } = await this.initialize();
+        const allUnits: VardaV1Unit[] = []
+        let count = 0;
+        let url = `${apiUrl}/v1/toimipaikat/`;
+        let result = null
+        do {
+            count++
+            console.log(`Processing page ${count}`)
+            result = await httpClient.get<VardaV1Page<VardaV1Unit>>(url)
+            result.data.results.forEach(r => allUnits.push(r))
+            url = result.data.next ?? ""
+        }
+        while (url.length > 0)
+
+        return allUnits;
+    };
+
+    getUnit = async (unitVardaId: string): Promise<VardaV1Unit> => {
+        const { httpClient, apiUrl } = await this.initialize();
+        const url = `${apiUrl}/v1/toimipaikat/${unitVardaId}/`
+        const { data } = await httpClient.get<VardaV1Unit>(url);
+        return data;
+    }
 }

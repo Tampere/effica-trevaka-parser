@@ -32,5 +32,6 @@ export const config = {
         trim: true,
         delimiter: "|"
     },
-    defaultPartitionBufferSize: 60000 //line buffer for partitioned file reading and data persisting
+    defaultPartitionBufferSize: 60000, //line buffer for partitioned file reading and data persisting
+    logResponses: process.env.LOG_RESPONSES?.toUpperCase() === "TRUE"
 }
