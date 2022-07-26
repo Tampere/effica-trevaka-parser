@@ -4,7 +4,7 @@
 
 import { config } from "../config"
 import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/tables"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, dateParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
 
@@ -369,6 +369,22 @@ export const efficaTableMapping: TypeMapping = {
             starttime3: { sqlType: "text", parser: nullForcingTextParser },
             endtime3: { sqlType: "text", parser: nullForcingTextParser },
             guid: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    // päikky
+    archiveddocument: {
+        tableName: "archiveddocument",
+        columns: {
+            ssn: { sqlType: "text", parser: nullForcingTextParser },
+            lastname: { sqlType: "text", parser: nullForcingTextParser },
+            firstname: { sqlType: "text", parser: nullForcingTextParser },
+            date: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
+            approvedby: { sqlType: "text", parser: nullForcingTextParser },
+            kindergartenname: { sqlType: "text", parser: nullForcingTextParser },
+            period: { sqlType: "text", parser: nullForcingTextParser },
+            documentname: { sqlType: "text", parser: nullForcingTextParser },
+            documenttemplatename: { sqlType: "text", parser: nullForcingTextParser },
+            dateofbirth: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
         },
     },
 }

@@ -465,6 +465,45 @@ Object {
 }
 `;
 
+exports[`GET /import xml positive should return created archived documents 1`] = `
+Object {
+  "inserts": Array [
+    Array [
+      Object {
+        "approvedby": "Päikky",
+        "date": "2022-02-14T00:00:00.000Z",
+        "dateofbirth": "2019-06-01T00:00:00.000Z",
+        "documentname": "1212_Varhaiskasvatussuunnitelma_Christian Child_2021-08-01 - 2022-07-31.pdf",
+        "documenttemplatename": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+        "firstname": "Christian",
+        "kindergartenname": "Testipäiväkoti",
+        "lastname": "Child",
+        "period": "01.08.2021 - 31.07.2022",
+        "ssn": "010619A9501",
+      },
+    ],
+    Array [
+      Object {
+        "approvedby": "Päikky",
+        "date": "2022-02-14T00:00:00.000Z",
+        "dateofbirth": "2018-11-25T00:00:00.000Z",
+        "documentname": "9035_Varhaiskasvatussuunnitelma_Camilla Child_2021-08-01 - 2022-07-31.pdf",
+        "documenttemplatename": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+        "firstname": "Camilla",
+        "kindergartenname": "Testipäiväkoti",
+        "lastname": "Child",
+        "period": "01.08.2021 - 31.07.2022",
+        "ssn": "251118A9509",
+      },
+    ],
+  ],
+  "tables": Array [
+    "archiveddocument",
+    "archiveddocument",
+  ],
+}
+`;
+
 exports[`GET /import xml positive should return created childminders 1`] = `
 Object {
   "inserts": Array [

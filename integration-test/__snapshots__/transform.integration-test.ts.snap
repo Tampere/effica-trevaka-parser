@@ -470,6 +470,36 @@ Object {
 }
 `;
 
+exports[`GET /transform positive should return transformed pedagogical documents 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attachment_id": Any<String>,
+      "child_id": Any<String>,
+      "content_type": "application/pdf",
+      "created": "2022-02-14T00:00:00.000Z",
+      "description": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+      "id": Any<String>,
+      "name": "1212_Varhaiskasvatussuunnitelma_Christian Child_2021-08-01 - 2022-07-31.pdf",
+      "updated": "2022-02-14T00:00:00.000Z",
+      "uploaded_to_s3": false,
+    },
+    Object {
+      "attachment_id": Any<String>,
+      "child_id": Any<String>,
+      "content_type": "application/pdf",
+      "created": "2022-02-14T00:00:00.000Z",
+      "description": "Varhaiskasvatussuunnitelma Testi 2021-2022",
+      "id": Any<String>,
+      "name": "9035_Varhaiskasvatussuunnitelma_Camilla Child_2021-08-01 - 2022-07-31.pdf",
+      "updated": "2022-02-14T00:00:00.000Z",
+      "uploaded_to_s3": false,
+    },
+  ],
+  "todo": Array [],
+}
+`;
+
 exports[`GET /transform positive should return transformed persons 1`] = `
 Array [
   Object {

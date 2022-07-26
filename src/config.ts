@@ -22,6 +22,13 @@ export const config = {
         apiUrl: process.env.VARDA_API_URL,
         basicAuth: process.env.VARDA_BASIC_AUTH,
     },
+    aws: {
+        region: process.env.AWS_REGION ?? 'eu-west-1',
+        s3: {
+            endpoint: process.env.AWS_S3_ENDPOINT,
+            bucket: process.env.AWS_S3_BUCKET,
+        }
+    },
     xmlParserOptions: {
         parseNodeValue: true,
         arrayMode: true,

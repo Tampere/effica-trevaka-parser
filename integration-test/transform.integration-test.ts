@@ -45,6 +45,7 @@ const baseDataTables =
         "dailyjournalrows",
         "timestampheaders",
         "timestampdetails",
+        "archiveddocument",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare",
@@ -62,7 +63,8 @@ beforeAll(async () => {
     await initDb()
 
     for (const table of baseDataTables) {
-        await setupTable(table)
+        const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
+        await setupTable(table, importTarget)
     }
 })
 
@@ -380,6 +382,24 @@ describe("GET /transform positive", () => {
             {
                 childAttendances: Array(1).fill(childAttendanceExpectation),
                 childAttendancesTodo: Array(0).fill(childAttendanceExpectation),
+            }
+        )
+    })
+
+    it("should return transformed pedagogical documents", async () => {
+        await setupTransformations(["persons"])
+
+        const pedagogicalDocumentExpectation = {
+            id: expect.any(String),
+            child_id: expect.any(String),
+            attachment_id: expect.any(String),
+        }
+
+        await positiveTransformSnapshotTest(
+            "pedagogical_documents",
+            {
+                data: Array(2).fill(pedagogicalDocumentExpectation),
+                todo: Array(0).fill(pedagogicalDocumentExpectation),
             }
         )
     })

@@ -40,6 +40,7 @@ const baseDataTables =
         "dailyjournalrows",
         "timestampheaders",
         "timestampdetails",
+        "archiveddocument",
         "evaka_areas",
         "evaka_unit_manager",
         "evaka_daycare",
@@ -218,6 +219,13 @@ const childAttendanceExpectation = {
     child_id: expect.any(String),
 }
 
+const pedagogicalDocumentExpectation = {
+    id: expect.any(String),
+    child_id: expect.any(String),
+    created_by: expect.any(String),
+    updated_by: expect.any(String),
+}
+
 const messageAccountExpectation = {
     id: expect.any(String),
     created: expect.any(String),
@@ -228,7 +236,8 @@ beforeAll(async () => {
     await initDb()
 
     for await (const table of baseDataTables) {
-        await setupTable(table)
+        const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
+        await setupTable(table, importTarget)
     }
 
     await setupTransformations(Object.keys(transformationMap))
@@ -432,7 +441,28 @@ describe("GET /transfer positive", () => {
         )
     })
 
-    it("should return oid updated daycares", async () => {
+    it("should return transferred pedagogical document data", async () => {
+        await setupTransformations(["persons", "pedagogical_documents"])
+        await setupTransfers(["persons"])
+        await positiveTransferSnapshotTest(
+            "pedagogical_documents/data",
+            Array(2).fill(pedagogicalDocumentExpectation)
+        )
+    })
+
+    it("should return transferred pedagogical document pdf", async () => {
+        await setupTransformations(["persons", "pedagogical_documents"])
+        await setupTransfers(["persons"])
+        await positiveTransferSnapshotTest(
+            "pedagogical_documents/pdf",
+            undefined,
+            {
+                "path": "/integration-test/data/archiveddocument/pdf"
+            }
+        )
+    })
+
+    xit("should return oid updated daycares", async () => {
         const vardaUnitExpectation = { created_at: expect.any(String), uploaded_at: expect.any(String) }
         const updateExpectation = {
             daycare: [
@@ -452,8 +482,9 @@ describe("GET /transfer positive", () => {
     })
 })
 
-const positiveTransferSnapshotTest = async (tableName: string, resultPattern?: any) => {
+const positiveTransferSnapshotTest = async (tableName: string, resultPattern?: any, baseQueryObject: Record<string, string> = {}) => {
     const queryObject = {
+        ...baseQueryObject,
         returnAll: "true"
     }
 

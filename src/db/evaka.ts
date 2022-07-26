@@ -61,6 +61,23 @@ export const ensureEfficaUser = async <T>(t: ITask<T>): Promise<string> => {
     return user.id;
 };
 
+export const ensurePäikkyUser = async <T>(t: ITask<T>): Promise<string> => {
+    let user = await t.oneOrNone<{ id: string }>(
+        "SELECT id FROM evaka_user WHERE type = 'UNKNOWN'::evaka_user_type AND name = 'Päikky'",
+        t
+    );
+    if (user === null) {
+        user = await t.one<{ id: string }>(
+            `
+            INSERT INTO evaka_user (id, type, name)
+            VALUES (${getExtensionSchemaPrefix()}uuid_generate_v1mc(), 'UNKNOWN'::evaka_user_type, 'Päikky')
+            RETURNING id`,
+            t
+        );
+    }
+    return user.id;
+};
+
 export const copyUnitManagersAndDaycaresFromEvaka = async (): Promise<any> => {
     const umTd = extTableMapping["evaka_unit_manager"]
     const daycareTd = extTableMapping["evaka_daycare"]
