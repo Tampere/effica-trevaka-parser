@@ -86,6 +86,7 @@ export const transferPedagogicalDocumentPdf = async (path: string) => {
             .replace(/ó/g, "├│")
             .replace(/ú/g, "├║")
             .replace(/í/g, "├н")
+            .replace(/ë/g, "├л")
             .replace(/õ/g, "├╡");
         const file = `${path}/${encodedName}`;
         console.log(file);
