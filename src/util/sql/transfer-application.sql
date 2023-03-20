@@ -3,7 +3,7 @@
 -- SPDX-License-Identifier: LGPL-2.1-or-later
 
 INSERT INTO application
-    (id, sentdate, duedate, guardian_id, child_id, transferapplication, status, origin)
+    (id, sentdate, duedate, guardian_id, child_id, transferapplication, status, origin, type, allow_other_guardian_access)
 SELECT
     id,
     sentdate,
@@ -12,7 +12,9 @@ SELECT
     child_id,
     transferapplication,
     status::application_status_type,
-    'ELECTRONIC'::application_origin_type
+    'ELECTRONIC'::application_origin_type,
+    type::application_type,
+    false
 FROM ${migrationSchema:name}.evaka_application;
 
 INSERT INTO application_form

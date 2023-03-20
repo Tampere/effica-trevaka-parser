@@ -13,7 +13,9 @@ INSERT INTO fee_decision (
     partner_income,
     family_size,
     fee_thresholds,
-    decision_number
+    decision_number,
+    total_fee,
+    difference
 ) SELECT
     efd.id,
     efd.status::fee_decision_status,
@@ -68,7 +70,9 @@ INSERT INTO fee_decision (
             'minFee', ft.min_fee
         )
     END,
-    efd.decision_number
+    efd.decision_number,
+    0, -- See UPDATE below
+    '{}'
 FROM ${migrationSchema:name}.evaka_fee_decision efd
 LEFT JOIN fee_thresholds ft ON ft.valid_during @> efd.start_date;
 
@@ -77,6 +81,7 @@ INSERT INTO fee_decision_child (
     fee_decision_id,
     child_id,
     child_date_of_birth,
+    child_income,
     sibling_discount,
     placement_unit_id,
     placement_type,
@@ -93,6 +98,7 @@ INSERT INTO fee_decision_child (
     efdc.fee_decision_id,
     efdc.child_id,
     efdc.child_date_of_birth,
+    efdc.child_income,
     efdc.sibling_discount,
     efdc.placement_unit_id,
     sno.valid_placement_type,
@@ -114,5 +120,11 @@ INSERT INTO fee_decision_child (
     (SELECT SUM(faa4) * 100 FROM unnest(efdc.fee_and_deviations) faa4)
 FROM ${migrationSchema:name}.evaka_fee_decision_child efdc
 JOIN service_need_option sno ON sno.id = efdc.service_need_option_id;
+
+UPDATE fee_decision SET total_fee = (
+    SELECT coalesce(sum(fee_decision_child.final_fee), 0) sum
+    FROM fee_decision_child
+    WHERE fee_decision_id = fee_decision.id
+);
 
 SELECT setval('fee_decision_number_sequence', (SELECT COALESCE(max(decision_number), 1) FROM fee_decision));
