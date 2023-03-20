@@ -81,10 +81,12 @@ export const transferPedagogicalDocumentPdf = async (path: string) => {
             .replace(/é/g, "├й")
             .replace(/ß/g, "├Я")
             .replace(/ç/g, "├з")
+            .replace(/Ç/g, "├З")
             .replace(/ã/g, "├г")
             .replace(/á/g, "├б")
             .replace(/ó/g, "├│")
             .replace(/ú/g, "├║")
+            .replace(/ü/g, "├╝")
             .replace(/í/g, "├н")
             .replace(/ë/g, "├л")
             .replace(/õ/g, "├╡");
