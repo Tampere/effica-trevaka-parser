@@ -157,6 +157,7 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
     fee_decision_id UUID REFERENCES ${migrationSchema:name}.evaka_fee_decision,
     child_id UUID REFERENCES ${migrationSchema:name}.evaka_person,
     child_date_of_birth DATE,
+    child_income JSONB,
     sibling_discount INTEGER NOT NULL,
     placement_unit_id UUID REFERENCES ${migrationSchema:name}.evaka_daycare,
     service_need_option_id UUID,
@@ -166,11 +167,35 @@ CREATE TABLE ${migrationSchema:name}.evaka_fee_decision_child (
 );
 
 INSERT INTO ${migrationSchema:name}.evaka_fee_decision_child
-    (fee_decision_id, child_id, child_date_of_birth, sibling_discount, placement_unit_id, service_need_option_id, fee_and_deviations, effica_internal_decision_number, effica_ssn)
+    (fee_decision_id, child_id, child_date_of_birth, child_income, sibling_discount, placement_unit_id, service_need_option_id, fee_and_deviations, effica_internal_decision_number, effica_ssn)
 SELECT
     efd.id,
     child.id,
     child.date_of_birth,
+    CASE
+        WHEN pdr.income = 999999 THEN jsonb_build_object(
+            'effect', 'MAX_FEE_ACCEPTED',
+            'data', jsonb_build_object(),
+            'totalIncome', 0,
+            'totalExpenses', 0,
+            'total', 0,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+        WHEN pdr.income IS NOT NULL THEN jsonb_build_object(
+            'effect', 'INCOME',
+            'data', jsonb_build_object(
+                $(incomeType), pdr.income * 100
+            ),
+            'totalIncome', pdr.income * 100,
+            'totalExpenses', 0,
+            'total', pdr.income * 100,
+            'worksAtECHA', false,
+            'validFrom', null,
+            'validTo', null
+        )
+    END,
     0, -- NO USABLE DATA AVAILABLE ON EFFICA SIDE
     ep.unit_id,
     ep.option_id,
@@ -188,6 +213,7 @@ GROUP BY
     efd.id,
     child.id,
     child.date_of_birth,
+    pdr.income,
     ep.unit_id,
     ep.option_id,
     pd.internaldecisionnumber,

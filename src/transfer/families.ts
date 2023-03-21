@@ -39,9 +39,9 @@ const transferChildData = async <T>(t: ITask<T>, returnAll: boolean) => {
 const transferPartnerData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
     INSERT INTO fridge_partner
-        (partnership_id, indx, person_id, start_date, end_date, conflict)
+        (partnership_id, indx, person_id, start_date, end_date, conflict, other_indx)
     SELECT
-        partnership_id, indx, person_id, start_date, end_date, false
+        partnership_id, indx, person_id, start_date, end_date, false, other_indx
     FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner
     `;
     const insertQuery = wrapWithReturning(

@@ -36,8 +36,8 @@ export const transferPersonData = async (returnAll: boolean = false) => {
 
     // from V84__create_message_accounts.sql
     const messageAccountQuery = `
-    INSERT INTO message_account (person_id)
-    SELECT id
+    INSERT INTO message_account (person_id, type)
+    SELECT id, 'CITIZEN'
     FROM person
     ON CONFLICT DO NOTHING
     RETURNING *;

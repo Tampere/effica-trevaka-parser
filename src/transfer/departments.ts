@@ -28,8 +28,8 @@ export const transferDepartmentData = async (returnAll: boolean = false) => {
 
     // from V84__create_message_accounts.sql
     const messageAccountQuery = `
-    INSERT INTO message_account (daycare_group_id)
-    SELECT id
+    INSERT INTO message_account (daycare_group_id, type)
+    SELECT id, 'GROUP'
     FROM daycare_group
     ON CONFLICT DO NOTHING
     RETURNING *;

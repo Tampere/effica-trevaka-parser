@@ -30,6 +30,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             person_id UUID NOT NULL,
             effica_ssn TEXT NOT NULL,
             indx smallint NOT NULL,
+            other_indx smallint NOT NULL,
             family_number INTEGER NOT NULL,
             start_date date NOT NULL,
             end_date date,
@@ -88,7 +89,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
 
     const partnerQueryPart =
         `
-        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner (person_id, partnership_id, start_date, end_date, indx, family_number, effica_ssn)
+        INSERT INTO ${getMigrationSchemaPrefix()}evaka_fridge_partner (person_id, partnership_id, start_date, end_date, indx, other_indx, family_number, effica_ssn)
         WITH partnerships AS (
             SELECT hof.personid                                   AS hof_ssn,
                 partner.personid                                  AS partner_ssn,
@@ -108,6 +109,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             ps.start_date,
             ps.end_date,
             1          AS indx,
+            2          AS other_indx,
             ps.family_number,
             ps.hof_ssn AS effica_ssn
         FROM partnerships ps
@@ -118,6 +120,7 @@ export const transformFamilyData = async (returnAll: boolean = false) => {
             ps.start_date,
             ps.end_date,
             2              AS indx,
+            1              AS other_indx,
             ps.family_number,
             ps.partner_ssn AS effica_ssn
         FROM partnerships ps
