@@ -4,11 +4,27 @@
 
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1.0
+
 executors:
   reuse_tool:
     docker:
       - image: fsfe/reuse:0.13.0 # NOTE: Update bin/add-license-headers.sh to match
     resource_class: small
+  machine:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    resource_class: medium
+    environment:
+      BUILDKIT_PROGRESS: plain
+
+commands:
+  checkout_with_submodules:
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init --recursive
 
 jobs:
   check_licenses:
@@ -25,9 +41,26 @@ jobs:
               echo '=========================================';
               exit 1
             }
+  test:
+    executor: machine
+    steps:
+      - checkout_with_submodules
+      - run:
+          name: Start up compose stack
+          command: docker-compose -f docker-compose-it-db.yml up -d --build
+      - node/install-packages
+      - run: npm run integration-test
+      - run:
+          name: Collect docker-compose logs
+          command: docker-compose -f docker-compose-it-db.yml logs --tail=all > /tmp/docker-compose-logs.txt
+          when: always
+      - store_artifacts:
+          path: /tmp/docker-compose-logs.txt
+          destination: docker-compose-logs.txt
 
 workflows:
   version: 2
   test:
     jobs:
       - check_licenses
+      - test
