@@ -29,7 +29,7 @@ export const selectFromTable = (tableName: string, schema: string = "", isDataRe
 
 const queryFileCache: Record<string, QueryFile> = {}
 
-export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, values: any = {}, isDataReturned: boolean = false) => {
+export const runQueryFile = async <T>(path: string, t: pgPromise.ITask<T>, values: any = {}, isDataReturned: boolean = false) => {
     let queryFile = queryFileCache[path];
     if (!queryFile) {
         const fullPath = joinPath(__dirname, "sql", path);
@@ -39,7 +39,7 @@ export const runQueryFile = async (path: string, t: pgPromise.ITask<{}>, values:
     return isDataReturned ? await t.any(queryFile, values) : await t.none(queryFile, values)
 }
 
-export const runQuery = async (query: string, t: pgPromise.ITask<{}>, isDataReturned: boolean = false, values: any = {}) => {
+export const runQuery = async <T>(query: string, t: pgPromise.ITask<T>, isDataReturned: boolean = false, values: any = {}) => {
     return isDataReturned ? await t.any(query, values) : await t.none(query, values)
 }
 

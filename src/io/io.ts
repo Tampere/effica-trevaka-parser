@@ -67,7 +67,7 @@ export async function readFilesFromDir(importOptions: ImportOptions): Promise<Fi
     } catch (err) {
         throw new ErrorWithCause(`Parsing file data failed:`, err)
     }
-    return files;
+    return files.sort((a, b) => a.fileName.localeCompare(b.fileName));
 }
 
 const stripXmlOverhead = (xmlData: any, fileName: string): any => {
