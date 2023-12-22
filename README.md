@@ -76,11 +76,11 @@ If the XML source files for the imported data are large (hundreds of megabytes),
        - default value can be changed in application configuration (`defaultPartitionBufferSize`)
        - in actuality the number of lines used is most likely smaller (divisible by the element line length)
 
-## Copying daycare and unit manager information from eVaka
+## Copying daycare information from eVaka
 
-Depending on the migration structure, it may be required to use daycare and unit manager information prepared in eVaka for transforming related data. A simple endpoint was created to facilitate this during migration. This operation is not immediately testable with the accompanying DB container and requires target eVaka DB to actually have daycare and unit manager data. If using eVaka units in the migration, this step replaces daycare and unit manager CSV-import.
+Depending on the migration structure, it may be required to use daycare information prepared in eVaka for transforming related data. A simple endpoint was created to facilitate this during migration. This operation is not immediately testable with the accompanying DB container and requires target eVaka DB to actually have daycare data. If using eVaka units in the migration, this step replaces daycare CSV-import.
 
-1. Configure migration tool to connect to an eVaka DB with existing daycare and unit manager data as well as a migration schema
+1. Configure migration tool to connect to an eVaka DB with existing daycare data as well as a migration schema
 2. Start the application with `npm start`
 3. Send an HTTP GET request to `http://localhost:3000/copy/um-and-daycare`
    - no query parameters are required
@@ -119,7 +119,7 @@ An HTTP GET request to `http://localhost:3000/transform` will attempt to transfo
 
 1. Send an HTTP GET request to `http://localhost:3000/maintenance/reset-evaka` in order to truncate migration target data from the configured eVaka database
     - this operation will remove eVaka data using cascading truncations starting from the `person`, `daycare_group`, `varda_unit` and `decision` tables
-    - `daycare` and `unit_manager` are intentionally spared to retain eVaka unit and unit access right data
+    - `daycare` is intentionally spared to retain eVaka unit and unit access right data
     - this means **any interconnected data in the target eVaka database will be removed**
       - consequently, this should only be used to clear a migration performed on a "clean" eVaka environment as any pre-existing data would also be removed
 

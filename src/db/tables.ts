@@ -7,20 +7,6 @@ import { config } from "../config"
 import { TableDescriptor } from "../types"
 import { createGenericTableQueryFromDescriptor, getExtensionSchemaPrefix, getMigrationSchemaPrefix } from "../util/queryTools"
 
-export const createUnitManagerTableQuery = (td: TableDescriptor): string => {
-    return `
-    create table if not exists ${getMigrationSchemaPrefix()}${td.tableName}
-    (
-        id uuid default ${getExtensionSchemaPrefix()}uuid_generate_v1mc() not null
-            constraint unit_manager_pkey
-                primary key,
-        name text,
-        phone text,
-        email text
-    )
-    `
-}
-
 export const createDaycareTableQuery = (td: TableDescriptor): string => {
     return `
     create table if not exists ${getMigrationSchemaPrefix()}${td.tableName}
@@ -47,9 +33,9 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
         email text,
         schedule text,
         additional_info text,
-        unit_manager_id uuid
-            constraint fk$unit_manager
-                references ${getMigrationSchemaPrefix()}evaka_unit_manager(id),
+        unit_manager_name text not null,
+        unit_manager_phone text not null,
+        unit_manager_email text not null,
         cost_center text,
         upload_to_varda boolean default false not null,
         capacity integer default 0 not null,
@@ -71,7 +57,6 @@ export const createDaycareTableQuery = (td: TableDescriptor): string => {
         upload_to_koski boolean default false not null,
         oph_unit_oid text,
         oph_organizer_oid text,
-        operation_days integer[] default '{1,2,3,4,5}'::integer[],
         ghost_unit boolean,
         daycare_apply_period daterange,
         preschool_apply_period daterange,

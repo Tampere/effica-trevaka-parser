@@ -36,8 +36,8 @@ const transferChildData = async <T>(t: ITask<T>, returnAll: boolean) => {
 
 const transferPlacementData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
-    INSERT INTO placement (id, type, child_id, unit_id, start_date, end_date)
-    SELECT id, type::placement_type, child_id, unit_id, start_date, end_date
+    INSERT INTO placement (id, type, child_id, unit_id, start_date, end_date, place_guarantee)
+    SELECT id, type::placement_type, child_id, unit_id, start_date, end_date, false
     FROM ${getMigrationSchemaPrefix()}evaka_placement
     `;
     const insertQuery = wrapWithReturning(
@@ -52,7 +52,7 @@ const transferPlacementData = async <T>(t: ITask<T>, returnAll: boolean) => {
 const transferServiceNeedData = async <T>(t: ITask<T>, returnAll: boolean) => {
     const insertQueryPart = `
     INSERT INTO service_need (option_id, placement_id, start_date, end_date, shift_care)
-    SELECT option_id, id, start_date, end_date, false
+    SELECT option_id, id, start_date, end_date, 'NONE'
     FROM ${getMigrationSchemaPrefix()}evaka_placement
     `;
     const insertQuery = wrapWithReturning(

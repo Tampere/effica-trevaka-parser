@@ -42,7 +42,6 @@ const baseDataTables =
         "timestampdetails",
         "archiveddocument",
         "evaka_areas",
-        "evaka_unit_manager",
         "evaka_daycare",
         "daycare_oid_map"
     ]
@@ -56,7 +55,6 @@ let evakaDataCleanups: string[] = [
     "fee_alteration",
     "daycare",
     "person",
-    "unit_manager",
     "daycare_group"
 ]
 
@@ -98,7 +96,8 @@ const fridgeChildExpectation = {
 const fridgePartnerExpectation = {
     partnership_id: expect.any(String),
     person_id: expect.any(String),
-    created: expect.any(String),
+    created_at: expect.any(String),
+    created_by: expect.any(String),
     updated: expect.any(String)
 }
 
@@ -134,12 +133,6 @@ const applicationExpectation = {
     updated: expect.any(String),
     child_id: expect.any(String),
     guardian_id: expect.any(String),
-}
-const applicationFormExpectation = {
-    id: expect.any(String),
-    created: expect.any(String),
-    updated: expect.any(String),
-    application_id: expect.any(String),
 }
 
 const placementExpectation = {
@@ -234,6 +227,10 @@ const messageAccountExpectation = {
 
 beforeAll(async () => {
     await initDb()
+})
+
+beforeEach(async () => {
+    await truncateEvakaTables(evakaDataCleanups)
 
     for await (const table of baseDataTables) {
         const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
@@ -241,12 +238,6 @@ beforeAll(async () => {
     }
 
     await setupTransformations(Object.keys(transformationMap))
-})
-
-beforeEach(() => {
-})
-afterEach(async () => {
-    await truncateEvakaTables(evakaDataCleanups)
 })
 
 afterAll(async () => {
@@ -266,7 +257,6 @@ afterAll(async () => {
 
 describe("GET /transfer positive", () => {
     it("should return transferred daycares", async () => {
-        await setupTransfers(["unit_manager"])
         await positiveTransferSnapshotTest(
             "daycare",
             Array(3).fill(daycareExpectation)
@@ -274,7 +264,7 @@ describe("GET /transfer positive", () => {
     })
     it("should return transferred departments", async () => {
         await setupTransformations(["departments"])
-        await setupTransfers(["unit_manager", "daycare"])
+        await setupTransfers(["daycare"])
         await positiveTransferSnapshotTest(
             "departments",
             {
@@ -318,7 +308,7 @@ describe("GET /transfer positive", () => {
             "assistance_needs",
             {
                 assistanceNeeds: Array(1).fill(assistanceNeedExpectation),
-                assistanceBases: Array(1).fill(assistanceBasisExpectation),
+                assistanceBases: [],
             }
         )
     })
@@ -335,18 +325,17 @@ describe("GET /transfer positive", () => {
     })
     it("should return transferred applications", async () => {
         await setupTransformations(["persons", "families", "application", "departments", "placements"])
-        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements"])
+        await setupTransfers(["persons", "families", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "application",
             {
-                applications: Array(2).fill(applicationExpectation),
-                applicationForms: Array(1).fill(applicationFormExpectation)
+                applications: Array(2).fill(applicationExpectation)
             }
         )
     })
     it("should return transferred placements", async () => {
         await setupTransformations(["persons", "departments", "placements"])
-        await setupTransfers(["persons", "unit_manager", "daycare", "departments"])
+        await setupTransfers(["persons", "daycare", "departments"])
         await positiveTransferSnapshotTest(
             "placements",
             {
@@ -360,7 +349,7 @@ describe("GET /transfer positive", () => {
     })
     it("should return transferred fee alterations", async () => {
         await setupTransformations(["persons", "departments", "placements", "feedeviations"])
-        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
+        await setupTransfers(["persons", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "fee_alterations",
             Array(1).fill(feeAlterationExpectation)
@@ -391,7 +380,7 @@ describe("GET /transfer positive", () => {
 
     it("should return transferred voucher value decisions", async () => {
         await setupTransformations(["persons", "families", "departments", "placements", "feedeviations", "voucher_value_decisions"])
-        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
+        await setupTransfers(["persons", "families", "daycare", "departments", "placements", "fee_alterations"])
         await positiveTransferSnapshotTest(
             "voucher_value_decisions",
             Array(1).fill(voucherValueDecisionExpectation)
@@ -400,7 +389,7 @@ describe("GET /transfer positive", () => {
 
     it("should return transferred fee decisions", async () => {
         await setupTransformations(["persons", "families", "departments", "placements", "feedeviations", "pay_decisions"])
-        await setupTransfers(["persons", "families", "unit_manager", "daycare", "departments", "placements", "fee_alterations"])
+        await setupTransfers(["persons", "families", "daycare", "departments", "placements", "fee_alterations"])
         await positiveTransferSnapshotTest(
             "fee_decisions",
             {
@@ -416,7 +405,7 @@ describe("GET /transfer positive", () => {
 
     it("should return transferred absences", async () => {
         await setupTransformations(["persons", "departments", "placements", "daily_journals"])
-        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
+        await setupTransfers(["persons", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "absences",
             Array(1).fill(absenceExpectation)
@@ -425,7 +414,7 @@ describe("GET /transfer positive", () => {
 
     it("should return transferred backup cares", async () => {
         await setupTransformations(["persons", "departments", "placements", "daily_journals"])
-        await setupTransfers(["persons", "unit_manager", "daycare", "departments", "placements"])
+        await setupTransfers(["persons", "daycare", "departments", "placements"])
         await positiveTransferSnapshotTest(
             "backup_cares",
             Array(2).fill(backupCareExpectation)
@@ -434,7 +423,7 @@ describe("GET /transfer positive", () => {
 
     it("should return transferred child attendances", async () => {
         await setupTransformations(["persons", "timestamps"])
-        await setupTransfers(["persons", "unit_manager", "daycare"])
+        await setupTransfers(["persons", "daycare"])
         await positiveTransferSnapshotTest(
             "child_attendances",
             Array(1).fill(childAttendanceExpectation)
@@ -462,7 +451,7 @@ describe("GET /transfer positive", () => {
         )
     })
 
-    xit("should return oid updated daycares", async () => {
+    it("should return oid updated daycares", async () => {
         const vardaUnitExpectation = { created_at: expect.any(String), uploaded_at: expect.any(String) }
         const updateExpectation = {
             daycare: [
@@ -474,7 +463,7 @@ describe("GET /transfer positive", () => {
             ]
         }
 
-        await setupTransfers(["unit_manager", "daycare"])
+        await setupTransfers(["daycare"])
         await positiveTransferSnapshotTest(
             "daycare_oid",
             updateExpectation

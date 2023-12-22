@@ -12,7 +12,6 @@ import { transferChildAttendances } from "../transfer/child-attendances"
 import { transferDaycareData } from "../transfer/daycare"
 import { transferDaycareOidData } from "../transfer/daycare-oid"
 import { transferDepartmentData } from "../transfer/departments"
-import { transferUnitManagerData } from "../transfer/evaka-unit-manager"
 import { transferFamiliesData } from "../transfer/families"
 import { transferFeeAlterationsData } from "../transfer/fee-alterations"
 import { transferFeeDecisionData } from "../transfer/fee-decisions"
@@ -34,7 +33,6 @@ const dependencyOrder: MigrationOperation[] =
         { name: "assistance_actions", function: transferAssistanceActionsData },
         { name: "income", function: transferIncomeData },
         // daycare transfers suspended after locking down daycare data in production
-        //{ name: "unit_manager", function: transferUnitManagerData },
         //{ name: "daycare", function: transferDaycareData },
         { name: "departments", function: transferDepartmentData },
         { name: "placements", function: transferPlacementsData },
@@ -239,17 +237,6 @@ router.get("/pedagogical_documents/pdf", async (req, res, next) => {
         next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
     }
     timeEnd("**** Transfer pedagogical document pdf total ", undefined, "*")
-})
-router.get("/unit_manager", async (req, res, next) => {
-    const returnAll = req.query.returnAll === "true"
-    time("**** Transfer unit managers total ", undefined, "*")
-    try {
-        const results = await transferUnitManagerData(returnAll)
-        res.status(200).json(results)
-    } catch (err) {
-        next(new ErrorWithCause(`Transfer operation failed, transaction rolled back:`, err))
-    }
-    timeEnd("**** Transfer unit managers total ", undefined, "*")
 })
 
 router.get("/income", async (req, res, next) => {

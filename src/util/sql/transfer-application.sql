@@ -17,12 +17,8 @@ SELECT
     false
 FROM ${migrationSchema:name}.evaka_application;
 
-INSERT INTO application_form
-    (application_id, revision, document, latest)
-SELECT
-    ea.id,
-    1,
-    CASE
+UPDATE application
+SET document = CASE
         WHEN ea.type IN ('DAYCARE', 'PRESCHOOL') THEN jsonb_build_object(
             'child', jsonb_build_object(
                 'firstName', c.first_name,
@@ -169,8 +165,7 @@ SELECT
             ),
             'type', 'CLUB'
         )
-    END,
-    true
+    END
 FROM ${migrationSchema:name}.evaka_application ea
 JOIN (
     SELECT
@@ -193,8 +188,7 @@ JOIN ${migrationSchema:name}.evaka_person g ON g.id = ea.guardian_id;
 -- fix transfer applications
 UPDATE application a
 SET transferapplication = TRUE
-FROM application_form af
-WHERE af.application_id = a.id AND af.latest = TRUE AND EXISTS (
+WHERE EXISTS (
     SELECT 1
     FROM placement p
     WHERE p.child_id = a.child_id
@@ -203,6 +197,6 @@ WHERE af.application_id = a.id AND af.latest = TRUE AND EXISTS (
             WHEN 'DAYCARE_FIVE_YEAR_OLDS' THEN 'DAYCARE'
             WHEN 'DAYCARE_PART_TIME_FIVE_YEAR_OLDS' THEN 'DAYCARE'
             ELSE p.type::text
-            END = af.document ->> 'type'
-        AND daterange(p.start_date, p.end_date, '[]') @> to_date((af.document ->> 'preferredStartDate'), 'YYYY-MM-DD')
+            END = a.document ->> 'type'
+        AND daterange(p.start_date, p.end_date, '[]') @> to_date((a.document ->> 'preferredStartDate'), 'YYYY-MM-DD')
 );
