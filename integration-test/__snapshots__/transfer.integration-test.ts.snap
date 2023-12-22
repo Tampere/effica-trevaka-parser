@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GET /transfer positive should return oid updated daycares 1`] = `
-Object {
-  "daycare": Array [
-    Object {
+{
+  "daycare": [
+    {
       "additional_info": null,
       "backup_location": null,
       "business_id": "",
@@ -29,7 +29,7 @@ Object {
       "invoiced_by_municipality": true,
       "language": "fi",
       "language_emphasis_id": null,
-      "location": Object {
+      "location": {
         "x": 21.55555,
         "y": 61.55555,
       },
@@ -39,7 +39,7 @@ Object {
       "mailing_street_address": null,
       "name": "Tenhon testiyksikkö",
       "opening_date": "2020-03-01T00:00:00.000Z",
-      "operation_days": Array [],
+      "operation_days": [],
       "operation_times": "{NULL,NULL,NULL,NULL,NULL,NULL,NULL}",
       "oph_organizer_oid": "1.2.3.4",
       "oph_unit_oid": "1.2.3.4.5.6",
@@ -64,7 +64,7 @@ Object {
       "upload_to_varda": false,
       "url": null,
     },
-    Object {
+    {
       "additional_info": null,
       "backup_location": null,
       "business_id": "",
@@ -90,7 +90,7 @@ Object {
       "invoiced_by_municipality": false,
       "language": "fi",
       "language_emphasis_id": null,
-      "location": Object {
+      "location": {
         "x": 21.66666,
         "y": 61.66666,
       },
@@ -100,7 +100,7 @@ Object {
       "mailing_street_address": null,
       "name": "Pujakan testiyksikkö",
       "opening_date": "2020-03-01T00:00:00.000Z",
-      "operation_days": Array [],
+      "operation_days": [],
       "operation_times": "{NULL,NULL,NULL,NULL,NULL,NULL,NULL}",
       "oph_organizer_oid": "1.2.3.5",
       "oph_unit_oid": "1.2.3.4.5.7",
@@ -126,8 +126,8 @@ Object {
       "url": null,
     },
   ],
-  "varda_unit": Array [
-    Object {
+  "varda_unit": [
+    {
       "created_at": Any<String>,
       "evaka_daycare_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "uploaded_at": Any<String>,
@@ -138,8 +138,8 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred absences 1`] = `
-Array [
-  Object {
+[
+  {
     "absence_type": "SICKLEAVE",
     "category": "BILLABLE",
     "child_id": Any<String>,
@@ -153,22 +153,22 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred applications 1`] = `
-Object {
-  "applications": Array [
-    Object {
+{
+  "applications": [
+    {
       "additionaldaycareapplication": false,
       "allow_other_guardian_access": false,
       "checkedbyadmin": false,
       "child_id": Any<String>,
       "created": Any<String>,
-      "document": Object {
-        "additionalDetails": Object {
+      "document": {
+        "additionalDetails": {
           "allergyType": "",
           "dietType": "",
           "otherInfo": "",
         },
-        "apply": Object {
-          "preferredUnits": Array [
+        "apply": {
+          "preferredUnits": [
             "19fec146-e2f1-11eb-8473-db55258254c5",
             "cecdf326-0a56-11ec-90a9-e73454a1ee1a",
           ],
@@ -176,20 +176,20 @@ Object {
           "siblingName": "",
           "siblingSsn": "",
         },
-        "careDetails": Object {
+        "careDetails": {
           "assistanceDescription": "",
           "assistanceNeeded": false,
           "preparatory": null,
         },
-        "child": Object {
-          "address": Object {
+        "child": {
+          "address": {
             "city": "Ypäjä",
             "editable": false,
             "postalCode": "00001",
             "street": "HideStreet 2",
           },
           "childMovingDate": null,
-          "correctingAddress": Object {
+          "correctingAddress": {
             "city": "",
             "editable": true,
             "postalCode": "",
@@ -207,14 +207,14 @@ Object {
         "connectedDaycare": null,
         "docVersion": 0,
         "extendedCare": false,
-        "guardian": Object {
-          "address": Object {
+        "guardian": {
+          "address": {
             "city": "Ypäjä",
             "editable": false,
             "postalCode": "00001",
             "street": "Fakestreet 123",
           },
-          "correctingAddress": Object {
+          "correctingAddress": {
             "city": "",
             "editable": true,
             "postalCode": "",
@@ -233,13 +233,13 @@ Object {
         "hasOtherAdults": false,
         "hasOtherChildren": false,
         "maxFeeAccepted": false,
-        "otherAdults": Array [],
-        "otherChildren": Array [],
+        "otherAdults": [],
+        "otherChildren": [],
         "otherGuardianAgreementStatus": null,
         "partTime": false,
         "preferredStartDate": "2021-09-01",
         "serviceEnd": null,
-        "serviceNeedOption": Object {
+        "serviceNeedOption": {
           "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
           "nameEn": "Full-time",
           "nameFi": "Kokopäiväinen",
@@ -264,20 +264,20 @@ Object {
       "type": "DAYCARE",
       "updated": Any<String>,
     },
-    Object {
+    {
       "additionaldaycareapplication": false,
       "allow_other_guardian_access": false,
       "checkedbyadmin": false,
       "child_id": Any<String>,
       "created": Any<String>,
-      "document": Object {
-        "additionalDetails": Object {
+      "document": {
+        "additionalDetails": {
           "allergyType": "",
           "dietType": "",
           "otherInfo": "",
         },
-        "apply": Object {
-          "preferredUnits": Array [
+        "apply": {
+          "preferredUnits": [
             "19fec146-e2f1-11eb-8473-db55258254c5",
             "cecdf326-0a56-11ec-90a9-e73454a1ee1a",
           ],
@@ -285,20 +285,20 @@ Object {
           "siblingName": "",
           "siblingSsn": "",
         },
-        "careDetails": Object {
+        "careDetails": {
           "assistanceDescription": "",
           "assistanceNeeded": false,
           "preparatory": null,
         },
-        "child": Object {
-          "address": Object {
+        "child": {
+          "address": {
             "city": "Ypäjä",
             "editable": false,
             "postalCode": "00001",
             "street": "HideStreet 2",
           },
           "childMovingDate": null,
-          "correctingAddress": Object {
+          "correctingAddress": {
             "city": "",
             "editable": true,
             "postalCode": "",
@@ -316,14 +316,14 @@ Object {
         "connectedDaycare": null,
         "docVersion": 0,
         "extendedCare": false,
-        "guardian": Object {
-          "address": Object {
+        "guardian": {
+          "address": {
             "city": "Ypäjä",
             "editable": false,
             "postalCode": "00001",
             "street": "Fakestreet 123",
           },
-          "correctingAddress": Object {
+          "correctingAddress": {
             "city": "",
             "editable": true,
             "postalCode": "",
@@ -342,13 +342,13 @@ Object {
         "hasOtherAdults": false,
         "hasOtherChildren": false,
         "maxFeeAccepted": false,
-        "otherAdults": Array [],
-        "otherChildren": Array [],
+        "otherAdults": [],
+        "otherChildren": [],
         "otherGuardianAgreementStatus": null,
         "partTime": false,
         "preferredStartDate": "2021-09-01",
         "serviceEnd": null,
-        "serviceNeedOption": Object {
+        "serviceNeedOption": {
           "id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
           "nameEn": "Full-time",
           "nameFi": "Kokopäiväinen",
@@ -378,16 +378,16 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred assistance actions 1`] = `
-Object {
-  "assistanceActionOptions": Array [
-    Object {
+{
+  "assistanceActionOptions": [
+    {
       "action_id": Any<String>,
       "created": Any<String>,
       "option_id": Any<String>,
     },
   ],
-  "assistanceActions": Array [
-    Object {
+  "assistanceActions": [
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-05-31T00:00:00.000Z",
@@ -403,10 +403,10 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred assistance needs 1`] = `
-Object {
-  "assistanceBases": Array [],
-  "assistanceNeeds": Array [
-    Object {
+{
+  "assistanceBases": [],
+  "assistanceNeeds": [
+    {
       "capacity_factor": "0",
       "child_id": Any<String>,
       "created": Any<String>,
@@ -421,8 +421,8 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred backup cares 1`] = `
-Array [
-  Object {
+[
+  {
     "child_id": Any<String>,
     "created": Any<String>,
     "end_date": "2020-03-17T00:00:00.000Z",
@@ -432,7 +432,7 @@ Array [
     "unit_id": Any<String>,
     "updated": Any<String>,
   },
-  Object {
+  {
     "child_id": Any<String>,
     "created": Any<String>,
     "end_date": "2020-03-19T00:00:00.000Z",
@@ -446,8 +446,8 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred child attendances 1`] = `
-Array [
-  Object {
+[
+  {
     "child_id": Any<String>,
     "created": Any<String>,
     "date": "2021-01-01T00:00:00.000Z",
@@ -461,8 +461,8 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred daycares 1`] = `
-Array [
-  Object {
+[
+  {
     "additional_info": null,
     "backup_location": null,
     "business_id": "",
@@ -487,7 +487,7 @@ Array [
     "invoiced_by_municipality": true,
     "language": "fi",
     "language_emphasis_id": null,
-    "location": Object {
+    "location": {
       "x": 21.55555,
       "y": 61.55555,
     },
@@ -497,7 +497,7 @@ Array [
     "mailing_street_address": null,
     "name": "Tenhon testiyksikkö",
     "opening_date": "2020-03-01T00:00:00.000Z",
-    "operation_days": Array [],
+    "operation_days": [],
     "operation_times": "{NULL,NULL,NULL,NULL,NULL,NULL,NULL}",
     "oph_organizer_oid": null,
     "oph_unit_oid": null,
@@ -520,7 +520,7 @@ Array [
     "upload_to_varda": false,
     "url": null,
   },
-  Object {
+  {
     "additional_info": null,
     "backup_location": null,
     "business_id": "",
@@ -545,7 +545,7 @@ Array [
     "invoiced_by_municipality": false,
     "language": "fi",
     "language_emphasis_id": null,
-    "location": Object {
+    "location": {
       "x": 21.66666,
       "y": 61.66666,
     },
@@ -555,7 +555,7 @@ Array [
     "mailing_street_address": null,
     "name": "Pujakan testiyksikkö",
     "opening_date": "2020-03-01T00:00:00.000Z",
-    "operation_days": Array [],
+    "operation_days": [],
     "operation_times": "{NULL,NULL,NULL,NULL,NULL,NULL,NULL}",
     "oph_organizer_oid": null,
     "oph_unit_oid": null,
@@ -578,7 +578,7 @@ Array [
     "upload_to_varda": false,
     "url": null,
   },
-  Object {
+  {
     "additional_info": null,
     "backup_location": null,
     "business_id": "",
@@ -603,7 +603,7 @@ Array [
     "invoiced_by_municipality": false,
     "language": "fi",
     "language_emphasis_id": null,
-    "location": Object {
+    "location": {
       "x": 21.66666,
       "y": 61.66666,
     },
@@ -613,7 +613,7 @@ Array [
     "mailing_street_address": null,
     "name": "Perhepäivähoidon hakuyksikkö",
     "opening_date": "2020-03-01T00:00:00.000Z",
-    "operation_days": Array [],
+    "operation_days": [],
     "operation_times": "{NULL,NULL,NULL,NULL,NULL,NULL,NULL}",
     "oph_organizer_oid": null,
     "oph_unit_oid": null,
@@ -640,9 +640,9 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred departments 1`] = `
-Object {
-  "caretakers": Array [
-    Object {
+{
+  "caretakers": [
+    {
       "amount": "3",
       "created": Any<String>,
       "end_date": null,
@@ -651,7 +651,7 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "amount": "3",
       "created": Any<String>,
       "end_date": null,
@@ -661,15 +661,15 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "groups": Array [
-    Object {
+  "groups": [
+    {
       "daycare_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "end_date": null,
       "id": Any<String>,
       "name": "Tenhon terhot",
       "start_date": "2020-03-01T00:00:00.000Z",
     },
-    Object {
+    {
       "daycare_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       "end_date": null,
       "id": Any<String>,
@@ -677,8 +677,8 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
     },
   ],
-  "messageAccounts": Array [
-    Object {
+  "messageAccounts": [
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": Any<String>,
@@ -688,7 +688,7 @@ Object {
       "type": "GROUP",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": Any<String>,
@@ -703,9 +703,9 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred families 1`] = `
-Object {
-  "children": Array [
-    Object {
+{
+  "children": [
+    {
       "child_id": Any<String>,
       "conflict": false,
       "created": Any<String>,
@@ -715,7 +715,7 @@ Object {
       "start_date": "2020-12-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "conflict": false,
       "created": Any<String>,
@@ -725,7 +725,7 @@ Object {
       "start_date": "2020-12-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "conflict": false,
       "created": Any<String>,
@@ -736,8 +736,8 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "partners": Array [
-    Object {
+  "partners": [
+    {
       "conflict": false,
       "create_source": null,
       "created_at": Any<String>,
@@ -754,7 +754,7 @@ Object {
       "start_date": "2019-11-25T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "conflict": false,
       "create_source": null,
       "created_at": Any<String>,
@@ -771,7 +771,7 @@ Object {
       "start_date": "2020-12-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "conflict": false,
       "create_source": null,
       "created_at": Any<String>,
@@ -788,7 +788,7 @@ Object {
       "start_date": "2019-11-25T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "conflict": false,
       "create_source": null,
       "created_at": Any<String>,
@@ -810,8 +810,8 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred fee alterations 1`] = `
-Array [
-  Object {
+[
+  {
     "amount": 10,
     "id": Any<String>,
     "is_absolute": true,
@@ -827,14 +827,14 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred fee decisions 1`] = `
-Object {
-  "feeDecisionChildren": Array [
-    Object {
+{
+  "feeDecisionChildren": [
+    {
       "base_fee": 0,
       "child_date_of_birth": "2014-11-25T00:00:00.000Z",
       "child_id": Any<String>,
-      "child_income": Object {
-        "data": Object {},
+      "child_income": {
+        "data": {},
         "effect": "MAX_FEE_ACCEPTED",
         "total": 0,
         "totalExpenses": 0,
@@ -845,7 +845,7 @@ Object {
       },
       "created": Any<String>,
       "fee": 0,
-      "fee_alterations": Array [],
+      "fee_alterations": [],
       "fee_decision_id": Any<String>,
       "final_fee": 0,
       "id": Any<String>,
@@ -860,12 +860,12 @@ Object {
       "sibling_discount": 0,
       "updated": Any<String>,
     },
-    Object {
+    {
       "base_fee": 0,
       "child_date_of_birth": "2015-11-25T00:00:00.000Z",
       "child_id": Any<String>,
-      "child_income": Object {
-        "data": Object {},
+      "child_income": {
+        "data": {},
         "effect": "MAX_FEE_ACCEPTED",
         "total": 0,
         "totalExpenses": 0,
@@ -876,7 +876,7 @@ Object {
       },
       "created": Any<String>,
       "fee": 0,
-      "fee_alterations": Array [],
+      "fee_alterations": [],
       "fee_decision_id": Any<String>,
       "final_fee": 0,
       "id": Any<String>,
@@ -891,21 +891,21 @@ Object {
       "sibling_discount": 0,
       "updated": Any<String>,
     },
-    Object {
+    {
       "base_fee": 49200,
       "child_date_of_birth": "2019-06-01T00:00:00.000Z",
       "child_id": Any<String>,
       "child_income": null,
       "created": Any<String>,
       "fee": 49200,
-      "fee_alterations": Array [
-        Object {
+      "fee_alterations": [
+        {
           "amount": 100,
           "effect": -10000,
           "isAbsolute": true,
           "type": "DISCOUNT",
         },
-        Object {
+        {
           "amount": 288,
           "effect": -28800,
           "isAbsolute": true,
@@ -927,8 +927,8 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "feeDecisions": Array [
-    Object {
+  "feeDecisions": [
+    {
       "approved_at": null,
       "approved_by_id": null,
       "cancelled_at": null,
@@ -939,7 +939,7 @@ Object {
       "difference": "{}",
       "document_key": null,
       "family_size": 2,
-      "fee_thresholds": Object {
+      "fee_thresholds": {
         "incomeMultiplier": null,
         "maxFee": null,
         "maxIncomeThreshold": null,
@@ -947,8 +947,8 @@ Object {
         "minIncomeThreshold": null,
       },
       "head_of_family_id": Any<String>,
-      "head_of_family_income": Object {
-        "data": Object {
+      "head_of_family_income": {
+        "data": {
           "MAIN_INCOME": 0,
         },
         "effect": "INCOME",
@@ -968,7 +968,7 @@ Object {
       "updated": Any<String>,
       "valid_during": "[2019-08-01,2100-01-01)",
     },
-    Object {
+    {
       "approved_at": null,
       "approved_by_id": null,
       "cancelled_at": null,
@@ -979,7 +979,7 @@ Object {
       "difference": "{}",
       "document_key": null,
       "family_size": 2,
-      "fee_thresholds": Object {
+      "fee_thresholds": {
         "incomeMultiplier": null,
         "maxFee": null,
         "maxIncomeThreshold": null,
@@ -987,8 +987,8 @@ Object {
         "minIncomeThreshold": null,
       },
       "head_of_family_id": Any<String>,
-      "head_of_family_income": Object {
-        "data": Object {
+      "head_of_family_income": {
+        "data": {
           "MAIN_INCOME": 10020,
         },
         "effect": "INCOME",
@@ -1001,8 +1001,8 @@ Object {
       },
       "id": Any<String>,
       "partner_id": Any<String>,
-      "partner_income": Object {
-        "data": Object {},
+      "partner_income": {
+        "data": {},
         "effect": "MAX_FEE_ACCEPTED",
         "total": 0,
         "totalExpenses": 0,
@@ -1017,7 +1017,7 @@ Object {
       "updated": Any<String>,
       "valid_during": "[2020-03-01,2100-01-01)",
     },
-    Object {
+    {
       "approved_at": null,
       "approved_by_id": null,
       "cancelled_at": null,
@@ -1028,7 +1028,7 @@ Object {
       "difference": "{}",
       "document_key": null,
       "family_size": 2,
-      "fee_thresholds": Object {
+      "fee_thresholds": {
         "incomeMultiplier": null,
         "maxFee": null,
         "maxIncomeThreshold": null,
@@ -1036,8 +1036,8 @@ Object {
         "minIncomeThreshold": null,
       },
       "head_of_family_id": Any<String>,
-      "head_of_family_income": Object {
-        "data": Object {
+      "head_of_family_income": {
+        "data": {
           "MAIN_INCOME": 0,
         },
         "effect": "INCOME",
@@ -1062,23 +1062,23 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred income 1`] = `
-Array [
-  Object {
+[
+  {
     "application_id": null,
-    "data": Object {
-      "DAILY_ALLOWANCE": Object {
+    "data": {
+      "DAILY_ALLOWANCE": {
         "amount": 1000,
         "coefficient": "DAILY_ALLOWANCE_21_5",
       },
-      "MAIN_INCOME": Object {
+      "MAIN_INCOME": {
         "amount": 450060,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
-      "OTHER_INCOME": Object {
+      "OTHER_INCOME": {
         "amount": 56000,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
-      "PAID_ALIMONY": Object {
+      "PAID_ALIMONY": {
         "amount": 21500,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
@@ -1094,10 +1094,10 @@ Array [
     "valid_to": null,
     "works_at_echa": false,
   },
-  Object {
+  {
     "application_id": null,
-    "data": Object {
-      "MAIN_INCOME": Object {
+    "data": {
+      "MAIN_INCOME": {
         "amount": 5000000,
         "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
       },
@@ -1117,8 +1117,8 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred pedagogical document data 1`] = `
-Array [
-  Object {
+[
+  {
     "child_id": Any<String>,
     "created": "2022-02-14T00:00:00.000Z",
     "created_by": Any<String>,
@@ -1129,7 +1129,7 @@ Array [
     "updated": "2022-02-14T00:00:00.000Z",
     "updated_by": Any<String>,
   },
-  Object {
+  {
     "child_id": Any<String>,
     "created": "2022-02-14T00:00:00.000Z",
     "created_by": Any<String>,
@@ -1144,16 +1144,16 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred pedagogical document pdf 1`] = `
-Array [
-  Object {
-    "$metadata": Object {
+[
+  {
+    "$metadata": {
       "attempts": 1,
       "httpStatusCode": 200,
       "totalRetryDelay": 0,
     },
   },
-  Object {
-    "$metadata": Object {
+  {
+    "$metadata": {
       "attempts": 1,
       "httpStatusCode": 200,
       "totalRetryDelay": 0,
@@ -1163,9 +1163,9 @@ Array [
 `;
 
 exports[`GET /transfer positive should return transferred persons 1`] = `
-Object {
-  "messageAccounts": Array [
-    Object {
+{
+  "messageAccounts": [
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1175,7 +1175,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1185,7 +1185,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1195,7 +1195,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1205,7 +1205,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1215,7 +1215,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1225,7 +1225,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1235,7 +1235,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1245,7 +1245,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1255,7 +1255,7 @@ Object {
       "type": "CITIZEN",
       "updated": Any<String>,
     },
-    Object {
+    {
       "active": true,
       "created": Any<String>,
       "daycare_group_id": null,
@@ -1266,8 +1266,8 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "persons": Array [
-    Object {
+  "persons": [
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1288,7 +1288,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "Authentic",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "000-0000000",
       "post_office": "Ypäjä",
@@ -1305,7 +1305,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1326,7 +1326,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "Temporary",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "111-1111111",
       "post_office": "Ypäjä",
@@ -1343,7 +1343,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1364,7 +1364,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "Hidden",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "0222222222",
       "post_office": "",
@@ -1381,7 +1381,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "222-2222223",
       "created": Any<String>,
@@ -1402,7 +1402,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "Child",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "222-2222222",
       "post_office": "Ypäjä",
@@ -1419,7 +1419,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "222-2222223",
       "created": Any<String>,
@@ -1440,7 +1440,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "Child",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "222-2222222",
       "post_office": "Tenhola",
@@ -1457,7 +1457,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1478,7 +1478,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "",
       "post_office": "",
@@ -1495,7 +1495,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1516,7 +1516,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "",
       "post_office": "",
@@ -1533,7 +1533,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1554,7 +1554,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "",
       "post_office": "",
@@ -1571,7 +1571,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1592,7 +1592,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "",
       "post_office": "",
@@ -1609,7 +1609,7 @@ Object {
       "vtj_dependants_queried": null,
       "vtj_guardians_queried": null,
     },
-    Object {
+    {
       "aad_object_id": null,
       "backup_phone": "",
       "created": Any<String>,
@@ -1630,7 +1630,7 @@ Object {
       "language": "fi",
       "last_login": null,
       "last_name": "",
-      "nationalities": Array [],
+      "nationalities": [],
       "oph_person_oid": null,
       "phone": "",
       "post_office": "",
@@ -1652,9 +1652,9 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred placements 1`] = `
-Object {
-  "children": Array [
-    Object {
+{
+  "children": [
+    {
       "additionalinfo": "",
       "allergies": "",
       "diet": "",
@@ -1663,7 +1663,7 @@ Object {
       "language_at_home_details": "",
       "medication": "",
     },
-    Object {
+    {
       "additionalinfo": "",
       "allergies": "",
       "diet": "",
@@ -1672,7 +1672,7 @@ Object {
       "language_at_home_details": "",
       "medication": "",
     },
-    Object {
+    {
       "additionalinfo": "",
       "allergies": "",
       "diet": "",
@@ -1681,7 +1681,7 @@ Object {
       "language_at_home_details": "",
       "medication": "",
     },
-    Object {
+    {
       "additionalinfo": "",
       "allergies": "",
       "diet": "",
@@ -1691,8 +1691,8 @@ Object {
       "medication": "",
     },
   ],
-  "daycareGroups": Array [
-    Object {
+  "daycareGroups": [
+    {
       "daycare_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       "end_date": "2020-12-31T00:00:00.000Z",
       "id": Any<String>,
@@ -1700,8 +1700,8 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
     },
   ],
-  "groupPlacements": Array [
-    Object {
+  "groupPlacements": [
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1710,7 +1710,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1719,7 +1719,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1728,7 +1728,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1737,7 +1737,7 @@ Object {
       "start_date": "2020-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1746,7 +1746,7 @@ Object {
       "start_date": "2020-08-03T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1755,7 +1755,7 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1764,7 +1764,7 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "created": Any<String>,
       "daycare_group_id": Any<String>,
       "daycare_placement_id": Any<String>,
@@ -1774,8 +1774,8 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "placements": Array [
-    Object {
+  "placements": [
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-07-31T00:00:00.000Z",
@@ -1788,7 +1788,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2019-12-31T00:00:00.000Z",
@@ -1801,7 +1801,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-07-31T00:00:00.000Z",
@@ -1814,7 +1814,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-08-02T00:00:00.000Z",
@@ -1827,7 +1827,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2021-07-31T00:00:00.000Z",
@@ -1840,7 +1840,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-08-01T00:00:00.000Z",
@@ -1853,7 +1853,7 @@ Object {
       "unit_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2020-12-31T00:00:00.000Z",
@@ -1866,7 +1866,7 @@ Object {
       "unit_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       "updated": Any<String>,
     },
-    Object {
+    {
       "child_id": Any<String>,
       "created": Any<String>,
       "end_date": "2025-07-31T00:00:00.000Z",
@@ -1880,8 +1880,8 @@ Object {
       "updated": Any<String>,
     },
   ],
-  "serviceNeeds": Array [
-    Object {
+  "serviceNeeds": [
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1893,7 +1893,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1905,7 +1905,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1917,7 +1917,7 @@ Object {
       "start_date": "2019-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1929,7 +1929,7 @@ Object {
       "start_date": "2020-08-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1941,7 +1941,7 @@ Object {
       "start_date": "2020-08-03T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1953,7 +1953,7 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1965,7 +1965,7 @@ Object {
       "start_date": "2020-03-01T00:00:00.000Z",
       "updated": Any<String>,
     },
-    Object {
+    {
       "confirmed_at": null,
       "confirmed_by": null,
       "created": Any<String>,
@@ -1982,8 +1982,8 @@ Object {
 `;
 
 exports[`GET /transfer positive should return transferred voucher value decisions 1`] = `
-Array [
-  Object {
+[
+  {
     "annulled_at": null,
     "approved_at": "2020-12-01T00:00:00.000Z",
     "approved_by": null,
@@ -2002,8 +2002,8 @@ Array [
     "difference": "{}",
     "document_key": null,
     "family_size": 5,
-    "fee_alterations": Array [],
-    "fee_thresholds": Object {
+    "fee_alterations": [],
+    "fee_thresholds": {
       "incomeMultiplier": null,
       "maxFee": null,
       "maxIncomeThreshold": null,
