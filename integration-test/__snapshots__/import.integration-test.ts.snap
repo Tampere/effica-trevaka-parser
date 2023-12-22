@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GET /import csv positive should return created childmindermaps 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "effica_id": "010101-TP99",
         "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "childmindermap",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created daycare oid mappings 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
         "organizer_oid": "1.2.3.4",
         "unit_oid": "1.2.3.4.5.6",
         "varda_unit_id": 100,
       },
-      Object {
+      {
         "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
         "organizer_oid": "1.2.3.5",
         "unit_oid": "1.2.3.4.5.7",
@@ -34,44 +34,44 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "daycare_oid_map",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created evaka areas 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "id": "6529e31e-9777-11eb-ba88-33a923255570",
         "name": "Etelä",
         "short_name": "etela",
       },
-      Object {
+      {
         "id": "6529f5a2-9777-11eb-ba89-cfcda122ed3b",
         "name": "Itä",
         "short_name": "ita",
       },
-      Object {
+      {
         "id": "6529f6ce-9777-11eb-ba8a-8f6495ec5104",
         "name": "Länsi",
         "short_name": "lansi",
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "evaka_areas",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created evaka daycares 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "additional_info": null,
         "backup_location": null,
         "capacity": 0,
@@ -93,7 +93,7 @@ Object {
         "invoiced_by_municipality": true,
         "language": "fi",
         "language_emphasis_id": null,
-        "location": Object {
+        "location": {
           "x": 21.55555,
           "y": 61.55555,
         },
@@ -113,7 +113,7 @@ Object {
         "round_the_clock": false,
         "schedule": null,
         "street_address": "Testikuja 123",
-        "type": Array [
+        "type": [
           "CENTRE",
         ],
         "unit_manager_email": "",
@@ -125,7 +125,7 @@ Object {
         "upload_to_varda": false,
         "url": null,
       },
-      Object {
+      {
         "additional_info": null,
         "backup_location": null,
         "capacity": 0,
@@ -147,7 +147,7 @@ Object {
         "invoiced_by_municipality": false,
         "language": "fi",
         "language_emphasis_id": null,
-        "location": Object {
+        "location": {
           "x": 21.66666,
           "y": 61.66666,
         },
@@ -167,7 +167,7 @@ Object {
         "round_the_clock": false,
         "schedule": null,
         "street_address": "Testaajankatu 321",
-        "type": Array [
+        "type": [
           "CENTRE",
         ],
         "unit_manager_email": "",
@@ -179,7 +179,7 @@ Object {
         "upload_to_varda": false,
         "url": null,
       },
-      Object {
+      {
         "additional_info": null,
         "backup_location": null,
         "capacity": 0,
@@ -201,7 +201,7 @@ Object {
         "invoiced_by_municipality": false,
         "language": "fi",
         "language_emphasis_id": null,
-        "location": Object {
+        "location": {
           "x": 21.66666,
           "y": 61.66666,
         },
@@ -221,7 +221,7 @@ Object {
         "round_the_clock": false,
         "schedule": null,
         "street_address": "Testaajankatu 4321",
-        "type": Array [
+        "type": [
           "CENTRE",
         ],
         "unit_manager_email": "",
@@ -235,31 +235,31 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "evaka_daycare",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created extentmaps 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "days": 0,
         "effica_id": 100,
         "effica_name": "Kokopäivähoito",
         "evaka_id": "86ef70a0-bf85-11eb-91e6-1fb57a101161",
         "evaka_name": "Kokopäiväinen",
       },
-      Object {
+      {
         "days": 15,
         "effica_id": 101,
         "effica_name": "Kokopäivähoito",
         "evaka_id": "86ef7370-bf85-11eb-91e7-6fcd728c518d",
         "evaka_name": "Kokopäiväinen 15 pv sopimus",
       },
-      Object {
+      {
         "days": 0,
         "effica_id": 200,
         "effica_name": "Esiopetusta täydentävä",
@@ -268,17 +268,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "extentmap",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created families exclusion 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": "2020-12-01T00:00:00.000Z",
         "familynbr": 2,
         "personid": "010619A9501",
@@ -287,72 +287,72 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "families_exclusion",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created placements exclusion 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "placementnbr": 16,
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "placements_exclusion",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created unitmaps 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "effica_id": 123,
         "evaka_id": "19fec146-e2f1-11eb-8473-db55258254c5",
       },
-      Object {
+      {
         "effica_id": 125,
         "evaka_id": "19fec1fa-e2f1-11eb-8473-eb1f7ce94b07",
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "unitmap",
   ],
 }
 `;
 
 exports[`GET /import csv positive should return created unwantedunits 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "effica_id": 123,
         "name": "Päiväkoti yksi",
       },
-      Object {
+      {
         "effica_id": 125,
         "name": "Päiväkoti kaksi",
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "unwantedunits",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created application rows 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "areacode": "4010401",
         "careid": 12345,
         "childminder": null,
@@ -368,7 +368,7 @@ Object {
         "unitcare": 0,
         "unitcode": 123,
       },
-      Object {
+      {
         "areacode": "4010401",
         "careid": 12345,
         "childminder": null,
@@ -386,17 +386,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "applicationrows",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created applications 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "applicationdate": "2025-08-01T00:00:00.000Z",
         "applicationtype": 999940001,
         "careid": 12345,
@@ -407,7 +407,7 @@ Object {
         "status": 999962042,
         "transferapplication": false,
       },
-      Object {
+      {
         "applicationdate": "2020-04-01T00:00:00.000Z",
         "applicationtype": 999940001,
         "careid": 12346,
@@ -420,17 +420,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "applications",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created archived documents 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "approvedby": "Päikky",
         "date": "2022-02-14T00:00:00.000Z",
         "dateofbirth": "2019-06-01T00:00:00.000Z",
@@ -443,8 +443,8 @@ Object {
         "ssn": "010619A9501",
       },
     ],
-    Array [
-      Object {
+    [
+      {
         "approvedby": "Päikky",
         "date": "2022-02-14T00:00:00.000Z",
         "dateofbirth": "2018-11-25T00:00:00.000Z",
@@ -458,7 +458,7 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "archiveddocument",
     "archiveddocument",
   ],
@@ -466,10 +466,10 @@ Object {
 `;
 
 exports[`GET /import xml positive should return created childminders 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "area": 1,
         "email": "nomail@forme.fake",
         "enddate": null,
@@ -479,17 +479,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "childminders",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created codes 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "active": true,
         "code": 1,
         "codetype": "SPRAK",
@@ -497,7 +497,7 @@ Object {
         "extrainfo2": null,
         "text": "Suomi¤¤Finska",
       },
-      Object {
+      {
         "active": true,
         "code": 2,
         "codetype": "HEMKOMMUN",
@@ -505,7 +505,7 @@ Object {
         "extrainfo2": null,
         "text": "Ypäjä",
       },
-      Object {
+      {
         "active": true,
         "code": 3,
         "codetype": "LAND",
@@ -513,7 +513,7 @@ Object {
         "extrainfo2": "246",
         "text": "Suomi",
       },
-      Object {
+      {
         "active": true,
         "code": 108,
         "codetype": "INKSLAG",
@@ -521,7 +521,7 @@ Object {
         "extrainfo2": null,
         "text": "Muu tulo¤¤Muu tulo",
       },
-      Object {
+      {
         "active": true,
         "code": 85,
         "codetype": "INKSLAG",
@@ -529,7 +529,7 @@ Object {
         "extrainfo2": null,
         "text": "Palkkatulo",
       },
-      Object {
+      {
         "active": true,
         "code": 88,
         "codetype": "INKSLAG",
@@ -537,7 +537,7 @@ Object {
         "extrainfo2": null,
         "text": "Maksetut elatusavut¤¤Maksetut elatusavut",
       },
-      Object {
+      {
         "active": true,
         "code": 109,
         "codetype": "INKSLAG",
@@ -545,7 +545,7 @@ Object {
         "extrainfo2": null,
         "text": "Päiväraha¤¤Päiväraha",
       },
-      Object {
+      {
         "active": true,
         "code": 83,
         "codetype": "INKPERIOD",
@@ -553,7 +553,7 @@ Object {
         "extrainfo2": null,
         "text": "Kuukausitulo¤¤Inkomstperiod1",
       },
-      Object {
+      {
         "active": true,
         "code": 111,
         "codetype": "INKPERIOD",
@@ -561,7 +561,7 @@ Object {
         "extrainfo2": null,
         "text": "päiväraha x 21,5",
       },
-      Object {
+      {
         "active": true,
         "code": 100,
         "codetype": "OMFATTNING",
@@ -569,7 +569,7 @@ Object {
         "extrainfo2": null,
         "text": "Kokopäivähoito¤¤Heldagsomsorg 5-7t/d",
       },
-      Object {
+      {
         "active": true,
         "code": 101,
         "codetype": "OMFATTNING",
@@ -577,7 +577,7 @@ Object {
         "extrainfo2": null,
         "text": "Osapäivähoito enintään 5 h/pv¤¤Halvdagsomsorg &lt; 5 t/d",
       },
-      Object {
+      {
         "active": true,
         "code": 999420001,
         "codetype": "STATUS",
@@ -585,7 +585,7 @@ Object {
         "extrainfo2": null,
         "text": "Hyväksytty¤¤OK",
       },
-      Object {
+      {
         "active": true,
         "code": 999940001,
         "codetype": "ARENDETYP",
@@ -595,17 +595,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "codes",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created daily journal rows 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "dailyjournalid": 123456,
         "extrachild": null,
         "guid": "dailyjournalrow123456",
@@ -642,7 +642,7 @@ Object {
         "reportcode30": 0,
         "reportcode31": 0,
       },
-      Object {
+      {
         "dailyjournalid": 123457,
         "extrachild": null,
         "guid": "dailyjournalrow123457",
@@ -681,17 +681,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "dailyjournalrows",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created daily journals 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "childminder": null,
         "dailyjournalid": 123456,
         "department": 1231,
@@ -700,7 +700,7 @@ Object {
         "period": "202003",
         "unit": 123,
       },
-      Object {
+      {
         "childminder": null,
         "dailyjournalid": 123457,
         "department": 1251,
@@ -711,17 +711,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "dailyjournals",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created decisions 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "caseworker": "FAKE",
         "ceiling": "10",
         "days": 0,
@@ -746,17 +746,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "decisions",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created departments 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "departmentaddress": "Testikuja 123",
         "departmentcity": "Tenhola",
         "departmentcode": 1231,
@@ -768,7 +768,7 @@ Object {
         "startdate": Any<String>,
         "unitcode": 123,
       },
-      Object {
+      {
         "departmentaddress": "Testaajankatu 321",
         "departmentcity": "Pajuoja",
         "departmentcode": 1251,
@@ -782,94 +782,94 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "departments",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created families 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": Any<String>,
         "familynbr": 1,
         "personid": "020967-9992",
         "roleinfamily": "R",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "familynbr": 1,
         "personid": "180476-998M",
         "roleinfamily": "S",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "familynbr": 1,
         "personid": "251118A9509",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 2,
         "personid": "020967-9992",
         "roleinfamily": "R",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 2,
         "personid": "180476-998M",
         "roleinfamily": "S",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 2,
         "personid": "251118A9509",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 2,
         "personid": "010619A9501",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "familynbr": 2,
         "personid": "010619A9501",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 3,
         "personid": "180476-999M",
         "roleinfamily": "S",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 3,
         "personid": "251115A9509",
         "roleinfamily": "B",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 4,
         "personid": "180475-999M",
         "roleinfamily": "S",
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "familynbr": 4,
         "personid": "251114A9509",
@@ -878,17 +878,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "families",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created feedeviations 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "days": 0,
         "deviationtype": 5,
         "enddate": null,
@@ -901,7 +901,7 @@ Object {
         "startdate": Any<String>,
         "sum": "0",
       },
-      Object {
+      {
         "days": 0,
         "deviationtype": 39,
         "enddate": null,
@@ -914,7 +914,7 @@ Object {
         "startdate": Any<String>,
         "sum": "10",
       },
-      Object {
+      {
         "days": 0,
         "deviationtype": 999,
         "enddate": null,
@@ -929,17 +929,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "feedeviations",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created income  1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": Any<String>,
         "incomemissing": false,
         "maxincome": false,
@@ -947,7 +947,7 @@ Object {
         "startdate": Any<String>,
         "summa": "50000",
       },
-      Object {
+      {
         "enddate": null,
         "incomemissing": false,
         "maxincome": false,
@@ -957,17 +957,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "income",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created incomerows 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": null,
         "incomeperiod": 83,
         "incometype": 85,
@@ -975,7 +975,7 @@ Object {
         "startdate": Any<String>,
         "summa": "4500.6",
       },
-      Object {
+      {
         "enddate": Any<String>,
         "incomeperiod": 83,
         "incometype": 108,
@@ -983,7 +983,7 @@ Object {
         "startdate": Any<String>,
         "summa": "560",
       },
-      Object {
+      {
         "enddate": null,
         "incomeperiod": 83,
         "incometype": 88,
@@ -991,7 +991,7 @@ Object {
         "startdate": Any<String>,
         "summa": "215",
       },
-      Object {
+      {
         "enddate": null,
         "incomeperiod": 111,
         "incometype": 109,
@@ -1001,17 +1001,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "incomerows",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created pay decision rows 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "fee": "0",
         "guid": "paydecisionrow38437811",
         "income": "100.2",
@@ -1021,7 +1021,7 @@ Object {
         "rowtype": 1,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437812",
         "income": null,
@@ -1031,7 +1031,7 @@ Object {
         "rowtype": 3,
         "specification": "Perhekoko 2 (maksu 10.70%)",
       },
-      Object {
+      {
         "fee": "492",
         "guid": "paydecisionrow38437813",
         "income": null,
@@ -1041,7 +1041,7 @@ Object {
         "rowtype": 5,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437814",
         "income": "999999",
@@ -1051,7 +1051,7 @@ Object {
         "rowtype": 2,
         "specification": null,
       },
-      Object {
+      {
         "fee": "-288",
         "guid": "paydecisionrow38437815",
         "income": null,
@@ -1061,7 +1061,7 @@ Object {
         "rowtype": 5,
         "specification": null,
       },
-      Object {
+      {
         "fee": "-100",
         "guid": "paydecisionrow38437816",
         "income": null,
@@ -1071,7 +1071,7 @@ Object {
         "rowtype": 5,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437831",
         "income": "999999",
@@ -1081,7 +1081,7 @@ Object {
         "rowtype": 2,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437841",
         "income": "999999",
@@ -1091,7 +1091,7 @@ Object {
         "rowtype": 1,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437842",
         "income": "999999",
@@ -1101,7 +1101,7 @@ Object {
         "rowtype": 3,
         "specification": "Perhekoko 2 (maksu 10.70%)",
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437851",
         "income": "0",
@@ -1111,7 +1111,7 @@ Object {
         "rowtype": 1,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437852",
         "income": null,
@@ -1121,7 +1121,7 @@ Object {
         "rowtype": 3,
         "specification": "Perhekoko 2 (maksu 10.70%)",
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437853",
         "income": "999999",
@@ -1131,7 +1131,7 @@ Object {
         "rowtype": 5,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437861",
         "income": "0",
@@ -1141,7 +1141,7 @@ Object {
         "rowtype": 1,
         "specification": null,
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437862",
         "income": null,
@@ -1151,7 +1151,7 @@ Object {
         "rowtype": 3,
         "specification": "Perhekoko 2 (maksu 10.70%)",
       },
-      Object {
+      {
         "fee": "0",
         "guid": "paydecisionrow38437863",
         "income": "999999",
@@ -1163,17 +1163,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "paydecisionrows",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created pay decisions 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "caseworker": null,
         "decisiondate": "2020-01-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1186,7 +1186,7 @@ Object {
         "startdate": "2020-03-01T00:00:00.000Z",
         "status": 999420001,
       },
-      Object {
+      {
         "caseworker": null,
         "decisiondate": "2020-01-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1199,7 +1199,7 @@ Object {
         "startdate": "2020-03-01T00:00:00.000Z",
         "status": 999420001,
       },
-      Object {
+      {
         "caseworker": null,
         "decisiondate": "2020-01-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1212,7 +1212,7 @@ Object {
         "startdate": "2020-02-03T00:00:00.000Z",
         "status": 82,
       },
-      Object {
+      {
         "caseworker": null,
         "decisiondate": "2020-01-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1225,7 +1225,7 @@ Object {
         "startdate": "2020-08-02T00:00:00.000Z",
         "status": 999420001,
       },
-      Object {
+      {
         "caseworker": null,
         "decisiondate": "2020-01-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1238,7 +1238,7 @@ Object {
         "startdate": "2020-08-03T00:00:00.000Z",
         "status": 999420001,
       },
-      Object {
+      {
         "caseworker": null,
         "decisiondate": "2019-07-01T00:00:00.000Z",
         "decisionmaker": null,
@@ -1253,17 +1253,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "paydecisions",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created persons 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa1}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1279,7 +1279,7 @@ Object {
         "phonework": null,
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa2}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1295,7 +1295,7 @@ Object {
         "phonework": "111-1111111",
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa3}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1311,7 +1311,7 @@ Object {
         "phonework": null,
         "secretaddress": true,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa4}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1327,7 +1327,7 @@ Object {
         "phonework": "222-2222223",
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa5}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1343,7 +1343,7 @@ Object {
         "phonework": "222-2222222",
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa6}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1359,7 +1359,7 @@ Object {
         "phonework": null,
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa7}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1375,7 +1375,7 @@ Object {
         "phonework": null,
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa8}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1391,7 +1391,7 @@ Object {
         "phonework": null,
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa9}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1407,7 +1407,7 @@ Object {
         "phonework": null,
         "secretaddress": false,
       },
-      Object {
+      {
         "guid": "{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa10}",
         "homemunicipality": 2,
         "mothertongue": 1,
@@ -1425,17 +1425,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "persons",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created placementextents 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "days": 0,
         "enddate": null,
         "extentcode": 100,
@@ -1444,7 +1444,7 @@ Object {
         "placementnbr": 11,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": null,
         "extentcode": 10000,
@@ -1453,7 +1453,7 @@ Object {
         "placementnbr": 11,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 15,
         "enddate": null,
         "extentcode": 101,
@@ -1462,7 +1462,7 @@ Object {
         "placementnbr": 12,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 15,
         "enddate": null,
         "extentcode": 101,
@@ -1471,7 +1471,7 @@ Object {
         "placementnbr": 13,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 15,
         "enddate": null,
         "extentcode": 101,
@@ -1480,7 +1480,7 @@ Object {
         "placementnbr": 13,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 15,
         "enddate": Any<String>,
         "extentcode": 101,
@@ -1489,7 +1489,7 @@ Object {
         "placementnbr": 14,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 15,
         "enddate": null,
         "extentcode": 101,
@@ -1498,7 +1498,7 @@ Object {
         "placementnbr": 15,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 1000,
@@ -1507,7 +1507,7 @@ Object {
         "placementnbr": 17,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 100,
@@ -1516,7 +1516,7 @@ Object {
         "placementnbr": 18,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 100,
         "enddate": Any<String>,
         "extentcode": 100,
@@ -1525,7 +1525,7 @@ Object {
         "placementnbr": 19,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": null,
         "extentcode": 10000,
@@ -1534,7 +1534,7 @@ Object {
         "placementnbr": 19,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 200,
@@ -1543,7 +1543,7 @@ Object {
         "placementnbr": 20,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 100,
@@ -1552,7 +1552,7 @@ Object {
         "placementnbr": 21,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 100,
@@ -1561,7 +1561,7 @@ Object {
         "placementnbr": 22,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "days": 0,
         "enddate": Any<String>,
         "extentcode": 200,
@@ -1572,17 +1572,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "placementextents",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created placements 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": null,
         "personid": "010619A9501",
         "placementchildminder": null,
@@ -1591,7 +1591,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "personid": "010619A9501",
         "placementchildminder": null,
@@ -1600,7 +1600,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "personid": "251118A9509",
         "placementchildminder": "010101-TP99",
@@ -1609,7 +1609,7 @@ Object {
         "placementunitcode": null,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251118A9509",
         "placementchildminder": "010101-TP99",
@@ -1618,7 +1618,7 @@ Object {
         "placementunitcode": null,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "personid": "251118A9509",
         "placementchildminder": "010101-TP99",
@@ -1627,7 +1627,7 @@ Object {
         "placementunitcode": null,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "personid": "251118A9509",
         "placementchildminder": "010101-TP99",
@@ -1636,7 +1636,7 @@ Object {
         "placementunitcode": null,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251118A9509",
         "placementchildminder": null,
@@ -1645,7 +1645,7 @@ Object {
         "placementunitcode": 999,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251118A9509",
         "placementchildminder": null,
@@ -1654,7 +1654,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": null,
         "personid": "251118A9509",
         "placementchildminder": null,
@@ -1663,7 +1663,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251115A9509",
         "placementchildminder": null,
@@ -1672,7 +1672,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251115A9509",
         "placementchildminder": null,
@@ -1681,7 +1681,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251115A9509",
         "placementchildminder": null,
@@ -1690,7 +1690,7 @@ Object {
         "placementunitcode": 123,
         "startdate": Any<String>,
       },
-      Object {
+      {
         "enddate": Any<String>,
         "personid": "251114A9509",
         "placementchildminder": null,
@@ -1701,17 +1701,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "placements",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created special means 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": "2020-05-31T00:00:00.000Z",
         "guid": "specialmeans010619A95011",
         "mean": 438,
@@ -1722,17 +1722,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "specialmeans",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created special needs 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "enddate": "2020-05-31T00:00:00.000Z",
         "guid": "specialneeds010619A95011",
         "personid": "010619A9501",
@@ -1742,17 +1742,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "specialneeds",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created timestamp details 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "day": 1,
         "endtime1": "1617",
         "endtime2": null,
@@ -1765,17 +1765,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "timestampdetails",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created timestamp headers 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "childminder": "010101-TP99",
         "department": 0,
         "guid": "timestampheader-1122",
@@ -1788,17 +1788,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "timestampheaders",
   ],
 }
 `;
 
 exports[`GET /import xml positive should return created units 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "areacode": 1,
         "enddate": null,
         "phone1": "3123312",
@@ -1811,7 +1811,7 @@ Object {
         "unitname": "Tenhon testiyksikkö",
         "unitzipcode": "12000",
       },
-      Object {
+      {
         "areacode": 2,
         "enddate": null,
         "phone1": "12123123",
@@ -1826,17 +1826,17 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "units",
   ],
 }
 `;
 
 exports[`GET /import xml positive should work even if XML elements have mixed case 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
+{
+  "inserts": [
+    [
+      {
         "active": true,
         "code": 1,
         "codetype": "SPRAK",
@@ -1844,7 +1844,7 @@ Object {
         "extrainfo2": null,
         "text": "Suomi¤¤Finska",
       },
-      Object {
+      {
         "active": true,
         "code": 2,
         "codetype": "HEMKOMMUN",
@@ -1852,7 +1852,7 @@ Object {
         "extrainfo2": null,
         "text": "Ypäjä",
       },
-      Object {
+      {
         "active": true,
         "code": 3,
         "codetype": "LAND",
@@ -1860,7 +1860,7 @@ Object {
         "extrainfo2": "246",
         "text": "Suomi",
       },
-      Object {
+      {
         "active": true,
         "code": 26,
         "codetype": "INKSLAG",
@@ -1868,7 +1868,7 @@ Object {
         "extrainfo2": null,
         "text": "Lisätulo¤¤Inkomstslag1",
       },
-      Object {
+      {
         "active": true,
         "code": 25,
         "codetype": "INKSLAG",
@@ -1876,7 +1876,7 @@ Object {
         "extrainfo2": null,
         "text": "Päätulo¤¤Inkomstslag2",
       },
-      Object {
+      {
         "active": true,
         "code": 30,
         "codetype": "INKPERIOD",
@@ -1886,7 +1886,7 @@ Object {
       },
     ],
   ],
-  "tables": Array [
+  "tables": [
     "codes",
   ],
 }

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should import varda unit data 1`] = `
-Array [
-  Object {
+[
+  {
     "alkamis_pvm": 2022-01-01T00:00:00.000Z,
     "hallinnointijarjestelma": "VARDA",
     "id": "11",
@@ -16,7 +16,7 @@ Array [
     "vakajarjestaja": "localhost/organisaatio/2.2.2.1",
     "vakajarjestaja_oid": "2.2.2.1",
   },
-  Object {
+  {
     "alkamis_pvm": 2020-01-01T00:00:00.000Z,
     "hallinnointijarjestelma": "VARDA",
     "id": "12",
@@ -30,7 +30,7 @@ Array [
     "vakajarjestaja": "localhost/organisaatio/2.2.2.4",
     "vakajarjestaja_oid": "2.2.2.4",
   },
-  Object {
+  {
     "alkamis_pvm": 2021-01-01T00:00:00.000Z,
     "hallinnointijarjestelma": "VARDA",
     "id": "13",
@@ -48,8 +48,8 @@ Array [
 `;
 
 exports[`should import, transform and transfer varda data 1`] = `
-Array [
-  Object {
+[
+  {
     "etunimet": "Christian",
     "henkilo": "localhost/henkilo/21",
     "henkilo_id": "21",
@@ -57,7 +57,7 @@ Array [
     "id": "11",
     "kutsumanimi": "Christian",
     "lahdejarjestelma": "93",
-    "lapsi": Array [
+    "lapsi": [
       "localhost/lapsi/11",
       "localhost/lapsi/13",
     ],
@@ -73,16 +73,16 @@ Array [
     "syntyma_pvm": 2019-06-01T00:00:00.000Z,
     "tunniste": "tunniste1",
     "turvakielto": false,
-    "tyontekija": Array [],
+    "tyontekija": [],
     "url": "localhost/lapsi/11",
     "vakatoimija": "localhost/organisaatio/2.2.2.1",
     "vakatoimija_oid": "2.2.2.1",
-    "varhaiskasvatuspaatokset_top": Array [
+    "varhaiskasvatuspaatokset_top": [
       "localhost/paatos/1",
       "localhost/paatos/2",
     ],
   },
-  Object {
+  {
     "etunimet": "Christian",
     "henkilo": "localhost/henkilo/21",
     "henkilo_id": "21",
@@ -90,7 +90,7 @@ Array [
     "id": "13",
     "kutsumanimi": "Christian",
     "lahdejarjestelma": "57",
-    "lapsi": Array [
+    "lapsi": [
       "localhost/lapsi/11",
       "localhost/lapsi/13",
     ],
@@ -106,13 +106,13 @@ Array [
     "syntyma_pvm": 2019-06-01T00:00:00.000Z,
     "tunniste": "tunniste2",
     "turvakielto": false,
-    "tyontekija": Array [],
+    "tyontekija": [],
     "url": "localhost/lapsi/13",
     "vakatoimija": "localhost/organisaatio/2.2.2.3",
     "vakatoimija_oid": "2.2.2.3",
-    "varhaiskasvatuspaatokset_top": Array [],
+    "varhaiskasvatuspaatokset_top": [],
   },
-  Object {
+  {
     "etunimet": "Camilla",
     "henkilo": "localhost/henkilo/22",
     "henkilo_id": "22",
@@ -120,7 +120,7 @@ Array [
     "id": "12",
     "kutsumanimi": "Camilla",
     "lahdejarjestelma": "45",
-    "lapsi": Array [
+    "lapsi": [
       "localhost/lapsi/12",
     ],
     "muutos_pvm": "2022-02-09T11:29:00.249Z",
@@ -135,13 +135,13 @@ Array [
     "syntyma_pvm": 2018-11-25T00:00:00.000Z,
     "tunniste": null,
     "turvakielto": true,
-    "tyontekija": Array [
+    "tyontekija": [
       "localhost/tyontekija/1",
     ],
     "url": "localhost/lapsi/12",
     "vakatoimija": null,
     "vakatoimija_oid": null,
-    "varhaiskasvatuspaatokset_top": Array [
+    "varhaiskasvatuspaatokset_top": [
       "localhost/paatos/3",
     ],
   },
@@ -149,8 +149,8 @@ Array [
 `;
 
 exports[`should import, transform and transfer varda data 2`] = `
-Array [
-  Object {
+[
+  {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.1",
     "row_id": Any<String>,
@@ -158,7 +158,7 @@ Array [
     "varda_person_id": "21",
     "varda_person_oid": "1.1.1.1",
   },
-  Object {
+  {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.2",
     "row_id": Any<String>,
@@ -166,7 +166,7 @@ Array [
     "varda_person_id": "22",
     "varda_person_oid": "1.1.1.2",
   },
-  Object {
+  {
     "evaka_person_id": Any<String>,
     "organizer_oid": "2.2.2.3",
     "row_id": Any<String>,
@@ -178,8 +178,8 @@ Array [
 `;
 
 exports[`should import, transform and transfer varda data 3`] = `
-Array [
-  Object {
+[
+  {
     "created_at": Any<Date>,
     "evaka_person_id": Any<String>,
     "modified_at": Any<Date>,
@@ -189,7 +189,7 @@ Array [
     "varda_person_id": "21",
     "varda_person_oid": "1.1.1.1",
   },
-  Object {
+  {
     "created_at": Any<Date>,
     "evaka_person_id": Any<String>,
     "modified_at": Any<Date>,
@@ -199,7 +199,7 @@ Array [
     "varda_person_id": "22",
     "varda_person_oid": "1.1.1.2",
   },
-  Object {
+  {
     "created_at": Any<Date>,
     "evaka_person_id": Any<String>,
     "modified_at": Any<Date>,
