@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2021-2023 City of Tampere
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+version: 2
+updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
