@@ -9,12 +9,14 @@ import {
     runQuery,
     wrapWithReturning,
 } from "../util/queryTools";
+import { ensureEfficaUser } from "../db/evaka";
 
 export const transferFamiliesData = async (returnAll: boolean = false) => {
     return await migrationDb.tx(async (t) => {
+        const efficaUser = await ensureEfficaUser(t);
         return {
             children: await transferChildData(t, returnAll),
-            partners: await transferPartnerData(t, returnAll),
+            partners: await transferPartnerData(t, returnAll, efficaUser),
         };
     });
 };
@@ -36,12 +38,12 @@ const transferChildData = async <T>(t: ITask<T>, returnAll: boolean) => {
     return await runQuery(insertQuery, t, true);
 };
 
-const transferPartnerData = async <T>(t: ITask<T>, returnAll: boolean) => {
+const transferPartnerData = async <T>(t: ITask<T>, returnAll: boolean, efficaUser: string) => {
     const insertQueryPart = `
     INSERT INTO fridge_partner
-        (partnership_id, indx, person_id, start_date, end_date, conflict, other_indx)
+        (partnership_id, indx, person_id, start_date, end_date, conflict, other_indx, created_at, created_by)
     SELECT
-        partnership_id, indx, person_id, start_date, end_date, false, other_indx
+        partnership_id, indx, person_id, start_date, end_date, false, other_indx, now(), '${efficaUser}'
     FROM ${getMigrationSchemaPrefix()}evaka_fridge_partner
     `;
     const insertQuery = wrapWithReturning(

@@ -16,7 +16,7 @@ const tables = ["persons", "specialneeds", "specialmeans", "codes", "income", "i
     "units", "departments", "placements", "placementextents", "decisions",
     "feedeviations", "childminders", "evaka_areas", "unitmap", "unwantedunits", "childmindermap",
     "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
-    "applications", "applicationrows", "evaka_unit_manager", "evaka_daycare", "daycare_oid_map",
+    "applications", "applicationrows", "evaka_daycare", "daycare_oid_map",
     "families_exclusion", "placements_exclusion",
     "paydecisions", "paydecisionrows",
     // päikky
@@ -247,11 +247,8 @@ describe("GET /import csv positive", () => {
     it("should return created childmindermaps", async () => {
         return await positiveImportSnapshotTest("childmindermap")
     })
-    it("should return created evaka unit managers", async () => {
-        return await positiveImportSnapshotTest("evaka_unit_manager")
-    })
     it("should return created evaka daycares", async () => {
-        await setupTables(["evaka_areas", "evaka_unit_manager"])
+        await setupTables(["evaka_areas"])
         return await positiveImportSnapshotTest(
             "evaka_daycare",
             getTimeSeriesResultPattern(

@@ -103,13 +103,6 @@ Object {
         "mailing_street_address": null,
         "name": "Tenhon testiyksikkö",
         "opening_date": "2020-03-01T00:00:00.000Z",
-        "operation_days": Array [
-          1,
-          2,
-          3,
-          4,
-          5,
-        ],
         "oph_organizer_oid": null,
         "oph_unit_oid": null,
         "phone": null,
@@ -123,7 +116,9 @@ Object {
         "type": Array [
           "CENTRE",
         ],
-        "unit_manager_id": "340ead9c-a1bc-11eb-b5d4-1bc4a624aabe",
+        "unit_manager_email": "",
+        "unit_manager_name": "Yrjö Yksikönjohtaja",
+        "unit_manager_phone": "1",
         "updated": Any<String>,
         "upload_children_to_varda": false,
         "upload_to_koski": false,
@@ -162,13 +157,6 @@ Object {
         "mailing_street_address": null,
         "name": "Pujakan testiyksikkö",
         "opening_date": "2020-03-01T00:00:00.000Z",
-        "operation_days": Array [
-          1,
-          2,
-          3,
-          4,
-          5,
-        ],
         "oph_organizer_oid": null,
         "oph_unit_oid": null,
         "phone": null,
@@ -182,7 +170,9 @@ Object {
         "type": Array [
           "CENTRE",
         ],
-        "unit_manager_id": "340eae78-a1bc-11eb-b5d6-b30369678b4c",
+        "unit_manager_email": "",
+        "unit_manager_name": "Ylermi Yksikönjohtaja",
+        "unit_manager_phone": "2",
         "updated": Any<String>,
         "upload_children_to_varda": false,
         "upload_to_koski": false,
@@ -221,13 +211,6 @@ Object {
         "mailing_street_address": null,
         "name": "Perhepäivähoidon hakuyksikkö",
         "opening_date": "2020-03-01T00:00:00.000Z",
-        "operation_days": Array [
-          1,
-          2,
-          3,
-          4,
-          5,
-        ],
         "oph_organizer_oid": null,
         "oph_unit_oid": null,
         "phone": null,
@@ -241,7 +224,9 @@ Object {
         "type": Array [
           "CENTRE",
         ],
-        "unit_manager_id": "340eae78-a1bc-11eb-b5d6-b30369678b4c",
+        "unit_manager_email": "",
+        "unit_manager_name": "Ylermi Yksikönjohtaja",
+        "unit_manager_phone": "2",
         "updated": Any<String>,
         "upload_children_to_varda": false,
         "upload_to_koski": false,
@@ -252,30 +237,6 @@ Object {
   ],
   "tables": Array [
     "evaka_daycare",
-  ],
-}
-`;
-
-exports[`GET /import csv positive should return created evaka unit managers 1`] = `
-Object {
-  "inserts": Array [
-    Array [
-      Object {
-        "email": null,
-        "id": "340ead9c-a1bc-11eb-b5d4-1bc4a624aabe",
-        "name": "Yrjö Yksikönjohtaja",
-        "phone": "1",
-      },
-      Object {
-        "email": null,
-        "id": "340eae78-a1bc-11eb-b5d6-b30369678b4c",
-        "name": "Ylermi Yksikönjohtaja",
-        "phone": "2",
-      },
-    ],
-  ],
-  "tables": Array [
-    "evaka_unit_manager",
   ],
 }
 `;

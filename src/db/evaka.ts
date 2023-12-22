@@ -12,7 +12,7 @@ import {
     wrapWithReturning
 } from "../util/queryTools";
 import migrationDb from "./db";
-import { createDaycareTableQuery, createUnitManagerTableQuery } from "./tables";
+import { createDaycareTableQuery } from "./tables";
 
 export const affectedEvakaTablesList: string[] = [
     "absence",
@@ -38,7 +38,6 @@ export const affectedEvakaTablesList: string[] = [
     "person",
     "placement",
     "service_need",
-    "unit_manager",
     "varda_unit",
     "voucher_value_decision"
 ]
@@ -78,8 +77,7 @@ export const ensurePäikkyUser = async <T>(t: ITask<T>): Promise<string> => {
     return user.id;
 };
 
-export const copyUnitManagersAndDaycaresFromEvaka = async (): Promise<any> => {
-    const umTd = extTableMapping["evaka_unit_manager"]
+export const copyDaycaresFromEvaka = async (): Promise<any> => {
     const daycareTd = extTableMapping["evaka_daycare"]
     const getCopyQuery = (td: TableDescriptor, sourceTableName: string) => `
         INSERT INTO ${getMigrationSchemaPrefix()}${td.tableName}
@@ -88,18 +86,16 @@ export const copyUnitManagersAndDaycaresFromEvaka = async (): Promise<any> => {
 
     return await migrationDb.task(async (t) => {
 
-        await t.none(createUnitManagerTableQuery(umTd))
         await t.none(createDaycareTableQuery(daycareTd))
 
-        const umResult = await t.any(wrapWithReturning("evaka_unit_manager", getCopyQuery(umTd, "unit_manager"), false))
         const daycareResult = await t.any(wrapWithReturning("evaka_daycare", getCopyQuery(daycareTd, "daycare"), false))
-        return { unit_manager: umResult, daycare: daycareResult }
+        return { daycare: daycareResult }
     })
 }
 
 
 
-//NOTE: This reset removes migrated data from evaka with the exception of daycare, daycare_acl and unit_manager tables
+//NOTE: This reset removes migrated data from evaka with the exception of daycare and daycare_acl tables
 export const resetEvakaMigratedData = async () => {
     const evakaMigrationTables: string[] = [
         "person", "daycare_group", "varda_unit", "decision"

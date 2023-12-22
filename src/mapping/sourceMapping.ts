@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import { config } from "../config"
-import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery, createUnitManagerTableQuery } from "../db/tables"
+import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery } from "../db/tables"
 import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, dateParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
 import { TypeMapping } from "../types"
 
@@ -424,20 +424,6 @@ export const extTableMapping: TypeMapping = {
             evaka_id: { sqlType: "uuid", parser: nullForcingTextParser }
         }
     },
-    evaka_unit_manager: {
-        tableQueryFunction: createUnitManagerTableQuery,
-        tableName: "evaka_unit_manager",
-        columns: {
-            id:
-                { sqlType: "uuid", parser: nullForcingTextParser },
-            name:
-                { sqlType: "text", parser: nullForcingTextParser },
-            phone:
-                { sqlType: "text", parser: nullForcingTextParser },
-            email:
-                { sqlType: "text", parser: nullForcingTextParser }
-        }
-    },
     evaka_daycare: {
         tableQueryFunction: createDaycareTableQuery,
         tableName: "evaka_daycare",
@@ -473,8 +459,12 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "text", parser: nullForcingTextParser },
             additional_info:
                 { sqlType: "text", parser: nullForcingTextParser },
-            unit_manager_id:
-                { sqlType: "uuid", parser: nullForcingTextParser },
+            unit_manager_name:
+                { sqlType: "text", parser: nonNullTextParser },
+            unit_manager_phone:
+                { sqlType: "text", parser: nonNullTextParser },
+            unit_manager_email:
+                { sqlType: "text", parser: nonNullTextParser },
             cost_center:
                 { sqlType: "text", parser: nullForcingTextParser },
             upload_to_varda:
@@ -517,8 +507,6 @@ export const extTableMapping: TypeMapping = {
                 { sqlType: "text", parser: nullForcingTextParser },
             oph_organizer_oid:
                 { sqlType: "text", parser: nullForcingTextParser },
-            operation_days:
-                { sqlType: "integer[]", parser: csvStringArrayParser },
             ghost_unit:
                 { sqlType: "boolean", parser: csvStringBooleanParser },
             daycare_apply_period:

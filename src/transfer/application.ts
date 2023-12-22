@@ -27,10 +27,5 @@ const transferApplications = async <T>(t: ITask<T>, returnAll: boolean) => {
         t,
         true
     );
-    const applicationForms = await runQuery(
-        selectFromTable("application_form", "", returnAll, ["created"]),
-        t,
-        true
-    );
-    return { applications, applicationForms };
+    return { applications };
 };
