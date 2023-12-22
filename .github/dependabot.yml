@@ -10,3 +10,33 @@ updates:
       interval: "daily"
       time: "10:00"
       timezone: "Europe/Helsinki"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+    groups:
+      express:
+        patterns:
+          - "@types/express"
+          - "express"
+      jest:
+        patterns:
+          - "@types/jest"
+          - "jest*"
+          - "ts-jest"
+        exclude-patterns:
+          - "jest-junit"
+      luxon:
+        patterns:
+          - "@types/luxon"
+          - "luxon"
+      n-readlines:
+        patterns:
+          - "@types/n-readlines"
+          - "n-readlines"
+      supertest:
+        patterns:
+          - "@types/supertest"
+          - "supertest"
