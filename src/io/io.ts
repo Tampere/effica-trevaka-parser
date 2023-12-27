@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import csv from "csvtojson/v2"
-import * as xmlParser from "fast-xml-parser"
+import { X2jOptionsOptional, XMLParser } from "fast-xml-parser";
 import { Dirent } from "fs"
 import { opendir, readFile } from "fs/promises"
 import LineReader from "n-readlines"
@@ -16,6 +16,19 @@ import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
 import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
+
+const xmlParserOptions: X2jOptionsOptional = {
+    parseTagValue: true,
+    isArray: (tagName, jPath, isLeafNode) => !isLeafNode,
+    trimValues: true,
+    numberParseOptions: {
+        hex: false,
+        leadingZeros: false,
+    },
+    ignoreDeclaration: true,
+    processEntities: false,
+}
+const xmlParser = new XMLParser(xmlParserOptions)
 
 export async function readFilesFromDir(importOptions: ImportOptions): Promise<FileDescriptor[]> {
     const files: FileDescriptor[] = []
@@ -48,7 +61,7 @@ export async function readFilesFromDir(importOptions: ImportOptions): Promise<Fi
                     }
                     // note that effica dumps are delivered as txt files
                 } else {
-                    const xmlData = xmlParser.parse(fileAsString, config.xmlParserOptions)
+                    const xmlData = xmlParser.parse(fileAsString)
                     const tableData = stripXmlOverhead(xmlData, fileName)
                     file = {
                         fileName: fileName,
@@ -74,7 +87,7 @@ const stripXmlOverhead = (xmlData: any, fileName: string): any => {
     // { <item>: [Array] } 
     // the parsed XML data is just a wrapper object with the item key and an array of "item rows"
 
-    if (typeof xmlData === "string") {
+    if (typeof xmlData === "object" && Object.keys(xmlData).length === 0) {
         throw new Error(`No parseable data element detected in '${fileName}' (${errorCodes.noDataContent})`)
     }
     const elementKeys = Object.keys(xmlData)
@@ -233,6 +246,6 @@ async function importFileInParts(importOptions: PartitionImportOptions, dirent: 
 }
 
 const processXmlPartition = (parts: string[], fileName: string) => {
-    const result = stripXmlOverhead(xmlParser.parse(parts.join("\n"), config.xmlParserOptions), fileName)
+    const result = stripXmlOverhead(xmlParser.parse(parts.join("\n")), fileName)
     return result
 }

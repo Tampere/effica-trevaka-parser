@@ -29,12 +29,6 @@ export const config = {
             bucket: process.env.AWS_S3_BUCKET,
         }
     },
-    xmlParserOptions: {
-        parseNodeValue: true,
-        arrayMode: true,
-        trimValues: true,
-        parseTrueNumberOnly: true
-    },
     csvParserOptions: {
         trim: true,
         delimiter: "|"
