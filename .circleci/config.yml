@@ -48,7 +48,8 @@ jobs:
       - run:
           name: Start up compose stack
           command: docker-compose -f docker-compose-it-db.yml up -d --build
-      - node/install-packages
+      - node/install-packages:
+          include-branch-in-cache-key: false
       - run: npm run integration-test
       - run:
           name: Collect docker-compose logs
