@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import csv from "csvtojson/v2"
-import { X2jOptionsOptional, XMLParser } from "fast-xml-parser";
+import { X2jOptions, XMLParser } from "fast-xml-parser";
 import { Dirent } from "fs"
 import { opendir, readFile } from "fs/promises"
 import LineReader from "n-readlines"
@@ -17,7 +17,7 @@ import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, PartitionI
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 
-const xmlParserOptions: X2jOptionsOptional = {
+const xmlParserOptions: X2jOptions = {
     parseTagValue: true,
     isArray: (tagName, jPath, isLeafNode) => !isLeafNode,
     trimValues: true,
