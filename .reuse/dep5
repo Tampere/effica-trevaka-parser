@@ -7,3 +7,7 @@ Source: https://github.com/Tampere/effica-trevaka-parser
 # Files: src/*
 # Copyright: $YEAR $NAME <$CONTACT>
 # License: ...
+
+Files: .run/*
+Copyright: 2023 Tampere region
+License: LGPL-2.1-or-later
