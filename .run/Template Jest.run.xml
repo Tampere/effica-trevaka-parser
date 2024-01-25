@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="JavaScriptTestRunnerJest">
+    <config-file value="$PROJECT_DIR$/jest.config.integration-test.js" />
+    <node-interpreter value="project" />
+    <jest-options value="--runInBand" />
+    <envs>
+      <env name="AWS_ACCESS_KEY_ID" value="key" />
+      <env name="AWS_S3_BUCKET" value="migration" />
+      <env name="AWS_S3_ENDPOINT" value="http://localhost:9090" />
+      <env name="AWS_SECRET_ACCESS_KEY" value="secret" />
+      <env name="TZ" value="UTC" />
+    </envs>
+    <scope-kind value="ALL" />
+    <method v="2" />
+  </configuration>
+</component>
