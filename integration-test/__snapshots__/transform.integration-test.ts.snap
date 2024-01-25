@@ -271,7 +271,7 @@ exports[`GET /transform positive should return transformed income 1`] = `
     "notes": "",
     "person_id": Any<String>,
     "person_ssn": "020967-9992",
-    "valid_from": Any<String>,
+    "valid_from": "2020-03-01T00:00:00.000Z",
     "valid_to": null,
   },
   {
@@ -289,8 +289,8 @@ exports[`GET /transform positive should return transformed income 1`] = `
     "notes": "",
     "person_id": Any<String>,
     "person_ssn": "180476-998M",
-    "valid_from": Any<String>,
-    "valid_to": Any<String>,
+    "valid_from": "2020-03-01T00:00:00.000Z",
+    "valid_to": "2021-03-01T00:00:00.000Z",
   },
 ]
 `;
