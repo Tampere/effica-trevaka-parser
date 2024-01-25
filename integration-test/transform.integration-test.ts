@@ -270,25 +270,14 @@ describe("GET /transform positive", () => {
         cleanUps = ["evaka_income", "evaka_person"]
         await setupTransformations(["persons"])
 
-        const incomeExpectation =
-            [
-                {
-                    id: expect.any(String),
-                    person_id: expect.any(String),
-                    valid_from: expect.any(String),
-                    valid_to: null
-                },
-                {
-                    id: expect.any(String),
-                    person_id: expect.any(String),
-                    valid_from: expect.any(String),
-                    valid_to: expect.any(String)
-                }
-            ]
+        const incomeExpectation = {
+            id: expect.any(String),
+            person_id: expect.any(String),
+        }
 
         await positiveTransformSnapshotTest(
             "income",
-            incomeExpectation
+            Array(2).fill(incomeExpectation)
         )
     })
 

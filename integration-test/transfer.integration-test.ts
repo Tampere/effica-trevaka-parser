@@ -357,24 +357,19 @@ describe("GET /transfer positive", () => {
     })
 
     it("should return transferred income", async () => {
-        const incomeOpenExpectation = {
+        const incomeExpectation = {
 
             id: expect.any(String),
             person_id: expect.any(String),
             updated_at: expect.any(String),
             updated_by: expect.any(String),
-            valid_from: expect.any(String),
-        }
-        const incomeClosedExpectation = {
-            ...incomeOpenExpectation,
-            valid_to: expect.any(String)
         }
 
         await setupTransformations(["persons", "income"])
         await setupTransfers(["persons"])
         await positiveTransferSnapshotTest(
             "income",
-            [incomeOpenExpectation, incomeClosedExpectation]
+            Array(2).fill(incomeExpectation)
         )
     })
 

@@ -25,7 +25,7 @@ export const transferIncomeData = async (returnAll: boolean = false) => {
             application_id
         FROM ${getMigrationSchemaPrefix()}evaka_income p
     `
-    const insertQuery = wrapWithReturning("income", insertQueryPart, returnAll)
+    const insertQuery = wrapWithReturning("income", insertQueryPart, returnAll, ["valid_from", "valid_to NULLS FIRST"])
 
     return await migrationDb.tx(async (t) => {
         const updatedBy = await ensureEfficaUser(t)
