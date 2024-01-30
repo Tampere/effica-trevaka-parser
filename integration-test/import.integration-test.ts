@@ -9,6 +9,7 @@ import { initDb } from "../src/init"
 import { errorCodes } from "../src/util/error"
 import { dropTable } from "../src/util/queryTools"
 import { setupTables } from "../src/util/testTools"
+import migrationDb from "../src/db/db";
 
 const baseUrl = "/import"
 
@@ -39,7 +40,7 @@ const daycareExpectation: DateRangeExpectation = {
 }
 
 beforeAll(async () => {
-    await initDb()
+    await migrationDb.tx(async (tx) => await initDb(tx))
 })
 
 beforeEach(async () => {

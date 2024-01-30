@@ -4,13 +4,13 @@
 
 import express from "express"
 import { config } from "../config"
-import { importFileData } from "../import/service"
 import { importVarda, importVardaPersonData, importVardaUnitData } from "../import/varda"
-import { readFilesFromDir, readFilesFromDirAsPartitions } from "../io/io"
-import { FileDescriptor, ImportOptions, PartitionImportOptions } from "../types"
+import { importFilesFromDir, readFilesFromDirAsPartitions } from "../io/io"
+import { ImportOptions, PartitionImportOptions } from "../types"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
 import { AxiosVardaClient } from "../util/varda-client"
+import migrationDb from "../db/db";
 
 const router = express.Router();
 router.get("/", async (req, res, next) => {
@@ -25,8 +25,7 @@ router.get("/", async (req, res, next) => {
         importTarget: typeof importTarget === "string" ? importTarget : undefined
     }
     try {
-        const files: FileDescriptor[] = await readFilesFromDir(importOptions)
-        const importResult = await importFileData(files, importOptions)
+        const importResult = await migrationDb.tx(async (tx) => await importFilesFromDir(tx, importOptions))
         res.status(200).json(importResult)
     } catch (err) {
         next(new ErrorWithCause(`Import operation failed, transaction rolled back:`, err))

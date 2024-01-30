@@ -11,7 +11,7 @@ import pgPromise from "pg-promise"
 import v8 from "v8"
 import { config } from "../config"
 import migrationDb from "../db/db"
-import { importFileDataWithExistingTx } from "../import/service"
+import { importFileData, importFileDataWithExistingTx } from "../import/service"
 import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
 import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
@@ -29,6 +29,11 @@ const xmlParserOptions: X2jOptions = {
     processEntities: false,
 }
 const xmlParser = new XMLParser(xmlParserOptions)
+
+export const importFilesFromDir = async (tx: pgPromise.ITask<{}>, importOptions: ImportOptions) => {
+    const files = await readFilesFromDir(importOptions)
+    return await importFileData(tx, files, importOptions)
+}
 
 export async function readFilesFromDir(importOptions: ImportOptions): Promise<FileDescriptor[]> {
     const files: FileDescriptor[] = []
