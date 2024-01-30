@@ -8,6 +8,7 @@ import db from "../src/db/db"
 import { initDb } from "../src/init"
 import { dropTable, truncateEvakaTables } from "../src/util/queryTools"
 import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
+import migrationDb from "../src/db/db";
 
 const baseUrl = "/transform"
 let cleanUps: string[] = []
@@ -59,7 +60,7 @@ const personExpectation = {
 }
 
 beforeAll(async () => {
-    await initDb()
+    await migrationDb.tx(async (tx) => await initDb(tx))
 
     for (const table of baseDataTables) {
         const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined

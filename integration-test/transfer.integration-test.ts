@@ -8,6 +8,7 @@ import db from "../src/db/db"
 import { initDb } from "../src/init"
 import { dropTable, truncateEvakaTables } from "../src/util/queryTools"
 import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
+import migrationDb from "../src/db/db";
 
 const baseUrl = "/transfer"
 
@@ -226,7 +227,7 @@ const messageAccountExpectation = {
 }
 
 beforeAll(async () => {
-    await initDb()
+    await migrationDb.tx(async (tx) => await initDb(tx))
 })
 
 beforeEach(async () => {

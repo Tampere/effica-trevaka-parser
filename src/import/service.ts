@@ -4,27 +4,25 @@
 
 import pgPromise from "pg-promise"
 import { config } from "../config"
-import migrationDb, { pgp } from "../db/db"
+import { pgp } from "../db/db"
 import { createGenericTableAndViewQueryFromDescriptor } from "../db/tables"
 import { FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
 import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
-export const importFileData = async (files: FileDescriptor[], options: ImportOptions) => {
-    return await migrationDb.tx(async (t) => {
-        const tableResult = await createTables(files, t)
-        const tableInserts: any[] = [];
-        time("** Data inserts total")
-        for await (const f of files) {
-            time(`Table '${f.table.tableName}' inserts`)
-            const insertResult = await insertData(f.table, f.data, f.mapping, options, t)
-            timeEnd(`Table '${f.table.tableName}' inserts`)
-            tableInserts.push(insertResult)
-        }
-        timeEnd("** Data inserts total")
-        return { tables: tableResult, inserts: tableInserts }
-    })
+export const importFileData = async (t: pgPromise.ITask<{}>, files: FileDescriptor[], options: ImportOptions) => {
+    const tableResult = await createTables(files, t)
+    const tableInserts: any[] = [];
+    time("** Data inserts total")
+    for await (const f of files) {
+        time(`Table '${f.table.tableName}' inserts`)
+        const insertResult = await insertData(f.table, f.data, f.mapping, options, t)
+        timeEnd(`Table '${f.table.tableName}' inserts`)
+        tableInserts.push(insertResult)
+    }
+    timeEnd("** Data inserts total")
+    return { tables: tableResult, inserts: tableInserts }
 }
 
 export const importFileDataWithExistingTx = async (files: FileDescriptor[], options: PartitionImportOptions, t: pgPromise.ITask<{}>) => {

@@ -20,9 +20,10 @@ import {
     VardaV1Person,
     VardaV1Unit
 } from "../src/util/varda-client";
+import migrationDb from "../src/db/db";
 
 beforeAll(async () => {
-    await initDb();
+    await migrationDb.tx(async (tx) => await initDb(tx));
 });
 
 beforeEach(async () => {
