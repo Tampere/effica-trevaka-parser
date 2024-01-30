@@ -7,21 +7,10 @@ import app from "../src/app"
 import db from "../src/db/db"
 import { initDb } from "../src/init"
 import { errorCodes } from "../src/util/error"
-import { dropTable } from "../src/util/queryTools"
-import { setupTables } from "../src/util/testTools"
+import { setupTables, cleanupDb } from "../src/util/testTools"
 import migrationDb from "../src/db/db";
 
 const baseUrl = "/import"
-
-const tables = ["persons", "specialneeds", "specialmeans", "codes", "income", "incomerows", "families",
-    "units", "departments", "placements", "placementextents", "decisions",
-    "feedeviations", "childminders", "evaka_areas", "unitmap", "unwantedunits", "childmindermap",
-    "dailyjournals", "dailyjournalrows", "timestampheaders", "timestampdetails",
-    "applications", "applicationrows", "evaka_daycare", "daycare_oid_map",
-    "families_exclusion", "placements_exclusion",
-    "paydecisions", "paydecisionrows",
-    // päikky
-    "archiveddocument"]
 
 type DateRangeExpectation = { [key: string]: any }
 
@@ -44,9 +33,7 @@ beforeAll(async () => {
 })
 
 beforeEach(async () => {
-    for (const table of tables) {
-        await dropTable(table)
-    }
+    await db.tx(tx => cleanupDb(tx));
 })
 
 afterAll(async () => {

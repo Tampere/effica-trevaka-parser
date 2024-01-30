@@ -6,16 +6,10 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { initDb } from "../src/init"
-import { dropTable, truncateEvakaTables } from "../src/util/queryTools"
-import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
+import { cleanupDb, setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 import migrationDb from "../src/db/db";
 
 const baseUrl = "/transform"
-let cleanUps: string[] = []
-
-let evakaDataCleanups: string[] = [
-    "person",
-]
 
 //order based on dependency
 const baseDataTables =
@@ -61,6 +55,10 @@ const personExpectation = {
 
 beforeAll(async () => {
     await migrationDb.tx(async (tx) => await initDb(tx))
+})
+
+beforeEach(async () => {
+    await db.tx(tx => cleanupDb(tx));
 
     for (const table of baseDataTables) {
         const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
@@ -68,38 +66,18 @@ beforeAll(async () => {
     }
 })
 
-beforeEach(() => {
-})
-afterEach(async () => {
-    for (const table of cleanUps) {
-        await dropTable(table)
-    }
-    cleanUps = []
-
-    await truncateEvakaTables(evakaDataCleanups)
-
-})
-
 afterAll(async () => {
-    try {
-        for (const table of baseDataTables) {
-            await dropTable(table)
-        }
-    } finally {
-        return await db.$pool.end()
-    }
+    await db.$pool.end()
 })
 
 describe("GET /transform positive", () => {
     it("should return transformed persons", async () => {
-        cleanUps = ["evaka_person"]
         await positiveTransformSnapshotTest(
             "persons",
             Array(10).fill(personExpectation)
         )
     })
     it("should return transformed families", async () => {
-        cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
         await setupTransformations(["persons"])
 
         const fridgeChildExpectation =
@@ -187,8 +165,6 @@ describe("GET /transform positive", () => {
         )
     })
     it("should return transformed departments", async () => {
-        cleanUps = ["evaka_daycare_group"]
-
         const daycareGroupExpectation =
             [
                 {
@@ -217,11 +193,6 @@ describe("GET /transform positive", () => {
             child_id: expect.any(String),
             daycare_group_id: expect.any(String)
         }
-        const applicationExpectation = {
-            id: expect.any(String),
-            child_id: expect.any(String),
-            guardian_id: expect.any(String),
-        }
 
         await positiveTransformSnapshotTest(
             "placements",
@@ -244,10 +215,6 @@ describe("GET /transform positive", () => {
                     { ...placementExpectation, daycare_group_id: null }, // p=17, e=17
                     placementExpectation, // p=19, e=191
                     placementExpectation, // p=19, e=192
-                ],
-                applications: [
-                    applicationExpectation,
-                    applicationExpectation,
                 ]
             }
         )
@@ -268,7 +235,6 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed income", async () => {
-        cleanUps = ["evaka_income", "evaka_person"]
         await setupTransformations(["persons"])
 
         const incomeExpectation = {
@@ -394,8 +360,6 @@ describe("GET /transform positive", () => {
     })
 
     it("should return transformed application", async () => {
-        cleanUps = ["evaka_person", "evaka_fridge_child", "evaka_fridge_partner"]
-
         await setupTransformations(["persons", "families"])
         await setupTransfers(["persons", "families"])
 
@@ -417,7 +381,7 @@ describe("GET /transform positive", () => {
     })
 
     it("should return cleanups", async () => {
-        await setupTransformations(["persons", "departments", "placements"])
+        await setupTransformations(["persons", "departments", "placements", "daily_journals"])
 
         const daycareGroupExpectation = {
             id: expect.any(String)

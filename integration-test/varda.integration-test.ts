@@ -7,8 +7,8 @@ import { importVarda, importVardaUnitData } from "../src/import/varda";
 import { initDb } from "../src/init";
 import { transferVarda } from "../src/transfer/varda";
 import { transformVarda } from "../src/transform/varda";
-import { dropTable, truncateEvakaTables } from "../src/util/queryTools";
 import {
+    cleanupDb,
     setupTable,
     setupTransfer,
     setupTransformation
@@ -27,18 +27,14 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-    await truncateEvakaTables(["varda_organizer_child", "person"]);
+    await db.tx(tx => cleanupDb(tx));
     await setupTable("persons");
     await setupTable("codes");
     await setupTransformation("persons");
     await setupTransfer("persons");
-    await dropTable("varda_unit");
-    await dropTable("varda_child");
-    await dropTable("varda_person");
 });
 
 afterAll(async () => {
-    await truncateEvakaTables(["varda_organizer_child", "person"]);
     await db.$pool.end();
 });
 
