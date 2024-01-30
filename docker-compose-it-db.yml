@@ -24,14 +24,18 @@ services:
     depends_on:
       - db
     restart: on-failure
+  flyway_vesilahti:
+    image: flyway/flyway:10.3.0
+    command: -url=jdbc:postgresql://db:5432/vesilahti?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    volumes:
+      - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
+      - ./trevaka/service/src/main/resources/db/data/vesilahti:/flyway/sql/trevaka
+    depends_on:
+      - db
+    restart: on-failure
   s3:
     image: adobe/s3mock
     ports:
       - "9090:9090"
     environment:
       ROOT: /data
-    healthcheck:
-      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090" ]
-      interval: 1s
-      timeout: 5s
-      retries: 5
