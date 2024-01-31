@@ -6,8 +6,7 @@ import request from "supertest"
 import app from "../src/app"
 import db from "../src/db/db"
 import { initDb } from "../src/init"
-import { dropTable, truncateEvakaTables } from "../src/util/queryTools"
-import { setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
+import { cleanupDb, setupTable, setupTransfers, setupTransformations } from "../src/util/testTools"
 import migrationDb from "../src/db/db";
 
 const baseUrl = "/transfer"
@@ -51,13 +50,6 @@ const baseDataTables =
 const transformationMap: Record<string, string> = {
     persons: "evaka_person"
 }
-
-let evakaDataCleanups: string[] = [
-    "fee_alteration",
-    "daycare",
-    "person",
-    "daycare_group"
-]
 
 const daycareExpectation = {
     created: expect.any(String),
@@ -231,7 +223,7 @@ beforeAll(async () => {
 })
 
 beforeEach(async () => {
-    await truncateEvakaTables(evakaDataCleanups)
+    await db.tx(tx => cleanupDb(tx));
 
     for await (const table of baseDataTables) {
         const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
@@ -242,18 +234,7 @@ beforeEach(async () => {
 })
 
 afterAll(async () => {
-    try {
-        for (const table of baseDataTables) {
-            await dropTable(table)
-        }
-
-        for (const table of Object.values(transformationMap)) {
-            await dropTable(table)
-        }
-
-    } finally {
-        return await db.$pool.end()
-    }
+    await db.$pool.end()
 })
 
 describe("GET /transfer positive", () => {

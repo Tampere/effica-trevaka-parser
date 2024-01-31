@@ -722,32 +722,6 @@ exports[`GET /transform positive should return transformed persons 1`] = `
 
 exports[`GET /transform positive should return transformed placements 1`] = `
 {
-  "applications": [
-    {
-      "child_id": Any<String>,
-      "duedate": "2025-11-29T00:00:00.000Z",
-      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B99",
-      "effica_id": 12345,
-      "guardian_id": Any<String>,
-      "id": Any<String>,
-      "sentdate": "2025-08-01T00:00:00.000Z",
-      "status": "SENT",
-      "transferapplication": false,
-      "type": "DAYCARE",
-    },
-    {
-      "child_id": Any<String>,
-      "duedate": null,
-      "effica_guid": "12F28AA0-E059-4203-98F9-EE3D37738B00",
-      "effica_id": 12346,
-      "guardian_id": Any<String>,
-      "id": Any<String>,
-      "sentdate": "2020-04-01T00:00:00.000Z",
-      "status": "SENT",
-      "transferapplication": false,
-      "type": "DAYCARE",
-    },
-  ],
   "placements": [
     {
       "child_date_of_birth": "2019-06-01T00:00:00.000Z",
