@@ -5,8 +5,9 @@
 import app from "./app";
 import { config } from "./config";
 import { initDb } from "./init";
+import db from "./db/db";
 
-Promise.all([initDb()])
+Promise.all([db.tx(async (tx) => await initDb(tx))])
     .then(() => {
         app.listen(config.port, () => {
             console.log(
