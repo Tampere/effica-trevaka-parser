@@ -9,6 +9,14 @@ Tool for facilitating Effica -> eVaka data migrations
 
 Developed for assisting in the migration of early education data from the old education system to trevaka.
 
+## Generating a pre-signed data upload form
+
+1. Generate HTML form:
+
+        npm run --silent generate-upload-form [bucket-name] > evaka_upload_$(date +%Y-%m-%d).html
+
+2. Send the generated HTML file as an e-mail attachment
+
 ## Configuration
 The parser provides some configuration options to make the tool usable in different environments:
 
