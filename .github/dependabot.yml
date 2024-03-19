@@ -17,6 +17,9 @@ updates:
       time: "10:00"
       timezone: "Europe/Helsinki"
     groups:
+      aws-sdk:
+         patterns:
+           - "@aws-sdk/*"
       express:
         patterns:
           - "@types/express"

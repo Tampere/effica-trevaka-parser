@@ -6,6 +6,7 @@
 /.vscode/
 /.idea/
 
+/evaka_upload_*.html
 
 /xml/
 /node_modules/
