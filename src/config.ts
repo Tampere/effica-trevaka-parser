@@ -17,6 +17,10 @@ export const config = {
         user: process.env.PGUSER ?? "postgres",
         password: process.env.PGPASSWORD ?? "postgres",
         database: process.env.PGDATABASE ?? "migration",
+        ssl:
+            process.env.PGSSL?.toUpperCase() === "TRUE"
+                ? { rejectUnauthorized: false }
+                : false,
     },
     varda: {
         apiUrl: process.env.VARDA_API_URL,
@@ -36,3 +40,5 @@ export const config = {
     defaultPartitionBufferSize: 60000, //line buffer for partitioned file reading and data persisting
     logResponses: process.env.LOG_RESPONSES?.toUpperCase() === "TRUE"
 }
+
+export type Config = typeof config;

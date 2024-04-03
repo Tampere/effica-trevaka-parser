@@ -22,6 +22,9 @@ import { transformVoucherValueDecisionData } from "../transform/voucher-value-de
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
+import { transform } from "../transform";
+import db from "../db/db";
+import { config } from "../config";
 
 const dependencyOrder: MigrationOperation[] =
     [
@@ -264,6 +267,22 @@ router.get("/", async (req, res, next) => {
     res.status(status).json(results)
 
     timeEnd("**** Transform all total ", undefined, "*")
+})
+
+router.get("/sem", async (req, res, next) => {
+    const type = req.query.type
+    if (typeof type !== "string") {
+        return next(new Error("Type is required"))
+    }
+    time(`**** Transform ${type} total `, undefined, "*")
+    try {
+        const results = db.tx(async (tx) => await transform(tx, type, config))
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transform ${type} operation failed, transaction rolled back:`, err))
+    }
+    timeEnd(`**** Transform ${type} total `, undefined, "*")
 })
 
 

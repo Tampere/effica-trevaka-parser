@@ -12,7 +12,7 @@ import v8 from "v8"
 import { config } from "../config"
 import migrationDb from "../db/db"
 import { importFileData, importFileDataWithExistingTx } from "../import/service"
-import { efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
+import { efficaSemTableMapping, efficaTableMapping, extTableMapping } from "../mapping/sourceMapping"
 import { ColumnDescriptor, FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes, ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
@@ -45,7 +45,8 @@ export async function readFilesFromDir(importOptions: ImportOptions): Promise<Fi
                 const fileName = dirent.name.toLowerCase()
                 if (fileName.endsWith(".license")) continue
                 time(`'${dirent.name}' reading`)
-                const fileAsString = await readFile(`${importOptions.path}/${dirent.name}`, { encoding: "utf-8" })
+                const encoding = fileName.endsWith(".sem") ? "latin1" : "utf-8"
+                const fileAsString = await readFile(`${importOptions.path}/${dirent.name}`, { encoding })
                 timeEnd(`'${dirent.name}' reading`)
                 time(`'${dirent.name}' parsing`)
 
@@ -65,6 +66,15 @@ export async function readFilesFromDir(importOptions: ImportOptions): Promise<Fi
                         importType: ImportType.External
                     }
                     // note that effica dumps are delivered as txt files
+                } else if (fileType.toLowerCase() === "sem") {
+                    const csvData = await csv({ trim: true, delimiter: ";" }).fromString(fileAsString)
+                    file = {
+                        fileName: fileName,
+                        data: csvData,
+                        table: collectTableDescription(tableName, csvData, efficaSemTableMapping),
+                        mapping: efficaSemTableMapping,
+                        importType: ImportType.Effica
+                    }
                 } else {
                     const xmlData = xmlParser.parse(fileAsString)
                     const tableData = stripXmlOverhead(xmlData, fileName)
