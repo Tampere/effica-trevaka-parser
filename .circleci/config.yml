@@ -47,7 +47,7 @@ jobs:
       - checkout_with_submodules
       - run:
           name: Start up compose stack
-          command: docker-compose -f docker-compose-it-db.yml up -d --wait --build
+          command: docker-compose -f docker-compose-it-db.yml up -d --quiet-pull --wait --build
       - run:
           name: Waiting for compose stack to be up...
           command: docker-compose -f docker-compose-it-db.yml wait flyway
