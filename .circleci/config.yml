@@ -47,16 +47,16 @@ jobs:
       - checkout_with_submodules
       - run:
           name: Start up compose stack
-          command: docker-compose -f docker-compose-it-db.yml up -d --quiet-pull --wait --build
+          command: docker compose -f docker-compose-it-db.yml up -d --quiet-pull --wait --build
       - run:
           name: Waiting for compose stack to be up...
-          command: docker-compose -f docker-compose-it-db.yml wait flyway
+          command: docker compose -f docker-compose-it-db.yml wait flyway
       - node/install-packages:
           include-branch-in-cache-key: false
       - run: npm run integration-test
       - run:
-          name: Collect docker-compose logs
-          command: docker-compose -f docker-compose-it-db.yml logs --tail=all > /tmp/docker-compose-logs.txt
+          name: Collect docker compose logs
+          command: docker compose -f docker-compose-it-db.yml logs --tail=all > /tmp/docker-compose-logs.txt
           when: always
       - store_artifacts:
           path: /tmp/docker-compose-logs.txt
