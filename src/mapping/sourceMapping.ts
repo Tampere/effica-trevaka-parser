@@ -389,6 +389,76 @@ export const efficaTableMapping: TypeMapping = {
     },
 }
 
+export const efficaSemTableMapping: TypeMapping = {
+    effica_department: {
+        tableName: "effica_department",
+        columns: {
+            avdenhet: { sqlType: "text", parser: nullForcingTextParser },
+            avdnamn: { sqlType: "text", parser: nullForcingTextParser },
+            avdplatser: { sqlType: "text", parser: nullForcingTextParser },
+            avdfdat: { sqlType: "text", parser: nullForcingTextParser },
+            avdtdat: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    effica_person: {
+        tableName: "effica_person",
+        columns: {
+            personnr: { sqlType: "text", parser: nullForcingTextParser },
+            namn: { sqlType: "text", parser: nullForcingTextParser },
+            adress: { sqlType: "text", parser: nullForcingTextParser },
+            adrskydd: { sqlType: "text", parser: nullForcingTextParser },
+            reglpostnr: { sqlType: "text", parser: nullForcingTextParser },
+            regladr: { sqlType: "text", parser: nullForcingTextParser },
+            reglort: { sqlType: "text", parser: nullForcingTextParser },
+            eposthem: { sqlType: "text", parser: nullForcingTextParser },
+            epostarb: { sqlType: "text", parser: nullForcingTextParser },
+            reglhemtel: { sqlType: "text", parser: nullForcingTextParser },
+            reglarbtel: { sqlType: "text", parser: nullForcingTextParser },
+            modersmal: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    effica_fridge_child: {
+        tableName: "effica_head_of_child",
+        columns: {
+            namn: { sqlType: "text", parser: nullForcingTextParser },
+            personnr: { sqlType: "text", parser: nullForcingTextParser },
+            period: { sqlType: "text", parser: nullForcingTextParser },
+            regledare: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    effica_placement: {
+        tableName: "effica_placement",
+        columns: {
+            barnpnr: { sqlType: "text", parser: nullForcingTextParser },
+            enhet: { sqlType: "text", parser: nullForcingTextParser },
+            avdelning: { sqlType: "text", parser: nullForcingTextParser },
+            placfrom: { sqlType: "text", parser: nullForcingTextParser },
+            plactom: { sqlType: "text", parser: nullForcingTextParser },
+            omfattning: { sqlType: "text", parser: nullForcingTextParser },
+            timmar: { sqlType: "text", parser: nullForcingTextParser },
+            timmarfrom: { sqlType: "text", parser: nullForcingTextParser },
+            timmartom: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+    effica_income: {
+        tableName: "effica_income",
+        columns: {
+            reglpnr: { sqlType: "text", parser: nullForcingTextParser },
+            samhörpnr: { sqlType: "text", parser: nullForcingTextParser },
+            samhink: { sqlType: "text", parser: nullForcingTextParser },
+            reglink: { sqlType: "text", parser: nullForcingTextParser },
+            reglidatfr: { sqlType: "text", parser: nullForcingTextParser },
+            reglidatto: { sqlType: "text", parser: nullForcingTextParser },
+            reglsaknas: { sqlType: "text", parser: nullForcingTextParser },
+            reglmax: { sqlType: "text", parser: nullForcingTextParser },
+            samhidatfr: { sqlType: "text", parser: nullForcingTextParser },
+            samhidatto: { sqlType: "text", parser: nullForcingTextParser },
+            samhsaknas: { sqlType: "text", parser: nullForcingTextParser },
+            samhmax: { sqlType: "text", parser: nullForcingTextParser },
+        },
+    },
+};
+
 export const extTableMapping: TypeMapping = {
     evaka_areas: {
         tableQueryFunction: createAreaTableQuery,

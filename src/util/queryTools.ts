@@ -75,7 +75,7 @@ export const createGenericTableQueryFromDescriptor = (td: TableDescriptor): stri
     return `CREATE TABLE IF NOT EXISTS 
         ${getMigrationSchemaPrefix()}
         ${td.tableName} 
-        (${Object.keys(td.columns).map(c => `${c} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});`
+        (${Object.keys(td.columns).map(c => `${columnNameTransform(c)} ${td.columns[c].sqlType}`).join(",")}${primaryKeyStr});`
 }
 
 export const createSqlConditionalForIncomeCodes = (mappings: EfficaIncomeCodeMapping[]) => {
@@ -93,3 +93,5 @@ export const createTotalSumClauseForIncomeTypes = (mappings: EfficaIncomeCodeMap
 export const createSqlConditionalForCoefficients = (coeffMap: Record<string, string>) => {
     return Object.keys(coeffMap).map(c => `WHEN '${c}' THEN ${coeffMap[c]}`).join("\n")
 }
+
+export const columnNameTransform = (column: string) => column.replace('ö', 'o')

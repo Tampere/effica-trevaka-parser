@@ -260,3 +260,184 @@ export const MARKINGS_SELECTION_PERIOD: Record<string, SelectionPeriod> = {
 export const CHILDMINDER_APPLICATION_UNIT: Record<string, string> = {
     tampere: 'cecdf326-0a56-11ec-90a9-e73454a1ee1a'
 }
+
+export interface CitySpecificMappings {
+    financeDecisionMinDate: string;
+    // effica enhet -> evaka daycare#name
+    unitMapping: Record<string, string>;
+    // effica omfattning -> service_need_option#id
+    // SELECT jsonb_object_agg(omfattning, jsonb_build_object('serviceNeedOptionId', null)) FROM effica_placement;
+    placementMapping: Record<
+        string,
+        {
+            serviceNeedOptionId: string;
+            privateServiceVoucherServiceNeedOptionId?: string;
+        }
+    >;
+}
+
+export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
+    seutu: {
+        financeDecisionMinDate: "2024-01-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
+    vesilahti: {
+        financeDecisionMinDate: "2024-03-01",
+        unitMapping: {},
+        placementMapping: {
+            "Varhaiskasvatus 0-90h": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Varhaiskasvatus 91-120h": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Varhaiskasvatus 121-140h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Varhaiskasvatus 141-155h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Varhaiskasvatus 156-170h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Varhaiskasvatus yli 170h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuorohoito 121-140h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuorohoito 141-155h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuorohoito 156-170h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuorohoito yli 170 h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+        },
+    },
+    hameenkyro: {
+        financeDecisionMinDate: "2024-03-01",
+        unitMapping: {},
+        placementMapping: {
+            "*0-85 h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+                privateServiceVoucherServiceNeedOptionId:
+                    "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "*86-139 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+                privateServiceVoucherServiceNeedOptionId:
+                    "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "*Eo-täyd. osa-aikainen": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Eo-täyd ph 0-85 h/k": {
+                serviceNeedOptionId: "0a58d934-6fd1-11ed-a75e-c353faef5858",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Eo-täyd ph 86-120 h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Esiopetus 4t/päivä": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "*Kokopäivähoito": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "*Kokopäivähoito 12 pv/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+                privateServiceVoucherServiceNeedOptionId:
+                    "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "Pkoti/ aikap. 0-85 h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+                privateServiceVoucherServiceNeedOptionId:
+                    "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "Pkoti/ aikap. 121-140 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+                privateServiceVoucherServiceNeedOptionId:
+                    "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Pkoti/ aikap. 141-155 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Pkoti/ aikap. 156-170 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Pkoti/ aikap. 86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+                privateServiceVoucherServiceNeedOptionId:
+                    "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Pkoti/ aikap. yli 171 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Pph/ aikap. 141-155 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Pph/ aikap. 156-170 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Pph/ aikap. yli 171 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Tilapäinen hoito, kp": {
+                serviceNeedOptionId: "e1063bee-c19d-469d-85a5-6b0350872d76",
+            },
+            "Vuorohoito 0-85 h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+                privateServiceVoucherServiceNeedOptionId:
+                    "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "Vuorohoito 121-140 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+                privateServiceVoucherServiceNeedOptionId:
+                    "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Vuorohoito 141-155 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Vuorohoito 86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+                privateServiceVoucherServiceNeedOptionId:
+                    "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Vuorohoito yli 171 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "* yli 140 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+                privateServiceVoucherServiceNeedOptionId:
+                    "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+        },
+    },
+};

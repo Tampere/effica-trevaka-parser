@@ -24,6 +24,8 @@ import { transferVoucherValueDecisions } from "../transfer/voucher-value-decisio
 import { MigrationOperation } from "../types/internal"
 import { ErrorWithCause } from "../util/error"
 import { time, timeEnd } from "../util/timing"
+import db from "../db/db";
+import { transfer } from "../transfer";
 
 const dependencyOrder: MigrationOperation[] =
     [
@@ -294,6 +296,22 @@ router.get("/", async (req, res, next) => {
     res.status(status).json(results)
 
     timeEnd("**** Transfer all total ", undefined, "*")
+})
+
+router.get("/sem", async (req, res, next) => {
+    const type = req.query.type
+    if (typeof type !== "string") {
+        return next(new Error("Type is required"))
+    }
+    time(`**** Transfer ${type} total `, undefined, "*")
+    try {
+        const results = db.tx(async (tx) => await transfer(tx, type))
+        res.status(200).json(results)
+    } catch (err) {
+        console.log(err)
+        next(new ErrorWithCause(`Transfer ${type} operation failed, transaction rolled back:`, err))
+    }
+    timeEnd(`**** Transfer ${type} total `, undefined, "*")
 })
 
 export default router

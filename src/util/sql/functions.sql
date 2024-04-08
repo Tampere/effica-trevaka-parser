@@ -46,8 +46,10 @@ $$ LANGUAGE SQL IMMUTABLE;
 DROP FUNCTION IF EXISTS ${migrationSchema:name}.preschool_daycare_end_date(date) CASCADE;
 CREATE FUNCTION ${migrationSchema:name}.preschool_daycare_end_date(input date) RETURNS date AS $$
 BEGIN
-    IF input > '2023-07-31' THEN
+    IF input > '2024-07-31' THEN
         RAISE EXCEPTION 'Unsupported preschool daycare start date %', input;
+    ELSIF input >= '2023-08-01' THEN
+        RETURN '2024-07-31';
     ELSIF input >= '2022-08-01' THEN
         RETURN '2023-07-31';
     ELSIF input >= '2021-08-01' THEN

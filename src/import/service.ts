@@ -8,7 +8,7 @@ import { pgp } from "../db/db"
 import { createGenericTableAndViewQueryFromDescriptor } from "../db/tables"
 import { FileDescriptor, ImportOptions, ImportType, PartitionImportOptions, TableDescriptor, TypeMapping } from "../types"
 import { errorCodes } from "../util/error"
-import { createGenericTableQueryFromDescriptor } from "../util/queryTools"
+import { columnNameTransform, createGenericTableQueryFromDescriptor } from "../util/queryTools"
 import { time, timeEnd } from "../util/timing"
 
 export const importFileData = async (t: pgPromise.ITask<{}>, files: FileDescriptor[], options: ImportOptions) => {
@@ -62,7 +62,7 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
                 }
                 const columnParser = mapping[tableName].columns[columnKey]?.parser
                 if (columnParser !== undefined) {
-                    parsedRow[columnKey] = columnParser(dataItem)
+                    parsedRow[columnNameTransform(columnKey)] = columnParser(dataItem)
                 } else {
                     throw new Error(`Missing parsing instructions for table: ${tableName}, column: ${key}`)
                 }
@@ -74,7 +74,7 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
 
 export const insertData = async (table: TableDescriptor, data: any[], mapping: TypeMapping, options: ImportOptions, t: pgPromise.ITask<{}>) => {
     const cs = new pgp.helpers.ColumnSet(
-        Object.keys(table.columns),
+        Object.keys(table.columns).map(columnNameTransform),
         { table: { table: table.tableName, schema: config.migrationSchema } }
     );
     const parsedData = parseTableDataTypes(table.tableName, data, mapping)

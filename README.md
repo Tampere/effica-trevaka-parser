@@ -29,6 +29,7 @@ The parser provides some configuration options to make the tool usable in differ
 | `PGUSER`                  | The user used in connecting to the migration database                                                                     | `postgres`    |
 | `PGDATABASE`              | The name of the database used for migration                                                                               | `migration`   |
 | `PGPASSWORD`              | The password used to connect to the migration database                                                                    | `postgres`    |
+| `PGSSL`                   | true/false for enabling secure database connection                                                                        | `false`       |
 | `COPY_PERSONS_FROM_EVAKA` | Whether migration tool prefers existing data if overlapping ssns. Basically false for dev use, true for actual migration  | `false`       |
 | `MOCKVTJ`                 | Whether person's previous vtj-update dates are set to a static value. This is used if target eVaka has no VTJ integration | `false`       |
 | `VARDA_API_URL`           | Varda API base URL for Varda harvesting client (check eVaka config for the value, select suitable environment)            |               |
