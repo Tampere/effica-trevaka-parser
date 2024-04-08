@@ -25,8 +25,8 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.549.0",
-    "@aws-sdk/s3-presigned-post": "^3.549.0",
+    "@aws-sdk/client-s3": "^3.550.0",
+    "@aws-sdk/s3-presigned-post": "^3.550.0",
     "@types/luxon": "^3.4.2",
     "axios": "^1.6.8",
     "csvtojson": "^2.0.10",
