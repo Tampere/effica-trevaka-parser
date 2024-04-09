@@ -146,13 +146,18 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                     lower(preschool_daycare_placement_range),
                     upper(preschool_daycare_placement_range) - interval '1 day',
                     daycare_placement_place_guarantee,
-                    daycare_service_need_option_id,
+                    coalesce(correct_option.id, service_need_option.id),
                     lower(daycare_service_need_range * preschool_daycare_placement_range),
                     upper(daycare_service_need_range * preschool_daycare_placement_range) -
                     interval '1 day',
                     daycare_service_need_shift_care,
                     daycare_group_placement_daycare_group_id
-             FROM overlapping),
+             FROM overlapping
+                      LEFT JOIN service_need_option ON service_need_option.id = daycare_service_need_option_id
+                      LEFT JOIN service_need_option correct_option
+                                ON correct_option.name_fi = service_need_option.name_fi AND
+                                   NOT correct_option.default_option AND
+                                   correct_option.valid_placement_type = 'PRESCHOOL_DAYCARE'),
      preschool_select AS (SELECT effica_ssn,
                                  placement_child_id,
                                  preschool_placement_type,
