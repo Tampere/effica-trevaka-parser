@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`seutu fridge 1`] = `
+[
+  {
+    "child_social_security_number": "010124A920A",
+    "end_date": "2041-12-31",
+    "head_of_child_social_security_number": "010106A914F",
+    "start_date": "2024-01-01",
+  },
+]
+`;
+
+exports[`seutu income 1`] = `
+[
+  {
+    "data": {
+      "MAIN_INCOME": {
+        "amount": 524165,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+        "monthlyAmount": 524165,
+        "multiplier": 1,
+      },
+    },
+    "effect": "INCOME",
+    "evaka_ssn": "010106A914F",
+    "is_entrepreneur": false,
+    "notes": "Tulojen summa Efficasta",
+    "valid_from": "2024-01-01",
+    "valid_to": null,
+    "works_at_echa": false,
+  },
+  {
+    "data": {
+      "MAIN_INCOME": {
+        "amount": 402000,
+        "coefficient": "MONTHLY_NO_HOLIDAY_BONUS",
+        "monthlyAmount": 402000,
+        "multiplier": 1,
+      },
+    },
+    "effect": "INCOME",
+    "evaka_ssn": "010124A920A",
+    "is_entrepreneur": false,
+    "notes": "Tulojen summa Efficasta",
+    "valid_from": "2024-01-01",
+    "valid_to": null,
+    "works_at_echa": false,
+  },
+]
+`;

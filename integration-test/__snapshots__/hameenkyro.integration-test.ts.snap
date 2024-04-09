@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hameenkyro all placement mappings exists 1`] = `
+{
+  "municipal": [
+    {
+      "effica": "*0-85 h/kk",
+      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+    },
+    {
+      "effica": "*86-139 h/kk",
+      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+    },
+    {
+      "effica": "* yli 140 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "*Kokopäivähoito",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "Eo-täyd ph 0-85 h/k",
+      "evaka": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    },
+    {
+      "effica": "Esiopetus 4t/päivä",
+      "evaka": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+    },
+    {
+      "effica": "Vuorohoito 0-85 h/kk",
+      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+    },
+    {
+      "effica": "Tilapäinen hoito, kp",
+      "evaka": "e1063bee-c19d-469d-85a5-6b0350872d76",
+    },
+    {
+      "effica": "Vuorohoito 86-120 h/kk",
+      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+    },
+    {
+      "effica": "*Eo-täyd. osa-aikainen",
+      "evaka": "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+    },
+    {
+      "effica": "Eo-täyd ph 86-120 h/kk",
+      "evaka": "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+    },
+    {
+      "effica": "Pkoti/ aikap. 0-85 h/kk",
+      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+    },
+    {
+      "effica": "Vuorohoito 121-140 h/kk",
+      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+    },
+    {
+      "effica": "Vuorohoito 141-155 h/kk",
+      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+    },
+    {
+      "effica": "Vuorohoito yli 171 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "Pph/ aikap. 141-155 h/kk",
+      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+    },
+    {
+      "effica": "Pph/ aikap. 156-170 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "Pph/ aikap. yli 171 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "Pkoti/ aikap. 86-120 h/kk",
+      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+    },
+    {
+      "effica": "*Kokopäivähoito 12 pv/kk",
+      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+    },
+    {
+      "effica": "Pkoti/ aikap. 121-140 h/kk",
+      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+    },
+    {
+      "effica": "Pkoti/ aikap. 141-155 h/kk",
+      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+    },
+    {
+      "effica": "Pkoti/ aikap. 156-170 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+    {
+      "effica": "Pkoti/ aikap. yli 171 h/kk",
+      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+    },
+  ],
+  "voucher": [
+    {
+      "effica": "*0-85 h/kk",
+      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    },
+    {
+      "effica": "*86-139 h/kk",
+      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+    },
+    {
+      "effica": "* yli 140 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "*Kokopäivähoito",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Eo-täyd ph 0-85 h/k",
+      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+    },
+    {
+      "effica": "Esiopetus 4t/päivä",
+      "evaka": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+    },
+    {
+      "effica": "Vuorohoito 0-85 h/kk",
+      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    },
+    {
+      "effica": "Tilapäinen hoito, kp",
+      "evaka": "e1063bee-c19d-469d-85a5-6b0350872d76",
+    },
+    {
+      "effica": "Vuorohoito 86-120 h/kk",
+      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+    },
+    {
+      "effica": "*Eo-täyd. osa-aikainen",
+      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+    },
+    {
+      "effica": "Eo-täyd ph 86-120 h/kk",
+      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+    },
+    {
+      "effica": "Pkoti/ aikap. 0-85 h/kk",
+      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    },
+    {
+      "effica": "Vuorohoito 121-140 h/kk",
+      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+    },
+    {
+      "effica": "Vuorohoito 141-155 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Vuorohoito yli 171 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pph/ aikap. 141-155 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pph/ aikap. 156-170 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pph/ aikap. yli 171 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pkoti/ aikap. 86-120 h/kk",
+      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+    },
+    {
+      "effica": "*Kokopäivähoito 12 pv/kk",
+      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    },
+    {
+      "effica": "Pkoti/ aikap. 121-140 h/kk",
+      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+    },
+    {
+      "effica": "Pkoti/ aikap. 141-155 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pkoti/ aikap. 156-170 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+    {
+      "effica": "Pkoti/ aikap. yli 171 h/kk",
+      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+    },
+  ],
+}
+`;
+
+exports[`hameenkyro placement preschool 1`] = `
+[
+  {
+    "effica_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "PRESCHOOL",
+    "placement_unit_id": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2024-05-31",
+    "service_need_option_id": null,
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-09",
+  },
+]
+`;
+
+exports[`hameenkyro placement preschool 2`] = `
+[
+  {
+    "evaka_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "PRESCHOOL",
+    "placement_unit": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": null,
+    "service_need_option_id": null,
+    "service_need_shift_care": null,
+    "service_need_start_date": null,
+  },
+]
+`;
+
+exports[`hameenkyro placement preschool daycare 1`] = `
+[
+  {
+    "effica_ssn": "010124A920A",
+    "placement_end_date": "2023-08-08",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-01",
+    "placement_type": "PRESCHOOL_DAYCARE_ONLY",
+    "placement_unit_id": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2023-08-08",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-01",
+  },
+  {
+    "effica_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "PRESCHOOL_DAYCARE",
+    "placement_unit_id": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2024-05-31",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-09",
+  },
+  {
+    "effica_ssn": "010124A920A",
+    "placement_end_date": "2024-07-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2024-06-01",
+    "placement_type": "PRESCHOOL_DAYCARE_ONLY",
+    "placement_unit_id": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2024-07-31",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2024-06-01",
+  },
+]
+`;
+
+exports[`hameenkyro placement preschool daycare 2`] = `
+[
+  {
+    "evaka_ssn": "010124A920A",
+    "placement_end_date": "2023-08-08",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-01",
+    "placement_type": "PRESCHOOL_DAYCARE_ONLY",
+    "placement_unit": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2023-08-08",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-01",
+  },
+  {
+    "evaka_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "PRESCHOOL_DAYCARE",
+    "placement_unit": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2024-05-31",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-09",
+  },
+  {
+    "evaka_ssn": "010124A920A",
+    "placement_end_date": "2024-07-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2024-06-01",
+    "placement_type": "PRESCHOOL_DAYCARE_ONLY",
+    "placement_unit": "92b6e496-d273-11ee-9265-db72361ab90d",
+    "service_need_end_date": "2024-07-31",
+    "service_need_option_id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2024-06-01",
+  },
+]
+`;
+
+exports[`hameenkyro placement private voucher service 1`] = `
+[
+  {
+    "effica_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "DAYCARE",
+    "placement_unit_id": "ccf269c5-8677-452c-b2b7-e476a031f7b0",
+    "service_need_end_date": "2024-05-31",
+    "service_need_option_id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-09",
+  },
+]
+`;
+
+exports[`hameenkyro placement private voucher service 2`] = `
+[
+  {
+    "evaka_ssn": "010124A920A",
+    "placement_end_date": "2024-05-31",
+    "placement_place_guarantee": false,
+    "placement_start_date": "2023-08-09",
+    "placement_type": "DAYCARE",
+    "placement_unit": "ccf269c5-8677-452c-b2b7-e476a031f7b0",
+    "service_need_end_date": "2024-05-31",
+    "service_need_option_id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+    "service_need_shift_care": "NONE",
+    "service_need_start_date": "2023-08-09",
+  },
+]
+`;

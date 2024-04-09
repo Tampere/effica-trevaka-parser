@@ -5,5 +5,5 @@
 module.exports = {
     preset: "ts-jest",
     testEnvironment: "node",
-    testMatch: ["**/integration-test/**/*.[jt]s?(x)"],
+    testMatch: ["**/integration-test/**/*.integration-test.[jt]s?(x)"],
 };
