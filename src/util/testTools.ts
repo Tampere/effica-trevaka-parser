@@ -9,20 +9,22 @@ import { dropTable, truncateEvakaTables } from "./queryTools"
 import { ITask } from "pg-promise";
 import { config } from "../config";
 
-const flywayTables = [
+const flywayTables = ["flyway_schema_history"];
+
+const trevakaAfterMigrateTables = [
     "assistance_action_option",
     "care_area",
-    "club_term",
-    "flyway_schema_history",
-    "preschool_term",
     "service_need_option",
     "service_need_option_fee",
     "service_need_option_voucher_value",
 ];
 
-export const cleanupDb = async (tx: ITask<{}>) => {
+export const cleanupDb = async (
+    tx: ITask<{}>,
+    includeAfterMigrateTables: boolean = false,
+) => {
     await dropImportTables(tx);
-    await truncateProdTables(tx);
+    await truncateProdTables(tx, includeAfterMigrateTables);
 };
 
 const dropImportTables = async (tx: ITask<{}>) => {
@@ -39,17 +41,23 @@ const dropImportTables = async (tx: ITask<{}>) => {
     await Promise.all(tableNames.map((tableName) => dropTable(tableName, tx)));
 };
 
-const truncateProdTables = async (tx: ITask<{}>) => {
+const truncateProdTables = async (
+    tx: ITask<{}>,
+    includeAfterMigrateTables: boolean,
+) => {
+    const excludedTables = flywayTables.concat(
+        includeAfterMigrateTables ? [] : trevakaAfterMigrateTables,
+    );
     const tables = await tx.many<{ table_name: string }>(
         `
             SELECT table_name
             FROM information_schema.tables
             WHERE table_schema = 'public'
               AND table_type = 'BASE TABLE'
-              AND table_name NOT IN ($(flywayTables:list))
+              AND table_name NOT IN ($(excludedTables:list))
         `,
         {
-            flywayTables,
+            excludedTables,
         },
     );
     const tableNames = tables.map((table) => table.table_name);

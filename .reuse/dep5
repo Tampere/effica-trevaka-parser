@@ -11,3 +11,7 @@ Source: https://github.com/Tampere/effica-trevaka-parser
 Files: .run/*
 Copyright: 2023 Tampere region
 License: LGPL-2.1-or-later
+
+Files: integration-test/data/sem/*
+Copyright: 2023-2024 Tampere region
+License: LGPL-2.1-or-later

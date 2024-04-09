@@ -15,5 +15,6 @@ function create_database() {
 EOSQL
 }
 
+create_database seutu
 create_database vesilahti
 create_database hameenkyro

@@ -24,6 +24,14 @@ services:
     depends_on:
       - db
     restart: on-failure
+  flyway_seutu:
+    image: flyway/flyway:10.3.0
+    command: -url=jdbc:postgresql://db:5432/seutu?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    volumes:
+      - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
+    depends_on:
+      - db
+    restart: on-failure
   flyway_vesilahti:
     image: flyway/flyway:10.3.0
     command: -url=jdbc:postgresql://db:5432/vesilahti?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
