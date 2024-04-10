@@ -6,7 +6,7 @@ include:
   - trevaka/docker-compose.yml
 services:
   flyway:
-    image: flyway/flyway:10.3.0
+    image: flyway/flyway:10.11.0
     command: -url=jdbc:postgresql://db:5432/evaka_tampere_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
@@ -15,7 +15,7 @@ services:
       - db
     restart: on-failure
   flyway_seutu:
-    image: flyway/flyway:10.3.0
+    image: flyway/flyway:10.11.0
     command: -url=jdbc:postgresql://db:5432/evaka_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
@@ -23,7 +23,7 @@ services:
       - db
     restart: on-failure
   flyway_vesilahti:
-    image: flyway/flyway:10.3.0
+    image: flyway/flyway:10.11.0
     command: -url=jdbc:postgresql://db:5432/evaka_vesilahti_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
@@ -32,7 +32,7 @@ services:
       - db
     restart: on-failure
   flyway_hameenkyro:
-    image: flyway/flyway:10.3.0
+    image: flyway/flyway:10.11.0
     command: -url=jdbc:postgresql://db:5432/evaka_hameenkyro_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
