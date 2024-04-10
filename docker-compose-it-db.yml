@@ -7,7 +7,7 @@ include:
 services:
   flyway:
     image: flyway/flyway:10.11.0
-    command: -url=jdbc:postgresql://db:5432/evaka_tampere_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    command: -url=jdbc:postgresql://db:5432/evaka_tampere_local?preferQueryMode=extendedForPrepared -user=evaka_migration_local -password=flyway -placeholders.application_user=evaka_application_local -placeholders.migration_user=evaka_migration_local -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
       - ./trevaka/service/src/main/resources/db/data/tampere:/flyway/sql/trevaka
@@ -16,7 +16,7 @@ services:
     restart: on-failure
   flyway_seutu:
     image: flyway/flyway:10.11.0
-    command: -url=jdbc:postgresql://db:5432/evaka_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    command: -url=jdbc:postgresql://db:5432/evaka_local?preferQueryMode=extendedForPrepared -user=evaka_migration_local -password=flyway -placeholders.application_user=evaka_application_local -placeholders.migration_user=evaka_migration_local -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
     depends_on:
@@ -24,7 +24,7 @@ services:
     restart: on-failure
   flyway_vesilahti:
     image: flyway/flyway:10.11.0
-    command: -url=jdbc:postgresql://db:5432/evaka_vesilahti_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    command: -url=jdbc:postgresql://db:5432/evaka_vesilahti_local?preferQueryMode=extendedForPrepared -user=evaka_migration_local -password=flyway -placeholders.application_user=evaka_application_local -placeholders.migration_user=evaka_migration_local -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
       - ./trevaka/service/src/main/resources/db/data/vesilahti:/flyway/sql/trevaka
@@ -33,7 +33,7 @@ services:
     restart: on-failure
   flyway_hameenkyro:
     image: flyway/flyway:10.11.0
-    command: -url=jdbc:postgresql://db:5432/evaka_hameenkyro_local?preferQueryMode=extendedForPrepared -user=postgres -password=postgres -placeholders.application_user=postgres -placeholders.migration_user=postgres -postgresql.transactional.lock=false migrate
+    command: -url=jdbc:postgresql://db:5432/evaka_hameenkyro_local?preferQueryMode=extendedForPrepared -user=evaka_migration_local -password=flyway -placeholders.application_user=evaka_application_local -placeholders.migration_user=evaka_migration_local -postgresql.transactional.lock=false migrate
     volumes:
       - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
       - ./trevaka/service/src/main/resources/db/data/hameenkyro:/flyway/sql/trevaka
