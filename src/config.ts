@@ -16,7 +16,7 @@ export const config = {
         port: 5432,
         user: process.env.PGUSER ?? "postgres",
         password: process.env.PGPASSWORD ?? "postgres",
-        database: process.env.PGDATABASE ?? "migration",
+        database: process.env.PGDATABASE ?? "evaka_tampere_local",
         ssl:
             process.env.PGSSL?.toUpperCase() === "TRUE"
                 ? { rejectUnauthorized: false }

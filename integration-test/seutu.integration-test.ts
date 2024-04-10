@@ -18,7 +18,7 @@ import {
 const config = {
     ...configFromEnv,
     cityVariant: "seutu",
-    migrationDb: { ...configFromEnv.migrationDb, database: "seutu" },
+    migrationDb: { ...configFromEnv.migrationDb, database: "evaka_local" },
 };
 const db = pgp(config.migrationDb);
 
