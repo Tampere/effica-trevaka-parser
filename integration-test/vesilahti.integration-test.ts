@@ -11,7 +11,10 @@ import { findPlacementMappings } from "./test-utils";
 const config = {
     ...configFromEnv,
     cityVariant: "vesilahti",
-    migrationDb: { ...configFromEnv.migrationDb, database: "vesilahti" },
+    migrationDb: {
+        ...configFromEnv.migrationDb,
+        database: "evaka_vesilahti_local",
+    },
 };
 const db = pgp(config.migrationDb);
 

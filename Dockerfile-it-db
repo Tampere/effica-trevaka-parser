@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2021 City of Tampere
-#
-# SPDX-License-Identifier: LGPL-2.1-or-later
-
-FROM postgres:16-alpine3.19
-
-COPY init.sql /docker-entrypoint-initdb.d/
-COPY init.sh /docker-entrypoint-initdb.d/
-CMD ["postgres", "-c", "fsync=off"]

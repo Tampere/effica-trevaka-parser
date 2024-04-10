@@ -19,7 +19,10 @@ import {
 const config = {
     ...configFromEnv,
     cityVariant: "hameenkyro",
-    migrationDb: { ...configFromEnv.migrationDb, database: "hameenkyro" },
+    migrationDb: {
+        ...configFromEnv.migrationDb,
+        database: "evaka_hameenkyro_local",
+    },
 };
 const db = pgp(config.migrationDb);
 const importBasePath = `${__dirname}/data/sem/hameenkyro`;
