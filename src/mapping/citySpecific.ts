@@ -440,4 +440,29 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
             },
         },
     },
+    lempaala: {
+        financeDecisionMinDate: "2024-05-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
+    nokia: {
+        financeDecisionMinDate: "2024-05-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
+    kangasala: {
+        financeDecisionMinDate: "2024-05-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
+    ylojarvi: {
+        financeDecisionMinDate: "2024-05-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
+    pirkkala: {
+        financeDecisionMinDate: "2024-05-01",
+        unitMapping: {},
+        placementMapping: {},
+    },
 };
