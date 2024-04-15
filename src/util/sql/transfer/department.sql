@@ -4,11 +4,11 @@
 
 INSERT INTO daycare_group (id, daycare_id, name, start_date, end_date)
 SELECT id, daycare_id, name, start_date, end_date
-FROM $(migrationSchema:name).evaka_daycare_group;
+FROM $(migrationSchema:name).evaka_daycare_group_valid;
 
 INSERT INTO daycare_caretaker (group_id, amount, start_date, end_date)
 SELECT id, caretaker_amount, start_date, end_date
-FROM $(migrationSchema:name).evaka_daycare_group
+FROM $(migrationSchema:name).evaka_daycare_group_valid
 WHERE caretaker_amount IS NOT NULL;
 
 INSERT INTO message_account (daycare_group_id, type)

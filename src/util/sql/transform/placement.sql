@@ -63,7 +63,7 @@ SELECT effica_placement.barnpnr,
        coalesce(effica_placement.timmarfrom::date, effica_placement.placfrom::date),
        coalesce(effica_placement.timmartom::date, effica_placement.plactom::date),
        CASE WHEN effica_placement.omfattning ILIKE '%vuorohoito%' THEN 'FULL' ELSE 'NONE' END,
-       evaka_daycare_group.id
+       evaka_daycare_group_valid.id
 FROM $(migrationSchema:name).effica_placement
          LEFT JOIN $(migrationSchema:name).evaka_person ON evaka_person.effica_ssn = effica_placement.barnpnr
          LEFT JOIN daycare unit_by_mapping ON unit_by_mapping.name = $(unitMapping)::jsonb ->> effica_placement.enhet
@@ -76,9 +76,9 @@ FROM $(migrationSchema:name).effica_placement
                       'PRIVATE_SERVICE_VOUCHER' AND option_by_provider_type.id::text =
                                                     $(placementMapping)::jsonb -> effica_placement.omfattning ->>
                                                     'privateServiceVoucherServiceNeedOptionId'
-         LEFT JOIN $(migrationSchema:name).evaka_daycare_group
-                   ON evaka_daycare_group.daycare_id = coalesce(unit_by_mapping.id, unit_by_name.id) AND
-                      evaka_daycare_group.name = effica_placement.avdelning;
+         LEFT JOIN $(migrationSchema:name).evaka_daycare_group_valid
+                   ON evaka_daycare_group_valid.daycare_id = coalesce(unit_by_mapping.id, unit_by_name.id) AND
+                      evaka_daycare_group_valid.name = effica_placement.avdelning;
 
 -- transform overlapping PRESCHOOL and PRESCHOOL_DAYCARE_ONLY to PRESCHOOL_DAYCARE
 WITH overlapping AS (SELECT preschool.effica_ssn,
