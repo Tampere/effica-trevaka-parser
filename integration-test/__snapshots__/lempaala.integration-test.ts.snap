@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lempaala all placement mappings exists 1`] = `
+{
+  "municipal": [
+    {
+      "effica": "Tilapäinen hoito, kp",
+      "evaka": {
+        "default_option": true,
+        "id": "e945728f-2671-4158-8941-1d39a3a36dce",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
+    },
+    {
+      "effica": "Tilapäinen hoito, op",
+      "evaka": {
+        "default_option": true,
+        "id": "e945728f-2671-4158-8941-1d39a3a36dce",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 1, 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 1, 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 2, 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 3, 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 4, yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 2, 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 3, 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 4, yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 1, palveluseteli  0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 2, palveluseteli 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 3, palveluseteli 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 4, palveluseteli yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+  ],
+  "voucher": [
+    {
+      "effica": "Tilapäinen hoito, kp",
+      "evaka": {
+        "default_option": true,
+        "id": "e945728f-2671-4158-8941-1d39a3a36dce",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
+    },
+    {
+      "effica": "Tilapäinen hoito, op",
+      "evaka": {
+        "default_option": true,
+        "id": "e945728f-2671-4158-8941-1d39a3a36dce",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 1, 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 1, 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 2, 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 3, 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Hoitoaikaporras 4, yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 2, 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 3, 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Vuorohoitoporras 4, yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 1, palveluseteli  0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 2, palveluseteli 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 3, palveluseteli 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
+    },
+    {
+      "effica": "Porras 4, palveluseteli yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
+    },
+  ],
+}
+`;

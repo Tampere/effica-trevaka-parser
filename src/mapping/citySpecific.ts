@@ -443,7 +443,50 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
     lempaala: {
         financeDecisionMinDate: "2024-05-01",
         unitMapping: {},
-        placementMapping: {},
+        placementMapping: {
+            "Hoitoaikaporras 1, 0-85h/kk": {
+                serviceNeedOptionId: "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+            },
+            "Vuorohoitoporras 1, 0-85h/kk": {
+                serviceNeedOptionId: "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+            },
+            "Porras 1, palveluseteli  0-85h/kk": {
+                serviceNeedOptionId: "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+            },
+            "Hoitoaikaporras 2, 86-120h/kk": {
+                serviceNeedOptionId: "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+            },
+            "Vuorohoitoporras 2, 86-120h/kk": {
+                serviceNeedOptionId: "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+            },
+            "Porras 2, palveluseteli 86-120h/kk": {
+                serviceNeedOptionId: "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+            },
+            "Hoitoaikaporras 3, 121-150h/kk": {
+                serviceNeedOptionId: "a92cf108-0939-45f5-8976-ab31e456b84d",
+            },
+            "Vuorohoitoporras 3, 121-150h/kk": {
+                serviceNeedOptionId: "a92cf108-0939-45f5-8976-ab31e456b84d",
+            },
+            "Porras 3, palveluseteli 121-150h/kk": {
+                serviceNeedOptionId: "a92cf108-0939-45f5-8976-ab31e456b84d",
+            },
+            "Hoitoaikaporras 4, yli 151h/kk": {
+                serviceNeedOptionId: "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+            },
+            "Vuorohoitoporras 4, yli 151h/kk": {
+                serviceNeedOptionId: "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+            },
+            "Porras 4, palveluseteli yli 151h/kk": {
+                serviceNeedOptionId: "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+            },
+            "Tilapäinen hoito, kp": {
+                serviceNeedOptionId: "e945728f-2671-4158-8941-1d39a3a36dce",
+            },
+            "Tilapäinen hoito, op": {
+                serviceNeedOptionId: "e945728f-2671-4158-8941-1d39a3a36dce",
+            },
+        },
     },
     nokia: {
         financeDecisionMinDate: "2024-05-01",
