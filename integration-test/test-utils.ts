@@ -54,7 +54,12 @@ export const findPlacementMappings = async (
 ) => {
     const municipal = await tx.many(
         `
-            SELECT mapping.key AS effica, service_need_option.id AS evaka
+            SELECT mapping.key AS effica,
+                   jsonb_build_object(
+                           'id', service_need_option.id,
+                           'name_fi', service_need_option.name_fi,
+                           'default_option', service_need_option.default_option
+                   )           AS evaka
             FROM jsonb_each($(placementMapping)) mapping
                      LEFT JOIN service_need_option ON service_need_option.id = (mapping.value ->> 'serviceNeedOptionId')::uuid
         `,
@@ -62,7 +67,12 @@ export const findPlacementMappings = async (
     );
     const voucher = await tx.many(
         `
-            SELECT mapping.key AS effica, coalesce(voucher.id, municipal.id) AS evaka
+            SELECT mapping.key AS effica,
+                   jsonb_build_object(
+                           'id', coalesce(voucher.id, municipal.id),
+                           'name_fi', coalesce(voucher.name_fi, municipal.name_fi),
+                           'default_option', coalesce(voucher.default_option, municipal.default_option)
+                   )           AS evaka
             FROM jsonb_each($(placementMapping)) mapping
                      LEFT JOIN service_need_option voucher ON voucher.id =
                                                               (mapping.value ->> 'privateServiceVoucherServiceNeedOptionId')::uuid

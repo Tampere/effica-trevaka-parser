@@ -5,197 +5,389 @@ exports[`hameenkyro all placement mappings exists 1`] = `
   "municipal": [
     {
       "effica": "*0-85 h/kk",
-      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+      "evaka": {
+        "default_option": false,
+        "id": "50358394-b961-11eb-b51f-67ac436e5637",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*86-139 h/kk",
-      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+      "evaka": {
+        "default_option": false,
+        "id": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
     },
     {
       "effica": "* yli 140 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Kokopäivähoito",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Eo-täyd ph 0-85 h/k",
-      "evaka": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+      "evaka": {
+        "default_option": false,
+        "id": "0a58d934-6fd1-11ed-a75e-c353faef5858",
+        "name_fi": "Täydentävä varhaiskasvatus 0–50 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Esiopetus 4t/päivä",
-      "evaka": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+      "evaka": {
+        "default_option": true,
+        "id": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+        "name_fi": "Esiopetus",
+      },
     },
     {
       "effica": "Vuorohoito 0-85 h/kk",
-      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+      "evaka": {
+        "default_option": false,
+        "id": "50358394-b961-11eb-b51f-67ac436e5637",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Tilapäinen hoito, kp",
-      "evaka": "e1063bee-c19d-469d-85a5-6b0350872d76",
+      "evaka": {
+        "default_option": true,
+        "id": "e1063bee-c19d-469d-85a5-6b0350872d76",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
     },
     {
       "effica": "Vuorohoito 86-120 h/kk",
-      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+      "evaka": {
+        "default_option": false,
+        "id": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Eo-täyd. osa-aikainen",
-      "evaka": "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+      "evaka": {
+        "default_option": false,
+        "id": "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+        "name_fi": "Täydentävä varhaiskasvatus 51–85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Eo-täyd ph 86-120 h/kk",
-      "evaka": "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+      "evaka": {
+        "default_option": false,
+        "id": "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+        "name_fi": "Täydentävä varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 0-85 h/kk",
-      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+      "evaka": {
+        "default_option": false,
+        "id": "50358394-b961-11eb-b51f-67ac436e5637",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito 121-140 h/kk",
-      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+      "evaka": {
+        "default_option": false,
+        "id": "503590f0-b961-11eb-b520-53740af3f7ef",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito 141-155 h/kk",
-      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+      "evaka": {
+        "default_option": false,
+        "id": "503590f0-b961-11eb-b520-53740af3f7ef",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito yli 171 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. 141-155 h/kk",
-      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+      "evaka": {
+        "default_option": false,
+        "id": "503590f0-b961-11eb-b520-53740af3f7ef",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. 156-170 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. yli 171 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 86-120 h/kk",
-      "evaka": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+      "evaka": {
+        "default_option": false,
+        "id": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Kokopäivähoito 12 pv/kk",
-      "evaka": "50358394-b961-11eb-b51f-67ac436e5637",
+      "evaka": {
+        "default_option": false,
+        "id": "50358394-b961-11eb-b51f-67ac436e5637",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 121-140 h/kk",
-      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+      "evaka": {
+        "default_option": false,
+        "id": "503590f0-b961-11eb-b520-53740af3f7ef",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 141-155 h/kk",
-      "evaka": "503590f0-b961-11eb-b520-53740af3f7ef",
+      "evaka": {
+        "default_option": false,
+        "id": "503590f0-b961-11eb-b520-53740af3f7ef",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 156-170 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. yli 171 h/kk",
-      "evaka": "503591ae-b961-11eb-b521-1fca99358eed",
+      "evaka": {
+        "default_option": false,
+        "id": "503591ae-b961-11eb-b521-1fca99358eed",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+      },
     },
   ],
   "voucher": [
     {
       "effica": "*0-85 h/kk",
-      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+      "evaka": {
+        "default_option": false,
+        "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+        "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*86-139 h/kk",
-      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+      "evaka": {
+        "default_option": false,
+        "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+        "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+      },
     },
     {
       "effica": "* yli 140 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Kokopäivähoito",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Eo-täyd ph 0-85 h/k",
-      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+      "evaka": {
+        "default_option": false,
+        "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+        "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+      },
     },
     {
       "effica": "Esiopetus 4t/päivä",
-      "evaka": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+      "evaka": {
+        "default_option": true,
+        "id": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+        "name_fi": "Esiopetus",
+      },
     },
     {
       "effica": "Vuorohoito 0-85 h/kk",
-      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+      "evaka": {
+        "default_option": false,
+        "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+        "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Tilapäinen hoito, kp",
-      "evaka": "e1063bee-c19d-469d-85a5-6b0350872d76",
+      "evaka": {
+        "default_option": true,
+        "id": "e1063bee-c19d-469d-85a5-6b0350872d76",
+        "name_fi": "Tilapäinen varhaiskasvatus",
+      },
     },
     {
       "effica": "Vuorohoito 86-120 h/kk",
-      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+      "evaka": {
+        "default_option": false,
+        "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+        "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Eo-täyd. osa-aikainen",
-      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+      "evaka": {
+        "default_option": false,
+        "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+        "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+      },
     },
     {
       "effica": "Eo-täyd ph 86-120 h/kk",
-      "evaka": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+      "evaka": {
+        "default_option": false,
+        "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+        "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 0-85 h/kk",
-      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+      "evaka": {
+        "default_option": false,
+        "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+        "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito 121-140 h/kk",
-      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+      "evaka": {
+        "default_option": false,
+        "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+        "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito 141-155 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Vuorohoito yli 171 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. 141-155 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. 156-170 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pph/ aikap. yli 171 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 86-120 h/kk",
-      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+      "evaka": {
+        "default_option": false,
+        "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+        "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+      },
     },
     {
       "effica": "*Kokopäivähoito 12 pv/kk",
-      "evaka": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+      "evaka": {
+        "default_option": false,
+        "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
+        "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 121-140 h/kk",
-      "evaka": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+      "evaka": {
+        "default_option": false,
+        "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
+        "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 141-155 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. 156-170 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
     {
       "effica": "Pkoti/ aikap. yli 171 h/kk",
-      "evaka": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+      "evaka": {
+        "default_option": false,
+        "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
+        "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+      },
     },
   ],
 }
