@@ -491,7 +491,101 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
     nokia: {
         financeDecisionMinDate: "2024-05-01",
         unitMapping: {},
-        placementMapping: {},
+        placementMapping: {
+            "2-v Esiopetuskokeilu 4 h/pv": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "Esiopetus 4h/pv": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "Esiopetus+hoitoaika 0-50h": {
+                serviceNeedOptionId: "0a58d934-6fd1-11ed-a75e-c353faef5858",
+            },
+            "Esiopetus+hoitoaika 121-140h": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Esiopetus+hoitoaika 141-155h": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Esiopetus+hoitoaika 156-170h": {
+                serviceNeedOptionId: "0a58dcae-6fd1-11ed-a75e-b3e10433b949",
+            },
+            "Esiopetus+hoitoaika  51-85h": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Esiopetus+hoitoaika  86-120h": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+            },
+            "Esiopetus+palveluseteli 0-50h": {
+                serviceNeedOptionId: "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Esiopetus+palveluseteli 51-85h": {
+                serviceNeedOptionId: "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Esiopetus+palveluseteli 86-139h": {
+                serviceNeedOptionId: "b3102992-df96-45d5-a1c3-578791c2193c",
+            },
+            "Esiopetus+vuorohoito 121-140h": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Esiopetus+vuorohoito 141-155h": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Esiopetus+vuorohoito 156-170": {
+                serviceNeedOptionId: "0a58dcae-6fd1-11ed-a75e-b3e10433b949",
+            },
+            "Esiopetus+vuorohoito 51-85h": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Esiopetus+vuorohoito 86-120h": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+            },
+            "Hoitoaika  0-85h": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Hoitoaika 121-140h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Hoitoaika 141-155h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Hoitoaika 156-170h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Hoitoaika 171h-": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Hoitoaika  86-120h": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Palveluseteli 0-85h": {
+                serviceNeedOptionId: "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "Palveluseteli 140h-": {
+                serviceNeedOptionId: "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Palveluseteli 86-139h": {
+                serviceNeedOptionId: "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Vuorohoito 0-85h": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Vuorohoito 121-140h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuorohoito 141-155h": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuorohoito 156-170h": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuorohoito 171h-": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuorohoito 86-120h": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+        },
     },
     kangasala: {
         financeDecisionMinDate: "2024-05-01",
