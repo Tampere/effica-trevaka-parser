@@ -9,6 +9,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503590f0-b961-11eb-b520-53740af3f7ef",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -17,6 +18,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503590f0-b961-11eb-b520-53740af3f7ef",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -25,6 +27,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503591ae-b961-11eb-b521-1fca99358eed",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -33,6 +36,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503591ae-b961-11eb-b521-1fca99358eed",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -41,6 +45,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "50358394-b961-11eb-b51f-67ac436e5637",
         "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -49,6 +54,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "86ef70a0-bf85-11eb-91e6-1fb57a101165",
         "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -57,6 +63,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503590f0-b961-11eb-b520-53740af3f7ef",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -65,6 +72,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503590f0-b961-11eb-b520-53740af3f7ef",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -73,6 +81,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503591ae-b961-11eb-b521-1fca99358eed",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -81,6 +90,7 @@ exports[`vesilahti all placement mappings exists 1`] = `
         "default_option": false,
         "id": "503591ae-b961-11eb-b521-1fca99358eed",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
   ],

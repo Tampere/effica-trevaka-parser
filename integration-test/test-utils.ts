@@ -58,6 +58,7 @@ export const findPlacementMappings = async (
                    jsonb_build_object(
                            'id', service_need_option.id,
                            'name_fi', service_need_option.name_fi,
+                           'valid_placement_type', service_need_option.valid_placement_type,
                            'default_option', service_need_option.default_option
                    )           AS evaka
             FROM jsonb_each($(placementMapping)) mapping
