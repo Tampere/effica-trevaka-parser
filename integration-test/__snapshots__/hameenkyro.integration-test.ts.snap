@@ -227,6 +227,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
         "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -235,6 +236,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
         "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -243,6 +245,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -251,6 +254,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -259,6 +263,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
         "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+        "valid_placement_type": "PRESCHOOL_DAYCARE_ONLY",
       },
     },
     {
@@ -267,6 +272,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": true,
         "id": "94e44ef1-106b-401d-81b6-8e5c31cd0437",
         "name_fi": "Esiopetus",
+        "valid_placement_type": "PRESCHOOL",
       },
     },
     {
@@ -275,6 +281,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
         "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -283,6 +290,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": true,
         "id": "e1063bee-c19d-469d-85a5-6b0350872d76",
         "name_fi": "Tilapäinen varhaiskasvatus",
+        "valid_placement_type": "TEMPORARY_DAYCARE",
       },
     },
     {
@@ -291,6 +299,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
         "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -299,6 +308,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
         "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+        "valid_placement_type": "PRESCHOOL_DAYCARE_ONLY",
       },
     },
     {
@@ -307,6 +317,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
         "name_fi": "Palveluseteli Täydentävä varhaiskasvatus",
+        "valid_placement_type": "PRESCHOOL_DAYCARE_ONLY",
       },
     },
     {
@@ -315,6 +326,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
         "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -323,6 +335,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
         "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -331,6 +344,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -339,6 +353,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -347,6 +362,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -355,6 +371,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -363,6 +380,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -371,6 +389,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
         "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -379,6 +398,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "36c8c2ed-7543-47de-bc42-14d163a6277d",
         "name_fi": "Palveluseteli Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -387,6 +407,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "9eb82822-82ef-46fb-a123-29cf0af757b7",
         "name_fi": "Palveluseteli Varhaiskasvatus 86–139 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -395,6 +416,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -403,6 +425,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -411,6 +434,7 @@ exports[`hameenkyro all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f5d32585-2c78-4434-95d6-30b446db7d4d",
         "name_fi": "Palveluseteli Varhaiskasvatus yli 140 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
   ],

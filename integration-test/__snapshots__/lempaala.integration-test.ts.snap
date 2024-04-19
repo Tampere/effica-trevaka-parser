@@ -137,6 +137,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": true,
         "id": "e945728f-2671-4158-8941-1d39a3a36dce",
         "name_fi": "Tilapäinen varhaiskasvatus",
+        "valid_placement_type": "TEMPORARY_DAYCARE",
       },
     },
     {
@@ -145,6 +146,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": true,
         "id": "e945728f-2671-4158-8941-1d39a3a36dce",
         "name_fi": "Tilapäinen varhaiskasvatus",
+        "valid_placement_type": "TEMPORARY_DAYCARE",
       },
     },
     {
@@ -153,6 +155,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
         "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -161,6 +164,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
         "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -169,6 +173,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
         "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -177,6 +182,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -185,6 +191,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -193,6 +200,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
         "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -201,6 +209,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -209,6 +218,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -217,6 +227,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
         "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -225,6 +236,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
         "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -233,6 +245,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
         "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
     {
@@ -241,6 +254,7 @@ exports[`lempaala all placement mappings exists 1`] = `
         "default_option": false,
         "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
         "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
       },
     },
   ],

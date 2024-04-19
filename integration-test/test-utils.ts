@@ -72,6 +72,8 @@ export const findPlacementMappings = async (
                    jsonb_build_object(
                            'id', coalesce(voucher.id, municipal.id),
                            'name_fi', coalesce(voucher.name_fi, municipal.name_fi),
+                           'valid_placement_type',
+                           coalesce(voucher.valid_placement_type, municipal.valid_placement_type),
                            'default_option', coalesce(voucher.default_option, municipal.default_option)
                    )           AS evaka
             FROM jsonb_each($(placementMapping)) mapping
