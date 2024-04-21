@@ -590,7 +590,89 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
     kangasala: {
         financeDecisionMinDate: "2024-05-01",
         unitMapping: {},
-        placementMapping: {},
+        placementMapping: {
+            "2 v Esiopetuskokeilu 4 h/pv": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "Esiopetus 4t/päivä": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "Esiopetusta täydentävä 0-85 h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Esiopetusta täydentävä 121-150 h/kk": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+                privateServiceVoucherServiceNeedOptionId:
+                    "000a9d54-dd88-4f71-8489-b7d29e49ae92",
+            },
+            "Esiopetusta täydentävä 86-120 h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+                privateServiceVoucherServiceNeedOptionId:
+                    "b3102992-df96-45d5-a1c3-578791c2193c",
+            },
+            "Esiopetusta täydentävä yli 150 h/kk": {
+                serviceNeedOptionId: "0a58dcae-6fd1-11ed-a75e-b3e10433b949",
+            },
+            "Esiop.täydentävä 0-50 h/kk 08/2024 alk": {
+                serviceNeedOptionId: "0a58d934-6fd1-11ed-a75e-c353faef5858",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Esiop.täydentävä 51-85 h/kk 08/2024 alk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+                privateServiceVoucherServiceNeedOptionId:
+                    "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            /*"Kuntoutuksellinen varhaiskasvatus": { serviceNeedOptionId: "" },
+            "Kuntoutuksellinen varhaiskasv/esiopetus": {
+                serviceNeedOptionId: "",
+            },*/
+            "Varhaiskasvatusaika 0-85 h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Varhaiskasvatusaika 121-150 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Varhaiskasvatusaika 86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Varhaiskasvatusaika yli 150 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Virikekerho 1 kertaa/viikko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Virikekerho 2 kertaa/viikko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Vuorohoito 0-85 h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Vuorohoito 121-150 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuorohoito 86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Vuorohoito/esiop.täyd. 121-150 h/kk": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+                privateServiceVoucherServiceNeedOptionId:
+                    "000a9d54-dd88-4f71-8489-b7d29e49ae92",
+            },
+            "Vuorohoito/esiop.täyd. 86-120 h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+                privateServiceVoucherServiceNeedOptionId:
+                    "b3102992-df96-45d5-a1c3-578791c2193c",
+            },
+            "Vuorohoito/esiop.täyd. yli 150 h/kk": {
+                serviceNeedOptionId: "0a58dcae-6fd1-11ed-a75e-b3e10433b949",
+            },
+            "Vuorohoito yli 150 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+        },
     },
     ylojarvi: {
         financeDecisionMinDate: "2024-05-01",
