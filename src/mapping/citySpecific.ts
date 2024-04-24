@@ -676,8 +676,177 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
     },
     ylojarvi: {
         financeDecisionMinDate: "2024-05-01",
-        unitMapping: {},
-        placementMapping: {},
+        unitMapping: {
+            "Leikkitoiminta, Vihriälä": "Leikkitoiminta Vihriälä",
+            "Touhula SatuVekara2,  Esiopetus": "Touhula SatuVekara2, Esiopetus",
+        },
+        placementMapping: {
+            "Aikaperusteinen   0-85 h/kk alle 5h/pvä": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Aikaperusteinen   0-85 h/kk yli 5h/pvä": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Aikaperusteinen 121-140 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Aikaperusteinen 141-155 h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Aikaperusteinen 156-170 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Aikaperusteinen   86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Aikaperusteinen yli 171 h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Avoin varhaiskasvatus 1krt/vko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Avoin varhaiskasvatus 2krt/vk": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Avoin varhaiskasvatus 3krt/vko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Avoin varhaiskasvatus 4krt/vko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Esiopetus 4t/päivä": {
+                serviceNeedOptionId: "94e44ef1-106b-401d-81b6-8e5c31cd0437",
+            },
+            "Palveluseteli Aikaperust 121-140h/kk": {
+                serviceNeedOptionId: "f5d32585-2c78-4434-95d6-30b446db7d4d",
+            },
+            "Palveluseteli Aikaperust 141-155h/kk": {
+                serviceNeedOptionId: "1b1e6e91-8d54-405c-88f8-2a95d88f8962",
+            },
+            "Palveluseteli Aikaperust 156-170h/kk": {
+                serviceNeedOptionId: "4d6d632d-d8cf-4b5a-8437-decade30d0c0",
+            },
+            "Palveluseteli Aikaperust 86-120h/kk": {
+                serviceNeedOptionId: "9eb82822-82ef-46fb-a123-29cf0af757b7",
+            },
+            "Palveluseteli Aikaperusteinen 0-85h/kk": {
+                serviceNeedOptionId: "36c8c2ed-7543-47de-bc42-14d163a6277d",
+            },
+            "Palveluseteli Aikaperust yli 171h/kk": {
+                serviceNeedOptionId: "d7d8b130-ac3b-4447-adc8-ef7f6ef0b653",
+            },
+            "Palveluseteli eo täyd aikap 121-140h/kk": {
+                serviceNeedOptionId: "a8ae87a0-a326-4170-99da-088fb8679797",
+            },
+            "Palveluseteli eo täyd aikap  51h-85h/kk": {
+                serviceNeedOptionId: "fe0972a5-6ce9-41cc-a635-82fb22e7891b",
+            },
+            "Palveluseteli eo täyd aikap 86-120h/kk": {
+                serviceNeedOptionId: "ff4268de-0ae6-4e54-abbe-b296f5f03d4b",
+            },
+            "Pkoti/Aikaperusteinen   0h-85h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Pkoti/Aikaperusteinen 121h-140h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Pkoti/Aikaperusteinen 141h-155h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Pkoti/Aikaperusteinen 156h-170h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Pkoti/Aikaperusteinen  86h-120h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Pkoti/Aikaperusteinen yli 171h- /kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Pkoti/Esiop täyd aikaper   0h-50h/kk": {
+                serviceNeedOptionId: "0a58d934-6fd1-11ed-a75e-c353faef5858",
+            },
+            "Pkoti/Esiop täyd aikaper  0h-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Pkoti/Esiop täyd aikaper 121h-140h/kk": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Pkoti/Esiop täyd aikaper   51h-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Pkoti/Esiop täyd aikaper  86h-120h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+            },
+            "Pph/Aikaperusteinen 121h-140h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Pph/Aikaperusteinen 141h-155h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Pph/Aikaperusteinen 156h-170h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Pph/Aikaperusteinen yli 171h /kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Tilapäinen hoito, yli 5 t": {
+                serviceNeedOptionId: "e1063bee-c19d-469d-85a5-6b0350872d76",
+            },
+            "Vuoroh/Aikaperusteinen  0h-85h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Vuoroh/Aikaperusteinen 121h-140h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuoroh/Aikaperusteinen 141h-155h/kk": {
+                serviceNeedOptionId: "503590f0-b961-11eb-b520-53740af3f7ef",
+            },
+            "Vuoroh/Aikaperusteinen 156h-170h/kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuoroh/Aikaperusteinen  86h-120h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Vuoroh/Aikaperusteinen yli 171h- /kk": {
+                serviceNeedOptionId: "503591ae-b961-11eb-b521-1fca99358eed",
+            },
+            "Vuoroh/Esiop täyd aikaper  0h-50h/kk": {
+                serviceNeedOptionId: "0a58d934-6fd1-11ed-a75e-c353faef5858",
+            },
+            "Vuoroh/Esiop täyd aikaper  0h-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Vuoroh/Esiop täyd aikaper 121-140h/kk": {
+                serviceNeedOptionId: "0a58da38-6fd1-11ed-a75e-9b2790b0b4f5",
+            },
+            "Vuoroh/Esiop täyd aikaper  51-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Vuoroh/Esiop täyd aikaper  86-120h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+            },
+            "Aikaperusteinen 0-85 h/kk alle 5h/pvä": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Aikaperusteinen 0-85 h/kk yli 5h/pvä": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Aikaperusteinen 86-120 h/kk": {
+                serviceNeedOptionId: "86ef70a0-bf85-11eb-91e6-1fb57a101165",
+            },
+            "Pkoti/Aikaperusteinen 0h-85h/kk": {
+                serviceNeedOptionId: "50358394-b961-11eb-b51f-67ac436e5637",
+            },
+            "Pkoti/Esiop täyd aikaper 51h-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Vuoroh/Esiop täyd aikaper 51-85h/kk": {
+                serviceNeedOptionId: "0a58db0a-6fd1-11ed-a75e-bbde95c1aded",
+            },
+            "Vuoroh/Esiop täyd aikaper 86-120h/kk": {
+                serviceNeedOptionId: "0a58dbe6-6fd1-11ed-a75e-5335f2b9a91c",
+            },
+        },
     },
     pirkkala: {
         financeDecisionMinDate: "2024-05-01",

@@ -62,7 +62,7 @@ SELECT effica_placement.barnpnr,
            END,
        coalesce(effica_placement.timmarfrom::date, effica_placement.placfrom::date),
        coalesce(effica_placement.timmartom::date, effica_placement.plactom::date),
-       CASE WHEN effica_placement.omfattning ILIKE '%vuorohoito%' THEN 'FULL' ELSE 'NONE' END,
+       CASE WHEN effica_placement.omfattning ILIKE '%vuoroh%' THEN 'FULL' ELSE 'NONE' END,
        evaka_daycare_group_valid.id
 FROM $(migrationSchema:name).effica_placement
          LEFT JOIN $(migrationSchema:name).evaka_person ON evaka_person.effica_ssn = effica_placement.barnpnr
