@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pirkkala all placement mappings exists 1`] = `
+{
+  "municipal": [
+    {
+      "effica": "Vuorohoito 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Kerhotoiminta 2 krt/vko",
+      "evaka": {
+        "default_option": true,
+        "id": "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+        "name_fi": "Kerho",
+        "valid_placement_type": "CLUB",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Esiopetusta täydentävä varhaiskasvatus",
+      "evaka": {
+        "default_option": true,
+        "id": "e067df64-7ff0-42c1-a409-537db7c202dd",
+        "name_fi": "Esiopetusta täydentävä varhaiskasvatus",
+        "valid_placement_type": "PRESCHOOL_DAYCARE_ONLY",
+      },
+    },
+  ],
+  "voucher": [
+    {
+      "effica": "Vuorohoito 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Vuorohoito yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Kerhotoiminta 2 krt/vko",
+      "evaka": {
+        "default_option": true,
+        "id": "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+        "name_fi": "Kerho",
+        "valid_placement_type": "CLUB",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 0-85h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+        "name_fi": "Varhaiskasvatus 85 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 86-120h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+        "name_fi": "Varhaiskasvatus 86–120 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus 121-150h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "a92cf108-0939-45f5-8976-ab31e456b84d",
+        "name_fi": "Varhaiskasvatus 121-150 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Varhaiskasvatus yli 151h/kk",
+      "evaka": {
+        "default_option": false,
+        "id": "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+        "name_fi": "Varhaiskasvatus yli 151 tuntia / kuukausi",
+        "valid_placement_type": "DAYCARE",
+      },
+    },
+    {
+      "effica": "Esiopetusta täydentävä varhaiskasvatus",
+      "evaka": {
+        "default_option": true,
+        "id": "e067df64-7ff0-42c1-a409-537db7c202dd",
+        "name_fi": "Esiopetusta täydentävä varhaiskasvatus",
+        "valid_placement_type": "PRESCHOOL_DAYCARE_ONLY",
+      },
+    },
+  ],
+}
+`;

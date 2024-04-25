@@ -76,3 +76,12 @@ services:
     depends_on:
       - db
     restart: on-failure
+  flyway_pirkkala:
+    image: flyway/flyway:10.11.0
+    command: -url=jdbc:postgresql://db:5432/evaka_pirkkala_local?preferQueryMode=extendedForPrepared -user=evaka_migration_local -password=flyway -placeholders.application_user=evaka_application_local -placeholders.migration_user=evaka_migration_local -postgresql.transactional.lock=false migrate
+    volumes:
+      - ./trevaka/evaka/service/src/main/resources/db/migration:/flyway/sql/evaka
+      - ./trevaka/service/src/main/resources/db/data/pirkkala:/flyway/sql/trevaka
+    depends_on:
+      - db
+    restart: on-failure

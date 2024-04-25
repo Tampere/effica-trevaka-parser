@@ -851,6 +851,37 @@ export const CITY_SPECIFIC_MAPPINGS: Record<string, CitySpecificMappings> = {
     pirkkala: {
         financeDecisionMinDate: "2024-05-01",
         unitMapping: {},
-        placementMapping: {},
+        placementMapping: {
+            "Esiopetusta täydentävä varhaiskasvatus": {
+                serviceNeedOptionId: "e067df64-7ff0-42c1-a409-537db7c202dd",
+            },
+            "Kerhotoiminta 2 krt/vko": {
+                serviceNeedOptionId: "ff6ddcd4-fa8a-11eb-8592-2f2b4e398fcb",
+            },
+            "Varhaiskasvatus 0-85h/kk": {
+                serviceNeedOptionId: "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+            },
+            "Varhaiskasvatus 121-150h/kk": {
+                serviceNeedOptionId: "a92cf108-0939-45f5-8976-ab31e456b84d",
+            },
+            "Varhaiskasvatus 86-120h/kk": {
+                serviceNeedOptionId: "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+            },
+            "Varhaiskasvatus yli 151h/kk": {
+                serviceNeedOptionId: "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+            },
+            "Vuorohoito 0-85h/kk": {
+                serviceNeedOptionId: "489dcf01-e11a-4ab8-8c36-1e672581eb6d",
+            },
+            "Vuorohoito 121-150h/kk": {
+                serviceNeedOptionId: "a92cf108-0939-45f5-8976-ab31e456b84d",
+            },
+            "Vuorohoito 86-120h/kk": {
+                serviceNeedOptionId: "f24a1b37-0be9-4004-8a00-eefda8ed925a",
+            },
+            "Vuorohoito yli 151h/kk": {
+                serviceNeedOptionId: "22adbfd9-50d8-4192-9a35-1c5ce872e1a7",
+            },
+        },
     },
 };
