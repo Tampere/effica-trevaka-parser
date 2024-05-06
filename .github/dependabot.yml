@@ -16,6 +16,9 @@ updates:
       interval: "daily"
       time: "10:00"
       timezone: "Europe/Helsinki"
+    ignore:
+      - dependency-name: "@aws-sdk/*"
+        update-types: [ "version-update:semver-minor", "version-update:semver-patch" ]
     groups:
       aws-sdk:
          patterns:
