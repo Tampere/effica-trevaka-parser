@@ -22,6 +22,7 @@ CREATE TABLE $(migrationSchema:name).evaka_placement
     service_need_start_date          DATE,
     service_need_end_date            DATE,
     service_need_shift_care          TEXT,
+    service_need_part_week           BOOLEAN,
     -- daycare_group_placement
     group_placement_id               UUID             DEFAULT $(extensionSchema:name).uuid_generate_v1mc(),
     group_placement_daycare_group_id UUID
@@ -48,6 +49,7 @@ INSERT INTO $(migrationSchema:name).evaka_placement (effica_ssn,
                                                      service_need_start_date,
                                                      service_need_end_date,
                                                      service_need_shift_care,
+                                                     service_need_part_week,
                                                      group_placement_daycare_group_id)
 SELECT effica_placement.barnpnr,
        coalesce(option_by_provider_type.valid_placement_type, option_by_id.valid_placement_type),
@@ -63,6 +65,7 @@ SELECT effica_placement.barnpnr,
        coalesce(effica_placement.timmarfrom::date, effica_placement.placfrom::date),
        coalesce(effica_placement.timmartom::date, effica_placement.plactom::date),
        CASE WHEN effica_placement.omfattning ILIKE '%vuoroh%' THEN 'FULL' ELSE 'NONE' END,
+       coalesce(option_by_provider_type.part_week, option_by_id.part_week),
        evaka_daycare_group_valid.id
 FROM $(migrationSchema:name).effica_placement
          LEFT JOIN $(migrationSchema:name).evaka_person ON evaka_person.effica_ssn = effica_placement.barnpnr
@@ -100,6 +103,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                             daterange(preschool.service_need_start_date, preschool.service_need_end_date,
                                       '[]')                            AS preschool_service_need_range,
                             preschool.service_need_shift_care          AS preschool_service_need_shift_care,
+                            preschool.service_need_part_week           AS preschool_service_need_part_week,
                             preschool.group_placement_daycare_group_id AS preschool_group_placement_daycare_group_id,
                             -- PRESCHOOL_DAYCARE_ONLY
                             daterange(daycare.placement_start_date, daycare.placement_end_date, '[]')::datemultirange -
@@ -113,6 +117,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                             daterange(daycare.service_need_start_date, daycare.service_need_end_date,
                                       '[]')                            AS daycare_service_need_range,
                             daycare.service_need_shift_care            AS daycare_service_need_shift_care,
+                            daycare.service_need_part_week             AS daycare_service_need_part_week,
                             daycare.group_placement_daycare_group_id   AS daycare_group_placement_daycare_group_id
                      FROM $(migrationSchema:name).evaka_placement preschool
                               JOIN $(migrationSchema:name).evaka_placement daycare
@@ -138,6 +143,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                                                               service_need_start_date,
                                                               service_need_end_date,
                                                               service_need_shift_care,
+                                                              service_need_part_week,
                                                               group_placement_daycare_group_id)
              SELECT effica_ssn,
                     'PRESCHOOL_DAYCARE',
@@ -151,6 +157,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                     upper(daycare_service_need_range * preschool_daycare_placement_range) -
                     interval '1 day',
                     daycare_service_need_shift_care,
+                    daycare_service_need_part_week,
                     daycare_group_placement_daycare_group_id
              FROM overlapping
                       LEFT JOIN service_need_option ON service_need_option.id = daycare_service_need_option_id
@@ -167,6 +174,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                                  preschool_service_need_option_id,
                                  preschool_service_need_range,
                                  preschool_service_need_shift_care,
+                                 preschool_service_need_part_week,
                                  preschool_group_placement_daycare_group_id
                           FROM overlapping),
      preschool_insert AS (
@@ -181,6 +189,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                                                               service_need_start_date,
                                                               service_need_end_date,
                                                               service_need_shift_care,
+                                                              service_need_part_week,
                                                               group_placement_daycare_group_id)
              SELECT effica_ssn,
                     preschool_placement_type,
@@ -193,6 +202,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                     lower(preschool_service_need_range * preschool_range),
                     upper(preschool_service_need_range * preschool_range) - interval '1 day',
                     preschool_service_need_shift_care,
+                    preschool_service_need_part_week,
                     preschool_group_placement_daycare_group_id
              FROM preschool_select),
      daycare_select AS (SELECT effica_ssn,
@@ -204,6 +214,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                                daycare_service_need_option_id,
                                daycare_service_need_range,
                                daycare_service_need_shift_care,
+                               daycare_service_need_part_week,
                                daycare_group_placement_daycare_group_id
                         FROM overlapping),
      daycare_insert AS (
@@ -218,6 +229,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                                                               service_need_start_date,
                                                               service_need_end_date,
                                                               service_need_shift_care,
+                                                              service_need_part_week,
                                                               group_placement_daycare_group_id)
              SELECT effica_ssn,
                     daycare_placement_type,
@@ -230,6 +242,7 @@ WITH overlapping AS (SELECT preschool.effica_ssn,
                     lower(daycare_service_need_range * daycare_range),
                     upper(daycare_service_need_range * daycare_range) - interval '1 day',
                     daycare_service_need_shift_care,
+                    daycare_service_need_part_week,
                     daycare_group_placement_daycare_group_id
              FROM daycare_select)
 SELECT *
