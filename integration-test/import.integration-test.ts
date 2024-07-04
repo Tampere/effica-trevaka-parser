@@ -262,10 +262,6 @@ describe("GET /import csv positive", () => {
 
 // NEGATIVE CASES
 describe("GET /import negative", () => {
-    it("should fail on non flat data", async () => {
-        return await negativeImportTest("nonflat", 500, errorCodes.nonFlatData)
-    })
-
     it("should fail on non mapped table", async () => {
         return await negativeImportTest("unknowntable", 500, errorCodes.nonMappedTable)
     })

@@ -56,10 +56,6 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
             Object.keys(row).forEach((key) => {
                 const dataItem = row[key]
                 const columnKey = key.toLowerCase()
-                //Non-flat data shoud appear as arrays (dependent on the XML-parser option arrayMode)
-                if (typeof dataItem === "object") {
-                    throw new Error(`Data of column '${key}' in table '${tableName}' is not flat table data (${errorCodes.nonFlatData}): ${JSON.stringify(dataItem)}`)
-                }
                 const columnParser = mapping[tableName].columns[columnKey]?.parser
                 if (columnParser !== undefined) {
                     parsedRow[columnNameTransform(columnKey)] = columnParser(dataItem)

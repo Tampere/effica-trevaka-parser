@@ -4,7 +4,20 @@
 
 import { config } from "../config"
 import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery } from "../db/tables"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, dateParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import {
+    activityParser, attachmentParser,
+    codeNumericParser,
+    csvStringArrayParser,
+    csvStringBooleanParser,
+    dateParser,
+    forceNullValue,
+    nonNullTextParser,
+    nullDateParser,
+    nullForcingTextParser,
+    numericBooleanParser,
+    personParser,
+    stringToNumericParser
+} from "../parsers";
 import { TypeMapping } from "../types"
 
 
@@ -385,6 +398,24 @@ export const efficaTableMapping: TypeMapping = {
             documentname: { sqlType: "text", parser: nullForcingTextParser },
             documenttemplatename: { sqlType: "text", parser: nullForcingTextParser },
             dateofbirth: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
+        },
+    },
+    // seutu-päikky
+    document: {
+        tableName: "document",
+        columns: {
+            documentid: { sqlType: "text", parser: nullForcingTextParser },
+            documentdate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documentperiodstartdate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documentperiodenddate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documenttype: { sqlType: "text", parser: nullForcingTextParser },
+            documentname: { sqlType: "text", parser: nullForcingTextParser },
+            documentassignee: { sqlType: "text", parser: nullForcingTextParser },
+            filename: { sqlType: "text", parser: nullForcingTextParser },
+            unit: { sqlType: "text", parser: nullForcingTextParser },
+            archivedate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            personconcerned: { sqlType: "text", parser: personParser },
+            attachments: { sqlType: "text[]", parser: attachmentParser },
         },
     },
 }
