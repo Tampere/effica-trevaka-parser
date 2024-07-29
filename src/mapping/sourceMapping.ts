@@ -405,7 +405,7 @@ export const efficaTableMapping: TypeMapping = {
         tableName: "document",
         columns: {
             documentid: { sqlType: "text", parser: nullForcingTextParser },
-            documentdate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documentdate: { sqlType: "date", parser: nullDateParser },
             documentperiodstartdate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
             documentperiodenddate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
             documenttype: { sqlType: "text", parser: nullForcingTextParser },
