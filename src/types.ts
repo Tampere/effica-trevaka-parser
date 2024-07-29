@@ -21,7 +21,7 @@ export type QueryOptions = {
 
 export interface TableQueryFunction { (td: TableDescriptor): string }
 export type TypeMapping = Record<string, TableDescriptor>
-export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date" | "text[]" | "uuid" | "point" | "integer[]" | "daterange"
+export type SqlType = "text" | "numeric" | "boolean" | "timestamptz" | "integer" | "date" | "text[]" | "uuid" | "point" | "integer[]" | "daterange" | "jsonb"
 
 export type ImportOptions = { returnAll: boolean, path: string, importTarget?: string }
 export type PartitionImportOptions = { path: string, importTarget?: string, bufferSize: number }

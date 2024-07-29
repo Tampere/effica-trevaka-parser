@@ -414,8 +414,8 @@ export const efficaTableMapping: TypeMapping = {
             filename: { sqlType: "text", parser: nullForcingTextParser },
             unit: { sqlType: "text", parser: nullForcingTextParser },
             archivedate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
-            personconcerned: { sqlType: "text", parser: personParser },
-            attachments: { sqlType: "text[]", parser: attachmentParser },
+            personconcerned: { sqlType: "jsonb", parser: personParser },
+            attachments: { sqlType: "jsonb", parser: attachmentParser },
         },
     },
 }

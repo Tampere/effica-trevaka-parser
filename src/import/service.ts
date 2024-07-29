@@ -70,7 +70,7 @@ const parseTableDataTypes = (tableName: string, data: any[], mapping: TypeMappin
 
 export const insertData = async (table: TableDescriptor, data: any[], mapping: TypeMapping, options: ImportOptions, t: pgPromise.ITask<{}>) => {
     const cs = new pgp.helpers.ColumnSet(
-        Object.keys(table.columns).map(columnNameTransform),
+        Object.entries(table.columns).map(([columnName, columnDescriptor]) => `${columnNameTransform(columnName)}${columnDescriptor.sqlType === "jsonb" ? ':json' : ''}`),
         { table: { table: table.tableName, schema: config.migrationSchema } }
     );
     const parsedData = parseTableDataTypes(table.tableName, data, mapping)
