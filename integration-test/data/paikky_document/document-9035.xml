@@ -1,0 +1,51 @@
+<!--
+SPDX-FileCopyrightText: 2023-2024 Tampere region
+
+SPDX-License-Identifier: LGPL-2.1-or-later
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:tns="http://www.abilita.fi/paikky/digital-archiving" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <DocumentId>
+        9035
+    </DocumentId>
+    <DocumentDate>
+        2022-02-14
+    </DocumentDate>
+    <DocumentPeriodStartDate>
+        2021-08-01
+    </DocumentPeriodStartDate>
+    <DocumentPeriodEndDate>
+        2022-07-31
+    </DocumentPeriodEndDate>
+    <DocumentType>
+        Document
+    </DocumentType>
+    <DocumentName>
+        Lapsen varhaiskasvatussuunnitelma
+    </DocumentName>
+    <DocumentAssignee>
+        Essi Esimies
+    </DocumentAssignee>
+    <FileName>
+        9035_Varhaiskasvatussuunnitelma_Camilla Child_2021-08-01 - 2022-07-31.pdf
+    </FileName>
+    <PersonConcerned>
+        <PersonalIdentityCode>
+            251118A9509
+        </PersonalIdentityCode>
+        <LastName>
+            Child
+        </LastName>
+        <FirstName>
+            Camilla
+        </FirstName>
+    </PersonConcerned>
+    <Unit>
+        Testipäiväkoti
+    </Unit>
+    <ArchiveDate>
+        2022-02-14
+    </ArchiveDate>
+    <Attachments/>
+</Document>

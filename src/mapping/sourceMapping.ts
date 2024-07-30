@@ -384,25 +384,8 @@ export const efficaTableMapping: TypeMapping = {
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
     },
-    // päikky
-    archiveddocument: {
-        tableName: "archiveddocument",
-        columns: {
-            ssn: { sqlType: "text", parser: nullForcingTextParser },
-            lastname: { sqlType: "text", parser: nullForcingTextParser },
-            firstname: { sqlType: "text", parser: nullForcingTextParser },
-            date: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
-            approvedby: { sqlType: "text", parser: nullForcingTextParser },
-            kindergartenname: { sqlType: "text", parser: nullForcingTextParser },
-            period: { sqlType: "text", parser: nullForcingTextParser },
-            documentname: { sqlType: "text", parser: nullForcingTextParser },
-            documenttemplatename: { sqlType: "text", parser: nullForcingTextParser },
-            dateofbirth: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
-        },
-    },
-    // seutu-päikky
-    document: {
-        tableName: "document",
+    paikky_document: {
+        tableName: "paikky_document",
         columns: {
             documentid: { sqlType: "text", parser: nullForcingTextParser },
             documentdate: { sqlType: "date", parser: nullDateParser },

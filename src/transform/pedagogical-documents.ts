@@ -51,13 +51,13 @@ const transformSql = `
         (child_id, description, created, updated, name, content_type)
     SELECT
         child.id,
-        ad.documenttemplatename,
-        ad.date,
-        ad.date,
-        ad.documentname,
+        d.documentname,
+        d.archivedate,
+        d.archivedate,
+        d.filename,
         'application/pdf'
-    FROM $(migrationSchema:name).archiveddocument ad
-    LEFT JOIN $(migrationSchema:name).evaka_person child ON child.effica_ssn = ad.ssn
+    FROM $(migrationSchema:name).paikky_document d
+    LEFT JOIN $(migrationSchema:name).evaka_person child ON child.effica_ssn = d.personconcerned ->> 'PersonalIdentityCode'
 `;
 
 const todoSql = `

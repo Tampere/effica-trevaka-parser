@@ -40,7 +40,7 @@ const baseDataTables =
         "dailyjournalrows",
         "timestampheaders",
         "timestampdetails",
-        "archiveddocument",
+        "paikky_document",
         "evaka_areas",
         "evaka_daycare",
         "daycare_oid_map"
@@ -226,7 +226,7 @@ beforeEach(async () => {
     await db.tx(tx => cleanupDb(tx));
 
     for await (const table of baseDataTables) {
-        const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
+        const importTarget = table === "paikky_document" ? "paikky_document" : undefined
         await setupTable(table, importTarget)
     }
 
@@ -423,7 +423,7 @@ describe("GET /transfer positive", () => {
             "pedagogical_documents/pdf",
             undefined,
             {
-                "path": "/integration-test/data/archiveddocument/pdf"
+                "path": "/integration-test/data/paikky_document/pdf"
             }
         )
     })

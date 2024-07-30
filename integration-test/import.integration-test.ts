@@ -201,8 +201,8 @@ describe("GET /import xml positive", () => {
             "applicationrows")
     })
 
-    it("should return created archived documents", async() => {
-        return await positiveImportSnapshotTest("archiveddocument", undefined, "archiveddocument")
+    it("should return created päikky documents", async() => {
+        return await positiveImportSnapshotTest("paikky_document", undefined, "paikky_document")
     })
 
     it("should work even if XML elements have mixed case", async () => {
