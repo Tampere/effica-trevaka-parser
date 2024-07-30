@@ -89,7 +89,9 @@ export const transferPedagogicalDocumentPdf = async (path: string) => {
             .replace(/ü/g, "├╝")
             .replace(/í/g, "├н")
             .replace(/ë/g, "├л")
-            .replace(/õ/g, "├╡");
+            .replace(/õ/g, "├╡")
+            .replace(/ñ/g, "├▒")
+            .replace(/ø/g, "├╕");
         const file = `${path}/${encodedName}`;
         console.log(file);
         if (!fs.existsSync(file)) throw Error(`File not found ${file}`);
