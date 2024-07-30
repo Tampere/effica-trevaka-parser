@@ -25,3 +25,16 @@ export const stringToNumericParser = (v: null | string) => v == null || v === ""
 //FIXME: currently no way to set defaults for import tables, null needs to be interpreted (should it be evaka default instead)
 export const csvStringArrayParser = (v: undefined | string): string => v ? v : "{}"
 export const csvStringBooleanParser = (v: undefined | string): boolean => v?.toLowerCase() === "t"
+
+export const personParser = (v: undefined | object): string => {
+    return v ? Object.values(v)[0] : ""
+}
+
+export const attachmentParser = (v: undefined | object): string[] => {
+    const arr: string[] = []
+    if (!v) return []
+    for(let [key, item] of Object.entries(v)){
+        arr.push(item["Attachment"][0])
+    }
+    return arr
+}

@@ -4,7 +4,20 @@
 
 import { config } from "../config"
 import { createAreaTableQuery, createDaycareTableQuery, createGenericExclusionTableQuery } from "../db/tables"
-import { activityParser, codeNumericParser, csvStringArrayParser, csvStringBooleanParser, dateParser, forceNullValue, nonNullTextParser, nullDateParser, nullForcingTextParser, numericBooleanParser, stringToNumericParser } from "../parsers"
+import {
+    activityParser, attachmentParser,
+    codeNumericParser,
+    csvStringArrayParser,
+    csvStringBooleanParser,
+    dateParser,
+    forceNullValue,
+    nonNullTextParser,
+    nullDateParser,
+    nullForcingTextParser,
+    numericBooleanParser,
+    personParser,
+    stringToNumericParser
+} from "../parsers";
 import { TypeMapping } from "../types"
 
 
@@ -371,20 +384,21 @@ export const efficaTableMapping: TypeMapping = {
             guid: { sqlType: "text", parser: nullForcingTextParser },
         },
     },
-    // päikky
-    archiveddocument: {
-        tableName: "archiveddocument",
+    paikky_document: {
+        tableName: "paikky_document",
         columns: {
-            ssn: { sqlType: "text", parser: nullForcingTextParser },
-            lastname: { sqlType: "text", parser: nullForcingTextParser },
-            firstname: { sqlType: "text", parser: nullForcingTextParser },
-            date: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
-            approvedby: { sqlType: "text", parser: nullForcingTextParser },
-            kindergartenname: { sqlType: "text", parser: nullForcingTextParser },
-            period: { sqlType: "text", parser: nullForcingTextParser },
+            documentid: { sqlType: "text", parser: nullForcingTextParser },
+            documentdate: { sqlType: "date", parser: nullDateParser },
+            documentperiodstartdate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documentperiodenddate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            documenttype: { sqlType: "text", parser: nullForcingTextParser },
             documentname: { sqlType: "text", parser: nullForcingTextParser },
-            documenttemplatename: { sqlType: "text", parser: nullForcingTextParser },
-            dateofbirth: { sqlType: "date", parser: dateParser("dd.MM.yyyy") },
+            documentassignee: { sqlType: "text", parser: nullForcingTextParser },
+            filename: { sqlType: "text", parser: nullForcingTextParser },
+            unit: { sqlType: "text", parser: nullForcingTextParser },
+            archivedate: { sqlType: "date", parser: dateParser("yyyy-MM-dd") },
+            personconcerned: { sqlType: "jsonb", parser: personParser },
+            attachments: { sqlType: "jsonb", parser: attachmentParser },
         },
     },
 }

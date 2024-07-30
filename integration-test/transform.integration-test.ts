@@ -40,7 +40,7 @@ const baseDataTables =
         "dailyjournalrows",
         "timestampheaders",
         "timestampdetails",
-        "archiveddocument",
+        "paikky_document",
         "evaka_areas",
         "evaka_daycare",
         "daycare_oid_map"
@@ -61,7 +61,7 @@ beforeEach(async () => {
     await db.tx(tx => cleanupDb(tx));
 
     for (const table of baseDataTables) {
-        const importTarget = table === "archiveddocument" ? "archiveddocument" : undefined
+        const importTarget = table === "paikky_document" ? "paikky_document" : undefined
         await setupTable(table, importTarget)
     }
 })

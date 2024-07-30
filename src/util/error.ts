@@ -12,7 +12,6 @@ export class ErrorWithCause extends Error {
 }
 
 export const errorCodes = {
-    nonFlatData: "E-TREP-10001",
     nonMappedTable: "E-TREP-10002",
     nonMappedColumn: "E-TREP-10003",
     noDataContent: "E-TREP-10004",
