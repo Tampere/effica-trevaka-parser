@@ -32,7 +32,7 @@
     "csvtojson": "^2.0.10",
     "express": "^4.19.2",
     "fast-xml-parser": "^4.4.1",
-    "luxon": "^3.4.4",
+    "luxon": "^3.5.0",
     "n-readlines": "^1.0.1",
     "pg-promise": "^11.9.1",
     "ts-node": "^10.9.2"
