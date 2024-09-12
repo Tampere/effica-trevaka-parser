@@ -30,7 +30,7 @@
     "@types/luxon": "^3.4.2",
     "axios": "^1.7.7",
     "csvtojson": "^2.0.10",
-    "express": "^4.20.0",
+    "express": "^4.21.0",
     "fast-xml-parser": "^4.4.1",
     "luxon": "^3.5.0",
     "n-readlines": "^1.0.1",
